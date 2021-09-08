@@ -9,6 +9,7 @@ import styles from '../styles/Home.module.css'
 import Footer from '../components/Footer'
 import TitleBox from '../components/TitleBox'
 import NotAvailable from '../components/NotAvailable'
+import Link from 'next/link'
 
 interface PropsType {
   posts: Post[]
@@ -34,23 +35,24 @@ const Home: NextPage<PropsType> = ({ posts }) => {
     content = (
       <main className={styles.listContent}>
         {posts.map((post) => (
-          <a
-            style={{ textDecoration: 'none' }}
-            href={post.URL}
+          <Link
+            href={`${post.URL}`}
             key={post.postOptionalAttributes?.slug || ''}
           >
-            <PostItem
-              title={post.title}
-              localDate={post.dateISOFormatString}
-              description={
-                post.postOptionalAttributes?.description || 'No description'
-              }
-              thumbnailURL={
-                post.postOptionalAttributes?.coverUrl ||
-                blogConfig.getTitleBoxDefaultBackground()
-              }
-            />
-          </a>
+            <a style={{ textDecoration: 'none' }}>
+              <PostItem
+                title={post.title}
+                localDate={post.dateISOFormatString}
+                description={
+                  post.postOptionalAttributes?.description || 'No description'
+                }
+                thumbnailURL={
+                  post.postOptionalAttributes?.coverUrl ||
+                  blogConfig.getTitleBoxDefaultBackground()
+                }
+              />
+            </a>
+          </Link>
         ))}
       </main>
     )

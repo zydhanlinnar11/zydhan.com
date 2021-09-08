@@ -1,17 +1,14 @@
 import { Button } from '@material-ui/core'
 import styles from '../../styles/NavbarButton.module.css'
+import Link from 'next/link'
 
 const HomeButton = (key: string) => {
   return (
-    <Button
-      key={key}
-      className={styles.navBtn}
-      onClick={() => {
-        window.open('/', '_self')
-      }}
-    >
-      <h6>Home</h6>
-    </Button>
+    <Link key={key} href='/'>
+      <a className={styles.navBtn}>
+        <h6>Home</h6>
+      </a>
+    </Link>
   )
 }
 

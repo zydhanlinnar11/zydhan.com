@@ -25,7 +25,7 @@ class BlogConfig {
   getRightFooterText(): string {
     if (this.blogOptionalConfig.customRightFooterText)
       return this.blogOptionalConfig.customRightFooterText
-    return 'Created with React'
+    return 'Created with Next.js'
   }
 
   getHomeHeaderTitle(): string {

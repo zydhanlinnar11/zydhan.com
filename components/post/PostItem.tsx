@@ -26,8 +26,13 @@ interface PostItemProps {
   customTheme?: Theme
 }
 
-function PostItem(props: PostItemProps) {
-  const { title, localDate, description, thumbnailURL, customTheme } = props
+function PostItem({
+  title,
+  localDate,
+  description,
+  thumbnailURL,
+  customTheme,
+}: PostItemProps) {
   return (
     <ThemeProvider theme={customTheme ? customTheme : noPaddingTextButton}>
       <Button

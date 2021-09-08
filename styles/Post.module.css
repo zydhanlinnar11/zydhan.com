@@ -1,0 +1,49 @@
+.post-content-container {
+  background: var(--card-background);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background var(--transition-delay);
+  border-radius: 10px;
+  margin-top: 2rem;
+  display: flex;
+  min-height: 83vh;
+  padding: 2.5em;
+  margin-bottom: 2rem;
+}
+
+.post-content {
+  width: 100%;
+  color: var(--main-font-color);
+  transition: color var(--transition-delay);
+}
+
+.post-content img {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.post-content-title {
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.post-content-info {
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.not-highlighted {
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
+  .post-content-container {
+    margin-top: 0;
+    border: none;
+    border-radius: 0;
+  }
+}

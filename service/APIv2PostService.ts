@@ -41,20 +41,20 @@ class APIv2PostService {
     return posts
   }
 
-  async getPost(slug: string, callback: (post: Post | undefined) => void) {
+  async getPost(slug: string) {
     try {
-      const response = await fetch(`/api/post/${slug}`)
+      const response = await fetch(
+        `http://blog-api.zydhan.xyz/api/post/${slug}`
+      )
       if (!response.ok) throw new Error('Error')
       const post: singleResponseModel = await response.json()
-      callback(
-        new Post(post.title, post.created_at, post.cover_file_name, {
-          author: post.user_id,
-          markdown: post.markdown,
-        })
-      )
+      return new Post(post.title, post.created_at, post.cover_file_name, {
+        author: post.user_id,
+        markdown: post.markdown,
+      })
     } catch (error) {
-      callback(undefined)
       console.error('APIv2PostService.getPost(): Unable to fetch data from API')
+      return null
     }
   }
 }

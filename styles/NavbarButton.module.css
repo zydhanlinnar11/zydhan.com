@@ -6,6 +6,8 @@
   transition: background var(--transition-delay);
   border: none;
   transition: font-size 0.5s ease-in;
+  text-decoration: none;
+  text-transform: uppercase;
   text-align: center;
   border-radius: 0px;
 }
