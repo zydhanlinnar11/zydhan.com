@@ -58,7 +58,7 @@ const Home: NextPage<PropsType> = ({ posts }) => {
   return (
     <div>
       <Head>
-        <title>Zydhan's Blog</title>
+        <title>Zydhan&apos;s Blog</title>
         <meta name='description' content='Welcome to my blog' />
         <link rel='icon' href='/favicon.ico' />
       </Head>

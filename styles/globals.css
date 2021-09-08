@@ -78,6 +78,7 @@ p {
   .content {
     width: 100%;
     transition: all 0.5s;
+    margin-top: 64px;
   }
 
   main {

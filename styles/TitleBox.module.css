@@ -18,6 +18,12 @@
   font-weight: 300;
   text-shadow: 0 0 5px rgb(47, 36, 75);
   transition: font-size 0.5s;
+  z-index: 1;
+}
+
+#title-box-background {
+  z-index: 0;
+  border-radius: 15px;
 }
 
 @media screen and (max-width: 768px) {
