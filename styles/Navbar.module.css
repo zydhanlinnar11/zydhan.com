@@ -1,0 +1,38 @@
+#header {
+  height: 64px;
+  background: var(--navbar-color);
+  transition: background var(--transition-delay);
+  width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+}
+
+#titleNavContainer {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  height: 64px;
+}
+
+.navBtnGroup {
+  height: 64px;
+  display: flex;
+}
+
+#navTitle {
+  font-size: 20px;
+  color: var(--navbar-text-color);
+  transition: color var(--transition-delay);
+  font-weight: 400;
+  margin: auto 0;
+  transition: font-size 0.5s;
+}
+
+@media screen and (min-width: 768px) {
+  #navTitle {
+    font-size: 22px;
+  }
+}

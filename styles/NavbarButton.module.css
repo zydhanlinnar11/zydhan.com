@@ -1,0 +1,42 @@
+.navBtn {
+  height: 100%;
+  width: 64px;
+  display: flex;
+  background: rgba(0, 0, 0, 0);
+  transition: background var(--transition-delay);
+  border: none;
+  transition: font-size 0.5s ease-in;
+  text-align: center;
+  border-radius: 0px;
+}
+
+.navBtn:hover {
+  background: var(--nav-btn-hover-color);
+  transition: background var(--transition-delay);
+}
+
+.navBtn h6 {
+  margin: auto;
+  font-size: 12px;
+  color: var(--navbar-text-color);
+  transition: color var(--transition-delay);
+  font-weight: 500;
+}
+
+.verticalBar {
+  margin: auto;
+  height: 40%;
+  width: 1px;
+  background: var(--navbar-divider-color);
+  transition: background var(--transition-delay);
+}
+
+@media screen and (min-width: 768px) {
+  .navBtn h6 {
+    font-size: 16px;
+  }
+
+  .navBtn {
+    width: 120px;
+  }
+}

@@ -1,0 +1,18 @@
+.listContent {
+  display: grid;
+  grid-template-rows: repeat(3, 160px);
+  grid-template-columns: repeat(2, 49%);
+  gap: 24px 2%;
+  margin: auto;
+  margin-top: 6vh;
+}
+
+@media screen and (max-width: 768px) {
+  .listContent {
+    grid-template-rows: 160px;
+    grid-template-columns: 100%;
+    gap: 0 0;
+    margin: 0;
+    transition: all 0.5s;
+  }
+}
