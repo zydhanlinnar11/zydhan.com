@@ -14,6 +14,7 @@ const TitleBox = ({ title, backgroundURL }: TitleBoxProps) => {
         objectFit='cover'
         objectPosition='center'
         src={backgroundURL}
+        alt={`Cover image of ${title}`}
         id={styles['title-box-background']}
       ></Image>
       <h1 className={styles['title-box-post-title']}>{title}</h1>

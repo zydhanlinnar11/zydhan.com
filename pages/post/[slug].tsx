@@ -54,21 +54,18 @@ const PostPage: NextPage<Props> = ({ post, author }) => {
             </p>
             <hr />
             <ReactMarkdown
-              children={
-                post.postOptionalAttributes?.markdown || 'Content not available'
-              }
               components={{
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '')
                   return !inline && match ? (
                     <SyntaxHighlighter
-                      children={String(children).replace(/\n$/, '')}
                       style={materialOceanic}
                       language={match[1]}
                       showLineNumbers
-                      {...props}
                       lineNumberContainerStyle={{ paddingLeft: '0em' }}
-                    />
+                    >
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
                   ) : (
                     <code className={className} {...props}>
                       {children}
@@ -76,7 +73,9 @@ const PostPage: NextPage<Props> = ({ post, author }) => {
                   )
                 },
               }}
-            />
+            >
+              {post.postOptionalAttributes?.markdown || 'Content not available'}
+            </ReactMarkdown>
           </div>
         </div>
       </div>
