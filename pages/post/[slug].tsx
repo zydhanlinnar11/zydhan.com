@@ -24,7 +24,6 @@ interface Props {
 
 interface GetStaticPropsObjType {
   params: Params
-  revalidate: number
 }
 
 const PostPage: NextPage<Props> = ({ post, author }) => {
@@ -96,7 +95,6 @@ export async function getStaticProps({ params }: GetStaticPropsObjType) {
       post: JSON.parse(JSON.stringify(post)),
       author: JSON.parse(JSON.stringify(author)),
     },
-    revalidate: 30,
   }
 }
 
