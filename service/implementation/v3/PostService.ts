@@ -17,6 +17,7 @@ interface SingleResponseType {
   markdown: string
   cover_file_name: string
   user_id: string
+  description: string
 }
 
 class PostService implements IPostService {
@@ -51,6 +52,7 @@ class PostService implements IPostService {
         markdown: json.markdown,
         userId: json.user_id,
         slug: slug,
+        description: json.description,
       }
       return post
     } catch {
