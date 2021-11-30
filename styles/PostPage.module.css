@@ -1,0 +1,51 @@
+#postContent h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+#postContent h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+#postContent h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+#postContent h4 {
+  font-weight: 500;
+}
+
+#postContent h3,
+#postContent h4 {
+  margin-top: 1.125rem;
+  margin-bottom: 1.125rem;
+}
+
+#postContent h1,
+#postContent h2 {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+#postContent img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#postContent ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+}
+
+#postContent ol {
+  list-style-type: decimal;
+  padding-left: 2rem;
+}
