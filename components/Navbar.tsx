@@ -13,10 +13,6 @@ const navigation = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
 export default function Navbar() {
   return (
     <Disclosure
@@ -48,7 +44,7 @@ export default function Navbar() {
             <nav className='z-20 my-auto text-sm hidden sm:block'>
               <ul className='flex gap-x-8'>
                 {navigation.map((item) => (
-                  <li>
+                  <li key={item.name}>
                     <Link href={item.href} passHref={item.passHref}>
                       <a>{item.name}</a>
                     </Link>
@@ -68,7 +64,7 @@ export default function Navbar() {
               }}
             >
               {navigation.map((item) => (
-                <li className='pt-2'>
+                <li className='pt-2' key={item.name}>
                   <Link href={item.href} passHref={item.passHref}>
                     <a>{item.name}</a>
                   </Link>
