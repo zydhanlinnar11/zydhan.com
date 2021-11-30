@@ -8,7 +8,11 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className='bg-gray-900 text-white'>
+      <Html
+        className='bg-gray-900 text-white'
+        lang='id-ID'
+        style={{ scrollBehavior: 'smooth' }}
+      >
         <Head>
           <link rel='stylesheet' href='https://rsms.me/inter/inter.css'></link>
         </Head>

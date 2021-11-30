@@ -6,12 +6,12 @@ const socialMedia = [
   {
     icon: faGithub,
     url: 'https://github.com/zydhanlinnar11',
-    key: 'github',
+    key: 'Github',
   },
   {
     icon: faLinkedin,
     url: 'https://www.linkedin.com/in/zydhanlinnar11',
-    key: 'linkedin',
+    key: 'LinkedIn',
   },
 ]
 
@@ -38,7 +38,9 @@ export default function Footer() {
               href={item.url}
               key={item.key}
               target='_blank'
+              rel='noopener'
               className='max-h-3 max-w-3 hover:text-gray-100 focus:text-white'
+              aria-label={`Follow my ${item.key}`}
             >
               <FontAwesomeIcon icon={item.icon} size='lg' />
             </a>
