@@ -49,3 +49,17 @@
   list-style-type: decimal;
   padding-left: 2rem;
 }
+
+#postContent a {
+  --tw-text-opacity: 1;
+  color: rgba(96, 165, 250, var(--tw-text-opacity));
+}
+
+#postContent a:hover {
+  text-decoration: underline;
+}
+
+#postContent a:visited {
+  --tw-text-opacity: 1;
+  color: rgba(99, 102, 241, var(--tw-text-opacity));
+}
