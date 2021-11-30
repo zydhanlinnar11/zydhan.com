@@ -7,3 +7,7 @@
   position: absolute;
   top: 100%;
 }
+
+#navbar {
+  background-color: rgba(29, 29, 31, 0.3);
+}
