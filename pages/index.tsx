@@ -4,6 +4,7 @@ import Link from 'next/link'
 import BlogConfig from '../config/BlogConfig'
 import Post from '../models/Post'
 import Image from 'next/image'
+import Footer from '../components/Footer'
 
 export default function Home({ posts }: { posts: Post[] }) {
   return (
@@ -34,7 +35,7 @@ export default function Home({ posts }: { posts: Post[] }) {
           }}
         >
           {posts.map((post) => (
-            <Link href={`/post/${post.slug}`}>
+            <Link href={`/post/${post.slug}`} key={post.slug}>
               <a
                 key={post.slug}
                 className='h-72 rounded-lg max-w-xs w-full mx-auto'
@@ -68,6 +69,7 @@ export default function Home({ posts }: { posts: Post[] }) {
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   )
 }
