@@ -9,20 +9,22 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import styles from '../../styles/PostPage.module.css'
 
 export default function PostPage({ post }: { post: Post }) {
-  const title = `${post.title} - ${BlogConfig.BLOG_TITLE}`
-
   return (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>
+          {post.title} - {BlogConfig.BLOG_TITLE}
+        </title>
         <meta
           name='description'
           content={post.description ?? BlogConfig.BLOG_DESC}
         />
         <link rel='icon' href='/favicon.ico' />
-        <meta property='og:title' content={title} />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
+        <meta property='og:title' content={post.title} />
+        <meta
+          property='og:url'
+          content={`${BlogConfig.BLOG_DOMAIN}/post/${post.slug}`}
+        />
         <meta
           property='og:description'
           content={post.description ?? BlogConfig.BLOG_DESC}

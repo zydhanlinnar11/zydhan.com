@@ -7,16 +7,17 @@ import BlogConfig from '../config/BlogConfig'
 import Post from '../models/Post'
 
 export default function Home({ posts }: { posts: Post[] }) {
-  const title = `Home - ${BlogConfig.BLOG_TITLE}`
+  const title = `Home`
 
   return (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>
+          {title} - {BlogConfig.BLOG_TITLE}
+        </title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />
         <link rel='icon' href='/favicon.ico' />
         <meta property='og:title' content={title} />
-        <meta property='og:type' content='website' />
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />
       </Head>

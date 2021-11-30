@@ -15,6 +15,8 @@ class MyDocument extends Document {
       >
         <Head>
           <link rel='stylesheet' href='https://rsms.me/inter/inter.css'></link>
+          <meta property='og:type' content='website' />
+          <meta property='og:site_name' content="Zydhan's Blog" />
         </Head>
         <body>
           <Main />
