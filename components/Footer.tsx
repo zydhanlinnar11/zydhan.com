@@ -25,10 +25,7 @@ export default function Footer() {
         paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
       }}
     >
-      <div
-        className='h-px w-full'
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0.24)' }}
-      ></div>
+      <div className='h-px w-full bg-divider-primary'></div>
       <div className='flex justify-between mt-2'>
         <div>
           <small>

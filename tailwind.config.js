@@ -22,6 +22,9 @@ module.exports = {
       divideColor: {
         main: 'rgba(255,255,255,0.24)',
       },
+      backgroundColor: {
+        'divider-primary': 'rgba(255,255,255,0.24)',
+      },
     },
   },
   variants: {
