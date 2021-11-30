@@ -31,7 +31,7 @@ export default function Navbar() {
             }}
           >
             <h1 className='z-20 my-auto font-semibold text-lg'>
-              {BlogConfig.getBlogTitle()}
+              {BlogConfig.BLOG_TITLE}
             </h1>
             <Disclosure.Button className='sm:hidden'>
               <span className='sr-only'>Open main menu</span>
