@@ -49,6 +49,7 @@ export default function Home({ posts }: { posts: Post[] }) {
                       className='rounded-t-lg'
                       layout='fill'
                       objectFit='cover'
+                      priority={true}
                     />
                   </div>
                   <div className='text-left p-6 flex flex-col justify-between flex-auto'>
