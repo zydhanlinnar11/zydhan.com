@@ -70,35 +70,15 @@ export default function RegisterPage() {
             onSubmit={registerHandler}
           >
             <div>
-              <label htmlFor='username' className='hidden' aria-hidden>
-                Username
+              <label htmlFor='name' className='hidden' aria-hidden>
+                Name
               </label>
               <div className='mt-1 relative rounded-md shadow-sm'>
                 <input
                   type='text'
-                  name='username'
-                  id='username'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-t-md h-10 bg-transparent'
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.24)',
-                    borderBottom: 'none',
-                  }}
-                  placeholder='Username'
-                  autoComplete='username'
-                  ref={usernameRef}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='name' className='hidden' aria-hidden>
-                Name
-              </label>
-              <div className='relative rounded-md shadow-sm'>
-                <input
-                  type='text'
                   name='name'
                   id='name'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 h-10 bg-transparent'
+                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-t-md h-10 bg-transparent'
                   style={{
                     border: '1px solid rgba(255, 255, 255, 0.24)',
                     borderBottom: 'none',
@@ -124,8 +104,27 @@ export default function RegisterPage() {
                     borderBottom: 'none',
                   }}
                   placeholder='E-mail'
-                  autoComplete='email'
+                  autoComplete='username'
                   ref={emailRef}
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor='username' className='hidden' aria-hidden>
+                Username
+              </label>
+              <div className='relative rounded-md shadow-sm'>
+                <input
+                  type='text'
+                  name='username'
+                  id='username'
+                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 h-10 bg-transparent'
+                  style={{
+                    border: '1px solid rgba(255, 255, 255, 0.24)',
+                    borderBottom: 'none',
+                  }}
+                  placeholder='Username'
+                  ref={usernameRef}
                 />
               </div>
             </div>

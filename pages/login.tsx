@@ -83,7 +83,7 @@ export default function LoginPage() {
                     borderBottom: 'none',
                   }}
                   placeholder='E-mail'
-                  autoComplete='email'
+                  autoComplete='username'
                   ref={emailRef}
                 />
               </div>
