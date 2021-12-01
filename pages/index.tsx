@@ -60,6 +60,7 @@ export default function Home({ posts }: { posts: Post[] }) {
                       layout='fill'
                       objectFit='cover'
                       priority={true}
+                      sizes='960px'
                     />
                   </div>
                   <div className='text-left p-6 flex flex-col justify-between flex-auto'>
