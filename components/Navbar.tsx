@@ -6,11 +6,11 @@ import styles from '../styles/Navbar.module.css'
 
 const navigation = [
   { name: 'Home', href: '/', passHref: false },
-  {
-    name: 'Resume',
-    href: 'https://zydhanlinnar11.github.io/resume/',
-    passHref: true,
-  },
+  // {
+  //   name: 'Resume',
+  //   href: 'https://zydhanlinnar11.github.io/resume/',
+  //   passHref: true,
+  // },
 ]
 
 export default function Navbar() {
