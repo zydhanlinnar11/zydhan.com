@@ -2,7 +2,7 @@ import styles from '../styles/SpinnerLoading.module.css'
 
 export default function SpinnerLoading() {
   return (
-    <>
+    <div className='text-center'>
       <div className={styles.spinner}>
         <div className={styles.bar1}></div>
         <div className={styles.bar2}></div>
@@ -18,6 +18,6 @@ export default function SpinnerLoading() {
         <div className={styles.bar12}></div>
       </div>
       <p className='mx-auto'>Loading...</p>
-    </>
+    </div>
   )
 }
