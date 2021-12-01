@@ -62,7 +62,7 @@ export default function RegisterPage() {
         <div>
           <header className='text-center'>
             <h1 className='text-3xl font-semibold'>Register</h1>
-            <p className='mt-3 text-gray-400'>Buat akun baru</p>
+            <p className='mt-3 text-gray-400'>Create new account</p>
           </header>
           <form
             className='text-center mt-5 max-w-xs mx-auto'
