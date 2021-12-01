@@ -16,7 +16,26 @@ export interface IAuthenticatedUser {
   username: string
 }
 
-const AuthContext = React.createContext(null)
+interface AuthContextInterface {
+  user: IAuthenticatedUser
+  register: (
+    username: string,
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword: string
+  ) => Promise<{
+    success: boolean
+    message: any
+  }>
+  login: (
+    email: string,
+    password: string
+  ) => Promise<{ success: boolean; message: string }>
+  logout: () => Promise<void>
+}
+
+const AuthContext = React.createContext<AuthContextInterface | null>(null)
 
 function getCookie(cname) {
   let name = cname + '='

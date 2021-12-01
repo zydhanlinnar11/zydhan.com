@@ -16,10 +16,7 @@ const navigation = [
 ]
 
 export default function Navbar() {
-  const {
-    user,
-    logout,
-  }: { user: IAuthenticatedUser; logout: () => Promise<void> } = useAuth()
+  const { user, logout } = useAuth()
 
   async function logoutHandler(e: React.FormEvent) {
     e.preventDefault()

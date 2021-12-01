@@ -9,7 +9,7 @@ import { useAuth, IAuthenticatedUser } from '../providers/AuthProvider'
 
 export default function Home({ posts }: { posts: Post[] }) {
   const title = `Home`
-  const { user }: { user: IAuthenticatedUser } = useAuth()
+  const { user } = useAuth()
 
   return (
     <div>
