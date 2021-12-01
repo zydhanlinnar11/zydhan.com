@@ -66,7 +66,7 @@ export default function Navbar() {
               {navigation.map((item) => (
                 <li className='pt-2' key={item.name}>
                   <Link href={item.href} passHref={item.passHref}>
-                    <a>{item.name}</a>
+                    <a className='w-full inline-block'>{item.name}</a>
                   </Link>
                 </li>
               ))}
