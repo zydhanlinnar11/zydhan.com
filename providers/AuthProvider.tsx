@@ -120,35 +120,40 @@ export function AuthProvider({ children }) {
   async function getUserFromToken() {
     const token = localStorage.getItem('token')
 
-    const response = await fetch(`${BlogConfig.BLOG_API}/user`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    if (response.status !== 200) {
+    try {
+      const response = await fetch(`${BlogConfig.BLOG_API}/user`, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (response.status !== 200) {
+        return null
+      }
+      const json: IAuthenticatedUser = await response.json()
+
+      return json
+    } catch (error) {
       return null
     }
-    const json: IAuthenticatedUser = await response.json()
-
-    return json
   }
 
   async function logout() {
     const token = localStorage.getItem('token')
     updateUser(null)
 
-    const response = await fetch(`${BlogConfig.BLOG_API}/logout`, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const json = await response.json()
-    console.log(json)
+    try {
+      const response = await fetch(`${BlogConfig.BLOG_API}/logout`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const json = await response.json()
+    } catch (error) {}
   }
 
   const value = {
