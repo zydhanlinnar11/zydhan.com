@@ -1,9 +1,43 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import BlogConfig from '../config/BlogConfig'
+import { useAuth } from '../providers/AuthProvider'
+import Router from 'next/router'
 
 export default function LoginPage() {
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+  const [errorMessage, setErrorMessage] = useState('')
+  const { login } = useAuth()
+  const [disabledLogin, setDisabledLogin] = useState(false)
+
+  async function loginHandler(e: React.FormEvent) {
+    e.preventDefault()
+    setErrorMessage('')
+    setDisabledLogin(true)
+
+    try {
+      const loginStatus = await login(
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+
+      if (!loginStatus.success) {
+        setErrorMessage(loginStatus.message)
+        setDisabledLogin(false)
+        return
+      }
+
+      Router.push('/')
+    } catch {
+      setErrorMessage('Internal error. Please contact admin.')
+    }
+    setDisabledLogin(false)
+  }
+
   return (
     <div>
       <Head>
@@ -27,9 +61,13 @@ export default function LoginPage() {
         <div>
           <header className='text-center'>
             <h1 className='text-3xl font-semibold'>Login</h1>
-            <p className='mt-3 text-gray-400'>Masuk ke akun anda</p>
+            <p className='mt-3 text-gray-400'>Log in to your account</p>
           </header>
-          <form className='text-center mt-5 max-w-xs mx-auto' method='POST'>
+          <form
+            className='text-center mt-5 max-w-xs mx-auto'
+            method='POST'
+            onSubmit={loginHandler}
+          >
             <div>
               <label htmlFor='email' className='hidden' aria-hidden>
                 E-mail
@@ -46,6 +84,7 @@ export default function LoginPage() {
                   }}
                   placeholder='E-mail'
                   autoComplete='email'
+                  ref={emailRef}
                 />
               </div>
             </div>
@@ -64,12 +103,26 @@ export default function LoginPage() {
                   }}
                   placeholder='Password'
                   autoComplete='current-password'
+                  ref={passwordRef}
                 />
               </div>
             </div>
+            <div className='mt-1'>
+              <small>
+                Don't have account?{' '}
+                <Link href='/register'>
+                  <a className='text-blue-400 hover:underline'>
+                    Create an account
+                  </a>
+                </Link>
+              </small>
+              <br />
+              <small className='text-red-500'>{errorMessage}</small>
+            </div>
             <button
               type='submit'
-              className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30'
+              disabled={disabledLogin}
+              className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed'
             >
               Log in
             </button>

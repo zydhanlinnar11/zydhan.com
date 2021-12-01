@@ -5,9 +5,11 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import BlogConfig from '../config/BlogConfig'
 import Post from '../models/Post'
+import { useAuth, IAuthenticatedUser } from '../providers/AuthProvider'
 
 export default function Home({ posts }: { posts: Post[] }) {
   const title = `Home`
+  const { user }: { user: IAuthenticatedUser } = useAuth()
 
   return (
     <div>
@@ -33,7 +35,9 @@ export default function Home({ posts }: { posts: Post[] }) {
         >
           <h1 className='text-4xl font-bold'>{BlogConfig.BLOG_TITLE}</h1>
           <h2 className='text-lg font-bolder my-2 text-gray-400 text-center'>
-            {BlogConfig.BLOG_DESC}
+            {user
+              ? `Welcome, ${user.name}! Have fun here.`
+              : BlogConfig.BLOG_DESC}
           </h2>
         </header>
         <div

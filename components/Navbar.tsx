@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import styles from '../styles/Navbar.module.css'
+import { IAuthenticatedUser, useAuth } from '../providers/AuthProvider'
+import React from 'react'
 
 const navigation = [
   { name: 'Home', href: '/', passHref: false },
@@ -14,6 +16,17 @@ const navigation = [
 ]
 
 export default function Navbar() {
+  const {
+    user,
+    logout,
+  }: { user: IAuthenticatedUser; logout: () => Promise<void> } = useAuth()
+
+  async function logoutHandler(e: React.FormEvent) {
+    e.preventDefault()
+
+    logout()
+  }
+
   return (
     <Disclosure
       id={styles.navbar}
@@ -50,6 +63,20 @@ export default function Navbar() {
                     </Link>
                   </li>
                 ))}
+                {user && (
+                  <li>
+                    <form onSubmit={logoutHandler}>
+                      <button type='submit'>Log out</button>
+                    </form>
+                  </li>
+                )}
+                {!user && (
+                  <li>
+                    <Link href='/login'>
+                      <a className='w-full inline-block'>Log in</a>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
@@ -70,6 +97,25 @@ export default function Navbar() {
                   </Link>
                 </li>
               ))}
+              {user && (
+                <li className='pt-2'>
+                  <form onSubmit={logoutHandler}>
+                    <button
+                      className='w-full inline-block text-left'
+                      type='submit'
+                    >
+                      Log out
+                    </button>
+                  </form>
+                </li>
+              )}
+              {!user && (
+                <li className='pt-2'>
+                  <Link href='/login'>
+                    <a className='w-full inline-block'>Log in</a>
+                  </Link>
+                </li>
+              )}
             </ul>
           </Disclosure.Panel>
         </>

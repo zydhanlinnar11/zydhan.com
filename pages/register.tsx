@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -14,21 +15,28 @@ export default function RegisterPage() {
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
   const { register } = useAuth()
+  const [disabledRegister, setDisabledRegister] = useState(false)
 
   async function registerHandler(e: React.FormEvent) {
     e.preventDefault()
     setErrorMessage('')
     setSuccessMessage('')
+    setDisabledRegister(true)
 
-    const registerStatus = await register(
-      usernameRef.current.value,
-      nameRef.current.value,
-      emailRef.current.value,
-      passwordRef.current.value,
-      confirmPasswordRef.current.value
-    )
-    if (registerStatus.success) setSuccessMessage(registerStatus.message)
-    else setErrorMessage(registerStatus.message)
+    try {
+      const registerStatus = await register(
+        usernameRef.current.value,
+        nameRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value,
+        confirmPasswordRef.current.value
+      )
+      if (registerStatus.success) setSuccessMessage(registerStatus.message)
+      else setErrorMessage(registerStatus.message)
+    } catch {
+      setErrorMessage('Internal error. Please contact admin.')
+    }
+    setDisabledRegister(false)
   }
 
   return (
@@ -161,12 +169,20 @@ export default function RegisterPage() {
               </div>
             </div>
             <div className='mt-1'>
+              <small>
+                Already have an account?{' '}
+                <Link href='/login'>
+                  <a className='text-blue-400 hover:underline'>Log in</a>
+                </Link>
+              </small>
+              <br />
               <small className='text-red-500'>{errorMessage}</small>
               <small className='text-green-500'>{successMessage}</small>
             </div>
             <button
               type='submit'
-              className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30'
+              disabled={disabledRegister}
+              className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed'
             >
               Register
             </button>
