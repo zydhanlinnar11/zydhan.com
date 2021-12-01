@@ -23,69 +23,51 @@ export default function Home({ posts }: { posts: Post[] }) {
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />
       </Head>
-      <Navbar />
-      <main>
-        <header
-          className='flex flex-col min-h-24 my-16 text-center mx-auto'
-          style={{
-            maxWidth: '980px',
-            paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-            paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-          }}
-        >
-          <h1 className='text-4xl font-bold'>{BlogConfig.BLOG_TITLE}</h1>
-          <h2 className='text-lg font-bolder my-2 text-gray-400 text-center'>
-            {user
-              ? `Welcome, ${user.name}! Have fun here.`
-              : BlogConfig.BLOG_DESC}
-          </h2>
-        </header>
-        <div
-          className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'
-          style={{
-            maxWidth: '980px',
-            paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-            paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-          }}
-        >
-          {posts.map((post) => (
-            <Link href={`/post/${post.slug}`} key={post.slug}>
-              <a
-                key={post.slug}
-                className='h-72 rounded-lg max-w-xs w-full mx-auto'
-                style={{ border: '1px solid rgba(255, 255, 255, 0.24)' }}
-              >
-                <article className='h-full flex flex-col'>
-                  <div className='h-32 block w-full relative'>
-                    <Image
-                      src={post.coverUrl}
-                      alt={`${post.slug}-image`}
-                      className='rounded-t-lg'
-                      layout='fill'
-                      objectFit='cover'
-                      priority={true}
-                      sizes='960px'
-                    />
+      <header className='flex flex-col min-h-24 my-16 text-center mx-auto'>
+        <h1 className='text-4xl font-bold'>{BlogConfig.BLOG_TITLE}</h1>
+        <h2 className='text-lg font-bolder my-2 text-gray-400 text-center'>
+          {user
+            ? `Welcome, ${user.name}! Have fun here.`
+            : BlogConfig.BLOG_DESC}
+        </h2>
+      </header>
+      <div className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'>
+        {posts.map((post) => (
+          <Link href={`/post/${post.slug}`} key={post.slug}>
+            <a
+              key={post.slug}
+              className='h-72 rounded-lg max-w-xs w-full mx-auto'
+              style={{ border: '1px solid rgba(255, 255, 255, 0.24)' }}
+            >
+              <article className='h-full flex flex-col'>
+                <div className='h-32 block w-full relative'>
+                  <Image
+                    src={post.coverUrl}
+                    alt={`${post.slug}-image`}
+                    className='rounded-t-lg'
+                    layout='fill'
+                    objectFit='cover'
+                    priority={true}
+                    sizes='960px'
+                  />
+                </div>
+                <div className='text-left p-6 flex flex-col justify-between flex-auto'>
+                  <div>
+                    <h3 className='font-bold text-lg'>{post.title}</h3>
                   </div>
-                  <div className='text-left p-6 flex flex-col justify-between flex-auto'>
-                    <div>
-                      <h3 className='font-bold text-lg'>{post.title}</h3>
-                    </div>
-                    <p className='text-gray-400 font-semibold text-sm'>
-                      {new Date(post.createdAt).toLocaleDateString(undefined, {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </p>
-                  </div>
-                </article>
-              </a>
-            </Link>
-          ))}
-        </div>
-      </main>
-      <Footer />
+                  <p className='text-gray-400 font-semibold text-sm'>
+                    {new Date(post.createdAt).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </p>
+                </div>
+              </article>
+            </a>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }

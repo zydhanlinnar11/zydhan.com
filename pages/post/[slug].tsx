@@ -30,67 +30,49 @@ export default function PostPage({ post }: { post: Post }) {
           content={post.description ?? BlogConfig.BLOG_DESC}
         />
       </Head>
-      <Navbar />
-      <main>
-        <article>
-          <header
-            className='flex flex-col min-h-24 my-16 text-center mx-auto'
-            style={{
-              maxWidth: '980px',
-              paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-              paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-            }}
-          >
-            <h3 className='text-sm font-bolder my-2 text-gray-400'>
-              {new Date(post.createdAt).toLocaleDateString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </h3>
-            <h1 className='text-4xl font-bold'>{post.title}</h1>
-            <h2 className='text-lg font-bolder my-2 text-gray-400'>
-              {post.description ?? BlogConfig.BLOG_DESC}
-            </h2>
-          </header>
-          <div
-            className='text-center mx-auto'
-            style={{
-              maxWidth: '980px',
-              paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-              paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-            }}
-          >
-            <div className='bg-divider-primary h-px w-full'></div>
-            <div className='py-4 text-left' id={styles.postContent}>
-              <ReactMarkdown
-                components={{
-                  code({ node, inline, className, children, ...props }) {
-                    const match = /language-(\w+)/.exec(className || '')
-                    return !inline && match ? (
-                      <SyntaxHighlighter
-                        style={materialOceanic}
-                        language={match[1]}
-                        showLineNumbers
-                        lineNumberContainerStyle={{ paddingLeft: '0em' }}
-                      >
-                        {String(children).replace(/\n$/, '')}
-                      </SyntaxHighlighter>
-                    ) : (
-                      <code className={className} {...props}>
-                        {children}
-                      </code>
-                    )
-                  },
-                }}
-              >
-                {post.markdown ?? 'Content not available'}
-              </ReactMarkdown>
-            </div>
+      <article>
+        <header className='flex flex-col min-h-24 my-16 text-center mx-auto'>
+          <h3 className='text-sm font-bolder my-2 text-gray-400'>
+            {new Date(post.createdAt).toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </h3>
+          <h1 className='text-4xl font-bold'>{post.title}</h1>
+          <h2 className='text-lg font-bolder my-2 text-gray-400'>
+            {post.description ?? BlogConfig.BLOG_DESC}
+          </h2>
+        </header>
+        <div className='text-center mx-auto'>
+          <div className='bg-divider-primary h-px w-full'></div>
+          <div className='py-4 text-left' id={styles.postContent}>
+            <ReactMarkdown
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '')
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      style={materialOceanic}
+                      language={match[1]}
+                      showLineNumbers
+                      lineNumberContainerStyle={{ paddingLeft: '0em' }}
+                    >
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  )
+                },
+              }}
+            >
+              {post.markdown ?? 'Content not available'}
+            </ReactMarkdown>
           </div>
-        </article>
-      </main>
-      <Footer />
+        </div>
+      </article>
     </div>
   )
 }

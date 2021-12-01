@@ -14,24 +14,12 @@ export default function Custom404() {
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />
       </Head>
-      <Navbar />
-      <main
-        className='flex justify-center mx-auto'
-        style={{
-          minHeight: '75vh',
-          maxWidth: '980px',
-          paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-          paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-        }}
-      >
-        <header className='my-auto text-center'>
-          <h1 className='text-4xl'>404 Not Found</h1>
-          <p className='mt-3 text-gray-400'>
-            Halaman yang anda cari tidak ditemukan.
-          </p>
-        </header>
-      </main>
-      <Footer />
+      <header className='my-auto text-center'>
+        <h1 className='text-4xl'>404 Not Found</h1>
+        <p className='mt-3 text-gray-400'>
+          Halaman yang anda cari tidak ditemukan.
+        </p>
+      </header>
     </div>
   )
 }
