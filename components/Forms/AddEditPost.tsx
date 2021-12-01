@@ -7,9 +7,9 @@ interface AddEditPostFormProps {
 }
 
 export default function AddEditPostForm({ post }: AddEditPostFormProps) {
-  const postTitleRef = useRef()
-  const postDescriptionRef = useRef()
-  const postMarkdownRef = useRef()
+  const postTitleRef = useRef(null)
+  const postDescriptionRef = useRef(null)
+  const postMarkdownRef = useRef(null)
 
   async function editPostHandler() {
     let body = {

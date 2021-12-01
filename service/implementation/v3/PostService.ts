@@ -1,4 +1,3 @@
-import { ISubmissionBody } from '../../../components/Forms/AddEditPost'
 import BlogConfig from '../../../config/BlogConfig'
 import Post from '../../../models/Post'
 import { getCookie } from '../../../providers/AuthProvider'
@@ -65,7 +64,7 @@ class PostService implements IPostService {
     }
   }
 
-  async editSinglePost(slug: string, submissionBody): Promise<string> {
+  async editSinglePost(slug: string, submissionBody) {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
         credentials: 'same-origin',
@@ -83,7 +82,7 @@ class PostService implements IPostService {
     } catch (error) {}
   }
 
-  async addSinglePost(submissionBody): Promise<string> {
+  async addSinglePost(submissionBody) {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
         credentials: 'same-origin',
