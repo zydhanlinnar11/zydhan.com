@@ -5,7 +5,7 @@ import BlogConfig from '../config/BlogConfig'
 
 export default function Custom404() {
   return (
-    <div>
+    <div className='my-auto'>
       <Head>
         <title>Not Found - {BlogConfig.BLOG_TITLE}</title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />

@@ -47,7 +47,7 @@ export default function LoginPage() {
   }, [isUserFetched, user])
 
   return (
-    <div>
+    <div className='my-auto'>
       <Head>
         <title>Login - {BlogConfig.BLOG_TITLE}</title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />

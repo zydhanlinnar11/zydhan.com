@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider>
       <Navbar />
       <main
-        className='flex flex-col justify-center mx-auto'
+        className='flex flex-col mx-auto'
         style={{
           minHeight: '75vh',
           maxWidth: '980px',

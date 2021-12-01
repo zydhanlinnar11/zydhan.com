@@ -49,7 +49,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div>
+    <div className='my-auto'>
       <Head>
         <title>Register - {BlogConfig.BLOG_TITLE}</title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />
