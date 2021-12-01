@@ -33,6 +33,7 @@ interface AuthContextInterface {
     password: string
   ) => Promise<{ success: boolean; message: string }>
   logout: () => Promise<void>
+  isUserFetched: boolean
 }
 
 const AuthContext = React.createContext<AuthContextInterface | null>(null)
@@ -59,6 +60,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState<IAuthenticatedUser>(null)
+  const [isUserFetched, setUserFetched] = useState(false)
 
   useEffect(() => {
     getUserFromToken().then((updatedUser: IAuthenticatedUser) =>
@@ -148,12 +150,15 @@ export function AuthProvider({ children }) {
         },
       })
       if (response.status !== 200) {
+        setUserFetched(true)
         return null
       }
       const json: IAuthenticatedUser = await response.json()
 
+      setUserFetched(true)
       return json
     } catch (error) {
+      setUserFetched(true)
       return null
     }
   }
@@ -161,6 +166,8 @@ export function AuthProvider({ children }) {
   async function logout() {
     const token = localStorage.getItem('token')
     updateUser(null)
+
+    if (!token) return
 
     try {
       const response = await fetch(`${BlogConfig.BLOG_API}/logout`, {
@@ -180,6 +187,7 @@ export function AuthProvider({ children }) {
     register,
     login,
     logout,
+    isUserFetched,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
