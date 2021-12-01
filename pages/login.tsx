@@ -34,8 +34,8 @@ export default function LoginPage() {
       Router.push('/')
     } catch {
       setErrorMessage('Internal error. Please contact admin.')
+      setDisabledLogin(false)
     }
-    setDisabledLogin(false)
   }
 
   return (
