@@ -14,6 +14,7 @@ export interface IAuthenticatedUser {
   name: string
   updated_at: string
   username: string
+  admin: boolean
 }
 
 interface AuthContextInterface {
@@ -38,7 +39,7 @@ interface AuthContextInterface {
 
 const AuthContext = React.createContext<AuthContextInterface | null>(null)
 
-function getCookie(cname) {
+export function getCookie(cname) {
   let name = cname + '='
   let decodedCookie = decodeURIComponent(document.cookie)
   let ca = decodedCookie.split(';')
@@ -72,9 +73,15 @@ export function AuthProvider({ children }) {
     if (!updatedUser) {
       localStorage.removeItem('token')
       setUser(null)
+      setUserFetched(true)
       return
     }
+    // Laravel return this value as integer
+    // So we need to convert to boolean
+    const isAdmin = updatedUser.admin as unknown as number
+    updatedUser.admin = isAdmin != 0
     setUser(updatedUser)
+    setUserFetched(true)
   }
 
   async function register(
@@ -150,15 +157,12 @@ export function AuthProvider({ children }) {
         },
       })
       if (response.status !== 200) {
-        setUserFetched(true)
         return null
       }
       const json: IAuthenticatedUser = await response.json()
 
-      setUserFetched(true)
       return json
     } catch (error) {
-      setUserFetched(true)
       return null
     }
   }

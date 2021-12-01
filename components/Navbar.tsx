@@ -60,18 +60,25 @@ export default function Navbar() {
                     </Link>
                   </li>
                 ))}
+                {!user && (
+                  <li>
+                    <Link href='/login'>
+                      <a>Log in</a>
+                    </Link>
+                  </li>
+                )}
+                {user?.admin && (
+                  <li>
+                    <Link href='/admin'>
+                      <a>Admin</a>
+                    </Link>
+                  </li>
+                )}
                 {user && (
                   <li>
                     <form onSubmit={logoutHandler}>
                       <button type='submit'>Log out</button>
                     </form>
-                  </li>
-                )}
-                {!user && (
-                  <li>
-                    <Link href='/login'>
-                      <a className='w-full inline-block'>Log in</a>
-                    </Link>
                   </li>
                 )}
               </ul>
@@ -94,6 +101,13 @@ export default function Navbar() {
                   </Link>
                 </li>
               ))}
+              {user?.admin && (
+                <li className='pt-2'>
+                  <Link href='/admin'>
+                    <a className='w-full inline-block'>Admin</a>
+                  </Link>
+                </li>
+              )}
               {user && (
                 <li className='pt-2'>
                   <form onSubmit={logoutHandler}>
@@ -104,13 +118,6 @@ export default function Navbar() {
                       Log out
                     </button>
                   </form>
-                </li>
-              )}
-              {!user && (
-                <li className='pt-2'>
-                  <Link href='/login'>
-                    <a className='w-full inline-block'>Log in</a>
-                  </Link>
                 </li>
               )}
             </ul>

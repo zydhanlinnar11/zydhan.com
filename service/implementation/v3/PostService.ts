@@ -1,5 +1,7 @@
+import { ISubmissionBody } from '../../../components/Forms/AddEditPost'
 import BlogConfig from '../../../config/BlogConfig'
 import Post from '../../../models/Post'
+import { getCookie } from '../../../providers/AuthProvider'
 import IPostService from '../../interface/IPostService'
 
 interface MultiResponseType {
@@ -44,6 +46,9 @@ class PostService implements IPostService {
   async getSinglePost(slug: string): Promise<Post> {
     try {
       const response = await fetch(`${BlogConfig.BLOG_API}/post/${slug}`)
+
+      if (response.status !== 200) throw 'Error'
+
       const json: SingleResponseType = await response.json()
       const post: Post = {
         title: json.title,
@@ -58,6 +63,43 @@ class PostService implements IPostService {
     } catch {
       throw 'API Error'
     }
+  }
+
+  async editSinglePost(slug: string, submissionBody): Promise<string> {
+    try {
+      const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
+        credentials: 'same-origin',
+      })
+      const response = await fetch(`${BlogConfig.BLOG_API}/post/${slug}`, {
+        method: 'PATCH',
+        body: JSON.stringify(submissionBody),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+    } catch (error) {}
+  }
+
+  async addSinglePost(submissionBody): Promise<string> {
+    try {
+      const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
+        credentials: 'same-origin',
+      })
+      console.log(submissionBody)
+      const response = await fetch(`${BlogConfig.BLOG_API}/posts`, {
+        method: 'POST',
+        body: JSON.stringify(submissionBody),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+    } catch (error) {}
   }
 }
 
