@@ -105,6 +105,7 @@ export function AuthProvider({ children }) {
           Accept: 'application/json',
           'Content-Type': 'application/json',
           'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          credentials: 'include',
         },
       })
       const json = await response.json()
@@ -130,6 +131,7 @@ export function AuthProvider({ children }) {
           Accept: 'application/json',
           'Content-Type': 'application/json',
           'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          credentials: 'include',
         },
       })
       const json: IAPILoginResponse = await response.json()
