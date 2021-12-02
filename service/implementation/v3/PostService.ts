@@ -75,7 +75,7 @@ class PostService implements IPostService {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
@@ -94,7 +94,7 @@ class PostService implements IPostService {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
