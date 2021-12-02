@@ -67,7 +67,7 @@ class PostService implements IPostService {
   async editSinglePost(slug: string, submissionBody) {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
-        credentials: 'same-origin',
+        credentials: 'include',
       })
       const response = await fetch(`${BlogConfig.BLOG_API}/post/${slug}`, {
         method: 'PATCH',
@@ -85,7 +85,7 @@ class PostService implements IPostService {
   async addSinglePost(submissionBody) {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
-        credentials: 'same-origin',
+        credentials: 'include',
       })
       console.log(submissionBody)
       const response = await fetch(`${BlogConfig.BLOG_API}/posts`, {

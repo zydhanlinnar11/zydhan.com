@@ -96,7 +96,7 @@ export function AuthProvider({ children }) {
     }
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
-        credentials: 'same-origin',
+        credentials: 'include',
       })
       const response = await fetch(`${BlogConfig.BLOG_API}/register`, {
         method: 'POST',
@@ -121,7 +121,7 @@ export function AuthProvider({ children }) {
   async function login(email: string, password: string) {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
-        credentials: 'same-origin',
+        credentials: 'include',
       })
       const response = await fetch(`${BlogConfig.BLOG_API}/login`, {
         method: 'POST',
