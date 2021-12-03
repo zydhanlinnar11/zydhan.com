@@ -21,10 +21,20 @@ export default function LoginPage() {
     setDisabledLogin(true)
 
     try {
-      const loginStatus = await login(
-        emailRef.current.value,
-        passwordRef.current.value
-      )
+      const notFilled: string[] = []
+      const email: string = emailRef.current.value
+      const password: string = passwordRef.current.value
+
+      if (!email.trim()) notFilled.push('Email')
+      if (!password.trim()) notFilled.push('Password')
+
+      if (notFilled.length != 0) {
+        setErrorMessage(notFilled.join(' and ') + " can't be empty.")
+        setDisabledLogin(false)
+        return
+      }
+
+      const loginStatus = await login(email, password)
 
       if (!loginStatus.success) {
         setErrorMessage(loginStatus.message)
