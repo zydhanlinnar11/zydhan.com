@@ -101,6 +101,13 @@ export default function Navbar() {
                   </Link>
                 </li>
               ))}
+              {!user && (
+                <li className='pt-2'>
+                  <Link href='/login'>
+                    <a className='w-full inline-block'>Login</a>
+                  </Link>
+                </li>
+              )}
               {user?.admin && (
                 <li className='pt-2'>
                   <Link href='/admin'>
