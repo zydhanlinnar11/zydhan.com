@@ -58,7 +58,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   }
 
   return (
-    <form className='px-12 pb-12' onSubmit={submitHandler}>
+    <form className='md:px-12 pb-12' onSubmit={submitHandler}>
       <div>
         <label htmlFor='post-title'>Title</label>
         <div className='mt-2 relative rounded-md shadow-sm'>
