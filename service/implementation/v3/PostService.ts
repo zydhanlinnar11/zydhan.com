@@ -1,7 +1,9 @@
 import BlogConfig from '../../../config/BlogConfig'
 import Post from '../../../models/Post'
 import { getCookie } from '../../../providers/AuthProvider'
-import IPostService from '../../interface/IPostService'
+import IPostService, {
+  EditSinglePostInterface,
+} from '../../interface/IPostService'
 
 interface MultiResponseType {
   title: string
@@ -64,7 +66,10 @@ class PostService implements IPostService {
     }
   }
 
-  async editSinglePost(slug: string, submissionBody) {
+  async editSinglePost(
+    slug: string,
+    submissionBody
+  ): Promise<EditSinglePostInterface> {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
         credentials: 'include',
@@ -80,15 +85,20 @@ class PostService implements IPostService {
           credentials: 'include',
         },
       })
-    } catch (error) {}
+      const json: { message: string; new_slug?: string } = await response.json()
+      if (response.status !== 200)
+        return { success: false, message: json.message }
+      return { success: true, newSlug: json.new_slug }
+    } catch (error) {
+      return { success: false, message: 'Connection error.' }
+    }
   }
 
-  async addSinglePost(submissionBody) {
+  async addSinglePost(submissionBody): Promise<string | null> {
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
         credentials: 'include',
       })
-      console.log(submissionBody)
       const response = await fetch(`${BlogConfig.BLOG_API}/posts`, {
         method: 'POST',
         body: JSON.stringify(submissionBody),
@@ -100,7 +110,35 @@ class PostService implements IPostService {
           credentials: 'include',
         },
       })
-    } catch (error) {}
+      const { slug } = await response.json()
+
+      if (response.status !== 201) return null
+      return slug
+    } catch (error) {
+      return null
+    }
+  }
+
+  async deleteSinglePost(slug: string): Promise<boolean> {
+    try {
+      const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
+        credentials: 'include',
+      })
+      const response = await fetch(`${BlogConfig.BLOG_API}/post/${slug}`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          credentials: 'include',
+        },
+      })
+      if (response.status !== 200) return false
+      return true
+    } catch (error) {
+      return false
+    }
   }
 }
 
