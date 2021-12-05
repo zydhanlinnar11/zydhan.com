@@ -20,7 +20,12 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   }
 
   function showDeleteAlert() {
-    if (!confirm('test')) return
+    if (
+      !confirm(
+        'Are you sure want to delete this post? This action is irreversible.'
+      )
+    )
+      return
     deletePostHandler()
   }
 
