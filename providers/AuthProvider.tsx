@@ -3,7 +3,8 @@ import BlogConfig from '../config/BlogConfig'
 
 interface IAPILoginResponse {
   message: string
-  token: string
+  token?: string
+  errors?: string
 }
 
 export interface IAuthenticatedUser {
@@ -27,7 +28,7 @@ interface AuthContextInterface {
     confirmPassword: string
   ) => Promise<{
     success: boolean
-    message: any
+    message: string
   }>
   login: (
     email: string,
@@ -38,6 +39,15 @@ interface AuthContextInterface {
 }
 
 const AuthContext = React.createContext<AuthContextInterface | null>(null)
+
+function getFirstObjectItem(obj): string | null {
+  for (let key in obj) {
+    // Each key has value array of string
+    // We only need to return first index
+    return obj[key]?.[0]
+  }
+  return null
+}
 
 export function getCookie(cname) {
   let name = cname + '='
@@ -89,18 +99,21 @@ export function AuthProvider({ children }) {
     name: string,
     email: string,
     password: string,
-    confirmPassword: string
+    password_confirmation: string
   ) {
-    if (password != confirmPassword) {
-      return { success: false, message: "Password confirmation doesn't match." }
-    }
     try {
       const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
         credentials: 'include',
       })
       const response = await fetch(`${BlogConfig.BLOG_API}/register`, {
         method: 'POST',
-        body: JSON.stringify({ username, name, email, password }),
+        body: JSON.stringify({
+          username,
+          name,
+          email,
+          password,
+          password_confirmation,
+        }),
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -108,14 +121,21 @@ export function AuthProvider({ children }) {
           credentials: 'include',
         },
       })
-      const json = await response.json()
+      const json: { message?: string; errors?: string } = await response.json()
 
       if (response.status !== 200)
-        return { success: false, message: json.message }
+        return {
+          success: false,
+          message: json.errors ? getFirstObjectItem(json.errors) : json.message,
+        }
 
-      return { success: true, message: 'Account successfully created.' }
+      return {
+        success: true,
+        message: 'Account successfully created.',
+        errors: {},
+      }
     } catch {
-      return { success: false, message: 'Connection error.' }
+      throw 'Connection error.'
     }
   }
 
@@ -137,13 +157,16 @@ export function AuthProvider({ children }) {
       const json: IAPILoginResponse = await response.json()
 
       if (response.status !== 200)
-        return { success: false, message: json.message }
+        return {
+          success: false,
+          message: json.errors ? getFirstObjectItem(json.errors) : json.message,
+        }
 
       localStorage.setItem('token', json.token)
       updateUser(await getUserFromToken())
       return { success: true, message: 'Login success.' }
     } catch {
-      return { success: false, message: 'Connection error.' }
+      throw 'Connection error.'
     }
   }
 

@@ -40,12 +40,16 @@ export default function RegisterPage() {
         passwordRef.current.value,
         confirmPasswordRef.current.value
       )
-      if (registerStatus.success) setSuccessMessage(registerStatus.message)
-      else setErrorMessage(registerStatus.message)
-    } catch {
-      setErrorMessage('Internal error. Please contact admin.')
+      if (!registerStatus.success) {
+        setErrorMessage(registerStatus.message)
+        return
+      }
+      setSuccessMessage(registerStatus.message)
+    } catch (e) {
+      setErrorMessage(e)
+    } finally {
+      setDisabledRegister(false)
     }
-    setDisabledRegister(false)
   }
 
   return (
