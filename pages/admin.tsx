@@ -1,10 +1,5 @@
-import Router from 'next/router'
-import { useEffect } from 'react'
+import AdminDashboardPage from './admin/dashboard'
 
 export default function AdminPage() {
-  useEffect(() => {
-    Router.push('/admin/dashboard')
-  }, [])
-
-  return <></>
+  return <AdminDashboardPage></AdminDashboardPage>
 }
