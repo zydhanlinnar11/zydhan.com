@@ -1,4 +1,4 @@
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import AdminPageWrapper from '../../../components/AdminPageWrapper'
 import AddEditPostForm from '../../../components/Forms/AddEditPost'

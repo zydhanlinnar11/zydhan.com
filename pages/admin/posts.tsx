@@ -1,6 +1,5 @@
 import Router from 'next/router'
 import Link from 'next/link'
-import Image from 'next/image'
 import BlogConfig from '../../config/BlogConfig'
 import { useAuth } from '../../providers/AuthProvider'
 import Post from '../../models/Post'

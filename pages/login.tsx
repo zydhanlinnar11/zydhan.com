@@ -1,8 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
 import BlogConfig from '../config/BlogConfig'
 import { useAuth } from '../providers/AuthProvider'
 import Router from 'next/router'

@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import BlogConfig from '../../config/BlogConfig'
 import Post from '../../models/Post'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
 import ReactMarkdown from 'react-markdown'
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'

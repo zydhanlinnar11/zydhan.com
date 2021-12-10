@@ -1,11 +1,7 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import BlogConfig from '../config/BlogConfig'
 import Post from '../models/Post'
-import { useAuth, IAuthenticatedUser } from '../providers/AuthProvider'
+import { useAuth } from '../providers/AuthProvider'
 import PostCard from '../components/PostCard'
 import Header from '../components/Header'
 
