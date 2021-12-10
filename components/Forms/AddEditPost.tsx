@@ -1,5 +1,6 @@
 import Router from 'next/router'
-import React, { useRef } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useRef } from 'react'
 import BlogConfig from '../../config/BlogConfig'
 import Post from '../../models/Post'
 import FullWidthButton from '../Button/FullWidthButton'
@@ -13,6 +14,10 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   const postTitleRef = useRef(null)
   const postDescriptionRef = useRef(null)
   const postMarkdownRef = useRef(null)
+  const router = useRouter()
+  const title: string = router.query.title as string
+  const description: string = router.query.description as string
+  const markdown: string = router.query.markdown as string
 
   async function deletePostHandler() {
     const success = await BlogConfig.POST_SERVICE.deleteSinglePost(post.slug)
@@ -64,6 +69,36 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
     else createPostHandler()
   }
 
+  function previewPost() {
+    const query: {
+      title: string
+      description: string
+      markdown: string
+      slug?: string
+      createdAt?: string
+    } = {
+      title: postTitleRef.current.value,
+      description: postDescriptionRef.current.value,
+      markdown: postMarkdownRef.current.value,
+    }
+    if (post) {
+      query.slug = post.slug
+      query.createdAt = post.createdAt
+    }
+
+    if (
+      !postTitleRef.current.value ||
+      !postDescriptionRef.current.value ||
+      !postMarkdownRef.current.value
+    )
+      return
+
+    Router.push({
+      pathname: '/admin/posts/preview',
+      query,
+    })
+  }
+
   return (
     <form className='md:px-12 pb-12' onSubmit={submitHandler}>
       <Input
@@ -72,7 +107,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
         position='single'
         type={'text'}
         reference={postTitleRef}
-        defaultValue={post?.title}
+        defaultValue={title ?? post?.title}
         showLabel={true}
       />
       <Input
@@ -81,7 +116,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
         position='single'
         type={'text'}
         reference={postDescriptionRef}
-        defaultValue={post?.description}
+        defaultValue={description ?? post?.description}
         showLabel={true}
         className='mt-3'
       />
@@ -94,7 +129,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
             className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-2 rounded-md h-96 bg-transparent border border-white/[0.24]'
             placeholder='Markdown'
             ref={postMarkdownRef}
-            defaultValue={post?.markdown}
+            defaultValue={markdown ?? post?.markdown}
           />
         </div>
       </div>
@@ -106,6 +141,9 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
           Delete post
         </FullWidthButton>
       )}
+      <FullWidthButton type='button' onClick={previewPost}>
+        Preview
+      </FullWidthButton>
     </form>
   )
 }
