@@ -2,7 +2,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Router from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
+import AnchorLink from '../components/AnchorLink'
+import FullWidthButton from '../components/Button/FullWidthButton'
 import Footer from '../components/Footer'
+import Input from '../components/Forms/Input'
 import Navbar from '../components/Navbar'
 import SpinnerLoading from '../components/SpinnerLoading'
 import BlogConfig from '../config/BlogConfig'
@@ -74,122 +77,58 @@ export default function RegisterPage() {
             method='POST'
             onSubmit={registerHandler}
           >
-            <div>
-              <label htmlFor='name' className='hidden' aria-hidden>
-                Name
-              </label>
-              <div className='mt-1 relative rounded-md shadow-sm'>
-                <input
-                  type='text'
-                  name='name'
-                  id='name'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-t-md h-10 bg-transparent'
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.24)',
-                    borderBottom: 'none',
-                  }}
-                  placeholder='Name'
-                  autoComplete='name'
-                  ref={nameRef}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='email' className='hidden' aria-hidden>
-                E-mail
-              </label>
-              <div className='relative rounded-md shadow-sm'>
-                <input
-                  type='email'
-                  name='email'
-                  id='email'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 h-10 bg-transparent'
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.24)',
-                    borderBottom: 'none',
-                  }}
-                  placeholder='E-mail'
-                  autoComplete='username'
-                  ref={emailRef}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='username' className='hidden' aria-hidden>
-                Username
-              </label>
-              <div className='relative rounded-md shadow-sm'>
-                <input
-                  type='text'
-                  name='username'
-                  id='username'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 h-10 bg-transparent'
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.24)',
-                    borderBottom: 'none',
-                  }}
-                  placeholder='Username'
-                  ref={usernameRef}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='password' className='hidden' aria-hidden>
-                Password
-              </label>
-              <div className='relative rounded-md shadow-sm'>
-                <input
-                  type='password'
-                  name='password'
-                  id='password'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 h-10 bg-transparent'
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.24)',
-                    borderBottom: 'none',
-                  }}
-                  placeholder='Password'
-                  autoComplete='new-password'
-                  ref={passwordRef}
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor='password' className='hidden' aria-hidden>
-                Confirm Password
-              </label>
-              <div className='relative rounded-md shadow-sm'>
-                <input
-                  type='password'
-                  name='password'
-                  id='confirm-password'
-                  className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-b-md h-10 bg-transparent'
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.24)',
-                  }}
-                  placeholder='Confirm Password'
-                  autoComplete='new-password'
-                  ref={confirmPasswordRef}
-                />
-              </div>
-            </div>
+            <Input
+              type={'text'}
+              name='name'
+              label='Name'
+              autoComplete='name'
+              position='top'
+              reference={nameRef}
+            />
+            <Input
+              type={'email'}
+              name='email'
+              label='E-mail'
+              autoComplete='username'
+              position='middle'
+              reference={emailRef}
+            />
+            <Input
+              type={'text'}
+              name='username'
+              label='Username'
+              position='middle'
+              reference={usernameRef}
+            />
+            <Input
+              type={'password'}
+              name='password'
+              label='Password'
+              autoComplete='new-password'
+              position='middle'
+              reference={passwordRef}
+            />
+            <Input
+              type={'password'}
+              name='password'
+              label='Confirm Password'
+              autoComplete='new-password'
+              position='bottom'
+              reference={confirmPasswordRef}
+              inputId='confirm-password'
+            />
             <div className='mt-1'>
               <small>
                 Already have an account?{' '}
-                <Link href='/login'>
-                  <a className='text-blue-400 hover:underline'>Log in</a>
-                </Link>
+                <AnchorLink href='/login' text='Log in' />
               </small>
               <br />
               <small className='text-red-500'>{errorMessage}</small>
               <small className='text-green-500'>{successMessage}</small>
             </div>
-            <button
-              type='submit'
-              disabled={disabledRegister}
-              className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed'
-            >
+            <FullWidthButton type='submit' disabled={disabledRegister}>
               Register
-            </button>
+            </FullWidthButton>
           </form>
         </div>
       ) : (

@@ -2,6 +2,7 @@ import Router from 'next/router'
 import React, { useRef } from 'react'
 import BlogConfig from '../../config/BlogConfig'
 import Post from '../../models/Post'
+import FullWidthButton from '../Button/FullWidthButton'
 
 interface AddEditPostFormProps {
   post?: Post
@@ -114,23 +115,13 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
           />
         </div>
       </div>
-
-      <button
-        type='submit'
-        // disabled={disabledLogin}
-        className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed'
-      >
+      <FullWidthButton type='submit'>
         {post ? 'Edit post' : 'Create post'}
-      </button>
+      </FullWidthButton>
       {post && (
-        <button
-          type='button'
-          // disabled={disabledLogin}
-          className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed'
-          onClick={showDeleteAlert}
-        >
+        <FullWidthButton type='button' onClick={showDeleteAlert}>
           Delete post
-        </button>
+        </FullWidthButton>
       )}
     </form>
   )

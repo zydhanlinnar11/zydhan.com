@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import styles from '../../styles/PostPage.module.css'
+import Header from '../../components/Header'
 
 export default function PostPage({ post }: { post: Post }) {
   return (
@@ -31,19 +32,15 @@ export default function PostPage({ post }: { post: Post }) {
         />
       </Head>
       <article>
-        <header className='flex flex-col min-h-24 my-16 text-center mx-auto'>
-          <h3 className='text-sm font-bolder my-2 text-gray-400'>
-            {new Date(post.createdAt).toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </h3>
-          <h1 className='text-4xl font-bold'>{post.title}</h1>
-          <h2 className='text-lg font-bolder my-2 text-gray-400'>
-            {post.description ?? BlogConfig.BLOG_DESC}
-          </h2>
-        </header>
+        <Header
+          topText={new Date(post.createdAt).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+          midText={post.title}
+          bottomText={post.description ?? BlogConfig.BLOG_DESC}
+        />
         <div className='text-center mx-auto'>
           <div className='bg-divider-primary h-px w-full'></div>
           <div className='py-4 text-left' id={styles.postContent}>

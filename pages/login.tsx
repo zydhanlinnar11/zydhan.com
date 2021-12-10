@@ -7,6 +7,9 @@ import BlogConfig from '../config/BlogConfig'
 import { useAuth } from '../providers/AuthProvider'
 import Router from 'next/router'
 import SpinnerLoading from '../components/SpinnerLoading'
+import FullWidthButton from '../components/Button/FullWidthButton'
+import Input from '../components/Forms/Input'
+import AnchorLink from '../components/AnchorLink'
 
 export default function LoginPage() {
   const emailRef = useRef(null)
@@ -68,64 +71,33 @@ export default function LoginPage() {
               method='POST'
               onSubmit={loginHandler}
             >
-              <div>
-                <label htmlFor='email' className='hidden' aria-hidden>
-                  E-mail
-                </label>
-                <div className='mt-1 relative rounded-md shadow-sm'>
-                  <input
-                    type='email'
-                    name='email'
-                    id='email'
-                    className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-t-md h-10 bg-transparent'
-                    style={{
-                      border: '1px solid rgba(255, 255, 255, 0.24)',
-                      borderBottom: 'none',
-                    }}
-                    placeholder='E-mail'
-                    autoComplete='username'
-                    ref={emailRef}
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor='password' className='hidden' aria-hidden>
-                  Password
-                </label>
-                <div className='relative rounded-md shadow-sm'>
-                  <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-b-md h-10 bg-transparent'
-                    style={{
-                      border: '1px solid rgba(255, 255, 255, 0.24)',
-                    }}
-                    placeholder='Password'
-                    autoComplete='current-password'
-                    ref={passwordRef}
-                  />
-                </div>
-              </div>
+              <Input
+                type={'email'}
+                name='email'
+                label='E-mail'
+                autoComplete='username'
+                position='top'
+                reference={emailRef}
+              />
+              <Input
+                type={'password'}
+                name='password'
+                label='Password'
+                autoComplete='current-password'
+                position='bottom'
+                reference={passwordRef}
+              />
               <div className='mt-1'>
                 <small>
                   Don't have account?{' '}
-                  <Link href='/register'>
-                    <a className='text-blue-400 hover:underline'>
-                      Create an account
-                    </a>
-                  </Link>
+                  <AnchorLink href='/register' text='Create an account' />
                 </small>
                 <br />
                 <small className='text-red-500'>{errorMessage}</small>
               </div>
-              <button
-                type='submit'
-                disabled={disabledLogin}
-                className='rounded-md border-2 border-opacity-50 border-gray-600 w-full h-10 mt-3 hover:bg-blue-600 hover:bg-opacity-30 transition-colors duration-100 focus:bg-blue-900 focus:bg-opacity-30 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed'
-              >
+              <FullWidthButton type='submit' disabled={disabledLogin}>
                 Log in
-              </button>
+              </FullWidthButton>
             </form>
           </div>
         </>
