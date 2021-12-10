@@ -39,9 +39,11 @@ export default function Navbar() {
               paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
             }}
           >
-            <h1 className='z-20 my-auto font-semibold text-lg'>
-              {BlogConfig.BLOG_TITLE}
-            </h1>
+            <Link href='/'>
+              <a className='my-auto font-semibold text-lg'>
+                <h1>{BlogConfig.BLOG_TITLE}</h1>
+              </a>
+            </Link>
             <Disclosure.Button className='sm:hidden'>
               <span className='sr-only'>Open main menu</span>
               {open ? (
