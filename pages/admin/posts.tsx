@@ -44,7 +44,11 @@ export default function AdminManagePostsPage() {
         {isPostsFetched ? (
           <div className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'>
             {posts.map((post) => (
-              <PostCard post={post} url={`/admin/posts/${post.slug}`} />
+              <PostCard
+                post={post}
+                url={`/admin/posts/${post.slug}`}
+                key={post.slug}
+              />
             ))}
           </div>
         ) : (
