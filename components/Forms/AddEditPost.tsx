@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import BlogConfig from '../../config/BlogConfig'
 import Post from '../../models/Post'
 import FullWidthButton from '../Button/FullWidthButton'
+import Input from './Input'
 
 interface AddEditPostFormProps {
   post?: Post
@@ -65,40 +66,25 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
 
   return (
     <form className='md:px-12 pb-12' onSubmit={submitHandler}>
-      <div>
-        <label htmlFor='post-title'>Title</label>
-        <div className='mt-2 relative rounded-md shadow-sm'>
-          <input
-            type='text'
-            name='post-title'
-            id='post-title'
-            className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-md h-10 bg-transparent'
-            style={{
-              border: '1px solid rgba(255, 255, 255, 0.24)',
-            }}
-            placeholder='Title'
-            defaultValue={post?.title}
-            ref={postTitleRef}
-          />
-        </div>
-      </div>
-      <div className='mt-3'>
-        <label htmlFor='post-description'>Description</label>
-        <div className='mt-2 relative rounded-md shadow-sm'>
-          <input
-            type='text'
-            name='post-description'
-            id='post-description'
-            className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full pl-4 pr-4 rounded-md h-10 bg-transparent'
-            style={{
-              border: '1px solid rgba(255, 255, 255, 0.24)',
-            }}
-            placeholder='Description'
-            defaultValue={post?.description}
-            ref={postDescriptionRef}
-          />
-        </div>
-      </div>
+      <Input
+        label='Title'
+        name='post-title'
+        position='single'
+        type={'text'}
+        reference={postTitleRef}
+        defaultValue={post?.title}
+        showLabel={true}
+      />
+      <Input
+        label='Description'
+        name='post-description'
+        position='single'
+        type={'text'}
+        reference={postDescriptionRef}
+        defaultValue={post?.description}
+        showLabel={true}
+        className='mt-3'
+      />
       <div className='mt-3'>
         <label htmlFor='post-markdown'>Markdown</label>
         <div className='mt-2 relative rounded-md shadow-sm'>

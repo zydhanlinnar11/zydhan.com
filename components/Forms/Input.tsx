@@ -4,8 +4,11 @@ interface InputProps {
   label: string
   reference: any
   autoComplete?: string
-  position: 'top' | 'middle' | 'bottom'
+  position: 'top' | 'middle' | 'bottom' | 'single'
   inputId?: string
+  defaultValue?: string
+  showLabel?: boolean
+  className?: string
 }
 
 export default function Input({
@@ -16,13 +19,18 @@ export default function Input({
   autoComplete,
   position,
   inputId,
+  defaultValue,
+  showLabel,
+  className,
 }: InputProps) {
   return (
-    <div>
-      <label htmlFor={name} className='hidden' aria-hidden>
+    <div className={className}>
+      <label htmlFor={name} className={showLabel ? '' : 'hidden'}>
         {label}
       </label>
-      <div className='relative rounded-md shadow-sm'>
+      <div
+        className={`${showLabel ? 'mt-2' : ''} relative rounded-md shadow-sm`}
+      >
         <input
           type={type}
           name={name}
@@ -32,18 +40,21 @@ export default function Input({
               ? 'rounded-b-md'
               : position === 'top'
               ? 'rounded-t-md'
+              : position === 'single'
+              ? 'rounded-md'
               : ''
           } h-10 bg-transparent`}
           style={{
             border: '1px solid rgba(255, 255, 255, 0.24)',
             borderBottom:
-              position !== 'bottom'
+              position !== 'bottom' && position !== 'single'
                 ? 'none'
                 : '1px solid rgba(255, 255, 255, 0.24)',
           }}
           placeholder={label}
           autoComplete={autoComplete}
           ref={reference}
+          defaultValue={defaultValue}
         />
       </div>
     </div>
