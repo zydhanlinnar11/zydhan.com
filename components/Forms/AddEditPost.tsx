@@ -47,7 +47,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
     if (!result.success) {
       return
     }
-    Router.push(`/admin/posts/${result.newSlug}`)
+    Router.replace(`/admin/posts/${result.newSlug}`)
   }
 
   async function createPostHandler() {
@@ -59,7 +59,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
 
     const slug = await BlogConfig.POST_SERVICE.addSinglePost(body)
     if (!slug) return
-    Router.push(`/admin/posts/${slug}`)
+    Router.replace(`/admin/posts/${slug}`)
   }
 
   function submitHandler(e: React.FormEvent) {
