@@ -91,10 +91,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
           <textarea
             name='post-markdown'
             id='post-markdown'
-            className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-2 rounded-md h-96 bg-transparent'
-            style={{
-              border: '1px solid rgba(255, 255, 255, 0.24)',
-            }}
+            className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-2 rounded-md h-96 bg-transparent border border-white/[0.24]'
             placeholder='Markdown'
             ref={postMarkdownRef}
             defaultValue={post?.markdown}

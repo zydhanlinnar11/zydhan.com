@@ -40,7 +40,7 @@ export default function PostPage({ post }: { post: Post }) {
           bottomText={post.description ?? BlogConfig.BLOG_DESC}
         />
         <div className='text-center mx-auto'>
-          <div className='bg-divider-primary h-px w-full'></div>
+          <div className='bg-white/[0.24] h-px w-full'></div>
           <div className='py-4 text-left' id={styles.postContent}>
             <ReactMarkdown
               components={{

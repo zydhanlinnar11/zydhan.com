@@ -19,12 +19,6 @@ module.exports = {
       saturate: {
         180: '1.80',
       },
-      divideColor: {
-        main: 'rgba(255,255,255,0.24)',
-      },
-      backgroundColor: {
-        'divider-primary': 'rgba(255,255,255,0.24)',
-      },
     },
   },
   plugins: [],

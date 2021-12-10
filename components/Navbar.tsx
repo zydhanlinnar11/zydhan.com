@@ -2,8 +2,7 @@ import BlogConfig from '../config/BlogConfig'
 import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import styles from '../styles/Navbar.module.css'
-import { IAuthenticatedUser, useAuth } from '../providers/AuthProvider'
+import { useAuth } from '../providers/AuthProvider'
 import React from 'react'
 
 const navigation = [
@@ -26,9 +25,9 @@ export default function Navbar() {
 
   return (
     <Disclosure
-      id={styles.navbar}
       as='nav'
-      className='sticky top-0 min-h-px52 sm:h-px52 z-10 w-full backdrop-blur-20 backdrop-saturate-180'
+      className="bg-zinc-900/25 sticky top-0 min-h-px52 sm:h-px52 z-10 w-full backdrop-blur-20 backdrop-saturate-180
+      after:w-full after:h-px after:bg-white/[0.24] after:content-[''] after:block after:absolute after:top-full"
     >
       {({ open }) => (
         <>
@@ -87,7 +86,7 @@ export default function Navbar() {
 
           <Disclosure.Panel className='sm:hidden pt-0 py-5'>
             <ul
-              className='flex flex-col gap-y-3 divide-y divide-main'
+              className='flex flex-col gap-y-3 divide-y divide-white/[0.24]'
               style={{
                 maxWidth: '980px',
                 paddingLeft: 'calc(max(46px, env(safe-area-inset-left)))',

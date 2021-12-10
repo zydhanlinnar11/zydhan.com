@@ -12,8 +12,7 @@ export default function PostCard({ post, url }: Props) {
     <Link href={url} key={post.slug}>
       <a
         key={post.slug}
-        className='h-72 rounded-lg max-w-xs w-full mx-auto'
-        style={{ border: '1px solid rgba(255, 255, 255, 0.24)' }}
+        className='h-72 rounded-lg max-w-xs w-full mx-auto border border-white/[0.24]'
       >
         <article className='h-full flex flex-col'>
           <div className='h-32 block w-full relative'>

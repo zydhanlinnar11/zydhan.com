@@ -43,14 +43,9 @@ export default function Input({
               : position === 'single'
               ? 'rounded-md'
               : ''
-          } h-10 bg-transparent`}
-          style={{
-            border: '1px solid rgba(255, 255, 255, 0.24)',
-            borderBottom:
-              position !== 'bottom' && position !== 'single'
-                ? 'none'
-                : '1px solid rgba(255, 255, 255, 0.24)',
-          }}
+          } h-10 bg-transparent border border-white/[0.24] ${
+            position !== 'bottom' && position !== 'single' ? 'border-b-0' : ''
+          }`}
           placeholder={label}
           autoComplete={autoComplete}
           ref={reference}

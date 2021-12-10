@@ -1,17 +1,18 @@
 import BlogConfig from '../config/BlogConfig'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import SmallSocialMediaButton from './Button/SmallSocialMediaButton'
 
 const socialMedia = [
   {
     icon: faGithub,
     url: 'https://github.com/zydhanlinnar11',
-    key: 'Github',
+    name: 'Github',
   },
   {
     icon: faLinkedin,
     url: 'https://www.linkedin.com/in/zydhanlinnar11',
-    key: 'LinkedIn',
+    name: 'LinkedIn',
   },
 ]
 
@@ -25,7 +26,7 @@ export default function Footer() {
         paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
       }}
     >
-      <div className='h-px w-full bg-divider-primary'></div>
+      <div className='h-px w-full bg-white/[0.24]'></div>
       <div className='flex justify-between mt-2'>
         <div>
           <small>
@@ -34,16 +35,12 @@ export default function Footer() {
         </div>
         <div className='flex gap-3'>
           {socialMedia.map((item) => (
-            <a
-              href={item.url}
-              key={item.key}
-              target='_blank'
-              rel='noopener'
-              className='max-h-3 max-w-3 hover:text-gray-100 focus:text-white'
-              aria-label={`Follow my ${item.key}`}
-            >
-              <FontAwesomeIcon icon={item.icon} size='lg' />
-            </a>
+            <SmallSocialMediaButton
+              icon={item.icon}
+              name={item.name}
+              url={item.url}
+              key={item.name}
+            />
           ))}
         </div>
       </div>
