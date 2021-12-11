@@ -10,6 +10,7 @@ import Header from '../../../components/Header'
 import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
 import FullWidthButton from '../../../components/Button/FullWidthButton'
+import AdminPageWrapper from '../../../components/AdminPageWrapper'
 
 export default function PostPage() {
   const router = useRouter()
@@ -37,68 +38,70 @@ export default function PostPage() {
   }
 
   return (
-    <div>
-      <Head>
-        <title>
-          {title} - {BlogConfig.BLOG_TITLE}
-        </title>
-        <meta
-          name='description'
-          content={description ?? BlogConfig.BLOG_DESC}
-        />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <article>
-        <Header
-          topText={new Date(createdAt ?? new Date()).toLocaleDateString(
-            undefined,
-            {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }
-          )}
-          midText={title}
-          bottomText={description ?? BlogConfig.BLOG_DESC}
-        >
-          <div className='sm:w-48 mx-auto'>
-            {/* <Link href={`/admin/posts/${slug ?? 'create'}`}>
+    <AdminPageWrapper title={title}>
+      <div>
+        <Head>
+          <title>
+            {title} - {BlogConfig.BLOG_TITLE}
+          </title>
+          <meta
+            name='description'
+            content={description ?? BlogConfig.BLOG_DESC}
+          />
+          <link rel='icon' href='/favicon.ico' />
+        </Head>
+        <article>
+          <Header
+            topText={new Date(createdAt ?? new Date()).toLocaleDateString(
+              undefined,
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              }
+            )}
+            midText={title}
+            bottomText={description ?? BlogConfig.BLOG_DESC}
+          >
+            <div className='sm:w-48 mx-auto'>
+              {/* <Link href={`/admin/posts/${slug ?? 'create'}`}>
               <a className='my-auto inline-block w-full'>Continue edit</a>
             </Link> */}
-            <FullWidthButton type='button' onClick={continueEditHandler}>
-              Continue edit
-            </FullWidthButton>
+              <FullWidthButton type='button' onClick={continueEditHandler}>
+                Continue edit
+              </FullWidthButton>
+            </div>
+          </Header>
+          <div className='text-center mx-auto'>
+            <div className='bg-white/[0.24] h-px w-full'></div>
+            <div className='py-4 text-left' id={styles.postContent}>
+              <ReactMarkdown
+                components={{
+                  code({ node, inline, className, children, ...props }) {
+                    const match = /language-(\w+)/.exec(className || '')
+                    return !inline && match ? (
+                      <SyntaxHighlighter
+                        style={materialOceanic}
+                        language={match[1]}
+                        showLineNumbers
+                        lineNumberContainerStyle={{ paddingLeft: '0em' }}
+                      >
+                        {String(children).replace(/\n$/, '')}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code className={className} {...props}>
+                        {children}
+                      </code>
+                    )
+                  },
+                }}
+              >
+                {markdown ?? 'Content not available'}
+              </ReactMarkdown>
+            </div>
           </div>
-        </Header>
-        <div className='text-center mx-auto'>
-          <div className='bg-white/[0.24] h-px w-full'></div>
-          <div className='py-4 text-left' id={styles.postContent}>
-            <ReactMarkdown
-              components={{
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '')
-                  return !inline && match ? (
-                    <SyntaxHighlighter
-                      style={materialOceanic}
-                      language={match[1]}
-                      showLineNumbers
-                      lineNumberContainerStyle={{ paddingLeft: '0em' }}
-                    >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  )
-                },
-              }}
-            >
-              {markdown ?? 'Content not available'}
-            </ReactMarkdown>
-          </div>
-        </div>
-      </article>
-    </div>
+        </article>
+      </div>
+    </AdminPageWrapper>
   )
 }
