@@ -17,7 +17,7 @@ const AdminPageWrapper: React.FC<AdminPageWrapperProps> = ({
   const { isUserFetched, user } = useAuth()
   useEffect(() => {
     if (isUserFetched && !user) {
-      Router.push('/login')
+      Router.replace('/login')
       return
     }
   }, [isUserFetched, user])

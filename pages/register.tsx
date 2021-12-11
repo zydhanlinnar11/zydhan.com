@@ -21,7 +21,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (isUserFetched && user) {
-      Router.push('/')
+      Router.replace('/')
       return
     }
   }, [isUserFetched, user])

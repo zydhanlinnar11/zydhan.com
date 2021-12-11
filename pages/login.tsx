@@ -32,7 +32,7 @@ export default function LoginPage() {
         return
       }
 
-      Router.push('/')
+      Router.replace('/')
     } catch (e) {
       setErrorMessage(e)
       setDisabledLogin(false)
@@ -41,7 +41,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isUserFetched && user) {
-      Router.push('/')
+      Router.replace('/')
       return
     }
   }, [isUserFetched, user])

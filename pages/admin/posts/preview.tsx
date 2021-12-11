@@ -30,7 +30,7 @@ export default function PostPage() {
       markdown,
     }
 
-    Router.push({
+    Router.replace({
       pathname: `/admin/posts/${slug ?? 'create'}`,
       query,
     })

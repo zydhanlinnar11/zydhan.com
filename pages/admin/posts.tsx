@@ -16,7 +16,7 @@ export default function AdminManagePostsPage() {
 
   useEffect(() => {
     if (isUserFetched && !user) {
-      Router.push('/login')
+      Router.replace('/login')
       return
     }
   }, [isUserFetched, user])
