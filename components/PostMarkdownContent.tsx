@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import rehypeRaw from 'rehype-raw'
+import Image from 'next/image'
 
 interface PostMarkdownContentProps {
   markdown: string
@@ -48,9 +49,19 @@ export default function PostMarkdownContent({
             <ul className='list-decimal list-inside mb-4'>{children}</ul>
           ),
           img: ({ node, children, ...props }) => (
-            <img className='mx-auto my-2' {...props}>
-              {children}
-            </img>
+            <div className='max-w-4xl relative h-96 mx-auto'>
+              <Image
+                src={props.src}
+                alt={props.alt}
+                className='mx-auto my-2'
+                layout='fill'
+                objectFit='contain'
+                sizes='896px'
+              />
+            </div>
+            // <img className='mx-auto my-2' {...props}>
+            //   {children}
+            // </img>
           ),
           h1: ({ children }) => (
             <h1 className='border-b border-b-white/[0.24] mt-6 mb-4 text-3xl pb-2 font-medium'>
