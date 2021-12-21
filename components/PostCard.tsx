@@ -26,7 +26,7 @@ export default function PostCard({ post, url }: PostCardProps) {
               layout='fill'
               objectFit='cover'
               priority={true}
-              sizes='960px'
+              sizes='320px'
             />
           </div>
           <div className='text-left p-6 flex flex-col justify-between flex-auto'>
