@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import BlogConfig from '../../../config/BlogConfig'
-import styles from '../../../styles/PostPage.module.css'
 import Header from '../../../components/Header'
 
 import Router, { useRouter } from 'next/router'
@@ -67,9 +66,7 @@ export default function PostPage() {
           </Header>
           <div className='text-center mx-auto'>
             <div className='bg-white/[0.24] h-px w-full'></div>
-            <div className='py-4 text-left' id={styles.postContent}>
-              <PostMarkdownContent markdown={markdown}></PostMarkdownContent>
-            </div>
+            <PostMarkdownContent markdown={markdown}></PostMarkdownContent>
           </div>
         </article>
       </div>
