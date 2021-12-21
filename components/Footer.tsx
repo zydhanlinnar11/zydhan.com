@@ -1,5 +1,4 @@
 import BlogConfig from '../config/BlogConfig'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import SmallSocialMediaButton from './Button/SmallSocialMediaButton'
 
@@ -18,14 +17,7 @@ const socialMedia = [
 
 export default function Footer() {
   return (
-    <footer
-      className='h-7 mx-auto text-gray-300 mb-5'
-      style={{
-        maxWidth: '980px',
-        paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-        paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-      }}
-    >
+    <footer className='h-7 mx-auto text-gray-300 mb-5 w-full max-w-5xl px-6'>
       <div className='h-px w-full bg-white/[0.24]'></div>
       <div className='flex justify-between mt-2'>
         <div>

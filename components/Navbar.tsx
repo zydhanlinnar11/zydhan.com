@@ -31,14 +31,7 @@ export default function Navbar() {
     >
       {({ open }) => (
         <>
-          <div
-            className='flex justify-between h-px52 my-0 mx-auto py-0'
-            style={{
-              maxWidth: '980px',
-              paddingLeft: 'calc(max(22px, env(safe-area-inset-left)))',
-              paddingRight: 'calc(max(22px, env(safe-area-inset-right)))',
-            }}
-          >
+          <div className='flex justify-between h-px52 my-0 mx-auto py-0 max-w-5xl px-6'>
             <Link href='/'>
               <a className='my-auto font-semibold text-lg'>
                 <h1>{BlogConfig.BLOG_TITLE}</h1>
@@ -87,14 +80,7 @@ export default function Navbar() {
           </div>
 
           <Disclosure.Panel className='sm:hidden pt-0 py-5'>
-            <ul
-              className='flex flex-col gap-y-3 divide-y divide-white/[0.24]'
-              style={{
-                maxWidth: '980px',
-                paddingLeft: 'calc(max(46px, env(safe-area-inset-left)))',
-                paddingRight: 'calc(max(46px, env(safe-area-inset-right)))',
-              }}
-            >
+            <ul className='flex flex-col gap-y-3 divide-y divide-white/[0.24] max-w-5xl px-12'>
               {navigation.map((item) => (
                 <li className='pt-2' key={item.name}>
                   <Link href={item.href} passHref={item.passHref}>
