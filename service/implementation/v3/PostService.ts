@@ -1,5 +1,5 @@
 import BlogConfig from '../../../config/BlogConfig'
-import Post from '../../../models/Post'
+import Post from '../../../interfaces/Post'
 import { getCookie } from '../../../providers/AuthProvider'
 import IPostService, {
   EditSinglePostInterface,

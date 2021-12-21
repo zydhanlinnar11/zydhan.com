@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Post from '../models/Post'
+import Post from '../interfaces/Post'
 
-interface Props {
+interface PostCardProps {
   post: Post
   url: string
 }
 
-export default function PostCard({ post, url }: Props) {
+export default function PostCard({ post, url }: PostCardProps) {
   return (
     <Link href={url} key={post.slug}>
       <a

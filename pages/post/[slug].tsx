@@ -1,12 +1,17 @@
 import Head from 'next/head'
 import BlogConfig from '../../config/BlogConfig'
-import Post from '../../models/Post'
-import ReactMarkdown from 'react-markdown'
-import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import styles from '../../styles/PostPage.module.css'
 import Header from '../../components/Header'
-import rehypeRaw from 'rehype-raw'
+import PostMarkdownContent from '../../components/PostMarkdownContent'
+
+interface Post {
+  title: string
+  slug: string
+  createdAt: string
+  description?: string
+  userId?: string
+  markdown?: string
+}
 
 export default function PostPage({ post }: { post: Post }) {
   return (
@@ -43,31 +48,7 @@ export default function PostPage({ post }: { post: Post }) {
         <div className='text-center mx-auto'>
           <div className='bg-white/[0.24] h-px w-full'></div>
           <div className='py-4 text-left' id={styles.postContent}>
-            <ReactMarkdown
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '')
-                  return !inline && match ? (
-                    <SyntaxHighlighter
-                      style={materialOceanic}
-                      language={match[1]}
-                      customStyle={{
-                        borderRadius: '0.375rem',
-                      }}
-                    >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  )
-                },
-              }}
-            >
-              {post.markdown ?? 'Content not available'}
-            </ReactMarkdown>
+            <PostMarkdownContent markdown={post.markdown}></PostMarkdownContent>
           </div>
         </div>
       </article>
@@ -76,19 +57,67 @@ export default function PostPage({ post }: { post: Post }) {
 }
 
 export async function getStaticProps({ params }) {
-  return {
+  interface Response {
+    title: string
+    slug: string
+    created_at: string
+    markdown: string
+    cover_file_name: string
+    user_id: string
+    description: string
+  }
+
+  const slug = params.slug
+  const nullPostProps = {
     props: {
-      post: await BlogConfig.POST_SERVICE.getSinglePost(params.slug),
+      post: null,
     },
+  }
+
+  try {
+    const response = await fetch(`${BlogConfig.BLOG_API}/post/${slug}`)
+
+    if (response.status !== 200) return nullPostProps
+
+    const { title, created_at, markdown, user_id, description }: Response =
+      await response.json()
+    const post: Post = {
+      title: title,
+      createdAt: created_at,
+      markdown: markdown,
+      userId: user_id,
+      slug: slug,
+      description: description,
+    }
+    return {
+      props: {
+        post,
+      },
+    }
+  } catch {
+    return nullPostProps
   }
 }
 
 export async function getStaticPaths() {
-  const posts = await BlogConfig.POST_SERVICE.getAllPosts()
+  interface Response {
+    slug: string
+  }
+
   const paths = []
-  posts.forEach((post) => {
-    paths.push({ params: { slug: post.slug } })
-  })
+  try {
+    const response = await fetch(`${BlogConfig.BLOG_API}/posts`)
+    const json: Response[] = await response.json()
+    json.forEach(({ slug }) => {
+      paths.push({ params: { slug: slug } })
+    })
+  } catch {
+    return {
+      paths: [],
+      fallback: false,
+    }
+  }
+
   return {
     paths,
     fallback: false,

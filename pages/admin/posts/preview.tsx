@@ -1,17 +1,12 @@
 import Head from 'next/head'
 import BlogConfig from '../../../config/BlogConfig'
-import Post from '../../../models/Post'
-import ReactMarkdown from 'react-markdown'
-import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import styles from '../../../styles/PostPage.module.css'
 import Header from '../../../components/Header'
-import rehypeRaw from 'rehype-raw'
 
 import Router, { useRouter } from 'next/router'
-import Link from 'next/link'
 import FullWidthButton from '../../../components/Button/FullWidthButton'
 import AdminPageWrapper from '../../../components/AdminPageWrapper'
+import PostMarkdownContent from '../../../components/PostMarkdownContent'
 
 export default function PostPage() {
   const router = useRouter()
@@ -73,31 +68,7 @@ export default function PostPage() {
           <div className='text-center mx-auto'>
             <div className='bg-white/[0.24] h-px w-full'></div>
             <div className='py-4 text-left' id={styles.postContent}>
-              <ReactMarkdown
-                rehypePlugins={[rehypeRaw]}
-                components={{
-                  code({ node, inline, className, children, ...props }) {
-                    const match = /language-(\w+)/.exec(className || '')
-                    return !inline && match ? (
-                      <SyntaxHighlighter
-                        style={materialOceanic}
-                        language={match[1]}
-                        customStyle={{
-                          borderRadius: '0.375rem',
-                        }}
-                      >
-                        {String(children).replace(/\n$/, '')}
-                      </SyntaxHighlighter>
-                    ) : (
-                      <code className={className} {...props}>
-                        {children}
-                      </code>
-                    )
-                  },
-                }}
-              >
-                {markdown ?? 'Content not available'}
-              </ReactMarkdown>
+              <PostMarkdownContent markdown={markdown}></PostMarkdownContent>
             </div>
           </div>
         </article>

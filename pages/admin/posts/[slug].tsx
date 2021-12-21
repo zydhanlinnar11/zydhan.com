@@ -4,7 +4,7 @@ import AdminPageWrapper from '../../../components/AdminPageWrapper'
 import AddEditPostForm from '../../../components/Forms/AddEditPost'
 import SpinnerLoading from '../../../components/SpinnerLoading'
 import BlogConfig from '../../../config/BlogConfig'
-import Post from '../../../models/Post'
+import Post from '../../../interfaces/Post'
 
 export default function EditPostPage() {
   const pageTitle = 'Edit Post'
