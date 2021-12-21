@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import BlogConfig from '../config/BlogConfig'
 
 export default function Custom404() {
@@ -12,12 +13,10 @@ export default function Custom404() {
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />
       </Head>
-      <header className='my-auto text-center'>
-        <h1 className='text-4xl'>404 Not Found</h1>
-        <p className='mt-3 text-gray-400'>
-          Halaman yang anda cari tidak ditemukan.
-        </p>
-      </header>
+      <CenteredErrorMessage
+        header='404 Not Found'
+        message='Halaman yang anda cari tidak ditemukan.'
+      ></CenteredErrorMessage>
     </div>
   )
 }

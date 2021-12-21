@@ -4,6 +4,7 @@ import Post from '../models/Post'
 import { useAuth } from '../providers/AuthProvider'
 import PostCard from '../components/PostCard'
 import Header from '../components/Header'
+import CenteredErrorMessage from '../components/CenteredErrorMessage'
 
 export default function Home({ posts }: { posts: Post[] }) {
   const title = `Home`
@@ -34,14 +35,10 @@ export default function Home({ posts }: { posts: Post[] }) {
           ))}
         </div>
       ) : (
-        <div className='text-center h-48 flex'>
-          <div className='m-auto'>
-            <h1 className='text-4xl'>Tidak ada pos</h1>
-            <p className='mt-3 text-gray-400'>
-              Saat ini belum ada pos, atau server sedang maintenance.
-            </p>
-          </div>
-        </div>
+        <CenteredErrorMessage
+          header='Tidak ada pos'
+          message='Saat ini belum ada pos, atau server sedang maintenance.'
+        ></CenteredErrorMessage>
       )}
     </div>
   )

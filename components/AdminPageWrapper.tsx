@@ -3,8 +3,8 @@ import Router from 'next/router'
 import { useEffect } from 'react'
 import BlogConfig from '../config/BlogConfig'
 import { useAuth } from '../providers/AuthProvider'
+import CenteredErrorMessage from './CenteredErrorMessage'
 import SpinnerLoading from './SpinnerLoading'
-import Custom403 from './Custom403'
 
 interface AdminPageWrapperProps {
   title: string
@@ -38,7 +38,10 @@ const AdminPageWrapper: React.FC<AdminPageWrapperProps> = ({
         user?.admin ? (
           children
         ) : (
-          <Custom403 />
+          <CenteredErrorMessage
+            header='403 Forbidden'
+            message="Sorry, but you don't have access to this page."
+          ></CenteredErrorMessage>
         )
       ) : (
         <div className='my-auto'>
