@@ -29,9 +29,7 @@ export default function EditPostPage() {
     <AdminPageWrapper title={pageTitle}>
       <header className='flex flex-col min-h-24 my-16 text-center mx-auto'>
         <h1 className='text-4xl font-bold'>{pageTitle}</h1>
-        <h2 className='text-lg font-bolder my-2 text-gray-400'>
-          {post?.title}
-        </h2>
+        <h2 className='text-lg my-2 text-gray-400'>{post?.title}</h2>
       </header>
       {!isPostFetched ? (
         <SpinnerLoading />
