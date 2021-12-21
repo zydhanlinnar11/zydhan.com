@@ -8,7 +8,6 @@ export default function Custom404() {
       <Head>
         <title>Not Found - {BlogConfig.BLOG_TITLE}</title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />
-        <link rel='icon' href='/favicon.ico' />
         <meta property='og:title' content={`Not Found`} />
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />

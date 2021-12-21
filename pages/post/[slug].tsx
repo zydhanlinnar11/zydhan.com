@@ -23,7 +23,6 @@ export default function PostPage({ post }: { post: Post }) {
           name='description'
           content={post.description ?? BlogConfig.BLOG_DESC}
         />
-        <link rel='icon' href='/favicon.ico' />
         <meta property='og:title' content={post.title} />
         <meta
           property='og:url'

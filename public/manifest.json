@@ -1,0 +1,22 @@
+{
+  "name": "Zydhan's Blog",
+  "short_name": "Zydhan's Blog",
+  "icons": [
+    {
+      "src": "/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#111827",
+  "display": "minimal-ui",
+  "scope": "/",
+  "theme_color": "#111827",
+  "orientation": "portrait"
+}

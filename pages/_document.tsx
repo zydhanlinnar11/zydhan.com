@@ -20,6 +20,14 @@ class MyDocument extends Document {
             href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
             rel='stylesheet'
           ></link>
+          <link rel='icon' href='/favicon.png' />
+          <link
+            rel='apple-touch-icon'
+            sizes='180x180'
+            href='/apple-touch-icon.png'
+          ></link>
+          <link rel='manifest' href='manifest.json' />
+          <meta name='theme-color' content='#111827' />
           <meta property='og:type' content='website' />
           <meta property='og:site_name' content="Zydhan's Blog" />
         </Head>

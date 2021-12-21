@@ -43,7 +43,6 @@ export default function PostPage() {
             name='description'
             content={description ?? BlogConfig.BLOG_DESC}
           />
-          <link rel='icon' href='/favicon.ico' />
         </Head>
         <article>
           <Header

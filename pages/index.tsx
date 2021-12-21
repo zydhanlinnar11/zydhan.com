@@ -23,7 +23,6 @@ export default function Home({ posts }: { posts: Post[] }) {
           {title} - {BlogConfig.BLOG_TITLE}
         </title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />
-        <link rel='icon' href='/favicon.ico' />
         <meta property='og:title' content={title} />
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />

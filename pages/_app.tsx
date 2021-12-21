@@ -1,9 +1,17 @@
+import { useEffect } from 'react'
 import 'tailwindcss/tailwind.css'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { AuthProvider } from '../providers/AuthProvider'
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if ('serviceWorker' in navigator === false) return
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+    })
+  }, [])
+
   return (
     <div className='min-h-screen flex flex-col'>
       <AuthProvider>

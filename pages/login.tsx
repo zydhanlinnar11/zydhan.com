@@ -51,7 +51,6 @@ export default function LoginPage() {
       <Head>
         <title>Login - {BlogConfig.BLOG_TITLE}</title>
         <meta name='description' content={BlogConfig.BLOG_DESC} />
-        <link rel='icon' href='/favicon.ico' />
         <meta property='og:title' content={`Login`} />
         <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
         <meta property='og:description' content={BlogConfig.BLOG_DESC} />
