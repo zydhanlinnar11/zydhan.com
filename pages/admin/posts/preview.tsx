@@ -64,10 +64,7 @@ export default function PostPage() {
             midText={title}
             bottomText={description ?? BlogConfig.BLOG_DESC}
           >
-            <div className='sm:w-48 mx-auto'>
-              {/* <Link href={`/admin/posts/${slug ?? 'create'}`}>
-              <a className='my-auto inline-block w-full'>Continue edit</a>
-            </Link> */}
+            <div className='w-48 mx-auto'>
               <FullWidthButton type='button' onClick={continueEditHandler}>
                 Continue edit
               </FullWidthButton>
