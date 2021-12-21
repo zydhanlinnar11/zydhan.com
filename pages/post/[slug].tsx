@@ -6,6 +6,7 @@ import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import styles from '../../styles/PostPage.module.css'
 import Header from '../../components/Header'
+import rehypeRaw from 'rehype-raw'
 
 export default function PostPage({ post }: { post: Post }) {
   return (
@@ -43,6 +44,7 @@ export default function PostPage({ post }: { post: Post }) {
           <div className='bg-white/[0.24] h-px w-full'></div>
           <div className='py-4 text-left' id={styles.postContent}>
             <ReactMarkdown
+              rehypePlugins={[rehypeRaw]}
               components={{
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '')
