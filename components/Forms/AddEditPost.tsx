@@ -100,7 +100,10 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   }
 
   return (
-    <form className='md:px-12 pb-12' onSubmit={submitHandler}>
+    <form
+      className='md:px-12 pb-12 max-w-full w-screen'
+      onSubmit={submitHandler}
+    >
       <Input
         label='Title'
         name='post-title'
