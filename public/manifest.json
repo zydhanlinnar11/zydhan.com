@@ -15,7 +15,7 @@
   ],
   "start_url": "/",
   "background_color": "#111827",
-  "display": "minimal-ui",
+  "display": "standalone",
   "scope": "/",
   "theme_color": "#111827",
   "orientation": "portrait"
