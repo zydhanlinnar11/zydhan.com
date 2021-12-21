@@ -16,7 +16,7 @@ export default function SmallSocialMediaButton({
     <a
       href={url}
       target='_blank'
-      rel='noopener'
+      rel='noreferrer'
       className='max-h-3 max-w-3 text-white/75 hover:text-white/90 focus:text-white'
       aria-label={`Follow my ${name}`}
     >

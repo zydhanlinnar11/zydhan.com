@@ -86,7 +86,7 @@ export default function LoginPage() {
               />
               <div className='mt-1'>
                 <small>
-                  Don't have account?{' '}
+                  Don&apos;t have account?{' '}
                   <AnchorLink href='/register' text='Create an account' />
                 </small>
                 <br />
