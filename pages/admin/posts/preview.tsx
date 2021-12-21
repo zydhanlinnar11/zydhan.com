@@ -82,8 +82,9 @@ export default function PostPage() {
                       <SyntaxHighlighter
                         style={materialOceanic}
                         language={match[1]}
-                        showLineNumbers
-                        lineNumberContainerStyle={{ paddingLeft: '0em' }}
+                        customStyle={{
+                          borderRadius: '0.375rem',
+                        }}
                       >
                         {String(children).replace(/\n$/, '')}
                       </SyntaxHighlighter>
