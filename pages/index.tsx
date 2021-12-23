@@ -4,13 +4,7 @@ import PostCard from '../components/PostCard'
 import Header from '../components/Header'
 import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import HeadTemplate from '../components/HeadTemplate'
-
-interface Post {
-  title: string
-  slug: string
-  createdAt: string
-  coverUrl: string
-}
+import Post from '../interfaces/Post'
 
 function PostGrid({ posts }: { posts: Post[] }) {
   return (

@@ -3,15 +3,7 @@ import Header from '../../components/Header'
 import PostMarkdownContent from '../../components/PostMarkdownContent'
 import HeadTemplate from '../../components/HeadTemplate'
 import DateTool from '../../service/utilities/DateTool'
-
-interface Post {
-  title: string
-  slug: string
-  createdAt: string
-  description?: string
-  userId?: string
-  markdown?: string
-}
+import Post from '../../interfaces/Post'
 
 export default function PostPage({
   post: { title, slug, createdAt, description, markdown },
