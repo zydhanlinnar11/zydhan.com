@@ -1,12 +1,11 @@
-import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
-import BlogConfig from '../config/BlogConfig'
 import { useAuth } from '../providers/AuthProvider'
 import Router from 'next/router'
 import SpinnerLoading from '../components/SpinnerLoading'
 import FullWidthButton from '../components/Button/FullWidthButton'
 import Input from '../components/Forms/Input'
 import AnchorLink from '../components/AnchorLink'
+import HeadTemplate from '../components/HeadTemplate'
 
 export default function LoginPage() {
   const emailRef = useRef(null)
@@ -48,13 +47,7 @@ export default function LoginPage() {
 
   return (
     <div className='my-auto'>
-      <Head>
-        <title>Login - {BlogConfig.BLOG_TITLE}</title>
-        <meta name='description' content={BlogConfig.BLOG_DESC} />
-        <meta property='og:title' content={`Login`} />
-        <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
-        <meta property='og:description' content={BlogConfig.BLOG_DESC} />
-      </Head>
+      <HeadTemplate title='Login'></HeadTemplate>
       {isUserFetched && !user ? (
         <>
           <div>

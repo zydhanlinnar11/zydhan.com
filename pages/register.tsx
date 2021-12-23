@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import Router from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import AnchorLink from '../components/AnchorLink'
 import FullWidthButton from '../components/Button/FullWidthButton'
 import Input from '../components/Forms/Input'
+import HeadTemplate from '../components/HeadTemplate'
 import SpinnerLoading from '../components/SpinnerLoading'
-import BlogConfig from '../config/BlogConfig'
 import { useAuth } from '../providers/AuthProvider'
 
 export default function RegisterPage() {
@@ -54,14 +53,7 @@ export default function RegisterPage() {
 
   return (
     <div className='my-auto'>
-      <Head>
-        <title>Register - {BlogConfig.BLOG_TITLE}</title>
-        <meta name='description' content={BlogConfig.BLOG_DESC} />
-        <meta property='og:title' content={`Register`} />
-        <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
-        <meta property='og:description' content={BlogConfig.BLOG_DESC} />
-      </Head>
-
+      <HeadTemplate title='Register'></HeadTemplate>
       {isUserFetched && !user ? (
         <div>
           <header className='text-center'>

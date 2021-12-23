@@ -1,9 +1,8 @@
-import Head from 'next/head'
 import Router from 'next/router'
 import { useEffect } from 'react'
-import BlogConfig from '../config/BlogConfig'
 import { useAuth } from '../providers/AuthProvider'
 import CenteredErrorMessage from './CenteredErrorMessage'
+import HeadTemplate from './HeadTemplate'
 import SpinnerLoading from './SpinnerLoading'
 
 interface AdminPageWrapperProps {
@@ -24,15 +23,7 @@ const AdminPageWrapper: React.FC<AdminPageWrapperProps> = ({
 
   return (
     <>
-      <Head>
-        <title>
-          {title} - {BlogConfig.BLOG_TITLE}
-        </title>
-        <meta name='description' content={BlogConfig.BLOG_DESC} />
-        <meta property='og:title' content={title} />
-        <meta property='og:url' content={BlogConfig.BLOG_DOMAIN} />
-        <meta property='og:description' content={BlogConfig.BLOG_DESC} />
-      </Head>
+      <HeadTemplate title={title}></HeadTemplate>
       {isUserFetched ? (
         user?.admin ? (
           children
