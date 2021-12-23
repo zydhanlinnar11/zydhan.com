@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth } from '../../providers/AuthProvider'
 import AdminPageWrapper from '../../components/AdminPageWrapper'
 import Header from '../../components/Header'
+import ThreeColumnGrid from '../../components/ThreeColumnGrid'
 
 const dashboardItems = [
   { title: 'Manage posts', link: '/admin/posts', icon: faNewspaper },
@@ -19,7 +20,7 @@ export default function AdminDashboardPage() {
           midText={title}
           bottomText={`Welcome, ${user ? user.name : 'admin'}!`}
         />
-        <div className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'>
+        <ThreeColumnGrid>
           {dashboardItems.map((item) => (
             <Link href={item.link} key={item.title}>
               <a className='h-40 rounded-lg max-w-xs w-full mx-auto flex p-8 border border-white/[0.24]'>
@@ -30,7 +31,7 @@ export default function AdminDashboardPage() {
               </a>
             </Link>
           ))}
-        </div>
+        </ThreeColumnGrid>
       </>
     </AdminPageWrapper>
   )

@@ -5,16 +5,7 @@ import Header from '../components/Header'
 import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import HeadTemplate from '../components/HeadTemplate'
 import Post from '../interfaces/Post'
-
-function PostGrid({ posts }: { posts: Post[] }) {
-  return (
-    <div className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'>
-      {posts.map((post) => (
-        <PostCard post={post} url={`/post/${post.slug}`} key={post.slug} />
-      ))}
-    </div>
-  )
-}
+import ThreeColumnGrid from '../components/ThreeColumnGrid'
 
 export default function Home({ posts }: { posts: Post[] }) {
   const { user } = useAuth()
@@ -27,7 +18,11 @@ export default function Home({ posts }: { posts: Post[] }) {
         bottomText={`Welcome, ${user ? user.name : 'guest'}! Have fun here.`}
       />
       {posts?.length > 0 ? (
-        <PostGrid posts={posts}></PostGrid>
+        <ThreeColumnGrid>
+          {posts.map((post) => (
+            <PostCard post={post} url={`/post/${post.slug}`} key={post.slug} />
+          ))}
+        </ThreeColumnGrid>
       ) : (
         <CenteredErrorMessage
           header='No post available'

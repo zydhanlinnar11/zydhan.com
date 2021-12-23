@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import SpinnerLoading from '../../components/SpinnerLoading'
 import AdminPageWrapper from '../../components/AdminPageWrapper'
 import PostCard from '../../components/PostCard'
+import ThreeColumnGrid from '../../components/ThreeColumnGrid'
 
 export default function AdminManagePostsPage() {
   const title = `Manage Posts`
@@ -42,7 +43,7 @@ export default function AdminManagePostsPage() {
           </div>
         </header>
         {isPostsFetched ? (
-          <div className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'>
+          <ThreeColumnGrid>
             {posts.map((post) => (
               <PostCard
                 post={post}
@@ -50,7 +51,7 @@ export default function AdminManagePostsPage() {
                 key={post.slug}
               />
             ))}
-          </div>
+          </ThreeColumnGrid>
         ) : (
           <SpinnerLoading />
         )}
