@@ -3,8 +3,8 @@ import IPostService from '../service/interface/IPostService'
 
 const BLOG_TITLE = "Zydhan's Blog"
 const BLOG_DESC = 'Welcome to my blog. Have fun here!'
-const BLOG_DOMAIN = 'https://blog.zydhan.xyz'
-const BLOG_API = 'https://api.blog.zydhan.xyz'
+const BLOG_DOMAIN = process.env.NEXT_PUBLIC_BLOG_DOMAIN
+const BLOG_API = process.env.NEXT_PUBLIC_BLOG_API
 const POST_SERVICE: IPostService = new PostService()
 
 const BlogConfig = {
