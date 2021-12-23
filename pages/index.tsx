@@ -4,7 +4,7 @@ import PostCard from '../components/PostCard'
 import Header from '../components/Header'
 import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import HeadTemplate from '../components/HeadTemplate'
-import Post from '../interfaces/Post'
+import Post from '../models/Post'
 import ThreeColumnGrid from '../components/ThreeColumnGrid'
 
 export default function Home({ posts }: { posts: Post[] }) {

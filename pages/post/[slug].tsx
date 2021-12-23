@@ -2,8 +2,8 @@ import BlogConfig from '../../config/BlogConfig'
 import Header from '../../components/Header'
 import PostMarkdownContent from '../../components/PostMarkdownContent'
 import HeadTemplate from '../../components/HeadTemplate'
-import DateTool from '../../service/utilities/DateTool'
-import Post from '../../interfaces/Post'
+import DateTool from '../../utilities/DateTool'
+import Post from '../../models/Post'
 
 export default function PostPage({
   post: { title, slug, createdAt, description, markdown },

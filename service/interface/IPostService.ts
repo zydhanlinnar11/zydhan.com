@@ -1,4 +1,4 @@
-import Post from '../../interfaces/Post'
+import Post from '../../models/Post'
 
 export interface EditSinglePostInterface {
   success: boolean
