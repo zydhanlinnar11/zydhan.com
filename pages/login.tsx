@@ -7,6 +7,7 @@ import Input from '../components/Forms/Input'
 import AnchorLink from '../components/AnchorLink'
 import HeadTemplate from '../components/HeadTemplate'
 import SmallErrorText from '../components/SmallErrorText'
+import SocialLoginButtons from '../components/SocialLoginButtons'
 
 export default function LoginPage() {
   const emailRef = useRef(null)
@@ -88,6 +89,7 @@ export default function LoginPage() {
               <FullWidthButton type='submit' disabled={disabledLogin}>
                 Log in
               </FullWidthButton>
+              <SocialLoginButtons />
             </form>
           </div>
         </>

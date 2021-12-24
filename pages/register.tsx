@@ -6,6 +6,7 @@ import Input from '../components/Forms/Input'
 import HeadTemplate from '../components/HeadTemplate'
 import SmallErrorText from '../components/SmallErrorText'
 import SmallSuccessText from '../components/SmallSuccessText'
+import SocialLoginButtons from '../components/SocialLoginButtons'
 import SpinnerLoading from '../components/SpinnerLoading'
 import { useAuth } from '../providers/AuthProvider'
 
@@ -119,6 +120,7 @@ export default function RegisterPage() {
             <FullWidthButton type='submit' disabled={disabledRegister}>
               Register
             </FullWidthButton>
+            <SocialLoginButtons />
           </form>
         </div>
       ) : (
