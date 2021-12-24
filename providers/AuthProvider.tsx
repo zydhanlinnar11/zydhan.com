@@ -206,7 +206,6 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     const token = localStorage.getItem('token')
-    document.cookie = 'token='
     updateUser(null)
 
     if (!token) return
