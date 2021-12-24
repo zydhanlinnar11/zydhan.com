@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import AnchorLink from '../components/AnchorLink'
 import FullWidthButton from '../components/Button/FullWidthButton'
 import Input from '../components/Forms/Input'

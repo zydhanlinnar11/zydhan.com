@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import BlogConfig from '../config/BlogConfig'
 
 interface IAPILoginResponse {
   message: string

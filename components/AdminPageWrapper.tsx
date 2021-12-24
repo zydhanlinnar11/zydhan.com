@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAuth } from '../providers/AuthProvider'
 import CenteredErrorMessage from './CenteredErrorMessage'
 import HeadTemplate from './HeadTemplate'

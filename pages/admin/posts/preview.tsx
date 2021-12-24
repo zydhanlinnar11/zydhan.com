@@ -6,7 +6,6 @@ import Router, { useRouter } from 'next/router'
 import FullWidthButton from '../../../components/Button/FullWidthButton'
 import AdminPageWrapper from '../../../components/AdminPageWrapper'
 import PostMarkdownContent from '../../../components/PostMarkdownContent'
-import React from 'react'
 
 export default function PostPage() {
   const router = useRouter()

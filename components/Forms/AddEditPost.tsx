@@ -1,6 +1,6 @@
 import Router from 'next/router'
 import { useRouter } from 'next/router'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import BlogConfig from '../../config/BlogConfig'
 import Post from '../../models/Post'
 import FullWidthButton from '../Button/FullWidthButton'

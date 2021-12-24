@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface FullWidthButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'reset' | 'submit'
   disabled?: any

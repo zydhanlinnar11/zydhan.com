@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useAuth } from '../providers/AuthProvider'
-import React from 'react'
 
 const navigation = [
   { name: 'Home', href: '/', passHref: false },

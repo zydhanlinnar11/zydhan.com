@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface InputProps {
   type: React.HTMLInputTypeAttribute
   name: string

@@ -6,7 +6,6 @@ import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import HeadTemplate from '../components/HeadTemplate'
 import ThreeColumnGrid from '../components/ThreeColumnGrid'
 import PostListItem from '../models/PostListItem'
-import React from 'react'
 
 export default function Home({ posts }: { posts: PostListItem[] }) {
   const { user } = useAuth()

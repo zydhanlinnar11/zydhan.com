@@ -1,6 +1,5 @@
 import AdminPageWrapper from '../../../components/AdminPageWrapper'
 import AddEditPostForm from '../../../components/Forms/AddEditPost'
-import React from 'react'
 
 export default function CreatePostPage() {
   const pageTitle = 'Create Post'
