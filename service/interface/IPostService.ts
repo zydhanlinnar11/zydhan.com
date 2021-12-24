@@ -1,4 +1,5 @@
 import Post from '../../models/Post'
+import PostListItem from '../../models/PostListItem'
 
 export interface EditSinglePostInterface {
   success: boolean
@@ -7,7 +8,7 @@ export interface EditSinglePostInterface {
 }
 
 interface IPostService {
-  getAllPosts(): Promise<Post[]>
+  getAllPosts(): Promise<PostListItem[]>
   getSinglePost(slug: string): Promise<Post>
   editSinglePost(slug: string, submissionBody): Promise<EditSinglePostInterface>
   addSinglePost(submissionBody): Promise<string | null>

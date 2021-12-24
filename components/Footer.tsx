@@ -1,6 +1,7 @@
 import BlogConfig from '../config/BlogConfig'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import SmallSocialMediaButton from './Button/SmallSocialMediaButton'
+import React from 'react'
 
 const socialMedia = [
   {

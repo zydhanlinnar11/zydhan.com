@@ -1,3 +1,5 @@
+import React from 'react'
+
 interface HeaderComponentProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
   topText?: string

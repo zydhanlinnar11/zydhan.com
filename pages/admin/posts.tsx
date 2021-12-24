@@ -2,17 +2,17 @@ import Router from 'next/router'
 import Link from 'next/link'
 import BlogConfig from '../../config/BlogConfig'
 import { useAuth } from '../../providers/AuthProvider'
-import Post from '../../models/Post'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SpinnerLoading from '../../components/SpinnerLoading'
 import AdminPageWrapper from '../../components/AdminPageWrapper'
 import PostCard from '../../components/PostCard'
 import ThreeColumnGrid from '../../components/ThreeColumnGrid'
+import PostListItem from '../../models/PostListItem'
 
 export default function AdminManagePostsPage() {
   const title = `Manage Posts`
   const { user, isUserFetched } = useAuth()
-  const [posts, setPosts] = useState<Post[] | null>(null)
+  const [posts, setPosts] = useState<PostListItem[] | null>(null)
   const [isPostsFetched, setPostsFetched] = useState(false)
 
   useEffect(() => {

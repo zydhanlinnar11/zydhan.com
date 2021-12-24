@@ -5,6 +5,7 @@ import { useAuth } from '../../providers/AuthProvider'
 import AdminPageWrapper from '../../components/AdminPageWrapper'
 import Header from '../../components/Header'
 import ThreeColumnGrid from '../../components/ThreeColumnGrid'
+import React from 'react'
 
 const dashboardItems = [
   { title: 'Manage posts', link: '/admin/posts', icon: faNewspaper },

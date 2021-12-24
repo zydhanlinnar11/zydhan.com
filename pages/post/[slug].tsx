@@ -3,7 +3,9 @@ import Header from '../../components/Header'
 import PostMarkdownContent from '../../components/PostMarkdownContent'
 import HeadTemplate from '../../components/HeadTemplate'
 import DateTool from '../../utilities/DateTool'
+import PostListItem from '../../models/PostListItem'
 import Post from '../../models/Post'
+import React from 'react'
 
 export default function PostPage({
   post: { title, slug, createdAt, description, markdown },
@@ -45,7 +47,7 @@ export async function getStaticProps({ params: { slug } }) {
 }
 
 export async function getStaticPaths() {
-  let posts: Post[]
+  let posts: PostListItem[]
   try {
     posts = await BlogConfig.POST_SERVICE.getAllPosts()
   } catch {

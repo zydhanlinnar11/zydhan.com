@@ -3,6 +3,7 @@ import 'tailwindcss/tailwind.css'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import { AuthProvider } from '../providers/AuthProvider'
+import React from 'react'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

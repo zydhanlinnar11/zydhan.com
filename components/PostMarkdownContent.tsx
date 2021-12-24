@@ -3,6 +3,7 @@ import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import rehypeRaw from 'rehype-raw'
 import Image from 'next/image'
+import React from 'react'
 
 interface PostMarkdownContentProps {
   markdown: string

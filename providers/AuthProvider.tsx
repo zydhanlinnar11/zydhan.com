@@ -102,25 +102,31 @@ export function AuthProvider({ children }) {
     password_confirmation: string
   ) {
     try {
-      const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
-        credentials: 'include',
-      })
-      const response = await fetch(`${BlogConfig.BLOG_API}/register`, {
-        method: 'POST',
-        body: JSON.stringify({
-          username,
-          name,
-          email,
-          password,
-          password_confirmation,
-        }),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+      const csrf = await fetch(
+        `${process.env.NEXT_PUBLIC_BLOG_API}/sanctum/csrf-cookie`,
+        {
           credentials: 'include',
-        },
-      })
+        }
+      )
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BLOG_API}/register`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            username,
+            name,
+            email,
+            password,
+            password_confirmation,
+          }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+            credentials: 'include',
+          },
+        }
+      )
       const json: { message?: string; errors?: string } = await response.json()
 
       if (response.status !== 200)
@@ -141,19 +147,25 @@ export function AuthProvider({ children }) {
 
   async function login(email: string, password: string) {
     try {
-      const csrf = await fetch(`${BlogConfig.BLOG_API}/sanctum/csrf-cookie`, {
-        credentials: 'include',
-      })
-      const response = await fetch(`${BlogConfig.BLOG_API}/login`, {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+      const csrf = await fetch(
+        `${process.env.NEXT_PUBLIC_BLOG_API}/sanctum/csrf-cookie`,
+        {
           credentials: 'include',
-        },
-      })
+        }
+      )
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BLOG_API}/login`,
+        {
+          method: 'POST',
+          body: JSON.stringify({ email, password }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+            credentials: 'include',
+          },
+        }
+      )
       const json: IAPILoginResponse = await response.json()
 
       if (response.status !== 200)
@@ -174,7 +186,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await fetch(`${BlogConfig.BLOG_API}/user`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API}/user`, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -199,14 +211,17 @@ export function AuthProvider({ children }) {
     if (!token) return
 
     try {
-      const response = await fetch(`${BlogConfig.BLOG_API}/logout`, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BLOG_API}/logout`,
+        {
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       const json = await response.json()
     } catch (error) {}
   }

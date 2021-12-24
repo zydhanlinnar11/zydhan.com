@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Post from '../models/Post'
+import React from 'react'
 
 interface PostCardProps {
   post: Post

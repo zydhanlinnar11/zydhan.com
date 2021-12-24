@@ -1,5 +1,6 @@
 import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import HeadTemplate from '../components/HeadTemplate'
+import React from 'react'
 
 export default function Custom404() {
   return (
