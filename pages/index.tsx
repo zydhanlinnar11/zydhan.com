@@ -5,9 +5,9 @@ import Header from '../components/Header'
 import CenteredErrorMessage from '../components/CenteredErrorMessage'
 import HeadTemplate from '../components/HeadTemplate'
 import ThreeColumnGrid from '../components/ThreeColumnGrid'
-import PostListItem from '../models/PostListItem'
+import Post from '../models/Post'
 
-export default function Home({ posts }: { posts: PostListItem[] }) {
+export default function Home({ posts }: { posts: Post[] }) {
   const { user } = useAuth()
 
   return (
@@ -34,7 +34,7 @@ export default function Home({ posts }: { posts: PostListItem[] }) {
 }
 
 export async function getStaticProps() {
-  let posts: PostListItem[]
+  let posts: Post[]
   try {
     posts = await BlogConfig.POST_SERVICE.getAllPosts()
   } catch {
