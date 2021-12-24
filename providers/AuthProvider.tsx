@@ -182,7 +182,8 @@ export function AuthProvider({ children }) {
   }
 
   async function getUserFromToken() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token') || getCookie('token')
+    if (token) localStorage.setItem('token', token)
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API}/user`, {
@@ -205,6 +206,7 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     const token = localStorage.getItem('token')
+    document.cookie = 'token='
     updateUser(null)
 
     if (!token) return
