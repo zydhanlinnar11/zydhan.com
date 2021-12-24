@@ -4,6 +4,8 @@ import AnchorLink from '../components/AnchorLink'
 import FullWidthButton from '../components/Button/FullWidthButton'
 import Input from '../components/Forms/Input'
 import HeadTemplate from '../components/HeadTemplate'
+import SmallErrorText from '../components/SmallErrorText'
+import SmallSuccessText from '../components/SmallSuccessText'
 import SpinnerLoading from '../components/SpinnerLoading'
 import { useAuth } from '../providers/AuthProvider'
 
@@ -111,8 +113,8 @@ export default function RegisterPage() {
                 <AnchorLink href='/login' text='Log in' />
               </small>
               <br />
-              <small className='text-red-500'>{errorMessage}</small>
-              <small className='text-green-500'>{successMessage}</small>
+              <SmallErrorText>{errorMessage}</SmallErrorText>
+              <SmallSuccessText>{successMessage}</SmallSuccessText>
             </div>
             <FullWidthButton type='submit' disabled={disabledRegister}>
               Register

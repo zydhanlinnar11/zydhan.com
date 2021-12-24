@@ -1,9 +1,11 @@
 import Router from 'next/router'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import BlogConfig from '../../config/BlogConfig'
 import Post from '../../models/Post'
 import FullWidthButton from '../Button/FullWidthButton'
+import SmallErrorText from '../SmallErrorText'
+import SmallSuccessText from '../SmallSuccessText'
 import Input from './Input'
 
 interface AddEditPostFormProps {
@@ -18,12 +20,16 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   const title: string = router.query.title as string
   const description: string = router.query.description as string
   const markdown: string = router.query.markdown as string
+  const [errorText, setErrorText] = useState<string>('')
 
   async function deletePostHandler() {
-    const success = await BlogConfig.POST_SERVICE.deleteSinglePost(post.slug)
-
-    if (!success) return
-    Router.push('/admin/posts')
+    setErrorText('')
+    try {
+      await BlogConfig.POST_SERVICE.deleteSinglePost(post.slug)
+      Router.push('/admin/posts')
+    } catch (e) {
+      setErrorText(e.message)
+    }
   }
 
   function showDeleteAlert() {
@@ -37,29 +43,41 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   }
 
   async function editPostHandler() {
+    setErrorText('')
+
     let body = {
       title: postTitleRef.current.value,
       description: postDescriptionRef.current.value,
       markdown: postMarkdownRef.current.value,
     }
 
-    const result = await BlogConfig.POST_SERVICE.editSinglePost(post.slug, body)
-    if (!result.success) {
-      return
+    try {
+      const result = await BlogConfig.POST_SERVICE.editSinglePost(
+        post.slug,
+        body
+      )
+      Router.replace(`/admin/posts/${result}`)
+    } catch (e) {
+      setErrorText(e.message)
     }
-    Router.replace(`/admin/posts/${result.newSlug}`)
   }
 
   async function createPostHandler() {
+    setErrorText('')
+
     let body = {
       title: postTitleRef.current.value,
       description: postDescriptionRef.current.value,
       markdown: postMarkdownRef.current.value,
     }
 
-    const slug = await BlogConfig.POST_SERVICE.addSinglePost(body)
-    if (!slug) return
-    Router.replace(`/admin/posts/${slug}`)
+    try {
+      const slug = await BlogConfig.POST_SERVICE.addSinglePost(body)
+      if (!slug) return
+      Router.replace(`/admin/posts/${slug}`)
+    } catch (e) {
+      setErrorText(e.message)
+    }
   }
 
   function submitHandler(e: React.FormEvent) {
@@ -70,6 +88,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   }
 
   function previewPost() {
+    setErrorText('')
     const query: {
       title: string
       description: string
@@ -90,8 +109,10 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
       !postTitleRef.current.value ||
       !postDescriptionRef.current.value ||
       !postMarkdownRef.current.value
-    )
+    ) {
+      setErrorText('Please fill all input.')
       return
+    }
 
     Router.push({
       pathname: '/admin/posts/preview',
@@ -135,6 +156,9 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
             defaultValue={markdown ?? post?.markdown}
           />
         </div>
+      </div>
+      <div className='text-center w-full'>
+        <SmallErrorText>{errorText}</SmallErrorText>
       </div>
       <FullWidthButton type='submit'>
         {post ? 'Edit post' : 'Create post'}

@@ -6,6 +6,7 @@ import FullWidthButton from '../components/Button/FullWidthButton'
 import Input from '../components/Forms/Input'
 import AnchorLink from '../components/AnchorLink'
 import HeadTemplate from '../components/HeadTemplate'
+import SmallErrorText from '../components/SmallErrorText'
 
 export default function LoginPage() {
   const emailRef = useRef(null)
@@ -82,7 +83,7 @@ export default function LoginPage() {
                   <AnchorLink href='/register' text='Create an account' />
                 </small>
                 <br />
-                <small className='text-red-500'>{errorMessage}</small>
+                <SmallErrorText>{errorMessage}</SmallErrorText>
               </div>
               <FullWidthButton type='submit' disabled={disabledLogin}>
                 Log in

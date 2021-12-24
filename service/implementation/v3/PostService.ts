@@ -112,7 +112,7 @@ class PostService implements IPostService {
   async editSinglePost(slug: string, submissionBody): Promise<string> {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BLOG_API}/post/${slug}`,
+        `${process.env.NEXT_PUBLIC_BLOG_API}/posts/${slug}`,
         {
           method: 'PATCH',
           body: JSON.stringify(submissionBody),
@@ -171,7 +171,7 @@ class PostService implements IPostService {
   async deleteSinglePost(slug: string): Promise<void> {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BLOG_API}/post/${slug}`,
+        `${process.env.NEXT_PUBLIC_BLOG_API}/posts/${slug}`,
         {
           method: 'DELETE',
           headers: {
