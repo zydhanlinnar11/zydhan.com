@@ -33,7 +33,7 @@ export default function AddEditPostForm({ post }: AddEditPostFormProps) {
   const markdown: string = router.query.markdown as string
   const [errorText, setErrorText] = useState<string>('')
   const [selectedVisibility, setSelectedVisibility] = useState(
-    visibilities[JSON.parse(post.visibility) - 1]
+    post ? visibilities[JSON.parse(post.visibility) - 1] : visibilities[0]
   )
 
   async function deletePostHandler() {
