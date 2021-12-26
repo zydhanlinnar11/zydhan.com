@@ -5,7 +5,7 @@ import IPostService, {
 } from '../../interface/IPostService'
 
 class PostService implements IPostService {
-  async getAllPosts(): Promise<Post[]> {
+  async getAllPosts(passCredential?: boolean): Promise<Post[]> {
     interface Response {
       id: string
       title: string
@@ -16,11 +16,21 @@ class PostService implements IPostService {
       user_id: string
       markdown: string
       description: string
+      visibility: '1' | '2' | '3'
     }
 
     try {
       const posts: Post[] = []
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API}/posts`)
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BLOG_API}/posts`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              passCredential && localStorage.getItem('token')
+            }`,
+          },
+        }
+      )
 
       if (!response.ok) throw new Error(response.statusText)
 
@@ -36,6 +46,7 @@ class PostService implements IPostService {
           description,
           user_id,
           updated_at,
+          visibility,
         }) => {
           posts.push({
             title,
@@ -47,6 +58,7 @@ class PostService implements IPostService {
             markdown,
             description,
             userId: user_id,
+            visibility,
           })
         }
       )
@@ -58,7 +70,7 @@ class PostService implements IPostService {
     }
   }
 
-  async getSinglePost(slug: string): Promise<Post> {
+  async getSinglePost(slug: string, passCredential?: boolean): Promise<Post> {
     interface Response {
       title: string
       slug: string
@@ -69,11 +81,19 @@ class PostService implements IPostService {
       description: string
       id: string
       updated_at: string
+      visibility: '1' | '2' | '3'
     }
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BLOG_API}/posts/${slug}`
+        `${process.env.NEXT_PUBLIC_BLOG_API}/posts/${slug}`,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              passCredential && localStorage.getItem('token')
+            }`,
+          },
+        }
       )
 
       const {
@@ -85,6 +105,7 @@ class PostService implements IPostService {
         description,
         id,
         updated_at,
+        visibility,
       }: Response = await response.json()
 
       if (response.status === 500) throw new Error('INTERNAL_SERVER_ERROR')
@@ -100,6 +121,7 @@ class PostService implements IPostService {
         slug: slug,
         description: description,
         id,
+        visibility,
       }
 
       return post

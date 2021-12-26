@@ -8,6 +8,7 @@ interface Post {
   userId: string
   markdown: string
   id: string
+  visibility: '1' | '2' | '3'
 }
 
 export default Post

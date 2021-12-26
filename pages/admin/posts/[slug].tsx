@@ -14,7 +14,7 @@ export default function EditPostPage() {
 
   useEffect(() => {
     if (typeof slug === 'string') {
-      BlogConfig.POST_SERVICE.getSinglePost(slug)
+      BlogConfig.POST_SERVICE.getSinglePost(slug, true)
         .then((fetchedPost) => {
           setPost(fetchedPost)
           setPostFetched(true)

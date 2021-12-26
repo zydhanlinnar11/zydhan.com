@@ -10,6 +10,7 @@ interface IPostService {
   /**
    * Get all posts from API.
    *
+   * @param passCredential - Post slug
    * @returns All posts from API
    *
    * @throws {@link INTERNAL_SERVER_ERROR}
@@ -20,12 +21,13 @@ interface IPostService {
    *
    * @public
    */
-  getAllPosts(): Promise<Post[]>
+  getAllPosts(passCredential?: boolean): Promise<Post[]>
 
   /**
    * Get single post from API.
    *
    * @param slug - Post slug
+   * @param passCredential - Post slug
    *
    * @returns single post from API
    *
@@ -40,7 +42,7 @@ interface IPostService {
    *
    * @public
    */
-  getSinglePost(slug: string): Promise<Post>
+  getSinglePost(slug: string, passCredential?: boolean): Promise<Post>
 
   /**
    * Edit single post from API.

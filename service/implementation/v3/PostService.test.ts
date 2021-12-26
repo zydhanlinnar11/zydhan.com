@@ -23,6 +23,7 @@ describe('getAllPosts', () => {
         updated_at: '2021-12-21T13:41:40.000000Z',
         user_id: '8e3a361d-f7e0-427c-a3cd-0989d3e40430',
         cover_url: 'https://dummyimage.com/600x400/000/fff',
+        visibility: '1',
       },
       {
         created_at: '2021-12-21T08:56:37.000000Z',
@@ -34,6 +35,7 @@ describe('getAllPosts', () => {
         updated_at: '2021-12-21T13:41:40.000000Z',
         user_id: '8e3a361d-f7e0-427c-a3cd-0989d3e40430',
         cover_url: 'https://dummyimage.com/600x400/000/fff',
+        visibility: '1',
       },
       {
         created_at: '2021-12-21T08:56:37.000000Z',
@@ -45,6 +47,7 @@ describe('getAllPosts', () => {
         updated_at: '2021-12-21T13:41:40.000000Z',
         user_id: '8e3a361d-f7e0-427c-a3cd-0989d3e40430',
         cover_url: 'https://dummyimage.com/600x400/000/fff',
+        visibility: '1',
       },
     ]
     const postsList: Post[] = postsResponse.map(
@@ -58,6 +61,7 @@ describe('getAllPosts', () => {
         description,
         user_id,
         updated_at,
+        visibility,
       }) => ({
         title,
         slug,
@@ -68,6 +72,7 @@ describe('getAllPosts', () => {
         userId: user_id,
         markdown,
         description,
+        visibility: '1',
       })
     )
 
@@ -105,6 +110,7 @@ describe('getSinglePosts', () => {
       slug: 'test-post-1',
       created_at: '2021-12-23 12:45:00',
       cover_url: 'https://dummyimage.com/600x400/000/fff',
+      visibility: '1',
       description: 'Test description',
       user_id: 'ID',
       markdown: 'Test markdown',
@@ -122,6 +128,7 @@ describe('getSinglePosts', () => {
       markdown: postResponse.markdown,
       updatedAt: postResponse.updated_at,
       id: postResponse.id,
+      visibility: '1',
     }
 
     fetchMock.mockResponseOnce(JSON.stringify(postResponse))

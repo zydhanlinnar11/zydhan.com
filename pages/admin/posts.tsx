@@ -24,7 +24,7 @@ export default function AdminManagePostsPage() {
 
   useEffect(() => {
     async function fetchAllPosts() {
-      const fetchedPosts = await BlogConfig.POST_SERVICE.getAllPosts()
+      const fetchedPosts = await BlogConfig.POST_SERVICE.getAllPosts(true)
       setPosts(fetchedPosts)
       setPostsFetched(true)
     }

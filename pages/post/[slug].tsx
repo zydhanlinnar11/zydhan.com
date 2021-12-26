@@ -4,6 +4,7 @@ import PostMarkdownContent from '../../components/PostMarkdownContent'
 import HeadTemplate from '../../components/HeadTemplate'
 import DateTool from '../../utilities/DateTool'
 import Post from '../../models/Post'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 export default function PostPage({
   post: { title, slug, createdAt, description, markdown },
@@ -32,19 +33,23 @@ export default function PostPage({
   )
 }
 
-export async function getStaticProps({ params: { slug } }) {
+export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   let post: Post | null
 
   try {
-    post = await BlogConfig.POST_SERVICE.getSinglePost(slug)
-  } catch {
-    post = null
+    post = await BlogConfig.POST_SERVICE.getSinglePost(
+      slug as unknown as string
+    )
+  } catch (e) {
+    return {
+      notFound: true,
+    }
   }
 
   return { props: { post } }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   let posts: Post[]
   try {
     posts = await BlogConfig.POST_SERVICE.getAllPosts()
@@ -59,6 +64,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   }
 }
