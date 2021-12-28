@@ -29,7 +29,12 @@ export default function PostMarkdownContent({
                 {String(children).replace(/\n$/, '')}
               </SyntaxHighlighter>
             ) : (
-              <code className={className} {...props}>
+              <code
+                className={
+                  className + ' py-1 px-2 m-0 text-sm rounded bg-gray-700'
+                }
+                {...props}
+              >
                 {children}
               </code>
             )
