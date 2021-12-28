@@ -12,7 +12,7 @@ export default function PostMarkdownContent({
   markdown,
 }: PostMarkdownContentProps) {
   return (
-    <div className='text-left pb-2 px-2 max-w-full break-all'>
+    <div className='text-left pb-2 px-2 max-w-full break-words'>
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         components={{
