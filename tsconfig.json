@@ -13,7 +13,17 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@blog-components/*": ["components/*"],
+      "@blog-config/*": ["config/*"],
+      "@blog-models/*": ["models/*"],
+      "@blog-providers/*": ["providers/*"],
+      "@blog-services/*": ["services/*"],
+      "@blog-css/*": ["styles/*"],
+      "@blog-pages/*": ["pages/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

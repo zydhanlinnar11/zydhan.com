@@ -1,5 +1,5 @@
-import PostService from '../service/implementation/v3/PostService'
-import IPostService from '../service/interface/IPostService'
+import PostService from '@blog-services/implementation/v3/PostService'
+import IPostService from '@blog-services/interface/IPostService'
 
 const BLOG_TITLE = "Zydhan's Blog"
 const BLOG_DESC = 'Welcome to my blog. Have fun here!'

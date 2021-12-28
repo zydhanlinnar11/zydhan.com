@@ -1,7 +1,7 @@
+import BlogConfig from '@blog-config/BlogConfig'
+import Post from '@blog-models/Post'
+import IPostService from '@blog-services/interface/IPostService'
 import fetchMock from 'jest-fetch-mock'
-import BlogConfig from '../../../config/BlogConfig'
-import Post from '../../../models/Post'
-import IPostService from '../../interface/IPostService'
 
 fetchMock.enableMocks()
 const postService: IPostService = BlogConfig.POST_SERVICE

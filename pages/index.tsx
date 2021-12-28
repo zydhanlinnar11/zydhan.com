@@ -1,11 +1,11 @@
-import BlogConfig from '../config/BlogConfig'
-import { useAuth } from '../providers/AuthProvider'
-import PostCard from '../components/PostCard'
-import Header from '../components/Header'
-import CenteredErrorMessage from '../components/CenteredErrorMessage'
-import HeadTemplate from '../components/HeadTemplate'
-import ThreeColumnGrid from '../components/ThreeColumnGrid'
-import Post from '../models/Post'
+import CenteredErrorMessage from '@blog-components/CenteredErrorMessage'
+import Header from '@blog-components/Header'
+import HeadTemplate from '@blog-components/HeadTemplate'
+import PostCard from '@blog-components/PostCard'
+import ThreeColumnGrid from '@blog-components/ThreeColumnGrid'
+import BlogConfig from '@blog-config/BlogConfig'
+import Post from '@blog-models/Post'
+import { useAuth } from '@blog-providers/AuthProvider'
 
 export default function Home({ posts }: { posts: Post[] }) {
   const { user } = useAuth()

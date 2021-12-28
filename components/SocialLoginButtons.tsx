@@ -1,9 +1,9 @@
+import BlogConfig from '@blog-config/BlogConfig'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Router from 'next/router'
 import React from 'react'
-import BlogConfig from '../config/BlogConfig'
-import FullWidthButton from './Button/FullWidthButton'
+import FullWidthButton from '@blog-components/Button/FullWidthButton'
 
 export default function SocialLoginButtons() {
   return (

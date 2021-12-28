@@ -1,14 +1,14 @@
+import AnchorLink from '@blog-components/AnchorLink'
+import FullWidthButton from '@blog-components/Button/FullWidthButton'
+import Input from '@blog-components/Forms/Input'
+import HeadTemplate from '@blog-components/HeadTemplate'
+import SmallErrorText from '@blog-components/SmallErrorText'
+import SmallSuccessText from '@blog-components/SmallSuccessText'
+import SocialLoginButtons from '@blog-components/SocialLoginButtons'
+import SpinnerLoading from '@blog-components/SpinnerLoading'
+import { useAuth } from '@blog-providers/AuthProvider'
 import Router from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import AnchorLink from '../components/AnchorLink'
-import FullWidthButton from '../components/Button/FullWidthButton'
-import Input from '../components/Forms/Input'
-import HeadTemplate from '../components/HeadTemplate'
-import SmallErrorText from '../components/SmallErrorText'
-import SmallSuccessText from '../components/SmallSuccessText'
-import SocialLoginButtons from '../components/SocialLoginButtons'
-import SpinnerLoading from '../components/SpinnerLoading'
-import { useAuth } from '../providers/AuthProvider'
 
 export default function RegisterPage() {
   const usernameRef = useRef(null)

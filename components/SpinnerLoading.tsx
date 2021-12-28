@@ -1,4 +1,4 @@
-import styles from '../styles/SpinnerLoading.module.css'
+import styles from '@blog-css/SpinnerLoading.module.css'
 
 export default function SpinnerLoading() {
   return (

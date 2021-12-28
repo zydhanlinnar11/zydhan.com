@@ -1,10 +1,10 @@
-import BlogConfig from '../../config/BlogConfig'
-import Header from '../../components/Header'
-import PostMarkdownContent from '../../components/PostMarkdownContent'
-import HeadTemplate from '../../components/HeadTemplate'
-import DateTool from '../../utilities/DateTool'
-import Post from '../../models/Post'
+import Header from '@blog-components/Header'
+import HeadTemplate from '@blog-components/HeadTemplate'
+import PostMarkdownContent from '@blog-components/PostMarkdownContent'
+import BlogConfig from '@blog-config/BlogConfig'
+import Post from '@blog-models/Post'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import DateTool from 'utilities/DateTool'
 
 export default function PostPage({
   post: { title, slug, createdAt, description, markdown },

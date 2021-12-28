@@ -1,5 +1,5 @@
+import BlogConfig from '@blog-config/BlogConfig'
 import Head from 'next/head'
-import BlogConfig from '../config/BlogConfig'
 
 interface HeadTemplateProps {
   title: string

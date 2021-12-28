@@ -1,13 +1,13 @@
 import Router from 'next/router'
 import { useRouter } from 'next/router'
 import { Fragment, useRef, useState } from 'react'
-import BlogConfig from '../../config/BlogConfig'
-import Post from '../../models/Post'
-import FullWidthButton from '../Button/FullWidthButton'
-import SmallErrorText from '../SmallErrorText'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import Input from './Input'
+import Input from '@blog-components/Forms/Input'
+import Post from '@blog-models/Post'
+import BlogConfig from '@blog-config/BlogConfig'
+import SmallErrorText from '@blog-components/SmallErrorText'
+import FullWidthButton from '@blog-components/Button/FullWidthButton'
 
 interface AddEditPostFormProps {
   post?: Post

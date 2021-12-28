@@ -1,11 +1,11 @@
+import AdminPageWrapper from '@blog-components/AdminPageWrapper'
+import FullWidthButton from '@blog-components/Button/FullWidthButton'
+import Header from '@blog-components/Header'
+import PostMarkdownContent from '@blog-components/PostMarkdownContent'
+import BlogConfig from '@blog-config/BlogConfig'
 import Head from 'next/head'
-import BlogConfig from '../../../config/BlogConfig'
-import Header from '../../../components/Header'
 
 import Router, { useRouter } from 'next/router'
-import FullWidthButton from '../../../components/Button/FullWidthButton'
-import AdminPageWrapper from '../../../components/AdminPageWrapper'
-import PostMarkdownContent from '../../../components/PostMarkdownContent'
 
 export default function PostPage() {
   const router = useRouter()

@@ -1,8 +1,6 @@
-import Post from '../../../models/Post'
-import { getCookie } from '../../../providers/AuthProvider'
-import IPostService, {
-  EditSinglePostInterface,
-} from '../../interface/IPostService'
+import Post from '@blog-models/Post'
+import { getCookie } from '@blog-providers/AuthProvider'
+import IPostService from '@blog-services/interface/IPostService'
 
 class PostService implements IPostService {
   async getAllPosts(passCredential?: boolean): Promise<Post[]> {

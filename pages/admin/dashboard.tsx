@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useAuth } from '../../providers/AuthProvider'
-import AdminPageWrapper from '../../components/AdminPageWrapper'
-import Header from '../../components/Header'
-import ThreeColumnGrid from '../../components/ThreeColumnGrid'
+import AdminPageWrapper from '@blog-components/AdminPageWrapper'
+import Header from '@blog-components/Header'
+import ThreeColumnGrid from '@blog-components/ThreeColumnGrid'
+import { useAuth } from '@blog-providers/AuthProvider'
 
 const dashboardItems = [
   { title: 'Manage posts', link: '/admin/posts', icon: faNewspaper },

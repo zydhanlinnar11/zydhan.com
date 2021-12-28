@@ -1,6 +1,6 @@
+import BlogConfig from '@blog-config/BlogConfig'
+import Post from '@blog-models/Post'
 import { GetServerSideProps } from 'next'
-import BlogConfig from '../config/BlogConfig'
-import Post from '../models/Post'
 
 function generateSiteMap(posts: Post[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>

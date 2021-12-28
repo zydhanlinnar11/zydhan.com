@@ -1,6 +1,6 @@
+import Post from '@blog-models/Post'
 import Image from 'next/image'
 import Link from 'next/link'
-import Post from '../models/Post'
 
 interface PostCardProps {
   post: Post

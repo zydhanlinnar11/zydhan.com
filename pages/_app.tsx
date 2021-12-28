@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import 'tailwindcss/tailwind.css'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import { AuthProvider } from '../providers/AuthProvider'
+import Footer from '@blog-components/Footer'
+import Navbar from '@blog-components/Navbar'
+import { AuthProvider } from '@blog-providers/AuthProvider'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

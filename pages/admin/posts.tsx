@@ -1,13 +1,13 @@
 import Router from 'next/router'
 import Link from 'next/link'
-import BlogConfig from '../../config/BlogConfig'
-import { useAuth } from '../../providers/AuthProvider'
 import { useEffect, useState } from 'react'
-import SpinnerLoading from '../../components/SpinnerLoading'
-import AdminPageWrapper from '../../components/AdminPageWrapper'
-import PostCard from '../../components/PostCard'
-import ThreeColumnGrid from '../../components/ThreeColumnGrid'
-import Post from '../../models/Post'
+import { useAuth } from '@blog-providers/AuthProvider'
+import Post from '@blog-models/Post'
+import BlogConfig from '@blog-config/BlogConfig'
+import AdminPageWrapper from '@blog-components/AdminPageWrapper'
+import ThreeColumnGrid from '@blog-components/ThreeColumnGrid'
+import PostCard from '@blog-components/PostCard'
+import SpinnerLoading from '@blog-components/SpinnerLoading'
 
 export default function AdminManagePostsPage() {
   const title = `Manage Posts`

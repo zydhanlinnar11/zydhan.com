@@ -1,10 +1,10 @@
+import AdminPageWrapper from '@blog-components/AdminPageWrapper'
+import AddEditPostForm from '@blog-components/Forms/AddEditPost'
+import SpinnerLoading from '@blog-components/SpinnerLoading'
+import BlogConfig from '@blog-config/BlogConfig'
+import Post from '@blog-models/Post'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import AdminPageWrapper from '../../../components/AdminPageWrapper'
-import AddEditPostForm from '../../../components/Forms/AddEditPost'
-import SpinnerLoading from '../../../components/SpinnerLoading'
-import BlogConfig from '../../../config/BlogConfig'
-import Post from '../../../models/Post'
 
 export default function EditPostPage() {
   const pageTitle = 'Edit Post'

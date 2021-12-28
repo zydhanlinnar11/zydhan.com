@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { useAuth } from '../providers/AuthProvider'
 import Router from 'next/router'
-import SpinnerLoading from '../components/SpinnerLoading'
-import FullWidthButton from '../components/Button/FullWidthButton'
-import Input from '../components/Forms/Input'
-import AnchorLink from '../components/AnchorLink'
-import HeadTemplate from '../components/HeadTemplate'
-import SmallErrorText from '../components/SmallErrorText'
-import SocialLoginButtons from '../components/SocialLoginButtons'
+import { useAuth } from '@blog-providers/AuthProvider'
+import HeadTemplate from '@blog-components/HeadTemplate'
+import Input from '@blog-components/Forms/Input'
+import AnchorLink from '@blog-components/AnchorLink'
+import SmallErrorText from '@blog-components/SmallErrorText'
+import FullWidthButton from '@blog-components/Button/FullWidthButton'
+import SocialLoginButtons from '@blog-components/SocialLoginButtons'
+import SpinnerLoading from '@blog-components/SpinnerLoading'
 
 export default function LoginPage() {
   const emailRef = useRef(null)

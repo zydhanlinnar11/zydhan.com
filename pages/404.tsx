@@ -1,5 +1,5 @@
-import CenteredErrorMessage from '../components/CenteredErrorMessage'
-import HeadTemplate from '../components/HeadTemplate'
+import CenteredErrorMessage from '@blog-components/CenteredErrorMessage'
+import HeadTemplate from '@blog-components/HeadTemplate'
 
 export default function Custom404() {
   return (

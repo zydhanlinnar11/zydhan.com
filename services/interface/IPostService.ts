@@ -1,4 +1,4 @@
-import Post from '../../models/Post'
+import Post from '@blog-models/Post'
 
 export interface EditSinglePostInterface {
   success: boolean

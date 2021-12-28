@@ -1,5 +1,5 @@
-import AdminPageWrapper from '../../../components/AdminPageWrapper'
-import AddEditPostForm from '../../../components/Forms/AddEditPost'
+import AdminPageWrapper from '@blog-components/AdminPageWrapper'
+import AddEditPostForm from '@blog-components/Forms/AddEditPost'
 
 export default function CreatePostPage() {
   const pageTitle = 'Create Post'

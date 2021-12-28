@@ -1,8 +1,8 @@
-import BlogConfig from '../config/BlogConfig'
 import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { useAuth } from '../providers/AuthProvider'
+import { useAuth } from '@blog-providers/AuthProvider'
+import BlogConfig from '@blog-config/BlogConfig'
 
 const navigation = [
   { name: 'Home', href: '/', passHref: false },

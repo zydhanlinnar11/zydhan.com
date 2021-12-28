@@ -1,9 +1,9 @@
+import { useAuth } from '@blog-providers/AuthProvider'
 import Router from 'next/router'
 import { useEffect } from 'react'
-import { useAuth } from '../providers/AuthProvider'
-import CenteredErrorMessage from './CenteredErrorMessage'
-import HeadTemplate from './HeadTemplate'
-import SpinnerLoading from './SpinnerLoading'
+import CenteredErrorMessage from '@blog-components/CenteredErrorMessage'
+import HeadTemplate from '@blog-components/HeadTemplate'
+import SpinnerLoading from '@blog-components/SpinnerLoading'
 
 interface AdminPageWrapperProps {
   title: string
