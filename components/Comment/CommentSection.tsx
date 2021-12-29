@@ -40,9 +40,7 @@ export default function CommentSection({ post }: CommentSectionProps) {
       setComments((prevComments) => [comment, ...prevComments])
       document.getElementById(`comments-section`)?.scrollIntoView()
       newCommentRef.current.value = ''
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   }
 
   const deleteCommentHandler = async (deletedComment: Comment) => {
@@ -54,9 +52,7 @@ export default function CommentSection({ post }: CommentSectionProps) {
           comments.filter((comment) => comment.id !== deletedComment.id)
         )
       }
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   }
 
   const editPostHandler = async (id: string, content: string) => {

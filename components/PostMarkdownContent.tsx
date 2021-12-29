@@ -1,8 +1,11 @@
 import ReactMarkdown from 'react-markdown'
-import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import rehypeRaw from 'rehype-raw'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+const MarkdownSyntaxHighlighter = dynamic(
+  () => import('@blog-components/Markdown/MarkdownSyntaxHighlighter')
+)
 
 interface PostMarkdownContentProps {
   markdown: string
@@ -19,15 +22,9 @@ export default function PostMarkdownContent({
           code: ({ node, inline, className, children, ...props }) => {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
-              <SyntaxHighlighter
-                style={materialOceanic}
-                language={match[1]}
-                customStyle={{
-                  borderRadius: '0.375rem',
-                }}
-              >
+              <MarkdownSyntaxHighlighter language={match[1]}>
                 {String(children).replace(/\n$/, '')}
-              </SyntaxHighlighter>
+              </MarkdownSyntaxHighlighter>
             ) : (
               <code
                 className={

@@ -1,12 +1,15 @@
 import CommentSection from '@blog-components/Comment/CommentSection'
 import Header from '@blog-components/Header'
 import HeadTemplate from '@blog-components/HeadTemplate'
-import PostMarkdownContent from '@blog-components/PostMarkdownContent'
 import BlogConfig from '@blog-config/BlogConfig'
 import Post from '@blog-models/Post'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import DateTool from 'utilities/DateTool'
+const PostMarkdownContent = dynamic(
+  () => import('@blog-components/PostMarkdownContent')
+)
 
 export default function PostPage({ post }: { post: Post }) {
   const { title, slug, createdAt, description, markdown } = post

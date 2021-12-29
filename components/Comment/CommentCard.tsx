@@ -1,10 +1,6 @@
-import ReactMarkdown from 'react-markdown'
 import Comment from '@blog-models/Comment'
 import React, { FormEvent, Fragment, useRef, useState } from 'react'
-import rehypeRaw from 'rehype-raw'
 import DateTool from 'utilities/DateTool'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import Image from 'next/image'
 import { Menu, Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,6 +9,7 @@ import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { useAuth } from '@blog-providers/AuthProvider'
 import FullWidthButton from '@blog-components/Button/FullWidthButton'
 import SmallErrorText from '@blog-components/SmallErrorText'
+import CommentMarkdown from './CommentMarkdown'
 
 interface CommentCardProps {
   comment: Comment
@@ -70,7 +67,10 @@ function CommentCard({
         <div>
           {(user?.admin || user?.id === comment.userId) && (
             <Menu as='div' className='relative inline-block text-left'>
-              <Menu.Button className='w-8 h-8 -mr-2 hover:bg-blue-600/30 rounded transition-all duration-150'>
+              <Menu.Button
+                aria-label='More option for comment'
+                className='w-8 h-8 -mr-2 hover:bg-blue-600/30 rounded transition-all duration-150'
+              >
                 <FontAwesomeIcon icon={faEllipsisV} />
               </Menu.Button>
               <Transition
@@ -144,83 +144,7 @@ function CommentCard({
             </div>
           </form>
         ) : (
-          <ReactMarkdown
-            components={{
-              code: ({ node, inline, className, children, ...props }) => {
-                const match = /language-(\w+)/.exec(className || '')
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    style={materialOceanic}
-                    language={match[1]}
-                    customStyle={{
-                      borderRadius: '0.375rem',
-                    }}
-                  >
-                    {String(children).replace(/\n$/, '')}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code
-                    className={
-                      className + ' py-1 px-2 m-0 text-sm rounded bg-gray-700'
-                    }
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                )
-              },
-              a: ({ node, children, ...props }) => (
-                <a
-                  className='text-blue-400 hover:underline visited:text-indigo-500'
-                  {...props}
-                >
-                  {children}
-                </a>
-              ),
-              ul: ({ children }) => (
-                <ul className='list-disc list-inside pl-4 mb-4'>{children}</ul>
-              ),
-              ol: ({ children }) => (
-                <ul className='list-decimal list-inside mb-4'>{children}</ul>
-              ),
-              img: ({ node, children, ...props }) => (
-                <span className='w-full h-36 sm:h-56 flex items-center block'>
-                  <img
-                    src={props.src}
-                    alt={props.alt}
-                    className='mx-auto my-2 max-h-full max-w-full'
-                  />
-                </span>
-              ),
-              h1: ({ children }) => (
-                <h1 className='border-b border-b-white/[0.24] mt-6 mb-4 text-2xl pb-2 font-medium'>
-                  {children}
-                </h1>
-              ),
-              h2: ({ children }) => (
-                <h2 className='border-b border-b-white/[0.24] mt-6 mb-4 text-xl pb-2 font-medium'>
-                  {children}
-                </h2>
-              ),
-              h3: ({ children }) => (
-                <h3 className='text-lg font-medium mt-6 mb-4'>{children}</h3>
-              ),
-              h4: ({ children }) => (
-                <h4 className='text font-medium mt-6 mb-4'>{children}</h4>
-              ),
-              h5: ({ children }) => (
-                <h5 className='text-sm font-medium mt-6 mb-4'>{children}</h5>
-              ),
-              h6: ({ children }) => (
-                <h6 className='text-sm text-white/50 font-medium mt-6 mb-4'>
-                  {children}
-                </h6>
-              ),
-              p: ({ children }) => <p className='mb-4 mt-0'>{children}</p>,
-            }}
-          >
-            {comment.content ?? 'Content not available'}
-          </ReactMarkdown>
+          <CommentMarkdown markdown={comment.content} />
         )}
       </div>
     </li>
