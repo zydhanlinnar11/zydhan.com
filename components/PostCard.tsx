@@ -1,6 +1,8 @@
 import Post from '@blog-models/Post'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import DateTool from 'utilities/DateTool'
 
 interface PostCardProps {
   post: Post
@@ -8,6 +10,12 @@ interface PostCardProps {
 }
 
 export default function PostCard({ post, url }: PostCardProps) {
+  const [createdAt, setCreatedAt] = useState(post.createdAt)
+
+  useEffect(() => {
+    setCreatedAt((prevCreatedAt) => DateTool.format(prevCreatedAt))
+  }, [])
+
   return (
     <Link href={url} key={post.slug}>
       <a
@@ -33,13 +41,7 @@ export default function PostCard({ post, url }: PostCardProps) {
             <div>
               <h3 className='font-bold text-lg'>{post.title}</h3>
             </div>
-            <p className='text-gray-400 font-semibold text-sm'>
-              {new Date(post.createdAt).toLocaleDateString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
+            <p className='text-gray-400 font-semibold text-sm'>{createdAt}</p>
           </div>
         </article>
       </a>
