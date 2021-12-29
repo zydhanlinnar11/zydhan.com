@@ -184,14 +184,11 @@ function CommentCard({
                 <ul className='list-decimal list-inside mb-4'>{children}</ul>
               ),
               img: ({ node, children, ...props }) => (
-                <div className='max-w-xl h-56 sm:max-w-4xl sm:h-96 mx-auto relative'>
-                  <Image
+                <div className='w-full h-36 sm:h-56 flex items-center'>
+                  <img
                     src={props.src}
                     alt={props.alt}
-                    className='mx-auto my-2'
-                    layout='fill'
-                    objectFit='contain'
-                    sizes='896px'
+                    className='mx-auto my-2 max-h-full max-w-full'
                   />
                 </div>
               ),
