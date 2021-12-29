@@ -1,9 +1,12 @@
 import AdminPageWrapper from '@blog-components/AdminPageWrapper'
 import FullWidthButton from '@blog-components/Button/FullWidthButton'
 import Header from '@blog-components/Header'
-import PostMarkdownContent from '@blog-components/PostMarkdownContent'
 import BlogConfig from '@blog-config/BlogConfig'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
+const PostMarkdownContent = dynamic(
+  () => import('@blog-components/PostMarkdownContent')
+)
 
 import Router, { useRouter } from 'next/router'
 
