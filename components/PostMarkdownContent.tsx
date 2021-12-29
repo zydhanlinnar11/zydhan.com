@@ -54,7 +54,7 @@ export default function PostMarkdownContent({
             <ul className='list-decimal list-inside mb-4'>{children}</ul>
           ),
           img: ({ node, children, ...props }) => (
-            <div className='max-w-xl h-56 sm:max-w-4xl sm:h-96 mx-auto relative'>
+            <span className='max-w-xl h-56 sm:max-w-4xl sm:h-96 mx-auto relative block'>
               <Image
                 src={props.src}
                 alt={props.alt}
@@ -62,8 +62,9 @@ export default function PostMarkdownContent({
                 layout='fill'
                 objectFit='contain'
                 sizes='896px'
+                priority={props.loading === 'eager'}
               />
-            </div>
+            </span>
           ),
           h1: ({ children }) => (
             <h1 className='border-b border-b-white/[0.24] mt-6 mb-4 text-3xl pb-2 font-medium'>
