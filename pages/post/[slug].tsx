@@ -1,6 +1,7 @@
 import CommentSection from '@blog-components/Comment/CommentSection'
 import Header from '@blog-components/Header'
 import HeadTemplate from '@blog-components/HeadTemplate'
+import SpinnerLoading from '@blog-components/SpinnerLoading'
 import BlogConfig from '@blog-config/BlogConfig'
 import Post from '@blog-models/Post'
 import { GetStaticPaths, GetStaticProps } from 'next'
@@ -8,7 +9,14 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import DateTool from 'utilities/DateTool'
 const PostMarkdownContent = dynamic(
-  () => import('@blog-components/PostMarkdownContent')
+  () => import('@blog-components/PostMarkdownContent'),
+  {
+    loading: () => (
+      <div className='py-16'>
+        <SpinnerLoading />
+      </div>
+    ),
+  }
 )
 
 export default function PostPage({ post }: { post: Post }) {
