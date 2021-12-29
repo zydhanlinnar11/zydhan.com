@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useAuth } from '@blog-providers/AuthProvider'
 import BlogConfig from '@blog-config/BlogConfig'
@@ -38,11 +38,23 @@ export default function Navbar() {
             </Link>
             <Disclosure.Button className='sm:hidden'>
               <span className='sr-only'>Open main menu</span>
-              {open ? (
-                <XIcon className='block h-6 w-6' aria-hidden='true' />
-              ) : (
-                <MenuIcon className='block h-6 w-6' aria-hidden='true' />
-              )}
+              <div className='flex flex-col w-4 h-3 justify-between'>
+                <div
+                  className={`w-full h-[2px] transition-transform ease-in-out	duration-300 bg-white origin-top-left ${
+                    open && 'rotate-45'
+                  }`}
+                ></div>
+                <div
+                  className={`w-full transition-opacity	duration-300 h-[2px] bg-white ${
+                    open && 'opacity-0'
+                  }`}
+                ></div>
+                <div
+                  className={`w-full h-[2px] transition-transform ease-in-out	duration-300 bg-white origin-bottom-left ${
+                    open && '-rotate-45 translate-y-[0.5px]'
+                  }`}
+                ></div>
+              </div>
             </Disclosure.Button>
             <nav className='z-20 my-auto text-sm hidden sm:block'>
               <ul className='flex gap-x-8'>
@@ -78,43 +90,53 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <Disclosure.Panel className='sm:hidden pt-0 py-5'>
-            <ul className='flex flex-col gap-y-3 divide-y divide-white/[0.24] max-w-5xl px-12'>
-              {navigation.map((item) => (
-                <li className='pt-2' key={item.name}>
-                  <Link href={item.href} passHref={item.passHref}>
-                    <a className='w-full inline-block'>{item.name}</a>
-                  </Link>
-                </li>
-              ))}
-              {!user && (
-                <li className='pt-2'>
-                  <Link href='/login'>
-                    <a className='w-full inline-block'>Login</a>
-                  </Link>
-                </li>
-              )}
-              {user?.admin && (
-                <li className='pt-2'>
-                  <Link href='/admin'>
-                    <a className='w-full inline-block'>Admin</a>
-                  </Link>
-                </li>
-              )}
-              {user && (
-                <li className='pt-2'>
-                  <form onSubmit={logoutHandler}>
-                    <button
-                      className='w-full inline-block text-left'
-                      type='submit'
-                    >
-                      Log out
-                    </button>
-                  </form>
-                </li>
-              )}
-            </ul>
-          </Disclosure.Panel>
+          <Transition
+            show={open}
+            enter='transition duration-200 ease-out'
+            enterFrom='transform -translate-y-2 opacity-0'
+            enterTo='transform scale-100 opacity-100'
+            leave='transition duration-200 ease-out'
+            leaveFrom='transform scale-100 opacity-100'
+            leaveTo='transform -translate-y-2 opacity-0'
+          >
+            <Disclosure.Panel className='sm:hidden pt-0 py-5'>
+              <ul className='flex flex-col gap-y-3 divide-y divide-white/[0.24] max-w-5xl px-12'>
+                {navigation.map((item) => (
+                  <li className='pt-2' key={item.name}>
+                    <Link href={item.href} passHref={item.passHref}>
+                      <a className='w-full inline-block'>{item.name}</a>
+                    </Link>
+                  </li>
+                ))}
+                {!user && (
+                  <li className='pt-2'>
+                    <Link href='/login'>
+                      <a className='w-full inline-block'>Login</a>
+                    </Link>
+                  </li>
+                )}
+                {user?.admin && (
+                  <li className='pt-2'>
+                    <Link href='/admin'>
+                      <a className='w-full inline-block'>Admin</a>
+                    </Link>
+                  </li>
+                )}
+                {user && (
+                  <li className='pt-2'>
+                    <form onSubmit={logoutHandler}>
+                      <button
+                        className='w-full inline-block text-left'
+                        type='submit'
+                      >
+                        Log out
+                      </button>
+                    </form>
+                  </li>
+                )}
+              </ul>
+            </Disclosure.Panel>
+          </Transition>
         </>
       )}
     </Disclosure>
