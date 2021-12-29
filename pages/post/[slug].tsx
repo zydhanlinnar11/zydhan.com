@@ -1,3 +1,4 @@
+import CommentSection from '@blog-components/Comment/CommentSection'
 import Header from '@blog-components/Header'
 import HeadTemplate from '@blog-components/HeadTemplate'
 import PostMarkdownContent from '@blog-components/PostMarkdownContent'
@@ -6,11 +7,9 @@ import Post from '@blog-models/Post'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import DateTool from 'utilities/DateTool'
 
-export default function PostPage({
-  post: { title, slug, createdAt, description, markdown },
-}: {
-  post: Post
-}) {
+export default function PostPage({ post }: { post: Post }) {
+  const { title, slug, createdAt, description, markdown } = post
+
   return (
     <div>
       <HeadTemplate
@@ -27,6 +26,7 @@ export default function PostPage({
         <div className='text-center mx-auto'>
           <div className='bg-white/[0.24] h-px w-full'></div>
           <PostMarkdownContent markdown={markdown}></PostMarkdownContent>
+          <CommentSection post={post}></CommentSection>
         </div>
       </article>
     </div>

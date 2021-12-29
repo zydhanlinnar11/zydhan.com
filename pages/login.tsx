@@ -33,6 +33,12 @@ export default function LoginPage() {
         return
       }
 
+      const fromPost = Router.query['from-post']
+      if (typeof fromPost === 'string') {
+        Router.push(`/post/${fromPost}`)
+        return
+      }
+
       Router.replace('/')
     } catch (e) {
       setErrorMessage(e)

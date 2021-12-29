@@ -6,7 +6,7 @@ export interface EditSinglePostInterface {
   newSlug?: string
 }
 
-interface IPostService {
+export default interface IPostService {
   /**
    * Get all posts from API.
    *
@@ -126,5 +126,3 @@ interface IPostService {
    */
   deleteSinglePost(slug: string): Promise<void>
 }
-
-export default IPostService

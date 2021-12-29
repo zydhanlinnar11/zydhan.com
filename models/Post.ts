@@ -1,4 +1,4 @@
-interface Post {
+export default interface Post {
   title: string
   slug: string
   createdAt: string
@@ -10,5 +10,3 @@ interface Post {
   id: string
   visibility: '1' | '2' | '3'
 }
-
-export default Post
