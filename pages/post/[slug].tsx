@@ -5,10 +5,16 @@ import PostMarkdownContent from '@blog-components/PostMarkdownContent'
 import BlogConfig from '@blog-config/BlogConfig'
 import Post from '@blog-models/Post'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useEffect, useState } from 'react'
 import DateTool from 'utilities/DateTool'
 
 export default function PostPage({ post }: { post: Post }) {
   const { title, slug, createdAt, description, markdown } = post
+  const [creationDate, setCreationDate] = useState(createdAt)
+
+  useEffect(() => {
+    setCreationDate(DateTool.format(createdAt))
+  }, [createdAt])
 
   return (
     <div>
@@ -19,7 +25,7 @@ export default function PostPage({ post }: { post: Post }) {
       ></HeadTemplate>
       <article>
         <Header
-          topText={DateTool.format(createdAt)}
+          topText={creationDate}
           midText={title}
           bottomText={description ?? BlogConfig.BLOG_DESC}
         />
