@@ -184,13 +184,13 @@ function CommentCard({
                 <ul className='list-decimal list-inside mb-4'>{children}</ul>
               ),
               img: ({ node, children, ...props }) => (
-                <div className='w-full h-36 sm:h-56 flex items-center'>
+                <span className='w-full h-36 sm:h-56 flex items-center block'>
                   <img
                     src={props.src}
                     alt={props.alt}
                     className='mx-auto my-2 max-h-full max-w-full'
                   />
-                </div>
+                </span>
               ),
               h1: ({ children }) => (
                 <h1 className='border-b border-b-white/[0.24] mt-6 mb-4 text-2xl pb-2 font-medium'>
