@@ -4,6 +4,7 @@ import BlogConfig from '@blog-config/BlogConfig'
 import Comment from '@blog-models/Comment'
 import Post from '@blog-models/Post'
 import { useAuth } from '@blog-providers/AuthProvider'
+import Router from 'next/router'
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import CommentCard from './CommentCard'
 
@@ -38,7 +39,7 @@ export default function CommentSection({ post }: CommentSectionProps) {
       )
 
       setComments((prevComments) => [comment, ...prevComments])
-      document.getElementById(`comments-section`)?.scrollIntoView()
+      Router.push('#comments-section')
       newCommentRef.current.value = ''
     } catch (e) {}
   }
@@ -67,7 +68,11 @@ export default function CommentSection({ post }: CommentSectionProps) {
   }
 
   return (
-    <section className='text-left px-2 pb-8' id='comments-section'>
+    <section
+      className="text-left px-2 pb-8
+    target:before:content-[''] target:before:h-14 target:before:block target:before:-mt-14"
+      id='comments-section'
+    >
       <h2 className='border-b border-b-white/[0.24] mb-4 text-2xl pb-2 font-medium'>
         Comments
       </h2>
