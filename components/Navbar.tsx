@@ -25,12 +25,12 @@ export default function Navbar() {
   return (
     <Disclosure
       as='nav'
-      className="bg-zinc-900/25 sticky top-0 min-h-px52 sm:h-px52 z-10 w-full backdrop-blur-20 backdrop-saturate-180
+      className="bg-zinc-900/25 sticky top-0 min-h-[52px] sm:h-[52px] z-10 w-full backdrop-blur-[20px] backdrop-saturate-[1.80]
       after:w-full after:h-px after:bg-white/[0.24] after:content-[''] after:block after:absolute after:top-full"
     >
       {({ open }) => (
         <>
-          <div className='flex justify-between h-px52 my-0 mx-auto py-0 max-w-5xl px-6'>
+          <div className='flex justify-between h-[52px] my-0 mx-auto py-0 max-w-5xl px-6'>
             <Link href='/'>
               <a className='my-auto font-semibold text-lg'>
                 <h1>{BlogConfig.BLOG_TITLE}</h1>
