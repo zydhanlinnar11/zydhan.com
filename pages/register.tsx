@@ -111,7 +111,7 @@ export default function RegisterPage() {
             <div className='mt-1'>
               <small>
                 Already have an account?{' '}
-                <AnchorLink href='/login' text='Log in' />
+                <AnchorLink href='/login'>Log in</AnchorLink>
               </small>
               <br />
               <SmallErrorText>{errorMessage}</SmallErrorText>

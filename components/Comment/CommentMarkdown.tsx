@@ -1,3 +1,4 @@
+import AnchorLink from '@blog-components/AnchorLink'
 import dynamic from 'next/dynamic'
 import ReactMarkdown from 'react-markdown'
 const MarkdownSyntaxHighlighter = dynamic(
@@ -30,12 +31,7 @@ const CommentMarkdown = ({ markdown }: CommentMarkdownProps) => {
           )
         },
         a: ({ node, children, ...props }) => (
-          <a
-            className='text-blue-400 hover:underline visited:text-indigo-500'
-            {...props}
-          >
-            {children}
-          </a>
+          <AnchorLink href={props.href}>{children}</AnchorLink>
         ),
         ul: ({ children }) => (
           <ul className='list-disc list-inside pl-4 mb-4'>{children}</ul>

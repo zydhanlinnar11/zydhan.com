@@ -105,8 +105,8 @@ export default function CommentSection({ post }: CommentSectionProps) {
         </form>
       ) : (
         <p className='text-center mt-12 mb-6'>
-          <AnchorLink href={`/login?from-post=${postSlug}`} text='Log in' /> to
-          add comment.
+          <AnchorLink href={`/login?from-post=${postSlug}`}>Log in</AnchorLink>{' '}
+          to add comment.
         </p>
       )}
     </section>

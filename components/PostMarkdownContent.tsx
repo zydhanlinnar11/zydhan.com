@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import AnchorLink from './AnchorLink'
 
 const MarkdownSyntaxHighlighter = dynamic(
   () => import('@blog-components/Markdown/MarkdownSyntaxHighlighter')
@@ -37,12 +38,9 @@ export default function PostMarkdownContent({
             )
           },
           a: ({ node, children, ...props }) => (
-            <a
-              className='text-blue-400 hover:underline visited:text-indigo-500'
-              {...props}
-            >
+            <AnchorLink href={props.href} target='_blank'>
               {children}
-            </a>
+            </AnchorLink>
           ),
           ul: ({ children }) => (
             <ul className='list-disc list-inside pl-4 mb-4'>{children}</ul>
