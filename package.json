@@ -24,7 +24,7 @@
     "sharp": "^0.29.3"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.0.8",
+    "@next/bundle-analyzer": "^12.0.10",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.4.0",
