@@ -21,7 +21,7 @@
     "react-markdown": "^7.1.2",
     "react-syntax-highlighter": "^15.4.5",
     "rehype-raw": "^6.1.1",
-    "sharp": "^0.29.3"
+    "sharp": "^0.30.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.0.10",
