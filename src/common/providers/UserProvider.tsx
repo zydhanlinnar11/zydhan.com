@@ -23,6 +23,12 @@ type UserState =
       state: 'unauthenticated'
       user: null
       login: (email: string, password: string) => Promise<void>
+      register: (
+        name: string,
+        email: string,
+        password: string,
+        passwordConfirm: string
+      ) => Promise<void>
     }
   | {
       state: 'authenticated'
@@ -35,6 +41,12 @@ type Action =
   | {
       type: 'USER_UNAUTHENTICATED'
       login: (email: string, password: string) => Promise<void>
+      register: (
+        name: string,
+        email: string,
+        password: string,
+        passwordConfirm: string
+      ) => Promise<void>
     }
   | { type: 'LOGOUT' }
 
@@ -51,6 +63,7 @@ const reducer = (state: UserState, action: Action): UserState => {
         state: 'unauthenticated',
         user: null,
         login: action.login,
+        register: action.register,
       }
     default:
       throw new Error()
@@ -83,7 +96,7 @@ export const UserProvider: FC = ({ children }) => {
 
       dispatch({ type: 'USER_AUTHENTICATED', user: res.data, logout: logout })
     } catch (e) {
-      dispatch({ type: 'USER_UNAUTHENTICATED', login })
+      dispatch({ type: 'USER_UNAUTHENTICATED', login, register })
     }
   }
 
@@ -93,7 +106,7 @@ export const UserProvider: FC = ({ children }) => {
         withCredentials: true,
       })
 
-      dispatch({ type: 'USER_UNAUTHENTICATED', login })
+      dispatch({ type: 'USER_UNAUTHENTICATED', login, register })
     } catch (e) {}
   }
 
@@ -111,6 +124,31 @@ export const UserProvider: FC = ({ children }) => {
       })
 
       fetchUser()
+    } catch (e) {
+      if (!axios.isAxiosError(e)) return
+      throw Error(e.response?.data?.message)
+    }
+  }
+
+  const register = async (
+    name: string,
+    email: string,
+    password: string,
+    passwordConfirm: string
+  ) => {
+    try {
+      const instance = axios.create({
+        baseURL: process.env.NEXT_PUBLIC_API_URL,
+        withCredentials: true,
+      })
+
+      await instance.get('/sanctum/csrf-cookie')
+      await instance.post('/auth/register', {
+        name,
+        email,
+        password,
+        password_confirmation: passwordConfirm,
+      })
     } catch (e) {
       if (!axios.isAxiosError(e)) return
       throw Error(e.response?.data?.message)

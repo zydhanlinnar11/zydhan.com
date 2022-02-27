@@ -3,24 +3,18 @@ import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
-import { useRouter } from 'next/router'
-import { FormEventHandler, useEffect, useRef, useState } from 'react'
+import Router, { useRouter } from 'next/router'
+import { FormEventHandler, useRef, useState } from 'react'
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const userState = useUserState()
   const router = useRouter()
   const [error, setError] = useState<string>('')
+  const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+  const confirmPasswordRef = useRef<HTMLInputElement>(null)
   const [isProcessing, setProcessing] = useState<boolean>(false)
-  const [flashSuccess, setFlashSuccess] = useState<string>('')
-
-  useEffect(() => {
-    const message = sessionStorage.getItem('flash_success')
-    if (!message) return
-    setFlashSuccess(JSON.parse(message))
-    sessionStorage.removeItem('flash_success')
-  }, [])
 
   if (userState.state !== 'unauthenticated') {
     if (userState.state === 'authenticated') router.push('/')
@@ -35,6 +29,10 @@ const LoginPage = () => {
     e.preventDefault()
     setProcessing(true)
     setError('')
+    if (!nameRef?.current?.value) {
+      setError('Name must be filled')
+      return
+    }
     if (!emailRef?.current?.value) {
       setError('Email must be filled')
       return
@@ -43,20 +41,37 @@ const LoginPage = () => {
       setError('Password must be filled')
       return
     }
+    if (!confirmPasswordRef?.current?.value) {
+      setError('Password confirmation must be filled')
+      return
+    }
 
     try {
-      await userState.login(emailRef.current.value, passwordRef.current.value)
+      await userState.register(
+        nameRef.current.value,
+        emailRef.current.value,
+        passwordRef.current.value,
+        confirmPasswordRef.current.value
+      )
+      Router.push('/auth/login')
+
+      sessionStorage.setItem(
+        'flash_success',
+        JSON.stringify('User successfully registered')
+      )
     } catch (e) {
-      if (e instanceof Error) setError(e.message)
+      if (!(e instanceof Error)) return
+      setError(e.message)
+    } finally {
+      setProcessing(false)
     }
-    setProcessing(false)
   }
 
   return (
     <div className='grow flex flex-col items-center justify-center'>
       <header className='text-center'>
-        <h1 className='text-3xl font-semibold'>Login</h1>
-        <p className='mt-3 text-gray-400'>Log in to your account</p>
+        <h1 className='text-3xl font-semibold'>Register</h1>
+        <p className='mt-3 text-gray-400'>Create new account</p>
       </header>
       <form
         className='text-center mt-5 max-w-xs mx-auto'
@@ -64,36 +79,52 @@ const LoginPage = () => {
         onSubmit={submitHandler}
       >
         <TextInput
+          type={'text'}
+          name='name'
+          label='Name'
+          autoComplete='name'
+          position='top'
+          reference={nameRef}
+        />
+        <TextInput
           type={'email'}
           name='email'
           label='E-mail'
           autoComplete='username'
-          position='top'
+          position='middle'
           reference={emailRef}
         />
         <TextInput
           type={'password'}
           name='password'
           label='Password'
-          autoComplete='current-password'
-          position='bottom'
+          autoComplete='new-password'
+          position='middle'
           reference={passwordRef}
+        />
+        <TextInput
+          type={'password'}
+          name='password'
+          label='Confirm Password'
+          autoComplete='new-password'
+          position='bottom'
+          reference={confirmPasswordRef}
+          inputId='confirm-password'
         />
         <div className='mt-1'>
           <small>
-            Don&apos;t have account?{' '}
-            <AnchorLink href='/auth/register'>Create an account</AnchorLink>
+            Already have an account?{' '}
+            <AnchorLink href='/auth/login'>Log in</AnchorLink>
           </small>
           <br />
-          <small className='text-green-500'>{flashSuccess}</small>
           <small className='text-red-500'>{error}</small>
         </div>
         <Button type='submit' disabled={isProcessing}>
-          Log in
+          Register
         </Button>
       </form>
     </div>
   )
 }
 
-export default LoginPage
+export default RegisterPage
