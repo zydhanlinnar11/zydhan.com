@@ -66,7 +66,7 @@ export const UserProvider: FC = ({ children }) => {
           }
         )
 
-        console.log(res.data)
+        dispatch({ type: 'USER_AUTHENTICATED', user: res.data })
       } catch (e) {
         dispatch({ type: 'USER_UNAUTHENTICATED' })
       }
