@@ -22,11 +22,13 @@ type UserState =
   | {
       state: 'authenticated'
       user: User
+      logout: () => void
     }
 
 type Action =
-  | { type: 'USER_AUTHENTICATED'; user: User }
+  | { type: 'USER_AUTHENTICATED'; user: User; logout: () => void }
   | { type: 'USER_UNAUTHENTICATED' }
+  | { type: 'LOGOUT' }
 
 const reducer = (state: UserState, action: Action): UserState => {
   switch (action.type) {
@@ -34,6 +36,7 @@ const reducer = (state: UserState, action: Action): UserState => {
       return {
         state: 'authenticated',
         user: action.user,
+        logout: action.logout,
       }
     case 'USER_UNAUTHENTICATED':
       return {
@@ -66,7 +69,7 @@ export const UserProvider: FC = ({ children }) => {
           }
         )
 
-        dispatch({ type: 'USER_AUTHENTICATED', user: res.data })
+        dispatch({ type: 'USER_AUTHENTICATED', user: res.data, logout: logout })
       } catch (e) {
         dispatch({ type: 'USER_UNAUTHENTICATED' })
       }
@@ -74,6 +77,16 @@ export const UserProvider: FC = ({ children }) => {
 
     fetchUser()
   }, [])
+
+  const logout = async () => {
+    try {
+      await axios.delete(process.env.NEXT_PUBLIC_API_URL + '/auth/logout', {
+        withCredentials: true,
+      })
+
+      dispatch({ type: 'USER_UNAUTHENTICATED' })
+    } catch (e) {}
+  }
 
   return (
     <UserStateContext.Provider value={state}>

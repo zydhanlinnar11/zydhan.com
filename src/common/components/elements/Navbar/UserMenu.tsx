@@ -56,7 +56,7 @@ const UserMenu = () => {
                   </div>
                 </div>
                 <div className='bg-gray-600 h-px mx-4 my-1' />
-                <MenuItem>
+                <MenuItem onClick={userState.logout}>
                   <FontAwesomeIcon
                     icon={faArrowRightFromBracket}
                     className='mr-2'
