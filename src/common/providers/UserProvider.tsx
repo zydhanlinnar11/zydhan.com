@@ -17,11 +17,9 @@ type User = {
 type UserState =
   | {
       state: 'loading'
-      user: null
     }
   | {
       state: 'unauthenticated'
-      user: null
       login: (email: string, password: string) => Promise<void>
       register: (
         name: string,
@@ -49,6 +47,7 @@ type Action =
       ) => Promise<void>
     }
   | { type: 'LOGOUT' }
+  | { type: 'LOADING' }
 
 const reducer = (state: UserState, action: Action): UserState => {
   switch (action.type) {
@@ -61,18 +60,20 @@ const reducer = (state: UserState, action: Action): UserState => {
     case 'USER_UNAUTHENTICATED':
       return {
         state: 'unauthenticated',
-        user: null,
         login: action.login,
         register: action.register,
       }
+    case 'LOADING':
+      return {
+        state: 'loading',
+      }
     default:
-      throw new Error()
+      throw new Error(`Unknown action ${JSON.stringify(action)}`)
   }
 }
 
 const initialState: UserState = {
   state: 'loading',
-  user: null,
 }
 
 const UserStateContext = createContext<UserState>(initialState)
@@ -87,6 +88,7 @@ export const UserProvider: FC = ({ children }) => {
 
   const fetchUser = async () => {
     try {
+      dispatch({ type: 'LOADING' })
       const res = await axios.get<any, AxiosResponse<User, any>, any>(
         process.env.NEXT_PUBLIC_API_URL + '/auth/authenticated-user',
         {
