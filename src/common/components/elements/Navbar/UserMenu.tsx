@@ -5,6 +5,7 @@ import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import MenuItem from './MenuItem'
 import { useUserState } from '@/common/providers/UserProvider'
+import Router from 'next/router'
 
 const UserMenu = () => {
   const userState = useUserState()
@@ -66,7 +67,7 @@ const UserMenu = () => {
               </>
             )}
             {userState.state === 'unauthenticated' && (
-              <MenuItem>
+              <MenuItem onClick={() => Router.push('/auth/login')}>
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
                   className='mr-2'

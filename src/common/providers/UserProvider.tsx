@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 
 import {
   createContext,
@@ -16,8 +16,13 @@ type User = {
 
 type UserState =
   | {
-      state: 'loading' | 'unauthenticated'
+      state: 'loading'
       user: null
+    }
+  | {
+      state: 'unauthenticated'
+      user: null
+      login: (email: string, password: string) => Promise<void>
     }
   | {
       state: 'authenticated'
@@ -27,7 +32,10 @@ type UserState =
 
 type Action =
   | { type: 'USER_AUTHENTICATED'; user: User; logout: () => void }
-  | { type: 'USER_UNAUTHENTICATED' }
+  | {
+      type: 'USER_UNAUTHENTICATED'
+      login: (email: string, password: string) => Promise<void>
+    }
   | { type: 'LOGOUT' }
 
 const reducer = (state: UserState, action: Action): UserState => {
@@ -42,6 +50,7 @@ const reducer = (state: UserState, action: Action): UserState => {
       return {
         state: 'unauthenticated',
         user: null,
+        login: action.login,
       }
     default:
       throw new Error()
@@ -60,23 +69,23 @@ export const UserProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get<any, AxiosResponse<User, any>, any>(
-          process.env.NEXT_PUBLIC_API_URL + '/auth/authenticated-user',
-          {
-            withCredentials: true,
-          }
-        )
-
-        dispatch({ type: 'USER_AUTHENTICATED', user: res.data, logout: logout })
-      } catch (e) {
-        dispatch({ type: 'USER_UNAUTHENTICATED' })
-      }
-    }
-
     fetchUser()
   }, [])
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get<any, AxiosResponse<User, any>, any>(
+        process.env.NEXT_PUBLIC_API_URL + '/auth/authenticated-user',
+        {
+          withCredentials: true,
+        }
+      )
+
+      dispatch({ type: 'USER_AUTHENTICATED', user: res.data, logout: logout })
+    } catch (e) {
+      dispatch({ type: 'USER_UNAUTHENTICATED', login })
+    }
+  }
 
   const logout = async () => {
     try {
@@ -84,8 +93,28 @@ export const UserProvider: FC = ({ children }) => {
         withCredentials: true,
       })
 
-      dispatch({ type: 'USER_UNAUTHENTICATED' })
+      dispatch({ type: 'USER_UNAUTHENTICATED', login })
     } catch (e) {}
+  }
+
+  const login = async (email: string, password: string) => {
+    try {
+      const instance = axios.create({
+        baseURL: process.env.NEXT_PUBLIC_API_URL,
+        withCredentials: true,
+      })
+
+      await instance.get('/sanctum/csrf-cookie')
+      await instance.post('/auth/login', {
+        email,
+        password,
+      })
+
+      fetchUser()
+    } catch (e) {
+      if (!axios.isAxiosError(e)) return
+      throw Error(e.response?.data?.message)
+    }
   }
 
   return (
