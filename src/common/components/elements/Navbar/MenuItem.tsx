@@ -13,7 +13,7 @@ const MenuItem: FC<Props> = ({ children, onClick }) => {
           onClick={onClick}
           className={`${
             active && 'bg-blue-600/30'
-          } py-2 pl-3 pr-9 text-left transition-all duration-150 text-base hover:cursor-pointer`}
+          } py-2 px-5 text-left transition-all duration-150 text-base hover:cursor-pointer flex items-center`}
         >
           {children}
         </p>

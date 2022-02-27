@@ -37,7 +37,7 @@ const UserMenu = () => {
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
                   className='mr-2'
-                ></FontAwesomeIcon>
+                />
                 Sign out
               </MenuItem>
             )}
@@ -46,7 +46,7 @@ const UserMenu = () => {
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
                   className='mr-2'
-                ></FontAwesomeIcon>
+                />
                 Sign in
               </MenuItem>
             )}
