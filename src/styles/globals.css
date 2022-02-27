@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.challenge_input_format_title,
+.challenge_output_format_title,
+.challenge_constraints_title,
+.challenge_sample_input_title,
+.challenge_sample_output_title,
+.challenge_explanation_title {
+  border-bottom-width: 1px;
+  border-bottom-color: rgb(255 255 255 / 0.24);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem /* 24px */;
+  line-height: 2rem;
+  padding-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.challenge_input_format_title .mb-4,
+.challenge_output_format_title .mb-4,
+.challenge_constraints_title .mb-4,
+.challenge_sample_input_title .mb-4,
+.challenge_sample_output_title .mb-4,
+.challenge_explanation_title .mb-4 {
+  margin-bottom: 0;
+}
+
+.challenge_input_format,
+.challenge_output_format,
+.challenge_constraints,
+.challenge_sample_input,
+.challenge_sample_output,
+.challenge_explanation {
+  page-break-inside: avoid;
+}
+
+.hackdown-content pre {
+  padding: 0.5rem /* 8px */;
+  font-size: 0.875rem /* 14px */;
+  line-height: 1.25rem /* 20px */;
+  border-radius: 0.25rem /* 4px */;
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  page-break-inside: avoid;
+}
+
+.hackdown-content blockquote .mb-4 {
+  margin-bottom: 0;
+}
+
+svg {
+  margin-bottom: -0.25rem;
+}
+
+@media print {
+  .hackdown-content pre {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    color: white;
+  }
+}
