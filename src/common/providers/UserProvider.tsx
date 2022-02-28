@@ -7,6 +7,7 @@ import {
   Dispatch,
   useContext,
   useEffect,
+  SetStateAction,
 } from 'react'
 
 type User = {
@@ -27,6 +28,10 @@ type UserState =
         password: string,
         passwordConfirm: string
       ) => Promise<void>
+      socialLogin: (
+        provider: 'google' | 'github',
+        setProcessing: Dispatch<SetStateAction<boolean>>
+      ) => void
     }
   | {
       state: 'authenticated'
@@ -45,6 +50,10 @@ type Action =
         password: string,
         passwordConfirm: string
       ) => Promise<void>
+      socialLogin: (
+        provider: 'google' | 'github',
+        setProcessing: Dispatch<SetStateAction<boolean>>
+      ) => void
     }
   | { type: 'LOGOUT' }
   | { type: 'LOADING' }
@@ -62,6 +71,7 @@ const reducer = (state: UserState, action: Action): UserState => {
         state: 'unauthenticated',
         login: action.login,
         register: action.register,
+        socialLogin: action.socialLogin,
       }
     case 'LOADING':
       return {
@@ -98,7 +108,7 @@ export const UserProvider: FC = ({ children }) => {
 
       dispatch({ type: 'USER_AUTHENTICATED', user: res.data, logout: logout })
     } catch (e) {
-      dispatch({ type: 'USER_UNAUTHENTICATED', login, register })
+      dispatch({ type: 'USER_UNAUTHENTICATED', login, register, socialLogin })
     }
   }
 
@@ -108,7 +118,7 @@ export const UserProvider: FC = ({ children }) => {
         withCredentials: true,
       })
 
-      dispatch({ type: 'USER_UNAUTHENTICATED', login, register })
+      dispatch({ type: 'USER_UNAUTHENTICATED', login, register, socialLogin })
     } catch (e) {}
   }
 
@@ -155,6 +165,32 @@ export const UserProvider: FC = ({ children }) => {
       if (!axios.isAxiosError(e)) return
       throw Error(e.response?.data?.message)
     }
+  }
+
+  const socialLogin = (
+    provider: 'google' | 'github',
+    setProcessing: Dispatch<SetStateAction<boolean>>
+  ) => {
+    setProcessing(true)
+    const width = 500
+    const height = 400
+    const left = window.screenX + (window.outerWidth - width) / 2
+    const top = window.screenY + (window.outerHeight - height) / 2.5
+
+    const popup = window.open(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/redirect`,
+      `Sign in with ${provider}`,
+      `width=${width},height=${height},left=${left},top=${top}`
+    )
+
+    const interval = setInterval(() => {
+      if (!popup || popup.closed) {
+        interval && clearInterval(interval)
+        dispatch({ type: 'LOADING' })
+        fetchUser().finally(() => setProcessing(false))
+        return
+      }
+    }, 500)
   }
 
   return (

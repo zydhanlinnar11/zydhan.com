@@ -5,6 +5,7 @@ import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import { useRouter } from 'next/router'
 import { FormEventHandler, useEffect, useRef, useState } from 'react'
+import SocialLoginButtonGroup from './SocialLoginButtonGroup'
 
 const LoginPage = () => {
   const userState = useUserState()
@@ -91,6 +92,10 @@ const LoginPage = () => {
         <Button type='submit' disabled={isProcessing}>
           Log in
         </Button>
+        <SocialLoginButtonGroup
+          isProcessing={isProcessing}
+          setProcessing={setProcessing}
+        />
       </form>
     </div>
   )
