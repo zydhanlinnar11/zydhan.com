@@ -92,7 +92,9 @@ const CommentSection: FC<Props> = ({ post }) => {
         </form>
       ) : (
         <p className='text-center mt-12 mb-6'>
-          <AnchorLink href={`/auth/login?next=/posts/${slug}#comments-section`}>
+          <AnchorLink
+            href={`/auth/login?next=/blog/posts/${slug}%23add-new-comment`}
+          >
             Log in
           </AnchorLink>{' '}
           to add comment.

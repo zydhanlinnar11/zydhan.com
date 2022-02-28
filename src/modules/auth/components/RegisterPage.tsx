@@ -19,7 +19,18 @@ const RegisterPage = () => {
   const [isProcessing, setProcessing] = useState<boolean>(false)
 
   if (userState.state !== 'unauthenticated') {
-    if (userState.state === 'authenticated') router.push('/')
+    let basePath =
+      process.env.NODE_ENV === 'production'
+        ? 'https://zydhan.xyz'
+        : 'https://dev.zydhan.xyz'
+    const nextPath = router.query['next']
+
+    let redirectTo = new URL(basePath)
+    try {
+      if (typeof nextPath === 'string')
+        redirectTo = new URL(`${basePath}${nextPath}`)
+    } catch (e) {}
+    if (userState.state === 'authenticated') router.push(redirectTo.toString())
     return (
       <div className='grow flex flex-col justify-center items-center'>
         <SpinnerLoading />
