@@ -60,7 +60,7 @@ const UserMenu = () => {
                 <MenuItem onClick={userState.logout}>
                   <FontAwesomeIcon
                     icon={faArrowRightFromBracket}
-                    className='mr-2'
+                    className='mr-2 my-0'
                   />
                   Sign out
                 </MenuItem>
@@ -70,7 +70,7 @@ const UserMenu = () => {
               <MenuItem onClick={() => Router.push('/auth/login')}>
                 <FontAwesomeIcon
                   icon={faArrowRightFromBracket}
-                  className='mr-2'
+                  className='mr-2 my-0'
                 />
                 Sign in
               </MenuItem>
