@@ -19,11 +19,15 @@
     "next": "^12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-markdown": "^8.0.0",
+    "react-syntax-highlighter": "^15.4.5",
+    "rehype-raw": "^6.1.1",
     "swr": "^1.2.2"
   },
   "devDependencies": {
     "@types/node": "17.0.18",
     "@types/react": "17.0.39",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "autoprefixer": "^10.4.2",
     "eslint": "8.9.0",
     "eslint-config-next": "12.0.10",
