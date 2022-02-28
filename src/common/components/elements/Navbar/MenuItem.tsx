@@ -13,7 +13,9 @@ const MenuItem: FC<Props> = ({ children, onClick }) => {
           onClick={onClick}
           className={`${
             active && 'bg-blue-600/30'
-          } py-2 px-5 text-left transition-all duration-150 text-base hover:cursor-pointer flex items-center`}
+          } py-2 px-3 text-left transition-all duration-150
+            hover:cursor-pointer flex items-center
+            mx-4 my-1 rounded text-sm`}
         >
           {children}
         </p>
