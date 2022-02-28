@@ -17,7 +17,6 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel='stylesheet' href='https://rsms.me/inter/inter.css'></link>
-          <title>Zydhan Linnar Putra&apos;s Personal Portfolio</title>
           <meta name='description' content='Welcome to My Personal Portfolio' />
           <meta
             property='og:title'
