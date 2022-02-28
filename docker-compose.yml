@@ -10,6 +10,8 @@ services:
     env_file: [docker.env]
     command: /bin/sh -c "npm run dev"
     networks: [nginx-proxy-network]
+    extra_hosts:
+      - 'api.dev.zydhan.xyz:host-gateway'
     restart: always
 
 networks:
