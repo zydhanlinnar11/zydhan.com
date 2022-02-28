@@ -14,7 +14,7 @@ const SocialLoginButtonGroup: FC<Props> = ({ isProcessing, setProcessing }) => {
 
   if (userState.state === 'unauthenticated')
     return (
-      <>
+      <div className='flex flex-col gap-3'>
         <Button
           type='button'
           disabled={isProcessing}
@@ -35,7 +35,7 @@ const SocialLoginButtonGroup: FC<Props> = ({ isProcessing, setProcessing }) => {
             Github
           </span>
         </Button>
-      </>
+      </div>
     )
   else return <></>
 }

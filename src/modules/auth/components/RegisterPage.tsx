@@ -139,13 +139,17 @@ const RegisterPage = () => {
             <br />
             <small className='text-red-500'>{error}</small>
           </div>
-          <Button type='submit' disabled={isProcessing}>
-            Register
-          </Button>
-          <SocialLoginButtonGroup
-            isProcessing={isProcessing}
-            setProcessing={setProcessing}
-          />
+          <div className='mt-3'>
+            <Button type='submit' disabled={isProcessing}>
+              Register
+            </Button>
+          </div>
+          <div className='mt-3'>
+            <SocialLoginButtonGroup
+              isProcessing={isProcessing}
+              setProcessing={setProcessing}
+            />
+          </div>
         </form>
       </div>
     </>

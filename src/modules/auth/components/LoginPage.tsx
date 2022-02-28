@@ -108,13 +108,17 @@ const LoginPage = () => {
             <small className='text-green-500'>{flashSuccess}</small>
             <small className='text-red-500'>{error}</small>
           </div>
-          <Button type='submit' disabled={isProcessing}>
-            Log in
-          </Button>
-          <SocialLoginButtonGroup
-            isProcessing={isProcessing}
-            setProcessing={setProcessing}
-          />
+          <div className='mt-3'>
+            <Button type='submit' disabled={isProcessing}>
+              Log in
+            </Button>
+          </div>
+          <div className='mt-3'>
+            <SocialLoginButtonGroup
+              isProcessing={isProcessing}
+              setProcessing={setProcessing}
+            />
+          </div>
         </form>
       </div>
     </>
