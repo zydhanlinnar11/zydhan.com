@@ -34,7 +34,7 @@ const UserMenu = () => {
         >
           <Menu.Items
             className='absolute origin-top-right bg-gray-900 flex
-                  flex-col right-0 w-56 mt-2 border border-white/20 rounded py-1 z-10'
+                  flex-col right-0 w-56 mt-2 border border-white/20 rounded py-1 z-10 break-all'
           >
             {userState.state === 'loading' && (
               <>

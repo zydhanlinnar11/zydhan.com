@@ -95,7 +95,7 @@ const AccountSettingPage = () => {
               <div
                 className='sm:w-64 sm:h-fit bg-gray-900 flex flex-col w-full
               border border-white/20 rounded p-6
-              justify-center text-center gap-y-5'
+              justify-center text-center gap-y-5 break-words text-ellipsis overflow-hidden'
               >
                 <>
                   <FontAwesomeIcon icon={faCircleUser} size={'4x'} />
