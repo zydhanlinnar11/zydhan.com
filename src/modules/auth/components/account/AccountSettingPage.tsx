@@ -3,16 +3,19 @@ import PrivateRoute from '@/modules/auth/components/PrivateRoute'
 import NarrowPageContainer from '@/common/components/elements/NarrowPageContainer'
 import {
   faCircleArrowLeft,
+  faCircleExclamation,
+  faCircleXmark,
   faFloppyDisk,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import TextInput from '@/common/components/elements/Form/TextInput'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import Header from '@/common/components/elements/Header'
+import { FormEventHandler, useRef, useState } from 'react'
 
 type User = {
   name: string
@@ -27,10 +30,49 @@ const fetcher = (url: string) =>
   axios.get(url, { withCredentials: true }).then((res) => res.data)
 
 const AccountSettingPage = () => {
+  const { mutate } = useSWRConfig()
   const { data, error } = useSWR<User>(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
     fetcher
   )
+  const [showAccountUpdateSuccess, setShowAccountUpdateSuccess] =
+    useState<boolean>(false)
+  const [accountUpdateError, setAccountUpdateError] = useState<string>('')
+  const nameRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+
+  const handleAccountChange: FormEventHandler<HTMLFormElement> = async (e) => {
+    setShowAccountUpdateSuccess(false)
+    setAccountUpdateError('')
+    e.preventDefault()
+
+    const name = nameRef.current?.value
+    const email = emailRef.current?.value
+
+    if (!name) {
+      setAccountUpdateError('Name must be filled')
+      return
+    }
+    if (!email) {
+      setAccountUpdateError('Email must be filled')
+      return
+    }
+
+    try {
+      const res = await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
+        { name, email },
+        {
+          withCredentials: true,
+        }
+      )
+
+      await mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
+      setShowAccountUpdateSuccess(true)
+    } catch (e) {
+      if (axios.isAxiosError(e)) setAccountUpdateError(e.message)
+    }
+  }
 
   return (
     <PrivateRoute>
@@ -71,7 +113,63 @@ const AccountSettingPage = () => {
                 >
                   <h3 className='text-lg font-semibold'>Account Information</h3>
                   <div className='h-px w-full bg-white/20 mt-3'></div>
-                  <form className='mt-5 flex flex-col gap-y-3'>
+                  <form
+                    className='mt-5 flex flex-col gap-y-3'
+                    onSubmit={handleAccountChange}
+                  >
+                    {showAccountUpdateSuccess && (
+                      <div
+                        className='flex justify-between gap-x-2 py-2 px-4 rounded-md
+    text-green-400 bg-green-300/[0.15] mb-3'
+                        role={'alert'}
+                      >
+                        <span className='flex justify-center items-center gap-x-2'>
+                          <FontAwesomeIcon
+                            className='my-0'
+                            icon={faCircleExclamation}
+                            size={'sm'}
+                          />{' '}
+                          Account updated successfully!
+                        </span>
+                        <span
+                          className='flex justify-center items-center hover:cursor-pointer'
+                          onClick={() => setShowAccountUpdateSuccess(false)}
+                        >
+                          <FontAwesomeIcon
+                            className='my-0'
+                            icon={faCircleXmark}
+                            size={'sm'}
+                          />
+                        </span>
+                      </div>
+                    )}
+
+                    {accountUpdateError && (
+                      <div
+                        className='flex justify-between gap-x-2 py-2 px-4 rounded-md
+    text-red-400 bg-red-300/[0.15] mb-3'
+                        role={'alert'}
+                      >
+                        <span className='flex justify-center items-center gap-x-2'>
+                          <FontAwesomeIcon
+                            className='my-0'
+                            icon={faCircleExclamation}
+                            size={'sm'}
+                          />{' '}
+                          {accountUpdateError}
+                        </span>
+                        <span
+                          className='flex justify-center items-center hover:cursor-pointer'
+                          onClick={() => setAccountUpdateError('')}
+                        >
+                          <FontAwesomeIcon
+                            className='my-0'
+                            icon={faCircleXmark}
+                            size={'sm'}
+                          />
+                        </span>
+                      </div>
+                    )}
                     <div className='grid grid-cols-3'>
                       <div className='flex'>
                         <label className='my-auto' htmlFor='name'>
@@ -84,7 +182,7 @@ const AccountSettingPage = () => {
                         position='single'
                         name='name'
                         type={'text'}
-                        reference={null}
+                        reference={nameRef}
                         autoComplete={'name'}
                         defaultValue={data.name}
                       />
@@ -102,7 +200,7 @@ const AccountSettingPage = () => {
                         position='single'
                         name='email'
                         type={'text'}
-                        reference={null}
+                        reference={emailRef}
                         autoComplete={'email'}
                         defaultValue={data.email}
                       />
