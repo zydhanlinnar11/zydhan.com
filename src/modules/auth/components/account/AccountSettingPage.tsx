@@ -1,0 +1,261 @@
+import Button from '@/common/components/elements/Button'
+import PrivateRoute from '@/modules/auth/components/PrivateRoute'
+import NarrowPageContainer from '@/common/components/elements/NarrowPageContainer'
+import {
+  faCircleArrowLeft,
+  faFloppyDisk,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import axios from 'axios'
+import useSWR from 'swr'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
+import TextInput from '@/common/components/elements/Form/TextInput'
+import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
+
+type User = {
+  name: string
+  email: string
+  linkedAccount: {
+    github: boolean
+    google: boolean
+  }
+}
+
+const fetcher = (url: string) =>
+  axios.get(url, { withCredentials: true }).then((res) => res.data)
+
+const AccountSettingPage = () => {
+  const { data, error } = useSWR<User>(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
+    fetcher
+  )
+
+  return (
+    <PrivateRoute>
+      <NarrowPageContainer>
+        <div className='w-full flex flex-col pb-10 gap-y-3 items-center sm:flex-row justify-between align-middle'>
+          <h2 className='text-2xl'>Account Setting</h2>
+          <div className='w-24 text-sm'>
+            <Button onClick={() => window.history.back()}>
+              <FontAwesomeIcon
+                className='my-auto mr-2'
+                icon={faCircleArrowLeft}
+              ></FontAwesomeIcon>{' '}
+              Back
+            </Button>
+          </div>
+        </div>
+        <div className='flex flex-col gap-y-5 sm:flex-row sm:gap-x-5'>
+          <div
+            className='sm:w-64 sm:h-fit bg-gray-900 flex flex-col w-full
+              border border-white/20 rounded p-6
+              justify-center text-center gap-y-5'
+          >
+            {data && (
+              <>
+                <FontAwesomeIcon icon={faCircleUser} size={'4x'} />
+                <div>
+                  <p className='text-lg'>{data.name}</p>
+                  <p className='text-sm text-gray-400'>{data.email}</p>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className='sm:w-full flex flex-col gap-y-5'>
+            <div
+              className='flex flex-col
+              border border-white/20 rounded px-6 py-5'
+            >
+              <h3 className='text-lg font-semibold'>Account Information</h3>
+              <div className='h-px w-full bg-white/20 mt-3'></div>
+              {data && (
+                <form className='mt-5 flex flex-col gap-y-3'>
+                  <div className='grid grid-cols-3'>
+                    <div className='flex'>
+                      <label className='my-auto' htmlFor='name'>
+                        Name
+                      </label>
+                    </div>
+                    <TextInput
+                      className='col-span-2'
+                      label='Name'
+                      position='single'
+                      name='name'
+                      type={'text'}
+                      reference={null}
+                      autoComplete={'name'}
+                      defaultValue={data.name}
+                    />
+                  </div>
+
+                  <div className='grid grid-cols-3'>
+                    <div className='flex'>
+                      <label className='my-auto' htmlFor='email'>
+                        Email
+                      </label>
+                    </div>
+                    <TextInput
+                      className='col-span-2'
+                      label='Email'
+                      position='single'
+                      name='email'
+                      type={'text'}
+                      reference={null}
+                      autoComplete={'email'}
+                      defaultValue={data.email}
+                    />
+                  </div>
+
+                  <div className='mt-3 flex sm:justify-end'>
+                    <div className='w-full sm:w-1/3'>
+                      <Button>
+                        <span className='flex justify-center items-center gap-x-2'>
+                          <FontAwesomeIcon
+                            className='my-0'
+                            icon={faFloppyDisk}
+                          />{' '}
+                          Save
+                        </span>
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              )}
+            </div>
+            <div
+              className='flex flex-col
+              border border-white/20 rounded px-6 py-5'
+            >
+              <h3 className='text-lg font-semibold'>Social Account</h3>
+              <div className='h-px w-full bg-white/20 mt-3'></div>
+              {data && (
+                <div className='mt-5 flex flex-col gap-y-3'>
+                  <div className='grid grid-cols-3'>
+                    <p className='my-auto'>Google</p>
+                    <div className='col-span-2'>
+                      {data.linkedAccount.google ? (
+                        <Button>
+                          <span className='flex justify-center items-center gap-x-2'>
+                            <FontAwesomeIcon className='my-0' icon={faGoogle} />{' '}
+                            Unlink Google Account
+                          </span>
+                        </Button>
+                      ) : (
+                        <Button>
+                          <span className='flex justify-center items-center gap-x-2'>
+                            <FontAwesomeIcon className='my-0' icon={faGoogle} />{' '}
+                            Link Google Account
+                          </span>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className='grid grid-cols-3'>
+                    <p className='my-auto'>Github</p>
+                    <div className='col-span-2'>
+                      {data.linkedAccount.github ? (
+                        <Button>
+                          <span className='flex justify-center items-center gap-x-2'>
+                            <FontAwesomeIcon className='my-0' icon={faGithub} />{' '}
+                            Unlink Github Account
+                          </span>
+                        </Button>
+                      ) : (
+                        <Button>
+                          <span className='flex justify-center items-center gap-x-2'>
+                            <FontAwesomeIcon className='my-0' icon={faGithub} />{' '}
+                            Link Github Account
+                          </span>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div
+              className='sm:col-span-3 flex flex-col
+              border border-white/20 rounded px-6 py-5'
+            >
+              <h3 className='text-lg font-semibold'>Change Password</h3>
+              <div className='h-px w-full bg-white/20 mt-3'></div>
+              {data && (
+                <form className='mt-5 flex flex-col gap-y-3'>
+                  <div className='grid grid-cols-3'>
+                    <div className='flex'>
+                      <label className='my-auto' htmlFor='current-password'>
+                        Current password
+                      </label>
+                    </div>
+                    <TextInput
+                      className='col-span-2'
+                      label='Current password'
+                      position='single'
+                      name='current-password'
+                      type={'password'}
+                      reference={null}
+                      autoComplete={'current-password'}
+                    />
+                  </div>
+
+                  <div className='grid grid-cols-3'>
+                    <div className='flex'>
+                      <label className='my-auto' htmlFor='new-password'>
+                        New password
+                      </label>
+                    </div>
+                    <TextInput
+                      className='col-span-2'
+                      label='New password'
+                      position='single'
+                      name='new-password'
+                      type={'password'}
+                      reference={null}
+                      autoComplete={'new-password'}
+                    />
+                  </div>
+
+                  <div className='grid grid-cols-3'>
+                    <div className='flex'>
+                      <label className='my-auto' htmlFor='confirm-new-password'>
+                        Confirm password
+                      </label>
+                    </div>
+                    <TextInput
+                      className='col-span-2'
+                      label='Confirm new password'
+                      position='single'
+                      name='confirm-new-password'
+                      type={'password'}
+                      reference={null}
+                      autoComplete={'new-password'}
+                    />
+                  </div>
+
+                  <div className='mt-3 flex sm:justify-end'>
+                    <div className='w-full sm:w-1/3'>
+                      <Button>
+                        <span className='flex justify-center items-center gap-x-2'>
+                          <FontAwesomeIcon
+                            className='my-0'
+                            icon={faFloppyDisk}
+                          />{' '}
+                          Change password
+                        </span>
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </NarrowPageContainer>
+    </PrivateRoute>
+  )
+}
+
+export default AccountSettingPage

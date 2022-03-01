@@ -2,7 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRightFromBracket,
+  faGear,
+} from '@fortawesome/free-solid-svg-icons'
 import MenuItem from './MenuItem'
 import { useUserState } from '@/common/providers/UserProvider'
 import Router from 'next/router'
@@ -57,6 +60,10 @@ const UserMenu = () => {
                   </div>
                 </div>
                 <div className='bg-gray-600 h-px mx-4 my-1' />
+                <MenuItem onClick={() => Router.push('/auth/account')}>
+                  <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
+                  Setting
+                </MenuItem>
                 <MenuItem onClick={userState.logout}>
                   <FontAwesomeIcon
                     icon={faArrowRightFromBracket}
