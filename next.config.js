@@ -9,6 +9,7 @@ module.exports = withBundleAnalyzer({
       'storage.googleapis.com',
       'cdn.discordapp.com',
       'avatars.dicebear.com',
+      'media.discordapp.net',
     ],
   },
 })
