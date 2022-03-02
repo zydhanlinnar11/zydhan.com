@@ -74,6 +74,27 @@ const AccountSettingPage = () => {
     }
   }
 
+  const handleLinkAccount = (provider: 'google' | 'github') => {
+    const width = 500
+    const height = 400
+    const left = window.screenX + (window.outerWidth - width) / 2
+    const top = window.screenY + (window.outerHeight - height) / 2.5
+
+    const popup = window.open(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/redirect`,
+      `Sign in with ${provider}`,
+      `width=${width},height=${height},left=${left},top=${top}`
+    )
+
+    const interval = setInterval(() => {
+      if (!popup || popup.closed) {
+        interval && clearInterval(interval)
+        mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
+        return
+      }
+    }, 500)
+  }
+
   return (
     <PrivateRoute>
       <NarrowPageContainer>
@@ -242,7 +263,7 @@ const AccountSettingPage = () => {
                             </span>
                           </Button>
                         ) : (
-                          <Button>
+                          <Button onClick={() => handleLinkAccount('google')}>
                             <span className='flex justify-center items-center gap-x-2'>
                               <FontAwesomeIcon
                                 className='my-0'
@@ -269,7 +290,7 @@ const AccountSettingPage = () => {
                             </span>
                           </Button>
                         ) : (
-                          <Button>
+                          <Button onClick={() => handleLinkAccount('github')}>
                             <span className='flex justify-center items-center gap-x-2'>
                               <FontAwesomeIcon
                                 className='my-0'
