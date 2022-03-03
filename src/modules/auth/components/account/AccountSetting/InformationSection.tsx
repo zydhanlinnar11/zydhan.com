@@ -10,6 +10,7 @@ import axios from 'axios'
 import React, { FC, FormEventHandler, useRef, useState } from 'react'
 import { mutate } from 'swr'
 import { User } from '@/modules/auth/types/AccountSettingUser'
+import { useUserState } from '@/common/providers/UserProvider'
 
 type Props = {
   user: User
@@ -22,6 +23,7 @@ const InformationSection: FC<Props> = ({ user }) => {
     useState<boolean>(false)
   const [accountUpdateError, setAccountUpdateError] = useState<string>('')
   const [isInProgress, setInProgress] = useState<boolean>(false)
+  const userState = useUserState()
 
   const handleAccountChange: FormEventHandler<HTMLFormElement> = async (e) => {
     setInProgress(true)
@@ -51,6 +53,7 @@ const InformationSection: FC<Props> = ({ user }) => {
       )
 
       await mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
+      if (userState.state === 'authenticated') userState.revalidate()
       setShowAccountUpdateSuccess(true)
     } catch (e) {
       if (axios.isAxiosError(e)) setAccountUpdateError(e.message)

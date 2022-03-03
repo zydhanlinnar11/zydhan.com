@@ -37,10 +37,16 @@ type UserState =
       state: 'authenticated'
       user: User
       logout: () => void
+      revalidate: () => void
     }
 
 type Action =
-  | { type: 'USER_AUTHENTICATED'; user: User; logout: () => void }
+  | {
+      type: 'USER_AUTHENTICATED'
+      user: User
+      logout: () => void
+      revalidate: () => void
+    }
   | {
       type: 'USER_UNAUTHENTICATED'
       login: (email: string, password: string) => Promise<void>
@@ -65,6 +71,7 @@ const reducer = (state: UserState, action: Action): UserState => {
         state: 'authenticated',
         user: action.user,
         logout: action.logout,
+        revalidate: action.revalidate,
       }
     case 'USER_UNAUTHENTICATED':
       return {
@@ -98,7 +105,6 @@ export const UserProvider: FC = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      dispatch({ type: 'LOADING' })
       const res = await axios.get<any, AxiosResponse<User, any>, any>(
         process.env.NEXT_PUBLIC_API_URL + '/auth/authenticated-user',
         {
@@ -106,7 +112,12 @@ export const UserProvider: FC = ({ children }) => {
         }
       )
 
-      dispatch({ type: 'USER_AUTHENTICATED', user: res.data, logout: logout })
+      dispatch({
+        type: 'USER_AUTHENTICATED',
+        user: res.data,
+        logout: logout,
+        revalidate: fetchUser,
+      })
     } catch (e) {
       dispatch({ type: 'USER_UNAUTHENTICATED', login, register, socialLogin })
     }
