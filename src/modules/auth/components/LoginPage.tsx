@@ -133,6 +133,15 @@ const LoginPage = () => {
               </AnchorLink>
             </small>
             <br />
+            <small>or</small>
+            <br />
+            <small>
+              Forgot your password?{' '}
+              <AnchorLink href='/auth/forgot-password'>
+                Reset password
+              </AnchorLink>
+            </small>
+            <br />
             <small className='text-green-500'>
               {state.state === 'IDLE' && state.successMessage}
             </small>
