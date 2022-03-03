@@ -1,6 +1,7 @@
 import NarrowPageContainer from '@/common/components/elements/NarrowPageContainer'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
+import getBaseURL from '@/common/utils/GetBaseUrl'
 import Router from 'next/router'
 import { FC } from 'react'
 
@@ -9,7 +10,9 @@ const PrivateRoute: FC = ({ children }) => {
 
   if (userState.state !== 'authenticated') {
     if (userState.state === 'unauthenticated') {
-      Router.push(`/auth/login?next=${Router.pathname}`)
+      const loginURL = new URL(`${getBaseURL()}/auth/login`)
+      loginURL.searchParams.append('next', `${getBaseURL()}/${Router.pathname}`)
+      Router.replace(loginURL.toString())
     }
     return (
       <NarrowPageContainer>

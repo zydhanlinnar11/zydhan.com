@@ -1,6 +1,7 @@
 import AnchorLink from '@/common/components/elements/AnchorLink'
 import Button from '@/common/components/elements/Button'
 import { useUserState } from '@/common/providers/UserProvider'
+import getBaseURL from '@/common/utils/GetBaseUrl'
 import Router from 'next/router'
 import React, { FC, FormEvent, useEffect, useRef, useState } from 'react'
 import { Post } from '../ViewPostPage'
@@ -93,7 +94,7 @@ const CommentSection: FC<Props> = ({ post }) => {
       ) : (
         <p className='text-center mt-12 mb-6'>
           <AnchorLink
-            href={`/auth/login?next=/blog/posts/${slug}%23add-new-comment`}
+            href={`/auth/login?next=${getBaseURL()}%2Fblog%2Fposts%2F${slug}%23add-new-comment`}
           >
             Log in
           </AnchorLink>{' '}
