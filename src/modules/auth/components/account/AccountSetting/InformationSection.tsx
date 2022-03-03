@@ -21,8 +21,10 @@ const InformationSection: FC<Props> = ({ user }) => {
   const [showAccountUpdateSuccess, setShowAccountUpdateSuccess] =
     useState<boolean>(false)
   const [accountUpdateError, setAccountUpdateError] = useState<string>('')
+  const [isInProgress, setInProgress] = useState<boolean>(false)
 
   const handleAccountChange: FormEventHandler<HTMLFormElement> = async (e) => {
+    setInProgress(true)
     setShowAccountUpdateSuccess(false)
     setAccountUpdateError('')
     e.preventDefault()
@@ -52,6 +54,8 @@ const InformationSection: FC<Props> = ({ user }) => {
       setShowAccountUpdateSuccess(true)
     } catch (e) {
       if (axios.isAxiosError(e)) setAccountUpdateError(e.message)
+    } finally {
+      setInProgress(false)
     }
   }
 
@@ -157,9 +161,10 @@ text-red-400 bg-red-300/[0.15] mb-3'
 
         <div className='mt-3 flex sm:justify-end'>
           <div className='w-full sm:w-1/3'>
-            <Button>
+            <Button disabled={isInProgress}>
               <span className='flex justify-center items-center gap-x-2'>
-                <FontAwesomeIcon className='my-0' icon={faFloppyDisk} /> Save
+                <FontAwesomeIcon className='my-0' icon={faFloppyDisk} />{' '}
+                {isInProgress ? 'Saving' : 'Save'}
               </span>
             </Button>
           </div>
