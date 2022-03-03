@@ -1,1 +1,1 @@
-export { default } from '@/modules/auth/components/account/AccountSettingPage'
+export { default } from '@/modules/auth/components/account/AccountSetting/AccountSettingPage'
