@@ -3,6 +3,7 @@ import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
+import axios from 'axios'
 import Head from 'next/head'
 import Router, { useRouter } from 'next/router'
 import { FormEventHandler, useReducer, useRef } from 'react'
@@ -71,10 +72,10 @@ const RegisterPage = () => {
       dispatch({ type: 'IDLE', errorMessage: 'Password must be filled' })
       return
     }
-    if (!confirmPasswordRef?.current?.value) {
+    if (confirmPasswordRef?.current?.value !== passwordRef.current.value) {
       dispatch({
         type: 'IDLE',
-        errorMessage: 'Password confirmation must be filled',
+        errorMessage: 'Password confirmation must match',
       })
       return
     }
@@ -94,8 +95,11 @@ const RegisterPage = () => {
       )
       dispatch({ type: 'IDLE' })
     } catch (e) {
-      if (!(e instanceof Error)) return
-      dispatch({ type: 'IDLE', errorMessage: e.message })
+      if (!axios.isAxiosError(e)) throw e
+      dispatch({
+        type: 'IDLE',
+        errorMessage: e.response?.data?.message || e.message,
+      })
     }
   }
 

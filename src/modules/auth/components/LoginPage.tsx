@@ -3,6 +3,7 @@ import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
+import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEventHandler, useEffect, useReducer, useRef } from 'react'
@@ -79,8 +80,11 @@ const LoginPage = () => {
     try {
       await userState.login(emailRef.current.value, passwordRef.current.value)
     } catch (e) {
-      if (e instanceof Error)
-        dispatch({ type: 'IDLE', errorMessage: e.message })
+      if (!axios.isAxiosError(e)) throw e
+      dispatch({
+        type: 'IDLE',
+        errorMessage: e.response?.data?.message || e.message,
+      })
     }
   }
 
@@ -128,7 +132,7 @@ const LoginPage = () => {
               {state.state === 'IDLE' && state.successMessage}
             </small>
             <small className='text-red-500'>
-              {state.state === 'IDLE' && state.successMessage}
+              {state.state === 'IDLE' && state.errorMessage}
             </small>
           </div>
           <div className='mt-3'>

@@ -128,23 +128,18 @@ export const UserProvider: FC = ({ children }) => {
   }
 
   const login = async (email: string, password: string) => {
-    try {
-      const instance = axios.create({
-        baseURL: process.env.NEXT_PUBLIC_API_URL,
-        withCredentials: true,
-      })
+    const instance = axios.create({
+      baseURL: process.env.NEXT_PUBLIC_API_URL,
+      withCredentials: true,
+    })
 
-      await instance.get('/sanctum/csrf-cookie')
-      await instance.post('/auth/login', {
-        email,
-        password,
-      })
+    await instance.get('/sanctum/csrf-cookie')
+    await instance.post('/auth/login', {
+      email,
+      password,
+    })
 
-      fetchUser()
-    } catch (e) {
-      if (!axios.isAxiosError(e)) return
-      throw Error(e.response?.data?.message)
-    }
+    fetchUser()
   }
 
   const register = async (
@@ -153,23 +148,18 @@ export const UserProvider: FC = ({ children }) => {
     password: string,
     passwordConfirm: string
   ) => {
-    try {
-      const instance = axios.create({
-        baseURL: process.env.NEXT_PUBLIC_API_URL,
-        withCredentials: true,
-      })
+    const instance = axios.create({
+      baseURL: process.env.NEXT_PUBLIC_API_URL,
+      withCredentials: true,
+    })
 
-      await instance.get('/sanctum/csrf-cookie')
-      await instance.post('/auth/register', {
-        name,
-        email,
-        password,
-        password_confirmation: passwordConfirm,
-      })
-    } catch (e) {
-      if (!axios.isAxiosError(e)) return
-      throw Error(e.response?.data?.message)
-    }
+    await instance.get('/sanctum/csrf-cookie')
+    await instance.post('/auth/register', {
+      name,
+      email,
+      password,
+      password_confirmation: passwordConfirm,
+    })
   }
 
   const socialLogin = (provider: 'google' | 'github') => {
