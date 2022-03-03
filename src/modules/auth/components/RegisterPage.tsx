@@ -5,18 +5,36 @@ import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import Head from 'next/head'
 import Router, { useRouter } from 'next/router'
-import { FormEventHandler, useRef, useState } from 'react'
+import { FormEventHandler, useReducer, useRef } from 'react'
 import SocialLoginButtonGroup from './SocialLoginButtonGroup'
+
+type RegisterState =
+  | { state: 'PROCESSING' }
+  | { state: 'IDLE'; errorMessage?: string }
+
+type Action = { type: 'PROCESSING' } | { type: 'IDLE'; errorMessage?: string }
+
+const reducer = (state: RegisterState, action: Action): RegisterState => {
+  if (action.type === 'PROCESSING')
+    return {
+      state: action.type,
+    }
+  if (action.type === 'IDLE')
+    return {
+      state: action.type,
+      errorMessage: action.errorMessage,
+    }
+  throw Error('Unknown action')
+}
 
 const RegisterPage = () => {
   const userState = useUserState()
   const router = useRouter()
-  const [error, setError] = useState<string>('')
+  const [state, dispatch] = useReducer(reducer, { state: 'IDLE' })
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
-  const [isProcessing, setProcessing] = useState<boolean>(false)
 
   if (userState.state !== 'unauthenticated') {
     let basePath =
@@ -40,22 +58,24 @@ const RegisterPage = () => {
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    setProcessing(true)
-    setError('')
+    dispatch({ type: 'PROCESSING' })
     if (!nameRef?.current?.value) {
-      setError('Name must be filled')
+      dispatch({ type: 'IDLE', errorMessage: 'Name must be filled' })
       return
     }
     if (!emailRef?.current?.value) {
-      setError('Email must be filled')
+      dispatch({ type: 'IDLE', errorMessage: 'Email must be filled' })
       return
     }
     if (!passwordRef?.current?.value) {
-      setError('Password must be filled')
+      dispatch({ type: 'IDLE', errorMessage: 'Password must be filled' })
       return
     }
     if (!confirmPasswordRef?.current?.value) {
-      setError('Password confirmation must be filled')
+      dispatch({
+        type: 'IDLE',
+        errorMessage: 'Password confirmation must be filled',
+      })
       return
     }
 
@@ -72,11 +92,10 @@ const RegisterPage = () => {
         'flash_success',
         JSON.stringify('User successfully registered')
       )
+      dispatch({ type: 'IDLE' })
     } catch (e) {
       if (!(e instanceof Error)) return
-      setError(e.message)
-    } finally {
-      setProcessing(false)
+      dispatch({ type: 'IDLE', errorMessage: e.message })
     }
   }
 
@@ -137,18 +156,17 @@ const RegisterPage = () => {
               <AnchorLink href='/auth/login'>Log in</AnchorLink>
             </small>
             <br />
-            <small className='text-red-500'>{error}</small>
+            <small className='text-red-500'>
+              {state.state === 'IDLE' && state.errorMessage}
+            </small>
           </div>
           <div className='mt-3'>
-            <Button type='submit' disabled={isProcessing}>
+            <Button type='submit' disabled={state.state === 'PROCESSING'}>
               Register
             </Button>
           </div>
           <div className='mt-3'>
-            <SocialLoginButtonGroup
-              isProcessing={isProcessing}
-              setProcessing={setProcessing}
-            />
+            <SocialLoginButtonGroup disabled={state.state === 'PROCESSING'} />
           </div>
         </form>
       </div>
