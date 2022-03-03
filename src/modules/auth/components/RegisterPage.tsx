@@ -36,25 +36,23 @@ const RegisterPage = () => {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
-
+  const loading = (
+    <div className='grow flex flex-col justify-center items-center'>
+      <SpinnerLoading />
+    </div>
+  )
+  const nextPath = router.query['next']
   if (userState.state !== 'unauthenticated') {
-    let basePath =
-      process.env.NODE_ENV === 'production'
-        ? 'https://zydhan.xyz'
-        : 'https://dev.zydhan.xyz'
-    const nextPath = router.query['next']
-
-    let redirectTo = new URL(basePath)
     try {
-      if (typeof nextPath === 'string')
-        redirectTo = new URL(`${basePath}${nextPath}`)
-    } catch (e) {}
-    if (userState.state === 'authenticated') router.push(redirectTo.toString())
-    return (
-      <div className='grow flex flex-col justify-center items-center'>
-        <SpinnerLoading />
-      </div>
-    )
+      if (typeof nextPath !== 'string') throw Error()
+      const redirectTo = new URL(`${nextPath}`)
+      if (userState.state === 'loading') return loading
+      router.push(redirectTo.toString())
+    } catch (e) {
+      if (userState.state === 'loading') return loading
+      router.push('/')
+    }
+    return loading
   }
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
