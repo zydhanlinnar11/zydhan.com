@@ -11,7 +11,7 @@ const PrivateRoute: FC = ({ children }) => {
   if (userState.state !== 'authenticated') {
     if (userState.state === 'unauthenticated') {
       const loginURL = new URL(`${getBaseURL()}/auth/login`)
-      loginURL.searchParams.append('next', `${getBaseURL()}/${Router.pathname}`)
+      loginURL.searchParams.append('next', window.location.href)
       Router.replace(loginURL.toString())
     }
     return (
