@@ -16,7 +16,6 @@ const fetcher = (url: string) =>
   axios.get(url, { withCredentials: true }).then((res) => res.data)
 
 const AccountSettingPage = () => {
-  const { mutate } = useSWRConfig()
   const { data, error } = useSWR<User>(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
     fetcher
