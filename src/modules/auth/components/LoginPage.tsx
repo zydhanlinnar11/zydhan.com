@@ -3,9 +3,10 @@ import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
+import getBaseURL from '@/common/utils/GetBaseUrl'
 import axios from 'axios'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { FormEventHandler, useEffect, useReducer, useRef } from 'react'
 import SocialLoginButtonGroup from './SocialLoginButtonGroup'
 
@@ -50,9 +51,11 @@ const LoginPage = () => {
     sessionStorage.removeItem('flash_success')
   }, [])
 
+  const nextPath = router.query['next']
+  const registerPath = new URL(`${getBaseURL()}/auth/register`)
+  if (typeof nextPath === 'string')
+    registerPath.searchParams.append('next', nextPath)
   if (userState.state !== 'unauthenticated') {
-    const nextPath = router.query['next']
-
     try {
       if (typeof nextPath !== 'string') throw Error()
       const redirectTo = new URL(`${nextPath}`)
@@ -125,7 +128,9 @@ const LoginPage = () => {
           <div className='mt-1'>
             <small>
               Don&apos;t have account?{' '}
-              <AnchorLink href='/auth/register'>Create an account</AnchorLink>
+              <AnchorLink href={registerPath.toString()}>
+                Create an account
+              </AnchorLink>
             </small>
             <br />
             <small className='text-green-500'>
