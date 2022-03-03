@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, MouseEventHandler, useState } from 'react'
 import Button from '@/common/components/elements/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
@@ -9,6 +9,7 @@ import {
   faCircleExclamation,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons'
+import Modal from '@/common/components/elements/Modal'
 
 type Props = {
   user: User
@@ -17,6 +18,14 @@ type Props = {
 const SocialSection: FC<Props> = ({ user }) => {
   const [success, setSuccess] = useState<string>('')
   const [error, setError] = useState<string>('')
+  const [isUnlinkModalShowed, setUnlinkModalShowed] = useState<boolean>(false)
+  const [isUnlinkModalProviderName, setUnlinkModalProviderName] =
+    useState<string>('')
+  const [unlinkModalAction, setUnlinkModalAction] = useState<
+    MouseEventHandler<HTMLButtonElement>
+  >(() => {
+    return () => {}
+  })
 
   const handleLinkAccount = (provider: 'google' | 'github') => {
     const width = 500
@@ -59,110 +68,134 @@ const SocialSection: FC<Props> = ({ user }) => {
     }
   }
 
+  const showUnlinkModal = (provider: 'google' | 'github') => {
+    setUnlinkModalProviderName(
+      provider.charAt(0).toUpperCase() + provider.slice(1)
+    )
+    setUnlinkModalShowed(true)
+    setUnlinkModalAction(() => {
+      return async () => {
+        await handleUnlinkAccount(provider)
+        setUnlinkModalShowed(false)
+      }
+    })
+  }
+
   return (
-    <div
-      className='flex flex-col
+    <>
+      <Modal
+        bodyText={`Are you sure want to unlink your ${isUnlinkModalProviderName} account?`}
+        title={`Unlink ${isUnlinkModalProviderName}`}
+        handleClose={() => {
+          setUnlinkModalShowed(false)
+        }}
+        isShowed={isUnlinkModalShowed}
+        action={{ handler: unlinkModalAction, text: 'Unlink', type: 'danger' }}
+      />
+      <div
+        className='flex flex-col
 border border-white/20 rounded px-6 py-5'
-    >
-      <h3 className='text-lg font-semibold'>Social Account</h3>
-      <div className='h-px w-full bg-white/20 mt-3'></div>
-      <div className='mt-5 flex flex-col gap-y-3'>
-        {success && (
-          <div
-            className='flex justify-between gap-x-2 py-2 px-4 rounded-md
+      >
+        <h3 className='text-lg font-semibold'>Social Account</h3>
+        <div className='h-px w-full bg-white/20 mt-3'></div>
+        <div className='mt-5 flex flex-col gap-y-3'>
+          {success && (
+            <div
+              className='flex justify-between gap-x-2 py-2 px-4 rounded-md
 text-green-400 bg-green-300/[0.15] mb-3'
-            role={'alert'}
-          >
-            <span className='flex justify-center items-center gap-x-2'>
-              <FontAwesomeIcon
-                className='my-0'
-                icon={faCircleExclamation}
-                size={'sm'}
-              />{' '}
-              {success}
-            </span>
-            <span
-              className='flex justify-center items-center hover:cursor-pointer'
-              onClick={() => setSuccess('')}
+              role={'alert'}
             >
-              <FontAwesomeIcon
-                className='my-0'
-                icon={faCircleXmark}
-                size={'sm'}
-              />
-            </span>
-          </div>
-        )}
-        {error && (
-          <div
-            className='flex justify-between gap-x-2 py-2 px-4 rounded-md
+              <span className='flex justify-center items-center gap-x-2'>
+                <FontAwesomeIcon
+                  className='my-0'
+                  icon={faCircleExclamation}
+                  size={'sm'}
+                />{' '}
+                {success}
+              </span>
+              <span
+                className='flex justify-center items-center hover:cursor-pointer'
+                onClick={() => setSuccess('')}
+              >
+                <FontAwesomeIcon
+                  className='my-0'
+                  icon={faCircleXmark}
+                  size={'sm'}
+                />
+              </span>
+            </div>
+          )}
+          {error && (
+            <div
+              className='flex justify-between gap-x-2 py-2 px-4 rounded-md
 text-red-400 bg-red-300/[0.15] mb-3'
-            role={'alert'}
-          >
-            <span className='flex justify-center items-center gap-x-2'>
-              <FontAwesomeIcon
-                className='my-0'
-                icon={faCircleExclamation}
-                size={'sm'}
-              />{' '}
-              {error}
-            </span>
-            <span
-              className='flex justify-center items-center hover:cursor-pointer'
-              onClick={() => setError('')}
+              role={'alert'}
             >
-              <FontAwesomeIcon
-                className='my-0'
-                icon={faCircleXmark}
-                size={'sm'}
-              />
-            </span>
-          </div>
-        )}
+              <span className='flex justify-center items-center gap-x-2'>
+                <FontAwesomeIcon
+                  className='my-0'
+                  icon={faCircleExclamation}
+                  size={'sm'}
+                />{' '}
+                {error}
+              </span>
+              <span
+                className='flex justify-center items-center hover:cursor-pointer'
+                onClick={() => setError('')}
+              >
+                <FontAwesomeIcon
+                  className='my-0'
+                  icon={faCircleXmark}
+                  size={'sm'}
+                />
+              </span>
+            </div>
+          )}
 
-        <div className='grid grid-cols-3'>
-          <p className='my-auto'>Google</p>
-          <div className='col-span-2'>
-            {user.linkedAccount.google ? (
-              <Button onClick={() => handleUnlinkAccount('google')}>
-                <span className='flex justify-center items-center gap-x-2'>
-                  <FontAwesomeIcon className='my-0' icon={faGoogle} /> Unlink
-                  Google Account
-                </span>
-              </Button>
-            ) : (
-              <Button onClick={() => handleLinkAccount('google')}>
-                <span className='flex justify-center items-center gap-x-2'>
-                  <FontAwesomeIcon className='my-0' icon={faGoogle} /> Link
-                  Google Account
-                </span>
-              </Button>
-            )}
+          <div className='grid grid-cols-3'>
+            <p className='my-auto'>Google</p>
+            <div className='col-span-2'>
+              {user.linkedAccount.google ? (
+                <Button onClick={() => showUnlinkModal('google')}>
+                  <span className='flex justify-center items-center gap-x-2'>
+                    <FontAwesomeIcon className='my-0' icon={faGoogle} /> Unlink
+                    Google Account
+                  </span>
+                </Button>
+              ) : (
+                <Button onClick={() => handleLinkAccount('google')}>
+                  <span className='flex justify-center items-center gap-x-2'>
+                    <FontAwesomeIcon className='my-0' icon={faGoogle} /> Link
+                    Google Account
+                  </span>
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
 
-        <div className='grid grid-cols-3'>
-          <p className='my-auto'>Github</p>
-          <div className='col-span-2'>
-            {user.linkedAccount.github ? (
-              <Button onClick={() => handleUnlinkAccount('github')}>
-                <span className='flex justify-center items-center gap-x-2'>
-                  <FontAwesomeIcon className='my-0' icon={faGithub} /> Unlink
-                  Github Account
-                </span>
-              </Button>
-            ) : (
-              <Button onClick={() => handleLinkAccount('github')}>
-                <span className='flex justify-center items-center gap-x-2'>
-                  <FontAwesomeIcon className='my-0' icon={faGithub} /> Link
-                  Github Account
-                </span>
-              </Button>
-            )}
+          <div className='grid grid-cols-3'>
+            <p className='my-auto'>Github</p>
+            <div className='col-span-2'>
+              {user.linkedAccount.github ? (
+                <Button onClick={() => showUnlinkModal('github')}>
+                  <span className='flex justify-center items-center gap-x-2'>
+                    <FontAwesomeIcon className='my-0' icon={faGithub} /> Unlink
+                    Github Account
+                  </span>
+                </Button>
+              ) : (
+                <Button onClick={() => handleLinkAccount('github')}>
+                  <span className='flex justify-center items-center gap-x-2'>
+                    <FontAwesomeIcon className='my-0' icon={faGithub} /> Link
+                    Github Account
+                  </span>
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
