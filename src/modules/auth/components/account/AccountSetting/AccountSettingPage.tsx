@@ -11,9 +11,7 @@ import Header from '@/common/components/elements/Header'
 import { User } from '@/modules/auth/types/AccountSettingUser'
 import AccountSettingInformationSection from './InformationSection'
 import AccountSettingSocialSection from './SocialSection'
-
-const fetcher = (url: string) =>
-  axios.get(url, { withCredentials: true }).then((res) => res.data)
+import fetcher from '@/common/utils/AxiosSWRFetcher'
 
 const AccountSettingPage = () => {
   const { data, error } = useSWR<User>(
