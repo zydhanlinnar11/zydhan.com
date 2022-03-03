@@ -5,11 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { Dispatch, FC, SetStateAction } from 'react'
 
 type Props = {
-  isProcessing: boolean
-  setProcessing: Dispatch<SetStateAction<boolean>>
+  disabled: boolean
 }
 
-const SocialLoginButtonGroup: FC<Props> = ({ isProcessing, setProcessing }) => {
+const SocialLoginButtonGroup: FC<Props> = ({ disabled }) => {
   const userState = useUserState()
 
   if (userState.state === 'unauthenticated')
@@ -17,8 +16,8 @@ const SocialLoginButtonGroup: FC<Props> = ({ isProcessing, setProcessing }) => {
       <div className='flex flex-col gap-3'>
         <Button
           type='button'
-          disabled={isProcessing}
-          onClick={() => userState.socialLogin('google', setProcessing)}
+          disabled={disabled}
+          onClick={() => userState.socialLogin('google')}
         >
           <span className='flex justify-center items-center gap-x-2'>
             <FontAwesomeIcon className='my-0' icon={faGoogle} /> Log in with
@@ -27,8 +26,8 @@ const SocialLoginButtonGroup: FC<Props> = ({ isProcessing, setProcessing }) => {
         </Button>
         <Button
           type='button'
-          disabled={isProcessing}
-          onClick={() => userState.socialLogin('github', setProcessing)}
+          disabled={disabled}
+          onClick={() => userState.socialLogin('github')}
         >
           <span className='flex justify-center items-center gap-x-2'>
             <FontAwesomeIcon className='my-0' icon={faGithub} /> Log in with

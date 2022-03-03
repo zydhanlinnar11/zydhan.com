@@ -28,10 +28,7 @@ type UserState =
         password: string,
         passwordConfirm: string
       ) => Promise<void>
-      socialLogin: (
-        provider: 'google' | 'github',
-        setProcessing: Dispatch<SetStateAction<boolean>>
-      ) => void
+      socialLogin: (provider: 'google' | 'github') => void
     }
   | {
       state: 'authenticated'
@@ -56,10 +53,7 @@ type Action =
         password: string,
         passwordConfirm: string
       ) => Promise<void>
-      socialLogin: (
-        provider: 'google' | 'github',
-        setProcessing: Dispatch<SetStateAction<boolean>>
-      ) => void
+      socialLogin: (provider: 'google' | 'github') => void
     }
   | { type: 'LOGOUT' }
   | { type: 'LOADING' }
@@ -178,11 +172,8 @@ export const UserProvider: FC = ({ children }) => {
     }
   }
 
-  const socialLogin = (
-    provider: 'google' | 'github',
-    setProcessing: Dispatch<SetStateAction<boolean>>
-  ) => {
-    setProcessing(true)
+  const socialLogin = (provider: 'google' | 'github') => {
+    dispatch({ type: 'LOADING' })
     const width = 500
     const height = 400
     const left = window.screenX + (window.outerWidth - width) / 2
@@ -197,8 +188,7 @@ export const UserProvider: FC = ({ children }) => {
     const interval = setInterval(() => {
       if (!popup || popup.closed) {
         interval && clearInterval(interval)
-        dispatch({ type: 'LOADING' })
-        fetchUser().finally(() => setProcessing(false))
+        fetchUser()
         return
       }
     }, 500)
