@@ -12,6 +12,7 @@ import { User } from '@/modules/auth/types/AccountSettingUser'
 import AccountSettingInformationSection from './InformationSection'
 import AccountSettingSocialSection from './SocialSection'
 import fetcher from '@/common/utils/AxiosSWRFetcher'
+import PasswordSection from './PasswordSection'
 
 const AccountSettingPage = () => {
   const { data, error } = useSWR<User>(
@@ -54,6 +55,7 @@ const AccountSettingPage = () => {
               <div className='sm:w-full flex flex-col gap-y-5'>
                 <AccountSettingInformationSection user={data} />
                 <AccountSettingSocialSection user={data} />
+                <PasswordSection />
               </div>
             </div>
           </>
