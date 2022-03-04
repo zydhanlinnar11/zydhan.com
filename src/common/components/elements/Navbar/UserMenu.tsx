@@ -7,11 +7,29 @@ import {
   faGear,
 } from '@fortawesome/free-solid-svg-icons'
 import MenuItem from './MenuItem'
-import { useUserState } from '@/common/providers/UserProvider'
+import { useUserDispatch, useUserState } from '@/common/providers/UserProvider'
 import Router from 'next/router'
+import logout from '@/modules/auth/utils/Logout'
+import { toast } from 'react-toastify'
 
 const UserMenu = () => {
   const userState = useUserState()
+  const userDispatch = useUserDispatch()
+
+  const logoutHandler = async () => {
+    try {
+      await logout()
+      userDispatch({ type: 'USER_UNAUTHENTICATED' })
+      toast.success('Successfully logged out!', {
+        theme: 'dark',
+      })
+    } catch (e) {
+      toast.error('Failed to log out!', {
+        theme: 'dark',
+      })
+    }
+  }
+
   return (
     <ul className='flex gap-x-8'>
       <Menu as='div' className='ml-3 relative'>
@@ -64,7 +82,7 @@ const UserMenu = () => {
                   <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
                   Setting
                 </MenuItem>
-                <MenuItem onClick={userState.logout}>
+                <MenuItem onClick={logoutHandler}>
                   <FontAwesomeIcon
                     icon={faArrowRightFromBracket}
                     className='mr-2 my-0'

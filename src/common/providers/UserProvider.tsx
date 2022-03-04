@@ -79,16 +79,6 @@ export const UserProvider: FC = ({ children }) => {
     }
   }
 
-  const logout = async () => {
-    try {
-      await axios.delete(process.env.NEXT_PUBLIC_API_URL + '/auth/logout', {
-        withCredentials: true,
-      })
-
-      dispatch({ type: 'USER_UNAUTHENTICATED' })
-    } catch (e) {}
-  }
-
   return (
     <UserStateContext.Provider value={state}>
       <UserDispatchContext.Provider value={dispatch}>
