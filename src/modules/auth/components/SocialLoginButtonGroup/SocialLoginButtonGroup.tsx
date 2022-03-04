@@ -15,11 +15,11 @@ const SocialLoginButtonGroup: FC<Props> = ({ disabled }) => {
   const userDispatch = useUserDispatch()
 
   const clickHandler = (provider: SocialProvider) => {
-    userDispatch({ type: 'LOADING' })
+    userDispatch({ state: 'loading' })
     socialLoginHandler(provider, () => {
       fetchUser()
-        .then((user) => userDispatch({ type: 'USER_AUTHENTICATED', user }))
-        .catch(() => userDispatch({ type: 'USER_UNAUTHENTICATED' }))
+        .then((user) => userDispatch({ state: 'authenticated', user }))
+        .catch(() => userDispatch({ state: 'unauthenticated' }))
     })
   }
 

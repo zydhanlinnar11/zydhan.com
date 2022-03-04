@@ -29,7 +29,7 @@ const LoginPage = () => {
     LoginHandler(emailRef.current?.value, passwordRef.current?.value).finally(
       () =>
         fetchUser()
-          .then((user) => userDispatch({ type: 'USER_AUTHENTICATED', user }))
+          .then((user) => userDispatch({ state: 'authenticated', user }))
           .finally(() => setProcessing(false))
     )
   }

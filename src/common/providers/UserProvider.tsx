@@ -1,6 +1,5 @@
 import User from '@/modules/auth/types/User'
 import fetchUser from '@/modules/auth/utils/FetchUser'
-import axios from 'axios'
 
 import {
   createContext,
@@ -23,35 +22,9 @@ type UserState =
       user: User
     }
 
-type Action =
-  | {
-      type: 'USER_AUTHENTICATED'
-      user: User
-    }
-  | {
-      type: 'USER_UNAUTHENTICATED'
-    }
-  | { type: 'LOADING' }
+type Action = UserState
 
-const reducer = (state: UserState, action: Action): UserState => {
-  switch (action.type) {
-    case 'USER_AUTHENTICATED':
-      return {
-        state: 'authenticated',
-        user: action.user,
-      }
-    case 'USER_UNAUTHENTICATED':
-      return {
-        state: 'unauthenticated',
-      }
-    case 'LOADING':
-      return {
-        state: 'loading',
-      }
-    default:
-      throw new Error(`Unknown action ${JSON.stringify(action)}`)
-  }
-}
+const reducer = (state: UserState, action: Action): UserState => action
 
 const initialState: UserState = {
   state: 'loading',
@@ -71,11 +44,11 @@ export const UserProvider: FC = ({ children }) => {
     try {
       const data = await fetchUser()
       dispatch({
-        type: 'USER_AUTHENTICATED',
+        state: 'authenticated',
         user: data,
       })
     } catch (e) {
-      dispatch({ type: 'USER_UNAUTHENTICATED' })
+      dispatch({ state: 'unauthenticated' })
     }
   }
 

@@ -19,7 +19,7 @@ const UserMenu = () => {
   const logoutHandler = async () => {
     try {
       await logout()
-      userDispatch({ type: 'USER_UNAUTHENTICATED' })
+      userDispatch({ state: 'unauthenticated' })
       toast.success('Successfully logged out!', {
         theme: 'dark',
       })
