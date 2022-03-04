@@ -27,7 +27,7 @@ const AccountSettingsInformationSection: FC<Props> = ({ user }) => {
   const handleAccountChange: FormEventHandler<HTMLFormElement> = (e) => {
     setInProgress(true)
     e.preventDefault()
-    handleInformationChange(emailRef.current?.value, emailRef.current?.value)
+    handleInformationChange(nameRef.current?.value, emailRef.current?.value)
       .then(() => {
         const updateUserData = async () => {
           const user = await fetchUser()
