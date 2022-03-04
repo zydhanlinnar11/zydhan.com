@@ -1,3 +1,5 @@
+import User from '@/modules/auth/types/User'
+import fetchUser from '@/modules/auth/utils/FetchUser'
 import axios, { AxiosResponse } from 'axios'
 
 import {
@@ -9,36 +11,25 @@ import {
   useEffect,
 } from 'react'
 
-type User = {
-  name: string
-  email: string
-}
-
 type UserState =
   | {
       state: 'loading'
     }
   | {
       state: 'unauthenticated'
-      socialLogin: (provider: 'google' | 'github') => void
     }
   | {
       state: 'authenticated'
       user: User
-      logout: () => void
-      revalidate: () => void
     }
 
 type Action =
   | {
       type: 'USER_AUTHENTICATED'
       user: User
-      logout: () => void
-      revalidate: () => void
     }
   | {
       type: 'USER_UNAUTHENTICATED'
-      socialLogin: (provider: 'google' | 'github') => void
     }
   | { type: 'LOGOUT' }
   | { type: 'LOADING' }
@@ -49,13 +40,10 @@ const reducer = (state: UserState, action: Action): UserState => {
       return {
         state: 'authenticated',
         user: action.user,
-        logout: action.logout,
-        revalidate: action.revalidate,
       }
     case 'USER_UNAUTHENTICATED':
       return {
         state: 'unauthenticated',
-        socialLogin: action.socialLogin,
       }
     case 'LOADING':
       return {
@@ -77,26 +65,18 @@ export const UserProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    fetchUser()
+    getUserData()
   }, [])
 
-  const fetchUser = async () => {
+  const getUserData = async () => {
     try {
-      const res = await axios.get<any, AxiosResponse<User, any>, any>(
-        process.env.NEXT_PUBLIC_API_URL + '/auth/authenticated-user',
-        {
-          withCredentials: true,
-        }
-      )
-
+      const data = await fetchUser()
       dispatch({
         type: 'USER_AUTHENTICATED',
-        user: res.data,
-        logout: logout,
-        revalidate: fetchUser,
+        user: data,
       })
     } catch (e) {
-      dispatch({ type: 'USER_UNAUTHENTICATED', socialLogin })
+      dispatch({ type: 'USER_UNAUTHENTICATED' })
     }
   }
 
@@ -106,7 +86,7 @@ export const UserProvider: FC = ({ children }) => {
         withCredentials: true,
       })
 
-      dispatch({ type: 'USER_UNAUTHENTICATED', socialLogin })
+      dispatch({ type: 'USER_UNAUTHENTICATED' })
     } catch (e) {}
   }
 
@@ -126,7 +106,7 @@ export const UserProvider: FC = ({ children }) => {
     const interval = setInterval(() => {
       if (!popup || popup.closed) {
         interval && clearInterval(interval)
-        fetchUser()
+        getUserData()
         return
       }
     }, 500)
@@ -134,7 +114,9 @@ export const UserProvider: FC = ({ children }) => {
 
   return (
     <UserStateContext.Provider value={state}>
-      {children}
+      <UserDispatchContext.Provider value={dispatch}>
+        {children}
+      </UserDispatchContext.Provider>
     </UserStateContext.Provider>
   )
 }

@@ -1,7 +1,9 @@
 import AnchorLink from '@/common/components/elements/AnchorLink'
 import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
+import { useUserDispatch } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
+import fetchUser from '@/modules/auth/utils/FetchUser'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEventHandler, useRef, useState } from 'react'
@@ -10,6 +12,7 @@ import AuthenticationPages from '../AuthenticationPages'
 import LoginHandler from './LoginHandler'
 
 const LoginPage = () => {
+  const userDispatch = useUserDispatch()
   const router = useRouter()
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -24,7 +27,10 @@ const LoginPage = () => {
     e.preventDefault()
     setProcessing(true)
     LoginHandler(emailRef.current?.value, passwordRef.current?.value).finally(
-      () => setProcessing(false)
+      () =>
+        fetchUser()
+          .then((user) => userDispatch({ type: 'USER_AUTHENTICATED', user }))
+          .finally(() => setProcessing(false))
     )
   }
 
