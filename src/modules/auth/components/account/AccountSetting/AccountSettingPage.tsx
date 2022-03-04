@@ -3,16 +3,16 @@ import PrivateRoute from '@/modules/auth/components/PrivateRoute'
 import NarrowPageContainer from '@/common/components/elements/NarrowPageContainer'
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import axios from 'axios'
 import useSWR, { useSWRConfig } from 'swr'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import Header from '@/common/components/elements/Header'
 import { User } from '@/modules/auth/types/AccountSettingUser'
-import AccountSettingInformationSection from './InformationSection'
+import AccountSettingsInformationSection from './AccountSettingsInformationSection'
 import AccountSettingSocialSection from './SocialSection'
 import fetcher from '@/common/utils/AxiosSWRFetcher'
 import PasswordSection from './PasswordSection'
+import Head from 'next/head'
 
 const AccountSettingPage = () => {
   const { data, error } = useSWR<User>(
@@ -25,6 +25,9 @@ const AccountSettingPage = () => {
       <NarrowPageContainer>
         {data && !error && (
           <>
+            <Head>
+              <title>Account Setting - zydhan.xyz</title>
+            </Head>
             <div className='w-full flex flex-col pb-10 gap-y-3 items-center sm:flex-row justify-between align-middle'>
               <h2 className='text-2xl'>Account Setting</h2>
               <div className='w-24 text-sm'>
@@ -53,7 +56,7 @@ const AccountSettingPage = () => {
               </div>
 
               <div className='sm:w-full flex flex-col gap-y-5'>
-                <AccountSettingInformationSection user={data} />
+                <AccountSettingsInformationSection user={data} />
                 <AccountSettingSocialSection user={data} />
                 <PasswordSection />
               </div>

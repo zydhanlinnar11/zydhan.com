@@ -14,6 +14,7 @@ const PrivateRoute: FC = ({ children }) => {
       loginURL.searchParams.append('next', window.location.href)
       Router.replace(loginURL.toString())
     }
+
     return (
       <NarrowPageContainer>
         <div className='my-auto'>
