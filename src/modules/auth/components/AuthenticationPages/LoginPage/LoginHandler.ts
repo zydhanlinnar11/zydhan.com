@@ -27,8 +27,6 @@ const LoginHandler = async (email?: string, password?: string) => {
       password,
     })
 
-    // fetchUser()
-
     toast.success('Successfully logged in.', {
       theme: 'dark',
     })

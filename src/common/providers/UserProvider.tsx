@@ -1,6 +1,6 @@
 import User from '@/modules/auth/types/User'
 import fetchUser from '@/modules/auth/utils/FetchUser'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 import {
   createContext,
@@ -31,7 +31,6 @@ type Action =
   | {
       type: 'USER_UNAUTHENTICATED'
     }
-  | { type: 'LOGOUT' }
   | { type: 'LOADING' }
 
 const reducer = (state: UserState, action: Action): UserState => {
@@ -88,28 +87,6 @@ export const UserProvider: FC = ({ children }) => {
 
       dispatch({ type: 'USER_UNAUTHENTICATED' })
     } catch (e) {}
-  }
-
-  const socialLogin = (provider: 'google' | 'github') => {
-    dispatch({ type: 'LOADING' })
-    const width = 500
-    const height = 400
-    const left = window.screenX + (window.outerWidth - width) / 2
-    const top = window.screenY + (window.outerHeight - height) / 2.5
-
-    const popup = window.open(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/redirect`,
-      `Sign in with ${provider}`,
-      `width=${width},height=${height},left=${left},top=${top}`
-    )
-
-    const interval = setInterval(() => {
-      if (!popup || popup.closed) {
-        interval && clearInterval(interval)
-        getUserData()
-        return
-      }
-    }, 500)
   }
 
   return (

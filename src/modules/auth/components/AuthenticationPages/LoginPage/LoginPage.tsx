@@ -7,7 +7,7 @@ import fetchUser from '@/modules/auth/utils/FetchUser'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEventHandler, useRef, useState } from 'react'
-import SocialLoginButtonGroup from '../../SocialLoginButtonGroup'
+import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonGroup'
 import AuthenticationPages from '../AuthenticationPages'
 import LoginHandler from './LoginHandler'
 
