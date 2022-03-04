@@ -3,13 +3,12 @@ import PrivateRoute from '@/modules/auth/components/PrivateRoute'
 import NarrowPageContainer from '@/common/components/elements/NarrowPageContainer'
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import axios from 'axios'
 import useSWR, { useSWRConfig } from 'swr'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
 import Header from '@/common/components/elements/Header'
 import { User } from '@/modules/auth/types/AccountSettingUser'
-import AccountSettingInformationSection from './InformationSection'
+import AccountSettingsInformationSection from './AccountSettingsInformationSection'
 import AccountSettingSocialSection from './SocialSection'
 import fetcher from '@/common/utils/AxiosSWRFetcher'
 import PasswordSection from './PasswordSection'
@@ -53,7 +52,7 @@ const AccountSettingPage = () => {
               </div>
 
               <div className='sm:w-full flex flex-col gap-y-5'>
-                <AccountSettingInformationSection user={data} />
+                <AccountSettingsInformationSection user={data} />
                 <AccountSettingSocialSection user={data} />
                 <PasswordSection />
               </div>
