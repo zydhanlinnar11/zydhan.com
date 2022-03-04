@@ -6,43 +6,24 @@ import { useUserState } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import axios from 'axios'
 import Head from 'next/head'
-import Router, { useRouter } from 'next/router'
-import { FormEventHandler, useEffect, useReducer, useRef } from 'react'
-import SocialLoginButtonGroup from './SocialLoginButtonGroup'
+import { useRouter } from 'next/router'
+import { FormEventHandler, useEffect, useRef } from 'react'
+import AuthenticationStatusText from '../AuthenticationStatusText'
+import SocialLoginButtonGroup from '../SocialLoginButtonGroup'
+import useLoginStatus from './useLoginStatus'
 
-type LoginState =
-  | { state: 'PROCESSING' }
-  | { state: 'IDLE'; errorMessage?: string; successMessage?: string }
-
-type Action =
-  | { type: 'PROCESSING' }
-  | { type: 'IDLE'; errorMessage?: string; successMessage?: string }
-
-const reducer = (state: LoginState, action: Action): LoginState => {
-  if (action.type === 'PROCESSING')
-    return {
-      state: action.type,
-    }
-  if (action.type === 'IDLE')
-    return {
-      state: action.type,
-      errorMessage: action.errorMessage,
-      successMessage: action.successMessage,
-    }
-  throw Error('Unknown action')
-}
+const loading = (
+  <div className='grow flex flex-col justify-center items-center'>
+    <SpinnerLoading />
+  </div>
+)
 
 const LoginPage = () => {
   const userState = useUserState()
   const router = useRouter()
-  const [state, dispatch] = useReducer(reducer, { state: 'IDLE' })
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-  const loading = (
-    <div className='grow flex flex-col justify-center items-center'>
-      <SpinnerLoading />
-    </div>
-  )
+  const { state, dispatch } = useLoginStatus()
 
   useEffect(() => {
     const message = sessionStorage.getItem('flash_success')
@@ -142,12 +123,12 @@ const LoginPage = () => {
               </AnchorLink>
             </small>
             <br />
-            <small className='text-green-500'>
-              {state.state === 'IDLE' && state.successMessage}
-            </small>
-            <small className='text-red-500'>
-              {state.state === 'IDLE' && state.errorMessage}
-            </small>
+            {state.state === 'IDLE' && (
+              <AuthenticationStatusText
+                errorMessage={state.errorMessage}
+                successMessage={state.successMessage}
+              />
+            )}
           </div>
           <div className='mt-3'>
             <Button type='submit' disabled={state.state === 'PROCESSING'}>

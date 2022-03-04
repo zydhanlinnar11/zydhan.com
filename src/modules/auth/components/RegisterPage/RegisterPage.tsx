@@ -6,41 +6,26 @@ import { useUserState } from '@/common/providers/UserProvider'
 import axios from 'axios'
 import Head from 'next/head'
 import Router, { useRouter } from 'next/router'
-import { FormEventHandler, useReducer, useRef } from 'react'
-import SocialLoginButtonGroup from './SocialLoginButtonGroup'
+import { FormEventHandler, useRef } from 'react'
+import AuthenticationStatusText from '../AuthenticationStatusText'
+import SocialLoginButtonGroup from '../SocialLoginButtonGroup'
+import useRegisterStatus from './useRegisterStatus'
 
-type RegisterState =
-  | { state: 'PROCESSING' }
-  | { state: 'IDLE'; errorMessage?: string }
-
-type Action = { type: 'PROCESSING' } | { type: 'IDLE'; errorMessage?: string }
-
-const reducer = (state: RegisterState, action: Action): RegisterState => {
-  if (action.type === 'PROCESSING')
-    return {
-      state: action.type,
-    }
-  if (action.type === 'IDLE')
-    return {
-      state: action.type,
-      errorMessage: action.errorMessage,
-    }
-  throw Error('Unknown action')
-}
+const loading = (
+  <div className='grow flex flex-col justify-center items-center'>
+    <SpinnerLoading />
+  </div>
+)
 
 const RegisterPage = () => {
   const userState = useUserState()
   const router = useRouter()
-  const [state, dispatch] = useReducer(reducer, { state: 'IDLE' })
+  const { state, dispatch } = useRegisterStatus()
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
-  const loading = (
-    <div className='grow flex flex-col justify-center items-center'>
-      <SpinnerLoading />
-    </div>
-  )
+
   const nextPath = router.query['next']
   if (userState.state !== 'unauthenticated') {
     try {
@@ -158,17 +143,17 @@ const RegisterPage = () => {
               <AnchorLink href='/auth/login'>Log in</AnchorLink>
             </small>
             <br />
-            <small className='text-red-500'>
-              {state.state === 'IDLE' && state.errorMessage}
-            </small>
+            {state.status === 'IDLE' && (
+              <AuthenticationStatusText errorMessage={state.errorMessage} />
+            )}
           </div>
           <div className='mt-3'>
-            <Button type='submit' disabled={state.state === 'PROCESSING'}>
+            <Button type='submit' disabled={state.status === 'PROCESSING'}>
               Register
             </Button>
           </div>
           <div className='mt-3'>
-            <SocialLoginButtonGroup disabled={state.state === 'PROCESSING'} />
+            <SocialLoginButtonGroup disabled={state.status === 'PROCESSING'} />
           </div>
         </form>
       </div>

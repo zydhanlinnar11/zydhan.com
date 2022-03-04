@@ -6,27 +6,20 @@ import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FormEventHandler, useReducer, useRef } from 'react'
+import useForgotPasswordStatus from './useForgotPasswordStatus'
 
-type ForgotPasswordState =
-  | { status: 'PROCESSING' }
-  | { status: 'IDLE'; errorMessage?: string; successMessage?: string }
+const loading = (
+  <div className='grow flex flex-col justify-center items-center'>
+    <SpinnerLoading />
+  </div>
+)
 
-type Action = ForgotPasswordState
-
-const reducer = (
-  state: ForgotPasswordState,
-  action: Action
-): ForgotPasswordState => action
 const ForgotPasswordPage = () => {
   const userState = useUserState()
   const router = useRouter()
-  const [state, dispatch] = useReducer(reducer, { status: 'IDLE' })
+  const { state, dispatch } = useForgotPasswordStatus()
   const emailRef = useRef<HTMLInputElement>(null)
-  const loading = (
-    <div className='grow flex flex-col justify-center items-center'>
-      <SpinnerLoading />
-    </div>
-  )
+
   if (userState.state !== 'unauthenticated') {
     if (userState.state === 'authenticated') router.push('/')
     return loading

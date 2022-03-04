@@ -2,7 +2,7 @@ import Button from '@/common/components/elements/Button'
 import { useUserState } from '@/common/providers/UserProvider'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { Dispatch, FC, SetStateAction } from 'react'
+import React, { FC } from 'react'
 
 type Props = {
   disabled: boolean

@@ -6,31 +6,24 @@ import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FormEventHandler, useReducer, useRef } from 'react'
+import AuthenticationStatusText from '../AuthenticationStatusText'
+import useResetPasswordStatus from './useResetPasswordStatus'
 
-type ResetPasswordState =
-  | { status: 'PROCESSING' }
-  | { status: 'IDLE'; errorMessage?: string; successMessage?: string }
-
-type Action = ResetPasswordState
-
-const reducer = (
-  state: ResetPasswordState,
-  action: Action
-): ResetPasswordState => action
+const loading = (
+  <div className='grow flex flex-col justify-center items-center'>
+    <SpinnerLoading />
+  </div>
+)
 
 const ResetPasswordPage = () => {
   const userState = useUserState()
   const router = useRouter()
-  const [state, dispatch] = useReducer(reducer, { status: 'IDLE' })
+  const { state, dispatch } = useResetPasswordStatus()
   const tokenRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const passwordConfirmationRef = useRef<HTMLInputElement>(null)
-  const loading = (
-    <div className='grow flex flex-col justify-center items-center'>
-      <SpinnerLoading />
-    </div>
-  )
+
   const token = router.query['token']
   const email = router.query['email']
 
@@ -143,14 +136,12 @@ const ResetPasswordPage = () => {
             position='bottom'
             reference={passwordConfirmationRef}
           />
-          <div className='mt-1'>
-            <small className='text-green-500'>
-              {state.status === 'IDLE' && state.successMessage}
-            </small>
-            <small className='text-red-500'>
-              {state.status === 'IDLE' && state.errorMessage}
-            </small>
-          </div>
+          {state.status === 'IDLE' && (
+            <AuthenticationStatusText
+              errorMessage={state.errorMessage}
+              successMessage={state.successMessage}
+            />
+          )}
           <div className='mt-3'>
             <Button type='submit' disabled={state.status === 'PROCESSING'}>
               Reset password
