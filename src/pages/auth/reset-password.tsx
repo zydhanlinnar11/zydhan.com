@@ -1,1 +1,1 @@
-export { default } from '@/modules/auth/components/ResetPasswordPage/index'
+export { default } from '@/modules/auth/components/AuthenticationPages/ResetPasswordPage/index'

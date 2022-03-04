@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 import {
   createContext,
@@ -7,7 +7,6 @@ import {
   Dispatch,
   useContext,
   useEffect,
-  SetStateAction,
 } from 'react'
 
 type User = {
@@ -21,13 +20,6 @@ type UserState =
     }
   | {
       state: 'unauthenticated'
-      login: (email: string, password: string) => Promise<void>
-      register: (
-        name: string,
-        email: string,
-        password: string,
-        passwordConfirm: string
-      ) => Promise<void>
       socialLogin: (provider: 'google' | 'github') => void
     }
   | {
@@ -46,13 +38,6 @@ type Action =
     }
   | {
       type: 'USER_UNAUTHENTICATED'
-      login: (email: string, password: string) => Promise<void>
-      register: (
-        name: string,
-        email: string,
-        password: string,
-        passwordConfirm: string
-      ) => Promise<void>
       socialLogin: (provider: 'google' | 'github') => void
     }
   | { type: 'LOGOUT' }
@@ -70,8 +55,6 @@ const reducer = (state: UserState, action: Action): UserState => {
     case 'USER_UNAUTHENTICATED':
       return {
         state: 'unauthenticated',
-        login: action.login,
-        register: action.register,
         socialLogin: action.socialLogin,
       }
     case 'LOADING':
@@ -113,7 +96,7 @@ export const UserProvider: FC = ({ children }) => {
         revalidate: fetchUser,
       })
     } catch (e) {
-      dispatch({ type: 'USER_UNAUTHENTICATED', login, register, socialLogin })
+      dispatch({ type: 'USER_UNAUTHENTICATED', socialLogin })
     }
   }
 
@@ -123,43 +106,8 @@ export const UserProvider: FC = ({ children }) => {
         withCredentials: true,
       })
 
-      dispatch({ type: 'USER_UNAUTHENTICATED', login, register, socialLogin })
+      dispatch({ type: 'USER_UNAUTHENTICATED', socialLogin })
     } catch (e) {}
-  }
-
-  const login = async (email: string, password: string) => {
-    const instance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_URL,
-      withCredentials: true,
-    })
-
-    await instance.get('/sanctum/csrf-cookie')
-    await instance.post('/auth/login', {
-      email,
-      password,
-    })
-
-    fetchUser()
-  }
-
-  const register = async (
-    name: string,
-    email: string,
-    password: string,
-    passwordConfirm: string
-  ) => {
-    const instance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_URL,
-      withCredentials: true,
-    })
-
-    await instance.get('/sanctum/csrf-cookie')
-    await instance.post('/auth/register', {
-      name,
-      email,
-      password,
-      password_confirmation: passwordConfirm,
-    })
   }
 
   const socialLogin = (provider: 'google' | 'github') => {

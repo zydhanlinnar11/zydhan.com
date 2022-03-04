@@ -1,93 +1,40 @@
 import AnchorLink from '@/common/components/elements/AnchorLink'
 import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
-import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
-import { useUserState } from '@/common/providers/UserProvider'
-import axios from 'axios'
+import getBaseURL from '@/common/utils/GetBaseUrl'
 import Head from 'next/head'
-import Router, { useRouter } from 'next/router'
-import { FormEventHandler, useRef } from 'react'
-import AuthenticationStatusText from '../AuthenticationStatusText'
-import SocialLoginButtonGroup from '../SocialLoginButtonGroup'
-import useRegisterStatus from './useRegisterStatus'
-
-const loading = (
-  <div className='grow flex flex-col justify-center items-center'>
-    <SpinnerLoading />
-  </div>
-)
+import { useRouter } from 'next/router'
+import { FormEventHandler, useRef, useState } from 'react'
+import SocialLoginButtonGroup from '../../SocialLoginButtonGroup'
+import AuthenticationPages from '../AuthenticationPages'
+import RegisterHandler from './RegisterHandler'
 
 const RegisterPage = () => {
-  const userState = useUserState()
   const router = useRouter()
-  const { state, dispatch } = useRegisterStatus()
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
+  const [isProcessing, setProcessing] = useState<boolean>(false)
 
   const nextPath = router.query['next']
-  if (userState.state !== 'unauthenticated') {
-    try {
-      if (typeof nextPath !== 'string') throw Error()
-      const redirectTo = new URL(`${nextPath}`)
-      if (userState.state === 'loading') return loading
-      router.push(redirectTo.toString())
-    } catch (e) {
-      if (userState.state === 'loading') return loading
-      router.push('/')
-    }
-    return loading
-  }
+  const loginPath = new URL(`${getBaseURL()}/auth/login`)
+  if (typeof nextPath === 'string')
+    loginPath.searchParams.append('next', nextPath)
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    dispatch({ type: 'PROCESSING' })
-    if (!nameRef?.current?.value) {
-      dispatch({ type: 'IDLE', errorMessage: 'Name must be filled' })
-      return
-    }
-    if (!emailRef?.current?.value) {
-      dispatch({ type: 'IDLE', errorMessage: 'Email must be filled' })
-      return
-    }
-    if (!passwordRef?.current?.value) {
-      dispatch({ type: 'IDLE', errorMessage: 'Password must be filled' })
-      return
-    }
-    if (confirmPasswordRef?.current?.value !== passwordRef.current.value) {
-      dispatch({
-        type: 'IDLE',
-        errorMessage: 'Password confirmation must match',
-      })
-      return
-    }
-
-    try {
-      await userState.register(
-        nameRef.current.value,
-        emailRef.current.value,
-        passwordRef.current.value,
-        confirmPasswordRef.current.value
-      )
-      Router.push('/auth/login')
-
-      sessionStorage.setItem(
-        'flash_success',
-        JSON.stringify('User successfully registered')
-      )
-      dispatch({ type: 'IDLE' })
-    } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
-      dispatch({
-        type: 'IDLE',
-        errorMessage: e.response?.data?.message || e.message,
-      })
-    }
+    setProcessing(true)
+    RegisterHandler(
+      nameRef.current?.value,
+      emailRef.current?.value,
+      passwordRef.current?.value,
+      confirmPasswordRef.current?.value
+    ).finally(() => setProcessing(false))
   }
 
   return (
-    <>
+    <AuthenticationPages>
       <Head>
         <title>Register - zydhan.xyz</title>
         <meta property='og:title' content='Login - zydhan.xyz' />
@@ -140,24 +87,21 @@ const RegisterPage = () => {
           <div className='mt-1'>
             <small>
               Already have an account?{' '}
-              <AnchorLink href='/auth/login'>Log in</AnchorLink>
+              <AnchorLink href={loginPath.toString()}>Log in</AnchorLink>
             </small>
             <br />
-            {state.status === 'IDLE' && (
-              <AuthenticationStatusText errorMessage={state.errorMessage} />
-            )}
           </div>
           <div className='mt-3'>
-            <Button type='submit' disabled={state.status === 'PROCESSING'}>
+            <Button type='submit' disabled={isProcessing}>
               Register
             </Button>
           </div>
           <div className='mt-3'>
-            <SocialLoginButtonGroup disabled={state.status === 'PROCESSING'} />
+            <SocialLoginButtonGroup disabled={isProcessing} />
           </div>
         </form>
       </div>
-    </>
+    </AuthenticationPages>
   )
 }
 

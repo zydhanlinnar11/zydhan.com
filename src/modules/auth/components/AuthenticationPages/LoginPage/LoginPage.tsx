@@ -1,79 +1,35 @@
 import AnchorLink from '@/common/components/elements/AnchorLink'
 import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
-import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
-import { useUserState } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
-import axios from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { FormEventHandler, useEffect, useRef } from 'react'
-import AuthenticationStatusText from '../AuthenticationStatusText'
-import SocialLoginButtonGroup from '../SocialLoginButtonGroup'
-import useLoginStatus from './useLoginStatus'
-
-const loading = (
-  <div className='grow flex flex-col justify-center items-center'>
-    <SpinnerLoading />
-  </div>
-)
+import { FormEventHandler, useRef, useState } from 'react'
+import SocialLoginButtonGroup from '../../SocialLoginButtonGroup'
+import AuthenticationPages from '../AuthenticationPages'
+import LoginHandler from './LoginHandler'
 
 const LoginPage = () => {
-  const userState = useUserState()
   const router = useRouter()
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-  const { state, dispatch } = useLoginStatus()
-
-  useEffect(() => {
-    const message = sessionStorage.getItem('flash_success')
-    if (!message) return
-    dispatch({ type: 'IDLE', successMessage: JSON.parse(message) })
-    sessionStorage.removeItem('flash_success')
-  }, [])
+  const [isProcessing, setProcessing] = useState<boolean>(false)
 
   const nextPath = router.query['next']
   const registerPath = new URL(`${getBaseURL()}/auth/register`)
   if (typeof nextPath === 'string')
     registerPath.searchParams.append('next', nextPath)
-  if (userState.state !== 'unauthenticated') {
-    try {
-      if (typeof nextPath !== 'string') throw Error()
-      const redirectTo = new URL(`${nextPath}`)
-      if (userState.state === 'loading') return loading
-      router.push(redirectTo.toString())
-    } catch (e) {
-      if (userState.state === 'loading') return loading
-      router.push('/')
-    }
-    return loading
-  }
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    dispatch({ type: 'PROCESSING' })
-    if (!emailRef?.current?.value) {
-      dispatch({ type: 'IDLE', errorMessage: 'Email must be filled' })
-      return
-    }
-    if (!passwordRef?.current?.value) {
-      dispatch({ type: 'IDLE', errorMessage: 'Password must be filled' })
-      return
-    }
-
-    try {
-      await userState.login(emailRef.current.value, passwordRef.current.value)
-    } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
-      dispatch({
-        type: 'IDLE',
-        errorMessage: e.response?.data?.message || e.message,
-      })
-    }
+    setProcessing(true)
+    LoginHandler(emailRef.current?.value, passwordRef.current?.value).finally(
+      () => setProcessing(false)
+    )
   }
 
   return (
-    <>
+    <AuthenticationPages>
       <Head>
         <title>Login - zydhan.xyz</title>
         <meta property='og:title' content='Login - zydhan.xyz' />
@@ -123,24 +79,18 @@ const LoginPage = () => {
               </AnchorLink>
             </small>
             <br />
-            {state.state === 'IDLE' && (
-              <AuthenticationStatusText
-                errorMessage={state.errorMessage}
-                successMessage={state.successMessage}
-              />
-            )}
           </div>
           <div className='mt-3'>
-            <Button type='submit' disabled={state.state === 'PROCESSING'}>
+            <Button type='submit' disabled={isProcessing}>
               Log in
             </Button>
           </div>
           <div className='mt-3'>
-            <SocialLoginButtonGroup disabled={state.state === 'PROCESSING'} />
+            <SocialLoginButtonGroup disabled={isProcessing} />
           </div>
         </form>
       </div>
-    </>
+    </AuthenticationPages>
   )
 }
 
