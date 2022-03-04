@@ -11,7 +11,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Zydhan Linnar Putra&apos;s Personal Portfolio</title>
+        <title>Zydhan Linnar Putra</title>
       </Head>
       <ToastContainer transition={Slide} />
       <div className='min-h-screen flex flex-col'>
