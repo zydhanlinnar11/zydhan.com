@@ -1,6 +1,5 @@
 import User from '@/modules/auth/types/User'
 import fetchUser from '@/modules/auth/utils/FetchUser'
-
 import {
   createContext,
   FC,
@@ -37,20 +36,15 @@ export const UserProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    getUserData()
+    fetchUser()
+      .then((user) =>
+        dispatch({
+          state: 'authenticated',
+          user,
+        })
+      )
+      .catch(() => dispatch({ state: 'unauthenticated' }))
   }, [])
-
-  const getUserData = async () => {
-    try {
-      const data = await fetchUser()
-      dispatch({
-        state: 'authenticated',
-        user: data,
-      })
-    } catch (e) {
-      dispatch({ state: 'unauthenticated' })
-    }
-  }
 
   return (
     <UserStateContext.Provider value={state}>
