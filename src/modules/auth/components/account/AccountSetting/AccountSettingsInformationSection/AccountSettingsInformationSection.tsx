@@ -2,7 +2,7 @@ import Button from '@/common/components/elements/Button'
 import TextInput from '@/common/components/elements/Form/TextInput'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { FC, FormEventHandler, useRef, useState } from 'react'
+import React, { FC, FormEventHandler, useEffect, useRef, useState } from 'react'
 import { mutate } from 'swr'
 import { User } from '@/modules/auth/types/AccountSettingUser'
 import fetchUser from '@/modules/auth/utils/FetchUser'
@@ -20,18 +20,25 @@ const AccountSettingsInformationSection: FC<Props> = ({ user }) => {
   const emailRef = useRef<HTMLInputElement>(null)
   const [isInProgress, setInProgress] = useState<boolean>(false)
   const userDispatch = useUserDispatch()
+  const [mounted, setMounted] = useState<boolean>(true)
+
+  useEffect(() => () => setMounted(false), [])
 
   const handleAccountChange: FormEventHandler<HTMLFormElement> = (e) => {
     setInProgress(true)
     e.preventDefault()
     handleInformationChange(emailRef.current?.value, emailRef.current?.value)
-      .then(async () => {
-        const user = await fetchUser()
-        await mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
-        userDispatch({ state: 'authenticated', user })
-        toast.success('Successfully update account information!', {
-          theme: 'dark',
-        })
+      .then(() => {
+        const updateUserData = async () => {
+          const user = await fetchUser()
+          userDispatch({ state: 'authenticated', user })
+
+          await mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
+          toast.success('Successfully update account information!', {
+            theme: 'dark',
+          })
+        }
+        if (mounted) updateUserData()
       })
       .catch(handleError)
       .finally(() => setInProgress(false))
