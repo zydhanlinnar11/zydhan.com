@@ -1,9 +1,11 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const ForgotPasswordHandler = async (email?: string) => {
-  // dispatch({ status: 'PROCESSING' })
   if (!email) {
-    //   dispatch({ status: 'IDLE', errorMessage: 'Email must be filled' })
+    toast.error('Email must be filled', {
+      theme: 'dark',
+    })
     return
   }
 
@@ -17,16 +19,16 @@ const ForgotPasswordHandler = async (email?: string) => {
         withCredentials: true,
       }
     )
-    //   dispatch({
-    //     status: 'IDLE',
-    //     successMessage: 'Check your email for reset password link',
-    //   })
+
+    toast.success('Check your email for reset password link', {
+      theme: 'dark',
+    })
   } catch (e) {
     if (!axios.isAxiosError(e)) throw e
-    //   dispatch({
-    //     status: 'IDLE',
-    //     errorMessage: e.response?.data?.message || e.message,
-    //   })
+
+    toast.error(e.response?.data?.message || e.message, {
+      theme: 'dark',
+    })
   }
 }
 

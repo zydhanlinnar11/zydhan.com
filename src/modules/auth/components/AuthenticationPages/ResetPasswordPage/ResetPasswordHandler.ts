@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const ResetPasswordHandler = async (
   email?: string,
@@ -6,20 +7,16 @@ const ResetPasswordHandler = async (
   passwordConfirmation?: string,
   token?: string
 ) => {
-  // dispatch({ status: 'PROCESSING' })
-  if (!email) {
-    //   dispatch({ status: 'IDLE', errorMessage: 'Email must be filled' })
-    return
-  }
   if (!password) {
-    //   dispatch({ status: 'IDLE', errorMessage: 'Password must be filled' })
+    toast.error('Password must be filled', {
+      theme: 'dark',
+    })
     return
   }
   if (passwordConfirmation !== password) {
-    //   dispatch({
-    //     status: 'IDLE',
-    //     errorMessage: 'Password confirmation should match',
-    //   })
+    toast.error('Password confirmation must match', {
+      theme: 'dark',
+    })
     return
   }
 
@@ -36,18 +33,15 @@ const ResetPasswordHandler = async (
         withCredentials: true,
       }
     )
-    //   dispatch({ status: 'IDLE' })
 
-    //   sessionStorage.setItem(
-    //     'flash_success',
-    //     JSON.stringify(res.data?.message ?? 'Password has been reset')
-    //   )
+    toast.success(res.data?.message ?? 'Password has been reset', {
+      theme: 'dark',
+    })
   } catch (e) {
     if (!axios.isAxiosError(e)) throw e
-    //   dispatch({
-    //     status: 'IDLE',
-    //     errorMessage: e.response?.data?.message || e.message,
-    //   })
+    toast.error(e.response?.data?.message || e.message, {
+      theme: 'dark',
+    })
   }
 }
 
