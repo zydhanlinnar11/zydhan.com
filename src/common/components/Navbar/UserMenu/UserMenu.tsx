@@ -31,39 +31,37 @@ const UserMenu = () => {
   }
 
   return (
-    <ul className='flex gap-x-8'>
-      <Menu icon={faCircleUser} iconSize='2x'>
-        {userState.state === 'loading' && <UserInfo />}
-        {userState.state === 'authenticated' && (
-          <>
-            <UserInfo user={userState.user} />
-            <MenuItem onClick={() => Router.push('/auth/account')}>
-              <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
-              Setting
-            </MenuItem>
-            <MenuItem onClick={logoutHandler}>
-              <FontAwesomeIcon
-                icon={faArrowRightFromBracket}
-                className='mr-2 my-0'
-              />
-              Sign out
-            </MenuItem>
-          </>
-        )}
-        {userState.state === 'unauthenticated' && (
-          <>
-            <UserInfo user={null} />
-            <MenuItem onClick={() => Router.push('/auth/login')}>
-              <FontAwesomeIcon
-                icon={faArrowRightFromBracket}
-                className='mr-2 my-0'
-              />
-              Sign in
-            </MenuItem>
-          </>
-        )}
-      </Menu>
-    </ul>
+    <Menu icon={faCircleUser} iconSize='2x'>
+      {userState.state === 'loading' && <UserInfo />}
+      {userState.state === 'authenticated' && (
+        <>
+          <UserInfo user={userState.user} />
+          <MenuItem onClick={() => Router.push('/auth/account')}>
+            <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
+            Setting
+          </MenuItem>
+          <MenuItem onClick={logoutHandler}>
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              className='mr-2 my-0'
+            />
+            Sign out
+          </MenuItem>
+        </>
+      )}
+      {userState.state === 'unauthenticated' && (
+        <>
+          <UserInfo user={null} />
+          <MenuItem onClick={() => Router.push('/auth/login')}>
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              className='mr-2 my-0'
+            />
+            Sign in
+          </MenuItem>
+        </>
+      )}
+    </Menu>
   )
 }
 
