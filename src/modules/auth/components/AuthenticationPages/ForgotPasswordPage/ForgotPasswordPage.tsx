@@ -2,6 +2,7 @@ import Button from '@/common/components/Button'
 import Input from '@/common/components/Form/Input'
 import Head from 'next/head'
 import React, { FormEventHandler, useRef, useState } from 'react'
+import GuestRoute from '../../GuestRoute'
 import ForgotPasswordHandler from './ForgotPasswordHandler'
 
 const ForgotPasswordPage = () => {
@@ -17,7 +18,7 @@ const ForgotPasswordPage = () => {
   }
 
   return (
-    <>
+    <GuestRoute>
       <Head>
         <title>Forgot Password - zydhan.xyz</title>
         <meta property='og:title' content='Forgot Password - zydhan.xyz' />
@@ -52,7 +53,7 @@ const ForgotPasswordPage = () => {
           </div>
         </form>
       </div>
-    </>
+    </GuestRoute>
   )
 }
 
