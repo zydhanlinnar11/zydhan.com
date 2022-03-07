@@ -3,6 +3,7 @@ import Modal from '@/common/components/Modal'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import PrivateRoute from '@/modules/auth/components/PrivateRoute'
 import logout from '@/modules/auth/utils/Logout'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
@@ -38,16 +39,21 @@ const LogoutPage = () => {
   }
 
   return (
-    <PrivateRoute>
-      <Modal
-        title='Log out'
-        bodyText='Are you sure want to log out?'
-        isShowed={isModalShowed}
-        handleClose={cancelLogout}
-        action={{ handler: logoutHandler, text: 'Log out', type: 'danger' }}
-      />
-      <FullscreenLoading />
-    </PrivateRoute>
+    <>
+      <Head>
+        <title>Log out - zydhan.xyz</title>
+      </Head>
+      <PrivateRoute>
+        <Modal
+          title='Log out'
+          bodyText='Are you sure want to log out?'
+          isShowed={isModalShowed}
+          handleClose={cancelLogout}
+          action={{ handler: logoutHandler, text: 'Log out', type: 'danger' }}
+        />
+        <FullscreenLoading />
+      </PrivateRoute>
+    </>
   )
 }
 
