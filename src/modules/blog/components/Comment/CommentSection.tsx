@@ -1,5 +1,5 @@
-import AnchorLink from '@/common/components/elements/AnchorLink'
-import Button from '@/common/components/elements/Button'
+import AnchorLink from '@/common/components/AnchorLink'
+import Button from '@/common/components/Button'
 import { useUserState } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import Router from 'next/router'

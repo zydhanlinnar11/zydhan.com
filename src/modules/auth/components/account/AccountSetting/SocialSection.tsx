@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler, useState } from 'react'
-import Button from '@/common/components/elements/Button'
+import Button from '@/common/components/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { User } from '@/modules/auth/types/AccountSettingUser'
@@ -9,7 +9,7 @@ import {
   faCircleExclamation,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons'
-import Modal from '@/common/components/elements/Modal'
+import Modal from '@/common/components/Modal'
 
 type Props = {
   user: User

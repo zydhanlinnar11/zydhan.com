@@ -1,5 +1,5 @@
-import Button from '@/common/components/elements/Button'
-import Input from '@/common/components/elements/Form/Input'
+import Button from '@/common/components/Button'
+import Input from '@/common/components/Form/Input'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FormEventHandler, useRef, useState } from 'react'

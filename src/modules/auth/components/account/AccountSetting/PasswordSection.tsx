@@ -1,9 +1,9 @@
 import React, { FormEventHandler, useReducer, useRef } from 'react'
-import Input from '@/common/components/elements/Form/Input'
+import Input from '@/common/components/Form/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Button from '@/common/components/elements/Button'
+import Button from '@/common/components/Button'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
-import Alert from '@/components/elements/Alert'
+import Alert from '@/components/Alert'
 import axios from 'axios'
 
 type State =

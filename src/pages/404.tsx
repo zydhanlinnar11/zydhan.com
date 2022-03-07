@@ -1,4 +1,4 @@
-import Header from '@/common/components/elements/Header'
+import Header from '@/common/components/Header'
 import React from 'react'
 
 export default function Custom404() {

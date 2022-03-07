@@ -1,4 +1,4 @@
-import FullscreenLoading from '@/common/components/elements/FullscreenLoading'
+import FullscreenLoading from '@/common/components/FullscreenLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'

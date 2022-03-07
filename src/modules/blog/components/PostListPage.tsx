@@ -1,4 +1,4 @@
-import Header from '@/common/components/elements/Header'
+import Header from '@/common/components/Header'
 import { useUserState } from '@/common/providers/UserProvider'
 import axios, { AxiosResponse } from 'axios'
 import Head from 'next/head'

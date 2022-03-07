@@ -1,5 +1,5 @@
-import Button from '@/common/components/elements/Button'
-import Input from '@/common/components/elements/Form/Input'
+import Button from '@/common/components/Button'
+import Input from '@/common/components/Form/Input'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { FC, FormEventHandler, useEffect, useRef, useState } from 'react'

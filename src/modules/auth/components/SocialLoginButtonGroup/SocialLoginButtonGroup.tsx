@@ -1,4 +1,4 @@
-import Button from '@/common/components/elements/Button'
+import Button from '@/common/components/Button'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -3,7 +3,7 @@ import rehypeRaw from 'rehype-raw'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { FC } from 'react'
-import AnchorLink from '@/common/components/elements/AnchorLink'
+import AnchorLink from '@/common/components/AnchorLink'
 
 const MarkdownSyntaxHighlighter = dynamic(
   () => import('@/modules/blog/components/MarkdownSyntaxHighlighter')

@@ -1,5 +1,5 @@
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
-import SmallSocialMediaButton from '@/components/elements/SmallSocialMediaButton'
+import SmallSocialMediaButton from '@/components/SmallSocialMediaButton'
 
 const socialMedia = [
   {
@@ -16,13 +16,13 @@ const socialMedia = [
 
 export default function Footer() {
   return (
-    <footer className="h-7 mx-auto text-gray-300 mb-5 w-full max-w-5xl px-6 print:hidden">
-      <div className="h-px w-full bg-white/[0.24]"></div>
-      <div className="flex justify-between mt-2">
+    <footer className='h-7 mx-auto text-gray-300 mb-5 w-full max-w-5xl px-6 print:hidden'>
+      <div className='h-px w-full bg-white/[0.24]'></div>
+      <div className='flex justify-between mt-2'>
         <div>
           <small>© {new Date().getFullYear()} Zydhan Linnar Putra.</small>
         </div>
-        <div className="flex gap-3">
+        <div className='flex gap-3'>
           {socialMedia.map((item) => (
             <SmallSocialMediaButton
               icon={item.icon}

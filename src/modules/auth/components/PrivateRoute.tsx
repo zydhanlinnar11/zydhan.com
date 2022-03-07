@@ -1,5 +1,5 @@
-import NarrowPageContainer from '@/common/components/elements/NarrowPageContainer'
-import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
+import NarrowPageContainer from '@/common/components/NarrowPageContainer'
+import SpinnerLoading from '@/common/components/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import Router from 'next/router'

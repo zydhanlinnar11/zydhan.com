@@ -1,5 +1,5 @@
-import Header from '@/common/components/elements/Header'
-import SpinnerLoading from '@/common/components/elements/SpinnerLoading'
+import Header from '@/common/components/Header'
+import SpinnerLoading from '@/common/components/SpinnerLoading'
 import axios, { AxiosResponse } from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
