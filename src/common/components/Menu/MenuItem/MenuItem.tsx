@@ -2,7 +2,8 @@ import { Menu } from '@headlessui/react'
 import { FC, MouseEventHandler } from 'react'
 
 type Props = {
-  onClick?: MouseEventHandler
+  onClick: MouseEventHandler<HTMLLIElement> &
+    ((event: { preventDefault: Function }) => void)
 }
 
 const MenuItem: FC<Props> = ({ children, onClick }) => {
@@ -12,6 +13,7 @@ const MenuItem: FC<Props> = ({ children, onClick }) => {
       className='py-2 px-3 text-left transition-all duration-150
               hover:cursor-pointer flex items-center
               rounded text-sm hover:bg-blue-600/30'
+      onClick={onClick}
     >
       {children}
     </Menu.Item>
