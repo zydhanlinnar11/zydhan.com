@@ -1,4 +1,4 @@
-import { FC, forwardRef, InputHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 
 type InputPosition = 'top' | 'middle' | 'bottom' | 'single'
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -33,5 +33,7 @@ const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
     />
   )
 })
+
+Input.displayName = 'Input'
 
 export default Input
