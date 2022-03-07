@@ -9,6 +9,9 @@ const nextConfig = {
       'avatars.dicebear.com',
     ],
   },
+  eslint: {
+    dirs: ['src'],
+  },
 }
 
 module.exports = nextConfig
