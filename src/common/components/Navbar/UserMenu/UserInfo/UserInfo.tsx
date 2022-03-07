@@ -10,16 +10,18 @@ type Props = {
 const loading = (
   <>
     <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
-    <div className='h-2 bg-slate-700 rounded animate-pulse'></div>
-    <div className='h-2 mx-5 bg-slate-700 rounded animate-pulse'></div>
+    <div className='h-2 bg-slate-700 rounded animate-pulse py-1 w-full mt-1'></div>
+    <div className='h-2 mx-5 bg-slate-700 rounded animate-pulse py-1 w-full'></div>
   </>
 )
 
 const noUser = (
   <>
     <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
-    <div className='h-2 bg-slate-700 rounded animate-pulse'></div>
-    <div className='h-2 mx-5 bg-slate-700 rounded animate-pulse'></div>
+    <div className='text-center'>
+      <p>Guest</p>
+      <small className='text-gray-400'>Welcome</small>
+    </div>
   </>
 )
 
