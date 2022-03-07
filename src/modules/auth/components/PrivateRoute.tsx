@@ -1,30 +1,23 @@
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
-import SpinnerLoading from '@/common/components/SpinnerLoading'
 import { useUserState } from '@/common/providers/UserProvider'
-import getBaseURL from '@/common/utils/GetBaseUrl'
-import Router from 'next/router'
-import { FC } from 'react'
+import FullscreenLoading from '@/common/components/FullscreenLoading'
+import { FC, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const PrivateRoute: FC = ({ children }) => {
-  const userState = useUserState()
+  const { state } = useUserState()
+  const router = useRouter()
 
-  if (userState.state !== 'authenticated') {
-    if (userState.state === 'unauthenticated') {
-      const loginURL = new URL(`${getBaseURL()}/auth/login`)
-      loginURL.searchParams.append('next', window.location.href)
-      Router.replace(loginURL.toString())
-    }
+  useEffect(() => {
+    if (state !== 'unauthenticated') return
+    router.push(`/auth/login?next=${encodeURIComponent(location.href)}`)
+  }, [state])
 
-    return (
-      <NarrowPageContainer>
-        <div className='my-auto'>
-          <SpinnerLoading />
-        </div>
-      </NarrowPageContainer>
-    )
-  }
-
-  return <>{children}</>
+  return (
+    <NarrowPageContainer>
+      {state === 'authenticated' ? <>{children}</> : <FullscreenLoading />}
+    </NarrowPageContainer>
+  )
 }
 
 export default PrivateRoute
