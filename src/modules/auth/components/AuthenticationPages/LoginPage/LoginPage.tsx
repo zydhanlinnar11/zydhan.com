@@ -1,6 +1,6 @@
 import AnchorLink from '@/common/components/elements/AnchorLink'
 import Button from '@/common/components/elements/Button'
-import TextInput from '@/common/components/elements/Form/TextInput'
+import Input from '@/common/components/elements/Form/Input'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import fetchUser from '@/modules/auth/utils/FetchUser'
@@ -52,21 +52,21 @@ const LoginPage = () => {
           method='POST'
           onSubmit={submitHandler}
         >
-          <TextInput
-            type={'email'}
+          <Input
+            type='email'
             name='email'
-            label='E-mail'
+            placeholder='E-mail'
             autoComplete='username'
             position='top'
-            reference={emailRef}
+            ref={emailRef}
           />
-          <TextInput
+          <Input
             type={'password'}
             name='password'
-            label='Password'
+            placeholder='Password'
             autoComplete='current-password'
             position='bottom'
-            reference={passwordRef}
+            ref={passwordRef}
           />
           <div className='mt-1'>
             <small>

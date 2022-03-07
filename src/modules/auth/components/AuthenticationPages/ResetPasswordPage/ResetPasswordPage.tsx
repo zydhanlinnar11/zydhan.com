@@ -1,5 +1,5 @@
 import Button from '@/common/components/elements/Button'
-import TextInput from '@/common/components/elements/Form/TextInput'
+import Input from '@/common/components/elements/Form/Input'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FormEventHandler, useRef, useState } from 'react'
@@ -49,39 +49,28 @@ const ResetPasswordPage = () => {
           method='POST'
           onSubmit={submitHandler}
         >
-          <div className='hidden'>
-            <TextInput
-              type='text'
-              name='token'
-              label='token'
-              defaultValue={`${token}`}
-              reference={tokenRef}
-              position='bottom'
-            />
-            <TextInput
-              type={'text'}
-              name='email'
-              label='E-mail'
-              defaultValue={`${email}`}
-              position='top'
-              reference={emailRef}
-            />
-          </div>
-          <TextInput
+          <Input type='hidden' defaultValue={`${token}`} ref={tokenRef} />
+          <Input
+            type='hidden'
+            defaultValue={`${email}`}
+            ref={emailRef}
+            autoComplete='username'
+          />
+          <Input
             type={'password'}
             name='password'
-            label='Password'
+            placeholder='Password'
             autoComplete='new-password'
             position='top'
-            reference={passwordRef}
+            ref={passwordRef}
           />
-          <TextInput
+          <Input
             type={'password'}
             name='password_confirmation'
-            label='Password Confirmation'
+            placeholder='Password Confirmation'
             autoComplete='new-password'
             position='bottom'
-            reference={passwordConfirmationRef}
+            ref={passwordConfirmationRef}
           />
           <div className='mt-3'>
             <Button type='submit' disabled={isProcessing}>

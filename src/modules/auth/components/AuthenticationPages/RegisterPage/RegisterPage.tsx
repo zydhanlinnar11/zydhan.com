@@ -1,6 +1,6 @@
 import AnchorLink from '@/common/components/elements/AnchorLink'
 import Button from '@/common/components/elements/Button'
-import TextInput from '@/common/components/elements/Form/TextInput'
+import Input from '@/common/components/elements/Form/Input'
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -51,38 +51,34 @@ const RegisterPage = () => {
           method='POST'
           onSubmit={submitHandler}
         >
-          <TextInput
-            type={'text'}
-            name='name'
-            label='Name'
+          <Input
+            type='text'
+            placeholder='Name'
             autoComplete='name'
             position='top'
-            reference={nameRef}
+            ref={nameRef}
           />
-          <TextInput
-            type={'email'}
+          <Input
+            type='email'
             name='email'
-            label='E-mail'
+            placeholder='E-mail'
             autoComplete='username'
             position='middle'
-            reference={emailRef}
+            ref={emailRef}
           />
-          <TextInput
-            type={'password'}
-            name='password'
-            label='Password'
+          <Input
+            type='password'
+            placeholder='Password'
             autoComplete='new-password'
             position='middle'
-            reference={passwordRef}
+            ref={passwordRef}
           />
-          <TextInput
-            type={'password'}
-            name='password'
-            label='Confirm Password'
+          <Input
+            type='password'
+            placeholder='Confirm Password'
             autoComplete='new-password'
             position='bottom'
-            reference={confirmPasswordRef}
-            inputId='confirm-password'
+            ref={confirmPasswordRef}
           />
           <div className='mt-1'>
             <small>

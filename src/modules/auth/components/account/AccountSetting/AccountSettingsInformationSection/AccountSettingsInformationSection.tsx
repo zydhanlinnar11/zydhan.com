@@ -1,5 +1,5 @@
 import Button from '@/common/components/elements/Button'
-import TextInput from '@/common/components/elements/Form/TextInput'
+import Input from '@/common/components/elements/Form/Input'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { FC, FormEventHandler, useEffect, useRef, useState } from 'react'
@@ -61,14 +61,13 @@ border border-white/20 rounded px-6 py-5'
               Name
             </label>
           </div>
-          <TextInput
+          <Input
             className='col-span-2'
-            label='Name'
+            placeholder='Name'
             position='single'
-            name='name'
-            type={'text'}
-            reference={nameRef}
-            autoComplete={'name'}
+            type='text'
+            ref={nameRef}
+            autoComplete='name'
             defaultValue={user.name}
           />
         </div>
@@ -79,14 +78,13 @@ border border-white/20 rounded px-6 py-5'
               Email
             </label>
           </div>
-          <TextInput
+          <Input
             className='col-span-2'
-            label='Email'
+            placeholder='Email'
             position='single'
-            name='email'
-            type={'text'}
-            reference={emailRef}
-            autoComplete={'email'}
+            type='text'
+            ref={emailRef}
+            autoComplete='email'
             defaultValue={user.email}
           />
         </div>

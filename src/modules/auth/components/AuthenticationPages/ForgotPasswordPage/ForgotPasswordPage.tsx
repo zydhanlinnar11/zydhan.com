@@ -1,5 +1,5 @@
 import Button from '@/common/components/elements/Button'
-import TextInput from '@/common/components/elements/Form/TextInput'
+import Input from '@/common/components/elements/Form/Input'
 import Head from 'next/head'
 import React, { FormEventHandler, useRef, useState } from 'react'
 import ForgotPasswordHandler from './ForgotPasswordHandler'
@@ -37,13 +37,13 @@ const ForgotPasswordPage = () => {
           method='POST'
           onSubmit={submitHandler}
         >
-          <TextInput
-            type={'email'}
+          <Input
+            type='email'
             name='email'
-            label='E-mail'
+            placeholder='E-mail'
             autoComplete='username'
             position='single'
-            reference={emailRef}
+            ref={emailRef}
           />
           <div className='mt-3'>
             <Button type='submit' disabled={isProcessing}>

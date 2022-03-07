@@ -1,5 +1,5 @@
 import React, { FormEventHandler, useReducer, useRef } from 'react'
-import TextInput from '@/common/components/elements/Form/TextInput'
+import Input from '@/common/components/elements/Form/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@/common/components/elements/Button'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
@@ -111,14 +111,13 @@ const PasswordSection = () => {
               Current password
             </label>
           </div>
-          <TextInput
+          <Input
             className='col-span-2'
-            label='Current password'
+            placeholder='Current password'
             position='single'
-            name='current_password'
-            type={'password'}
-            reference={currentPasswordRef}
-            autoComplete={'current-password'}
+            type='password'
+            ref={currentPasswordRef}
+            autoComplete='current-password'
           />
         </div>
 
@@ -128,14 +127,13 @@ const PasswordSection = () => {
               New password
             </label>
           </div>
-          <TextInput
+          <Input
             className='col-span-2'
-            label='New password'
+            placeholder='New password'
             position='single'
-            name='new_password'
-            type={'password'}
-            reference={newPasswordRef}
-            autoComplete={'new-password'}
+            type='password'
+            ref={newPasswordRef}
+            autoComplete='new-password'
           />
         </div>
 
@@ -145,14 +143,13 @@ const PasswordSection = () => {
               Confirm password
             </label>
           </div>
-          <TextInput
+          <Input
             className='col-span-2'
-            label='Confirm new password'
+            placeholder='Confirm password'
             position='single'
-            name='new_password_confirmation'
             type={'password'}
-            reference={newPasswordConfirmationRef}
-            autoComplete={'new-password'}
+            ref={newPasswordConfirmationRef}
+            autoComplete='new-password'
           />
         </div>
 
