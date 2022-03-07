@@ -5,13 +5,26 @@ import {
   faGear,
 } from '@fortawesome/free-solid-svg-icons'
 import { useUserState } from '@/common/providers/UserProvider'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Menu from '@/components/Menu'
 import MenuItem from '@/components/Menu/MenuItem'
 import UserInfo from './UserInfo'
 
 const UserMenu = () => {
   const userState = useUserState()
+  const router = useRouter()
+
+  const logoutHandler = () => {
+    const url = '/auth/logout'
+    if (router.pathname === url) return
+    router.push(url + `?from=${encodeURIComponent(location.href)}`)
+  }
+
+  const loginHandler = () => {
+    const url = '/auth/login'
+    if (router.pathname === url) return
+    router.push(url + `?next=${encodeURIComponent(location.href)}`)
+  }
 
   return (
     <Menu icon={faCircleUser} iconSize='2x'>
@@ -23,24 +36,24 @@ const UserMenu = () => {
             <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
             Setting
           </MenuItem>
-          <MenuItem onClick={() => Router.push('/auth/logout')}>
+          <MenuItem onClick={logoutHandler}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className='mr-2 my-0'
             />
-            Sign out
+            Log out
           </MenuItem>
         </>
       )}
       {userState.state === 'unauthenticated' && (
         <>
           <UserInfo user={null} />
-          <MenuItem onClick={() => Router.push('/auth/login')}>
+          <MenuItem onClick={loginHandler}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className='mr-2 my-0'
             />
-            Sign in
+            Log in
           </MenuItem>
         </>
       )}
