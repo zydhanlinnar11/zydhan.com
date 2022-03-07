@@ -1,26 +1,21 @@
 import AnchorLink from '@/common/components/AnchorLink'
 import Button from '@/common/components/Button'
 import Input from '@/common/components/Form/Input'
-import getBaseURL from '@/common/utils/GetBaseUrl'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { FormEventHandler, useRef, useState } from 'react'
 import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonGroup'
 import GuestRoute from '../../GuestRoute'
 import RegisterHandler from './RegisterHandler'
+import useNextPath from '@/modules/auth/hooks/useNextPath'
 
 const RegisterPage = () => {
-  const router = useRouter()
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
-  const [isProcessing, setProcessing] = useState<boolean>(false)
 
-  const nextPath = router.query['next']
-  const loginPath = new URL(`${getBaseURL()}/auth/login`)
-  if (typeof nextPath === 'string')
-    loginPath.searchParams.append('next', nextPath)
+  const [isProcessing, setProcessing] = useState<boolean>(false)
+  const nextPath = useNextPath()
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
@@ -83,7 +78,14 @@ const RegisterPage = () => {
           <div className='mt-1'>
             <small>
               Already have an account?{' '}
-              <AnchorLink href={loginPath.toString()}>Log in</AnchorLink>
+              <AnchorLink
+                href={
+                  '/auth/login' +
+                  (nextPath && `?next=${encodeURIComponent(nextPath)}`)
+                }
+              >
+                Log in
+              </AnchorLink>
             </small>
             <br />
           </div>

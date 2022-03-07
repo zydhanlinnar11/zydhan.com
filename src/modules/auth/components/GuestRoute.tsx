@@ -2,22 +2,23 @@ import FullscreenLoading from '@/common/components/FullscreenLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'
+import useNextPath from '../hooks/useNextPath'
 
 const GuestRoute: FC = ({ children }) => {
   const { state } = useUserState()
   const router = useRouter()
+  const nextPath = useNextPath()
 
   useEffect(() => {
     if (state !== 'authenticated') return
 
     try {
-      const nextPath = router.query['next']
       const redirectTo = new URL(`${nextPath}`)
       router.replace(redirectTo.toString())
     } catch (e) {
       router.replace('/')
     }
-  }, [state])
+  }, [state, nextPath])
 
   return state === 'unauthenticated' ? <>{children}</> : <FullscreenLoading />
 }
