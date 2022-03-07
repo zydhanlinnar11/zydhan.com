@@ -17,7 +17,7 @@ const LogoutPage = () => {
     setModalShowed(false)
     try {
       await logout()
-      await router.push('/')
+      await router.replace('/')
       toast.success('Successfully logged out!', {
         theme: 'dark',
       })
