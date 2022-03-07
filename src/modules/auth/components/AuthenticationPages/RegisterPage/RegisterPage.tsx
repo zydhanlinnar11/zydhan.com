@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEventHandler, useRef, useState } from 'react'
 import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonGroup'
-import AuthenticationPages from '../AuthenticationPages'
+import GuestRoute from '../../GuestRoute'
 import RegisterHandler from './RegisterHandler'
 
 const RegisterPage = () => {
@@ -34,7 +34,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <AuthenticationPages>
+    <GuestRoute>
       <Head>
         <title>Register - zydhan.xyz</title>
         <meta property='og:title' content='Login - zydhan.xyz' />
@@ -97,7 +97,7 @@ const RegisterPage = () => {
           </div>
         </form>
       </div>
-    </AuthenticationPages>
+    </GuestRoute>
   )
 }
 

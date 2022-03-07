@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FormEventHandler, useRef, useState } from 'react'
 import ResetPasswordHandler from './ResetPasswordHandler'
-import AuthenticationPages from '../AuthenticationPages'
+import GuestRoute from '../../GuestRoute'
 
 const ResetPasswordPage = () => {
   const router = useRouter()
@@ -29,7 +29,7 @@ const ResetPasswordPage = () => {
   }
 
   return (
-    <AuthenticationPages>
+    <GuestRoute>
       <Head>
         <title>Reset Password - zydhan.xyz</title>
         <meta property='og:title' content='Reset Password - zydhan.xyz' />
@@ -79,7 +79,7 @@ const ResetPasswordPage = () => {
           </div>
         </form>
       </div>
-    </AuthenticationPages>
+    </GuestRoute>
   )
 }
 
