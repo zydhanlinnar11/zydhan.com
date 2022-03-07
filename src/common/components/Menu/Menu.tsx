@@ -30,6 +30,7 @@ const Menu: FC<Props> = ({ children, icon, iconSize }) => {
         leaveTo='transform opacity-0 scale-95'
       >
         <HeadlessMenu.Items
+          as='ol'
           className='absolute origin-top-right bg-gray-900 flex
               flex-col right-0 w-56 mt-2 border border-white/20 rounded py-1 z-10 break-all'
         >
