@@ -5,8 +5,10 @@ import Head from 'next/head'
 import { FormEventHandler, useRef, useState } from 'react'
 import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonGroup'
 import GuestRoute from '../../GuestRoute'
-import RegisterHandler from './RegisterHandler'
+import registerHandler from './registerHandler'
 import useNextPath from '@/modules/auth/hooks/useNextPath'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const RegisterPage = () => {
   const nameRef = useRef<HTMLInputElement>(null)
@@ -20,12 +22,22 @@ const RegisterPage = () => {
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     setProcessing(true)
-    RegisterHandler(
-      nameRef.current?.value,
-      emailRef.current?.value,
-      passwordRef.current?.value,
-      confirmPasswordRef.current?.value
-    ).finally(() => setProcessing(false))
+
+    try {
+      await registerHandler(
+        nameRef.current?.value,
+        emailRef.current?.value,
+        passwordRef.current?.value,
+        confirmPasswordRef.current?.value
+      )
+    } catch (e) {
+      if (!axios.isAxiosError(e)) throw e
+      toast.error(e.response?.data?.message || e.message, {
+        theme: 'dark',
+      })
+    } finally {
+      setProcessing(false)
+    }
   }
 
   return (

@@ -7,8 +7,10 @@ import Head from 'next/head'
 import { FormEventHandler, useRef, useState } from 'react'
 import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonGroup'
 import GuestRoute from '../../GuestRoute'
-import LoginHandler from './LoginHandler'
+import loginHandler from './loginHandler'
 import useNextPath from '@/modules/auth/hooks/useNextPath'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const LoginPage = () => {
   const emailRef = useRef<HTMLInputElement>(null)
@@ -21,12 +23,18 @@ const LoginPage = () => {
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     setProcessing(true)
-    LoginHandler(emailRef.current?.value, passwordRef.current?.value).finally(
-      () =>
-        fetchUser()
-          .then((user) => userDispatch({ state: 'authenticated', user }))
-          .finally(() => setProcessing(false))
-    )
+    try {
+      await loginHandler(emailRef.current?.value, passwordRef.current?.value)
+      const user = await fetchUser()
+      userDispatch({ state: 'authenticated', user })
+    } catch (e) {
+      if (!axios.isAxiosError(e)) throw e
+      toast.error(e.response?.data?.message || e.message, {
+        theme: 'dark',
+      })
+    } finally {
+      setProcessing(false)
+    }
   }
 
   return (
