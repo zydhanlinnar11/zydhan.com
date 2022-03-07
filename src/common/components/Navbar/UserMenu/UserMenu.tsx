@@ -4,31 +4,14 @@ import {
   faArrowRightFromBracket,
   faGear,
 } from '@fortawesome/free-solid-svg-icons'
-import { useUserDispatch, useUserState } from '@/common/providers/UserProvider'
+import { useUserState } from '@/common/providers/UserProvider'
 import Router from 'next/router'
-import logout from '@/modules/auth/utils/Logout'
-import { toast } from 'react-toastify'
 import Menu from '@/components/Menu'
 import MenuItem from '@/components/Menu/MenuItem'
 import UserInfo from './UserInfo'
 
 const UserMenu = () => {
   const userState = useUserState()
-  const userDispatch = useUserDispatch()
-
-  const logoutHandler = async () => {
-    try {
-      await logout()
-      userDispatch({ state: 'unauthenticated' })
-      toast.success('Successfully logged out!', {
-        theme: 'dark',
-      })
-    } catch (e) {
-      toast.error('Failed to log out!', {
-        theme: 'dark',
-      })
-    }
-  }
 
   return (
     <Menu icon={faCircleUser} iconSize='2x'>
@@ -40,7 +23,7 @@ const UserMenu = () => {
             <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
             Setting
           </MenuItem>
-          <MenuItem onClick={logoutHandler}>
+          <MenuItem onClick={() => Router.push('/auth/logout')}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className='mr-2 my-0'
