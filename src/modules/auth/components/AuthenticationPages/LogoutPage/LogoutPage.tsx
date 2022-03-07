@@ -30,6 +30,11 @@ const LogoutPage = () => {
 
   const cancelLogout = () => {
     setModalShowed(false)
+    try {
+      router.push(new URL(`${router.query['from']}`).toString())
+    } catch (e) {
+      router.push('/')
+    }
   }
 
   return (
