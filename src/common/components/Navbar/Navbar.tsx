@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import UserMenu from '@/common/components/Navbar/UserMenu'
+import UserMenu from './UserMenu'
 
 export default function Navbar() {
   return (
