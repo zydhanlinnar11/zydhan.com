@@ -7,12 +7,12 @@ import useSWR, { useSWRConfig } from 'swr'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import SpinnerLoading from '@/common/components/SpinnerLoading'
 import Header from '@/common/components/Header'
-import { User } from '@/modules/auth/types/AccountSettingUser'
 import AccountSettingsInformationSection from './AccountSettingsInformationSection'
 import AccountSettingSocialSection from './SocialSection'
 import fetcher from '@/common/utils/AxiosSWRFetcher'
 import AccountSettingsPasswordSection from './AccountSettingsPasswordSection'
 import Head from 'next/head'
+import User from '@/modules/auth/types/User'
 
 const AccountSettingPage = () => {
   const { data, error } = useSWR<User>(

@@ -4,11 +4,11 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { FC, FormEventHandler, useEffect, useRef, useState } from 'react'
 import { mutate } from 'swr'
-import { User } from '@/modules/auth/types/AccountSettingUser'
 import fetchUser from '@/modules/auth/utils/FetchUser'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import User from '@/modules/auth/types/User'
 
 type Props = {
   user: User
