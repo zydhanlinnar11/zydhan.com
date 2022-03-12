@@ -9,6 +9,7 @@ import registerHandler from './registerHandler'
 import useNextPath from '@/modules/auth/hooks/useNextPath'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 const RegisterPage = () => {
   const nameRef = useRef<HTMLInputElement>(null)
@@ -18,6 +19,7 @@ const RegisterPage = () => {
 
   const [isProcessing, setProcessing] = useState<boolean>(false)
   const nextPath = useNextPath()
+  const router = useRouter()
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
@@ -29,6 +31,9 @@ const RegisterPage = () => {
         emailRef.current?.value,
         passwordRef.current?.value,
         confirmPasswordRef.current?.value
+      )
+      router.push(
+        `/auth/login${nextPath && `?next=${encodeURIComponent(nextPath)}`}`
       )
     } catch (e) {
       if (!axios.isAxiosError(e)) throw e
@@ -44,50 +49,50 @@ const RegisterPage = () => {
     <GuestRoute>
       <Head>
         <title>Register - zydhan.xyz</title>
-        <meta property='og:title' content='Login - zydhan.xyz' />
-        <meta property='og:url' content='https://zydhan.xyz/auth/register' />
-        <meta property='og:description' content='Create new account' />
+        <meta property="og:title" content="Login - zydhan.xyz" />
+        <meta property="og:url" content="https://zydhan.xyz/auth/register" />
+        <meta property="og:description" content="Create new account" />
       </Head>
-      <div className='grow flex flex-col items-center justify-center'>
-        <header className='text-center'>
-          <h1 className='text-3xl font-semibold'>Register</h1>
-          <p className='mt-3 text-gray-400'>Create new account</p>
+      <div className="grow flex flex-col items-center justify-center">
+        <header className="text-center">
+          <h1 className="text-3xl font-semibold">Register</h1>
+          <p className="mt-3 text-gray-400">Create new account</p>
         </header>
         <form
-          className='text-center mt-5 max-w-xs mx-auto'
-          method='POST'
+          className="text-center mt-5 max-w-xs mx-auto"
+          method="POST"
           onSubmit={submitHandler}
         >
           <Input
-            type='text'
-            placeholder='Name'
-            autoComplete='name'
-            position='top'
+            type="text"
+            placeholder="Name"
+            autoComplete="name"
+            position="top"
             ref={nameRef}
           />
           <Input
-            type='email'
-            name='email'
-            placeholder='E-mail'
-            autoComplete='username'
-            position='middle'
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            autoComplete="username"
+            position="middle"
             ref={emailRef}
           />
           <Input
-            type='password'
-            placeholder='Password'
-            autoComplete='new-password'
-            position='middle'
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+            position="middle"
             ref={passwordRef}
           />
           <Input
-            type='password'
-            placeholder='Confirm Password'
-            autoComplete='new-password'
-            position='bottom'
+            type="password"
+            placeholder="Confirm Password"
+            autoComplete="new-password"
+            position="bottom"
             ref={confirmPasswordRef}
           />
-          <div className='mt-1'>
+          <div className="mt-1">
             <small>
               Already have an account?{' '}
               <AnchorLink
@@ -101,12 +106,12 @@ const RegisterPage = () => {
             </small>
             <br />
           </div>
-          <div className='mt-3'>
-            <Button type='submit' disabled={isProcessing}>
+          <div className="mt-3">
+            <Button type="submit" disabled={isProcessing}>
               Register
             </Button>
           </div>
-          <div className='mt-3'>
+          <div className="mt-3">
             <SocialLoginButtonGroup disabled={isProcessing} />
           </div>
         </form>
