@@ -5,12 +5,14 @@ import Button from '@/common/components/Button'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useUserDispatch } from '@/common/providers/UserProvider'
 
 const AccountSettingsPasswordSection = () => {
   const [isInProgress, setInProgress] = useState<boolean>(false)
   const currentPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordRef = useRef<HTMLInputElement>(null)
   const newPasswordConfirmationRef = useRef<HTMLInputElement>(null)
+  const userDispatch = useUserDispatch()
 
   const handleChangePassword: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
@@ -45,6 +47,7 @@ const AccountSettingsPasswordSection = () => {
       toast.success('Password changed successfully', { theme: 'dark' })
     } catch (e) {
       if (!axios.isAxiosError(e)) throw e
+      if (e.response?.status === 401) userDispatch({ state: 'unauthenticated' })
       toast.error(e.response?.data?.message || 'Failed to change password', {
         theme: 'dark',
       })

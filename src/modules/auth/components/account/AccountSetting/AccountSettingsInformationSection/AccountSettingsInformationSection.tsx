@@ -55,6 +55,7 @@ const AccountSettingsInformationSection: FC<Props> = ({ user }) => {
       })
     } catch (e) {
       if (!axios.isAxiosError(e)) throw e
+      if (e.response?.status === 401) userDispatch({ state: 'unauthenticated' })
       toast.error(e.response?.data?.message || 'Failed to change password', {
         theme: 'dark',
       })
