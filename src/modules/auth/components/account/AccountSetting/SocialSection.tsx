@@ -7,12 +7,14 @@ import Modal from '@/common/components/Modal'
 import { toast } from 'react-toastify'
 import User from '@/modules/auth/types/User'
 import fetchUser from '@/modules/auth/utils/FetchUser'
+import { useUserDispatch } from '@/common/providers/UserProvider'
 
 type Props = {
   user: User
 }
 
 const SocialSection: FC<Props> = ({ user }) => {
+  const userDispatch = useUserDispatch()
   const [isUnlinkModalShowed, setUnlinkModalShowed] = useState<boolean>(false)
   const [isUnlinkModalProviderName, setUnlinkModalProviderName] =
     useState<string>('')
@@ -37,7 +39,11 @@ const SocialSection: FC<Props> = ({ user }) => {
     const interval = setInterval(() => {
       if (!popup || popup.closed) {
         interval && clearInterval(interval)
-        fetchUser()
+        fetchUser().catch((e) => {
+          if (!axios.isAxiosError(e)) return
+          if (e.response?.status === 401)
+            userDispatch({ state: 'unauthenticated' })
+        })
         return
       }
     }, 500)
@@ -58,6 +64,7 @@ const SocialSection: FC<Props> = ({ user }) => {
       )
     } catch (e) {
       if (!axios.isAxiosError(e)) throw e
+      if (e.response?.status === 401) userDispatch({ state: 'unauthenticated' })
       toast.error(e.response?.data?.message || 'Failed to change password', {
         theme: 'dark',
       })
