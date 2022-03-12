@@ -11,7 +11,7 @@ import { User } from '@/modules/auth/types/AccountSettingUser'
 import AccountSettingsInformationSection from './AccountSettingsInformationSection'
 import AccountSettingSocialSection from './SocialSection'
 import fetcher from '@/common/utils/AxiosSWRFetcher'
-import PasswordSection from './PasswordSection'
+import AccountSettingsPasswordSection from './AccountSettingsPasswordSection'
 import Head from 'next/head'
 
 const AccountSettingPage = () => {
@@ -28,51 +28,51 @@ const AccountSettingPage = () => {
             <Head>
               <title>Account Setting - zydhan.xyz</title>
             </Head>
-            <div className='w-full flex flex-col pb-10 gap-y-3 items-center sm:flex-row justify-between align-middle'>
-              <h2 className='text-2xl'>Account Setting</h2>
-              <div className='w-24 text-sm'>
+            <div className="w-full flex flex-col pb-10 gap-y-3 items-center sm:flex-row justify-between align-middle">
+              <h2 className="text-2xl">Account Setting</h2>
+              <div className="w-24 text-sm">
                 <Button onClick={() => window.history.back()}>
                   <FontAwesomeIcon
-                    className='my-auto mr-2'
+                    className="my-auto mr-2"
                     icon={faCircleArrowLeft}
                   ></FontAwesomeIcon>{' '}
                   Back
                 </Button>
               </div>
             </div>
-            <div className='flex flex-col gap-y-5 sm:flex-row sm:gap-x-5'>
+            <div className="flex flex-col gap-y-5 sm:flex-row sm:gap-x-5">
               <div
-                className='sm:w-64 sm:h-fit bg-gray-900 flex flex-col w-full
+                className="sm:w-64 sm:h-fit bg-gray-900 flex flex-col w-full
               border border-white/20 rounded p-6
-              justify-center text-center gap-y-5 break-words text-ellipsis overflow-hidden'
+              justify-center text-center gap-y-5 break-words text-ellipsis overflow-hidden"
               >
                 <>
                   <FontAwesomeIcon icon={faCircleUser} size={'4x'} />
                   <div>
-                    <p className='text-lg'>{data.name}</p>
-                    <p className='text-sm text-gray-400'>{data.email}</p>
+                    <p className="text-lg">{data.name}</p>
+                    <p className="text-sm text-gray-400">{data.email}</p>
                   </div>
                 </>
               </div>
 
-              <div className='sm:w-full flex flex-col gap-y-5'>
+              <div className="sm:w-full flex flex-col gap-y-5">
                 <AccountSettingsInformationSection user={data} />
                 <AccountSettingSocialSection user={data} />
-                <PasswordSection />
+                <AccountSettingsPasswordSection />
               </div>
             </div>
           </>
         )}
         {!data && !error && (
-          <div className='my-auto'>
+          <div className="my-auto">
             <SpinnerLoading />
           </div>
         )}
         {error && (
           <Header
-            className='my-auto'
-            midText='An error ocurred'
-            bottomText='Please try again later.'
+            className="my-auto"
+            midText="An error ocurred"
+            bottomText="Please try again later."
           />
         )}
       </NarrowPageContainer>
