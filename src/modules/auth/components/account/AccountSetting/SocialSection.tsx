@@ -2,11 +2,11 @@ import React, { FC, MouseEventHandler, useState } from 'react'
 import Button from '@/common/components/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { mutate } from 'swr'
 import axios from 'axios'
 import Modal from '@/common/components/Modal'
 import { toast } from 'react-toastify'
 import User from '@/modules/auth/types/User'
+import fetchUser from '@/modules/auth/utils/FetchUser'
 
 type Props = {
   user: User
@@ -37,7 +37,7 @@ const SocialSection: FC<Props> = ({ user }) => {
     const interval = setInterval(() => {
       if (!popup || popup.closed) {
         interval && clearInterval(interval)
-        mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
+        fetchUser()
         return
       }
     }, 500)
@@ -49,7 +49,7 @@ const SocialSection: FC<Props> = ({ user }) => {
         `${process.env.NEXT_PUBLIC_API_URL}/auth/user/unlink-social/${provider}`,
         { withCredentials: true }
       )
-      await mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
+      await fetchUser()
       toast.success(
         `Successfully unlink ${
           provider.charAt(0).toUpperCase() + provider.slice(1)

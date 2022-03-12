@@ -2,8 +2,7 @@ import Button from '@/common/components/Button'
 import Input from '@/common/components/Form/Input'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { FC, FormEventHandler, useEffect, useRef, useState } from 'react'
-import { mutate } from 'swr'
+import React, { FC, FormEventHandler, useRef, useState } from 'react'
 import fetchUser from '@/modules/auth/utils/FetchUser'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { toast } from 'react-toastify'
@@ -51,7 +50,6 @@ const AccountSettingsInformationSection: FC<Props> = ({ user }) => {
       const user = await fetchUser()
       userDispatch({ state: 'authenticated', user })
 
-      await mutate(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`)
       toast.success('Successfully update account information!', {
         theme: 'dark',
       })
