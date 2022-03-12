@@ -5,10 +5,6 @@ import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { User } from '@/modules/auth/types/AccountSettingUser'
 import { mutate } from 'swr'
 import axios from 'axios'
-import {
-  faCircleExclamation,
-  faCircleXmark,
-} from '@fortawesome/free-solid-svg-icons'
 import Modal from '@/common/components/Modal'
 import { toast } from 'react-toastify'
 
