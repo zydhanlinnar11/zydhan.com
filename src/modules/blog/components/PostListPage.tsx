@@ -21,12 +21,12 @@ const PostListPage = ({ posts }: { posts: Post[] }) => {
   const userState = useUserState()
 
   return (
-    <div className='flex flex-col mx-auto grow w-full max-w-5xl px-6'>
+    <div className="flex flex-col mx-auto grow w-full max-w-5xl px-6">
       <Head>
         <title>Blog - zydhan.xyz</title>
-        <meta property='og:title' content='Blog - zydhan.xyz' />
-        <meta property='og:url' content={'https://zydhan.xyz/blog'} />
-        <meta property='og:description' content='Welcome to My Blog' />
+        <meta property="og:title" content="Blog - zydhan.xyz" />
+        <meta property="og:url" content={'https://zydhan.xyz/blog'} />
+        <meta property="og:description" content="Welcome to My Blog" />
       </Head>
       <Header
         midText="Zydhan's Blog"
@@ -35,16 +35,20 @@ const PostListPage = ({ posts }: { posts: Post[] }) => {
         }! Have fun here.`}
       />
       {posts?.length > 0 ? (
-        <div className='text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14'>
+        <div className="text-center grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-12 mb-14">
           {posts.map((post) => (
-            <PostCard post={post} key={post.slug} />
+            <PostCard
+              post={post}
+              href={`/blog/posts/${post.slug}`}
+              key={post.slug}
+            />
           ))}
         </div>
       ) : (
-        <div className='my-auto'>
+        <div className="my-auto">
           <Header
-            midText='No post available'
-            bottomText='There are currently no posts, or the server is under maintenance.'
+            midText="No post available"
+            bottomText="There are currently no posts, or the server is under maintenance."
           ></Header>
         </div>
       )}
