@@ -5,6 +5,7 @@ type User = {
     github: boolean
     google: boolean
   }
+  admin: boolean
 }
 
 export default User
