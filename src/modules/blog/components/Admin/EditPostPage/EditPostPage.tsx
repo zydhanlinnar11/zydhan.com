@@ -8,6 +8,8 @@ import editPostHandler from './editPostHandler'
 import useAdminPost from '@/modules/blog/hooks/useAdminPost'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import Modal from '@/common/components/Modal'
+import deletePostHandler from './deletePostHandler'
 
 const visibilities = [
   { id: 1, name: 'Visible' },
@@ -26,6 +28,7 @@ const EditPostPage = () => {
     post ? visibilities[post.visibility] : visibilities[0]
   )
   const [isProcessing, setProcessing] = useState(false)
+  const [isDeleteModalShowed, setDeleteModalShowed] = useState(false)
 
   useEffect(() => {
     if (loading) toast('Loading post', { theme: 'dark' })
@@ -46,9 +49,23 @@ const EditPostPage = () => {
     ).finally(() => setProcessing(false))
   }
 
+  const deleteHandler = () => {
+    setProcessing(true)
+    deletePostHandler(`${router.query.id}`, router).finally(() =>
+      setProcessing(false)
+    )
+  }
+
   return (
     <AdminRoute>
       <>
+        <Modal
+          bodyText="Are you sure want to delete this post? This action is irreversible."
+          title="Delete post?"
+          handleClose={() => setDeleteModalShowed(false)}
+          isShowed={isDeleteModalShowed}
+          action={{ handler: deleteHandler, text: 'Delete', type: 'danger' }}
+        />
         <Head>
           <title>Edit Post - Blog - zydhan.xyz</title>
         </Head>
@@ -72,6 +89,13 @@ const EditPostPage = () => {
             <>
               <Button type="submit" disabled={isProcessing}>
                 Edit post
+              </Button>
+              <Button
+                type="button"
+                disabled={isProcessing}
+                onClick={() => setDeleteModalShowed(true)}
+              >
+                Delete post
               </Button>
             </>
           </form>
