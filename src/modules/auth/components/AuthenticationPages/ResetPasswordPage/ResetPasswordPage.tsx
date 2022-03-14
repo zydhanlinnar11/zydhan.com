@@ -32,48 +32,50 @@ const ResetPasswordPage = () => {
     <GuestRoute>
       <Head>
         <title>Reset Password - zydhan.xyz</title>
-        <meta property='og:title' content='Reset Password - zydhan.xyz' />
+        <meta property="og:title" content="Reset Password - zydhan.xyz" />
         <meta
-          property='og:url'
-          content='https://zydhan.xyz/auth/reset-password'
+          property="og:url"
+          content="https://zydhan.xyz/auth/reset-password"
         />
-        <meta property='og:description' content='Reset your account password' />
+        <meta property="og:description" content="Reset your account password" />
       </Head>
-      <div className='grow flex flex-col items-center justify-center'>
-        <header className='text-center'>
-          <h1 className='text-3xl font-semibold'>Reset password</h1>
-          <p className='mt-3 text-gray-400'>Reset your account password</p>
+      <div className="grow flex flex-col items-center justify-center">
+        <header className="text-center">
+          <h1 className="text-3xl font-semibold">Reset password</h1>
+          <p className="mt-3 text-gray-600 dark:text-gray-400">
+            Reset your account password
+          </p>
         </header>
         <form
-          className='text-center mt-5 max-w-xs mx-auto'
-          method='POST'
+          className="text-center mt-5 max-w-xs mx-auto"
+          method="POST"
           onSubmit={submitHandler}
         >
-          <Input type='hidden' defaultValue={`${token}`} ref={tokenRef} />
+          <Input type="hidden" defaultValue={`${token}`} ref={tokenRef} />
           <Input
-            type='hidden'
+            type="hidden"
             defaultValue={`${email}`}
             ref={emailRef}
-            autoComplete='username'
+            autoComplete="username"
           />
           <Input
             type={'password'}
-            name='password'
-            placeholder='Password'
-            autoComplete='new-password'
-            position='top'
+            name="password"
+            placeholder="Password"
+            autoComplete="new-password"
+            position="top"
             ref={passwordRef}
           />
           <Input
             type={'password'}
-            name='password_confirmation'
-            placeholder='Password Confirmation'
-            autoComplete='new-password'
-            position='bottom'
+            name="password_confirmation"
+            placeholder="Password Confirmation"
+            autoComplete="new-password"
+            position="bottom"
             ref={passwordConfirmationRef}
           />
-          <div className='mt-3'>
-            <Button type='submit' disabled={isProcessing}>
+          <div className="mt-3">
+            <Button type="submit" disabled={isProcessing}>
               Reset password
             </Button>
           </div>

@@ -10,17 +10,17 @@ type Props = {
 const loading = (
   <>
     <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
-    <div className='h-2 bg-slate-700 rounded animate-pulse py-1 w-full mt-1'></div>
-    <div className='h-2 mx-5 bg-slate-700 rounded animate-pulse py-1 w-full'></div>
+    <div className="h-2 bg-slate-700 rounded animate-pulse py-1 w-full mt-1"></div>
+    <div className="h-2 mx-5 bg-slate-700 rounded animate-pulse py-1 w-full"></div>
   </>
 )
 
 const noUser = (
   <>
     <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
-    <div className='text-center'>
+    <div className="text-center">
       <p>Guest</p>
-      <small className='text-gray-400'>Welcome</small>
+      <small className="text-gray-600 dark:text-gray-400">Welcome</small>
     </div>
   </>
 )
@@ -28,9 +28,9 @@ const noUser = (
 const withUser = (user: User) => (
   <>
     <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
-    <div className='text-center'>
+    <div className="text-center">
       <p>{user.name}</p>
-      <small className='text-gray-400'>{user.email}</small>
+      <small className="text-gray-600 dark:text-gray-400">{user.email}</small>
     </div>
   </>
 )
@@ -46,10 +46,10 @@ const UserInfo: FC<Props> = ({ user }) => {
 
   return (
     <>
-      <div className='flex flex-col gap-y-3 items-center justify-center pt-2 pb-1 px-6'>
+      <div className="flex flex-col gap-y-3 items-center justify-center pt-2 pb-1 px-6">
         {userDetail}
       </div>
-      <div className='bg-gray-600 h-px mx-4 my-1' />
+      <div className="bg-gray-600 h-px mx-4 my-1" />
     </>
   )
 }

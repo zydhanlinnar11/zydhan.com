@@ -41,7 +41,7 @@ const AccountSettingPage = () => {
                 <FontAwesomeIcon icon={faCircleUser} size={'4x'} />
                 <div>
                   <p className="text-lg">{userState.user.name}</p>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
                     {userState.user.email}
                   </p>
                 </div>

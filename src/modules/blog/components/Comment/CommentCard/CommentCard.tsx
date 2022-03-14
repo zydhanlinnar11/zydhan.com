@@ -51,7 +51,9 @@ function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
           </div>
           <div className="my-auto">
             <p className="text-sm">{user_name}</p>
-            <p className="text-xs text-gray-400">{createdAt}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {createdAt}
+            </p>
           </div>
         </div>
         {is_own_comment && (

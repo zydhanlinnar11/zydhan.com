@@ -13,9 +13,9 @@ export default function Header({
 }: HeaderComponentProps) {
   return (
     <header className='flex flex-col min-h-24 my-16 text-center mx-auto print:my-6'>
-      <small className='text-sm my-2 text-gray-400'>{topText}</small>
+      <small className='text-sm my-2 text-gray-600 dark:text-gray-400'>{topText}</small>
       <h1 className='text-4xl font-bold'>{midText}</h1>
-      <h2 className='text-lg my-2 text-gray-400 text-center print:text-gray-600'>
+      <h2 className='text-lg my-2 text-gray-600 dark:text-gray-400 text-center print:text-gray-600'>
         {bottomText}
       </h2>
       {children}

@@ -33,7 +33,7 @@ const PostCard: FC<Props> = ({ post, href }) => {
             <div>
               <h3 className="font-bold text-lg">{post.title}</h3>
             </div>
-            <p className="text-gray-400 font-semibold text-sm">
+            <p className="text-gray-600 dark:text-gray-400 font-semibold text-sm">
               {post.created_at}
             </p>
           </div>
