@@ -44,7 +44,9 @@ const Select: FC<Props> = ({ selected, setSelected, items }) => {
                     key={item.id}
                     className={({ active }) =>
                       `cursor-default select-none relative py-2 pl-3 pr-9 ${
-                        active ? 'text-white bg-gray-600/30' : 'text-gray-300'
+                        active
+                          ? 'text-white bg-gray-600/30'
+                          : 'text-gray-700 dark:text-gray-300'
                       }`
                     }
                     value={item}

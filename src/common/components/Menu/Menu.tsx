@@ -15,7 +15,7 @@ const Menu: FC<Props> = ({ children, icon, iconSize }) => {
       <div>
         <HeadlessMenu.Button className="bg-gray-800 flex text-sm rounded-full">
           <span className="sr-only">Open user menu</span>
-          <span className="text-gray-300">
+          <span className="text-gray-700 dark:text-gray-300">
             <FontAwesomeIcon icon={icon} size={iconSize} />
           </span>
         </HeadlessMenu.Button>

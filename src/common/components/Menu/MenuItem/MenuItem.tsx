@@ -12,7 +12,7 @@ const MenuItem: FC<Props> = ({ children, onClick }) => {
       as="li"
       className="py-2 px-3 text-left transition-all duration-150
               hover:cursor-pointer flex items-center
-              rounded text-sm hover:bg-gray-600/30 text-gray-300 hover:text-white"
+              rounded text-sm hover:bg-gray-600/30 text-gray-700 dark:text-gray-300 hover:text-white"
       onClick={onClick}
     >
       {children}
