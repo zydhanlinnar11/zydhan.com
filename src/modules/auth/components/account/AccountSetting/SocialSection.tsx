@@ -40,11 +40,13 @@ const SocialSection: FC<Props> = ({ user }) => {
     const interval = setInterval(() => {
       if (!popup || popup.closed) {
         interval && clearInterval(interval)
-        fetchUser().catch((e) => {
-          if (!axios.isAxiosError(e)) return
-          if (e.response?.status === 401)
-            userDispatch({ state: 'unauthenticated' })
-        })
+        fetchUser()
+          .then((user) => userDispatch({ state: 'authenticated', user }))
+          .catch((e) => {
+            if (!axios.isAxiosError(e)) return
+            if (e.response?.status === 401)
+              userDispatch({ state: 'unauthenticated' })
+          })
         return
       }
     }, 500)
@@ -53,7 +55,8 @@ const SocialSection: FC<Props> = ({ user }) => {
   const handleUnlinkAccount = async (provider: 'google' | 'github') => {
     try {
       await axiosAPI.delete(`/auth/user/unlink-social/${provider}`)
-      await fetchUser()
+      const user = await fetchUser()
+      userDispatch({ state: 'authenticated', user })
       toast.success(
         `Successfully unlink ${
           provider.charAt(0).toUpperCase() + provider.slice(1)
