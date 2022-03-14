@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html className="dark">
         <Head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
           <meta name="description" content="Welcome to My Personal Portfolio" />
