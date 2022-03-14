@@ -33,7 +33,7 @@ const AccountSettingPage = () => {
           </div>
           <div className="flex flex-col gap-y-5 sm:flex-row sm:gap-x-5">
             <div
-              className="sm:w-64 sm:h-fit bg-gray-900 flex flex-col w-full
+              className="sm:w-64 sm:h-fit bg-black flex flex-col w-full
               border border-white/20 rounded p-6
               justify-center text-center gap-y-5 break-words text-ellipsis overflow-hidden"
             >

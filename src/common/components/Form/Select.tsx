@@ -38,13 +38,13 @@ const Select: FC<Props> = ({ selected, setSelected, items }) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute z-10 mt-1 w-full bg-gray-900 shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-white/[0.24] ring-opacity-5 overflow-auto focus:outline-none">
+              <Listbox.Options className="absolute z-10 mt-1 w-full bg-black shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-white/[0.24] ring-opacity-5 overflow-auto focus:outline-none">
                 {items.map((item) => (
                   <Listbox.Option
                     key={item.id}
                     className={({ active }) =>
                       `cursor-default select-none relative py-2 pl-3 pr-9 ${
-                        active ? 'text-white bg-blue-600/30' : 'text-white'
+                        active ? 'text-white bg-gray-600/30' : 'text-gray-300'
                       }`
                     }
                     value={item}
@@ -60,7 +60,7 @@ const Select: FC<Props> = ({ selected, setSelected, items }) => {
                         {selected ? (
                           <span
                             className={`absolute inset-y-0 right-0 flex items-center pr-4 ${
-                              active ? 'text-white' : 'text-indigo-600'
+                              active ? 'text-white' : 'text-blue-500'
                             }`}
                           >
                             <CheckIcon className="h-5 w-5" aria-hidden="true" />
