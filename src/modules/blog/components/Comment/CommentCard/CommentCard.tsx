@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { useUserState } from '@/common/providers/UserProvider'
-import { Comment } from './useComments'
-import Markdown from '../Markdown'
+import Comment from '@/modules/blog/types/admin/Comment'
+import Markdown from '../../Markdown'
 
 interface CommentCardProps {
   comment: Comment
@@ -37,23 +37,23 @@ function CommentCard({
 
   return (
     <li
-      className='w-full border border-white/20 rounded px-5 py-3'
+      className="w-full border border-white/20 rounded px-5 py-3"
       id={comment.id}
     >
-      <div className='flex justify-between'>
-        <div className='w-full flex gap-3 mb-3'>
-          <div className='h-10 w-10 bg-white rounded-full shrink-0 my-auto'>
+      <div className="flex justify-between">
+        <div className="w-full flex gap-3 mb-3">
+          <div className="h-10 w-10 bg-white rounded-full shrink-0 my-auto">
             <Image
-              className='rounded-full shrink-0 my-auto'
+              className="rounded-full shrink-0 my-auto"
               width={40}
               height={40}
               src={`https://avatars.dicebear.com/api/human/${comment.id}.svg`}
               alt={`Profile picture of ${comment.user_name}`}
             ></Image>
           </div>
-          <div className='my-auto'>
-            <p className='text-sm'>{comment.user_name}</p>
-            <p className='text-xs text-gray-400'>{comment.createdAt}</p>
+          <div className="my-auto">
+            <p className="text-sm">{comment.user_name}</p>
+            <p className="text-xs text-gray-400">{comment.createdAt}</p>
           </div>
         </div>
         <div>
@@ -114,15 +114,15 @@ function CommentCard({
           )} */}
         </div>
       </div>
-      <div className='px-1'>
+      <div className="px-1">
         {isShowEdit ? (
           <form onSubmit={formEditHandler}>
-            <p className='text-lg font-medium px-1'>Edit comment</p>
-            <div className='mt-3 relative rounded-md shadow-sm'>
+            <p className="text-lg font-medium px-1">Edit comment</p>
+            <div className="mt-3 relative rounded-md shadow-sm">
               <textarea
-                name='post-markdown'
-                className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-3 rounded-md h-36 bg-transparent border border-white/[0.24]'
-                placeholder='Write comment here, markdown styling is supported'
+                name="post-markdown"
+                className="block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-3 rounded-md h-36 bg-transparent border border-white/[0.24]"
+                placeholder="Write comment here, markdown styling is supported"
                 defaultValue={comment.comment}
                 ref={contentRef}
               />
