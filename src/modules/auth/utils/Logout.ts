@@ -1,9 +1,7 @@
-import axios from 'axios'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 
 const logout = async () => {
-  await axios.delete(process.env.NEXT_PUBLIC_API_URL + '/auth/logout', {
-    withCredentials: true,
-  })
+  await axiosAPI.delete('/auth/logout')
 }
 
 export default logout

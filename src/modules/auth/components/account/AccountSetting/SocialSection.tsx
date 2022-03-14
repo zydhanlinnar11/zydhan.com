@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import User from '@/modules/auth/types/User'
 import fetchUser from '@/modules/auth/utils/FetchUser'
 import { useUserDispatch } from '@/common/providers/UserProvider'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 
 type Props = {
   user: User
@@ -51,10 +52,7 @@ const SocialSection: FC<Props> = ({ user }) => {
 
   const handleUnlinkAccount = async (provider: 'google' | 'github') => {
     try {
-      await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/user/unlink-social/${provider}`,
-        { withCredentials: true }
-      )
+      await axiosAPI.delete(`/auth/user/unlink-social/${provider}`)
       await fetchUser()
       toast.success(
         `Successfully unlink ${

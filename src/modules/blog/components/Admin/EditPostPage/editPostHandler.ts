@@ -1,3 +1,4 @@
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -9,18 +10,12 @@ const editPostHandler = async (
   markdown?: string
 ) => {
   try {
-    const res = await axios.patch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/admin/posts/${id}`,
-      {
-        title,
-        description,
-        markdown,
-        visibility,
-      },
-      {
-        withCredentials: true,
-      }
-    )
+    await axiosAPI.patch(`/blog/admin/posts/${id}`, {
+      title,
+      description,
+      markdown,
+      visibility,
+    })
     toast.success('Post edited successfully', { theme: 'dark' })
   } catch (e) {
     if (!axios.isAxiosError(e)) throw e

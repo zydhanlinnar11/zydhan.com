@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 import { toast } from 'react-toastify'
 
 const registerHandler = async (
@@ -7,13 +7,8 @@ const registerHandler = async (
   password?: string,
   passwordConfirm?: string
 ) => {
-  const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    withCredentials: true,
-  })
-
-  await instance.get('/sanctum/csrf-cookie')
-  await instance.post('/auth/register', {
+  await axiosAPI.get('/sanctum/csrf-cookie')
+  await axiosAPI.post('/auth/register', {
     name,
     email,
     password,

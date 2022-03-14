@@ -2,6 +2,7 @@ import AnchorLink from '@/common/components/AnchorLink'
 import Button from '@/common/components/Button'
 import TextArea from '@/common/components/Form/TextArea'
 import { useUserState } from '@/common/providers/UserProvider'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import Comment from '@/modules/blog/types/admin/Comment'
 import axios from 'axios'
@@ -57,15 +58,7 @@ const NewCommentSection: FC<Props> = ({ slug, mutate }) => {
       return
     }
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/${slug}/comments`,
-        {
-          comment,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+      await axiosAPI.post(`/blog/posts/${slug}/comments`, { comment })
       await mutate()
       await router.push('#comments-section')
       toast.success('Comment added successfully!', {

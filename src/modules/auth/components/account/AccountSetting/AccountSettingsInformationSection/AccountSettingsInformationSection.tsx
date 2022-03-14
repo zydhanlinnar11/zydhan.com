@@ -8,6 +8,7 @@ import { useUserDispatch } from '@/common/providers/UserProvider'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import User from '@/modules/auth/types/User'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 
 type Props = {
   user: User
@@ -39,13 +40,7 @@ const AccountSettingsInformationSection: FC<Props> = ({ user }) => {
         return
       }
 
-      await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
-        { name, email },
-        {
-          withCredentials: true,
-        }
-      )
+      await axiosAPI.patch('/auth/user', { name, email })
 
       const user = await fetchUser()
       userDispatch({ state: 'authenticated', user })

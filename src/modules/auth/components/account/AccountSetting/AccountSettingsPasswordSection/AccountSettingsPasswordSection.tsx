@@ -6,6 +6,7 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useUserDispatch } from '@/common/providers/UserProvider'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 
 const AccountSettingsPasswordSection = () => {
   const [isInProgress, setInProgress] = useState<boolean>(false)
@@ -33,17 +34,11 @@ const AccountSettingsPasswordSection = () => {
         toast.error('Password confirmation must be match', { theme: 'dark' })
         return
       }
-      await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/user/change-password`,
-        {
-          current_password: currentPasswordRef.current.value,
-          new_password: newPasswordRef.current.value,
-          new_password_confirmation: newPasswordConfirmationRef.current.value,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+      await axiosAPI.patch('/auth/user/change-password', {
+        current_password: currentPasswordRef.current.value,
+        new_password: newPasswordRef.current.value,
+        new_password_confirmation: newPasswordConfirmationRef.current.value,
+      })
       toast.success('Password changed successfully', { theme: 'dark' })
     } catch (e) {
       if (!axios.isAxiosError(e)) throw e

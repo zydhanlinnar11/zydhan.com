@@ -1,15 +1,11 @@
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 import axios from 'axios'
 import { NextRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
 const deletePostHandler = async (id: string, router: NextRouter) => {
   try {
-    const res = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/admin/posts/${id}`,
-      {
-        withCredentials: true,
-      }
-    )
+    await axiosAPI.delete(`/blog/admin/posts/${id}`)
     toast.success('Post deleted successfully', { theme: 'dark' })
     router.push('/blog/admin/posts')
   } catch (e) {

@@ -1,3 +1,4 @@
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 import axios, { AxiosResponse } from 'axios'
 import { NextRouter } from 'next/router'
 import { toast } from 'react-toastify'
@@ -10,16 +11,13 @@ const createPostHandler = async (
   markdown?: string
 ) => {
   try {
-    const res = await axios.post<any, AxiosResponse<{ id: string }, any>>(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/admin/posts`,
+    const res = await axiosAPI.post<any, AxiosResponse<{ id: string }, any>>(
+      '/blog/admin/posts',
       {
         title,
         description,
         markdown,
         visibility,
-      },
-      {
-        withCredentials: true,
       }
     )
     toast.success('Post created successfully', { theme: 'dark' })

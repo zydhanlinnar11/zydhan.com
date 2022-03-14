@@ -1,3 +1,4 @@
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -10,15 +11,7 @@ const ForgotPasswordHandler = async (email?: string) => {
   }
 
   try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/user/forgot-password`,
-      {
-        email,
-      },
-      {
-        withCredentials: true,
-      }
-    )
+    const res = await axiosAPI.post('/auth/user/forgot-password', { email })
 
     toast.success('Check your email for reset password link', {
       theme: 'dark',
