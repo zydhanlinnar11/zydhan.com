@@ -25,7 +25,7 @@ const Modal: FC<Props> = ({
         onClick={(e) => handleClose(e)}
       ></div>
       <div
-        className={`fixed z-50 bg-gray-800 mx-auto my-auto w-[288px] text-center rounded-md
+        className={`fixed z-50 bg-gray-200 dark:bg-gray-800 mx-auto my-auto w-[288px] text-center rounded-md
                 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                 transition-transform overflow-hidden duration-300 ${
                   isShowed ? 'scale-100' : 'scale-0'
@@ -37,10 +37,10 @@ const Modal: FC<Props> = ({
           </div>
           <p>{bodyText}</p>
         </div>
-        <div className="bg-gray-600 w-full h-px"></div>
+        <div className="bg-gray-400 dark:bg-gray-600 w-full h-px"></div>
         <div className="grid grid-cols-2 min-h-[2.75rem]">
           <button
-            className={`hover:bg-gray-600 transition-colors ${
+            className={`hover:bg-gray-400 dark:hover:bg-gray-600  transition-colors ${
               !action && 'col-span-2'
             }`}
             onClick={handleClose}
@@ -50,7 +50,7 @@ const Modal: FC<Props> = ({
           {action && (
             <button
               onClick={action.handler}
-              className={`hover:bg-gray-600 transition-colors border-l border-gray-600 ${
+              className={`hover:bg-gray-400 dark:hover:bg-gray-600 transition-colors border-l border-gray-400 dark:border-gray-600 ${
                 action.type === 'danger'
                   ? 'text-red-500'
                   : action.type === 'success'
