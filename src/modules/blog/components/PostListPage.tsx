@@ -56,7 +56,6 @@ export async function getStaticProps() {
     `${process.env.NEXT_PUBLIC_API_URL}/blog/posts`
   )
   const posts = response.data
-  console.log(posts)
 
   return { props: { posts } }
 }
