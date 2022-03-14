@@ -49,7 +49,7 @@ const UserInfo: FC<Props> = ({ user }) => {
       <div className="flex flex-col gap-y-3 items-center justify-center pt-2 pb-1 px-6">
         {userDetail}
       </div>
-      <div className="bg-gray-600 h-px mx-4 my-1" />
+      <div className="bg-black/20 dark:bg-white/20 h-px mx-4 my-1" />
     </>
   )
 }
