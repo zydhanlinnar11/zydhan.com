@@ -18,7 +18,7 @@ export default function PostPage({ post }: { post: Post }) {
   const { title, slug, createdAt, description, markdown } = post
 
   return (
-    <div>
+    <>
       <Head>
         <title>{title} - Blog - zydhan.xyz</title>
         <meta property="og:title" content="Blog - zydhan.xyz" />
@@ -36,7 +36,7 @@ export default function PostPage({ post }: { post: Post }) {
           <CommentSection post={post}></CommentSection>
         </div>
       </article>
-    </div>
+    </>
   )
 }
 
