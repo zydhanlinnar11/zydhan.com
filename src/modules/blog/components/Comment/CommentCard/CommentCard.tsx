@@ -5,17 +5,36 @@ import Markdown from '../../Markdown'
 import CommentCardMenu from './CommentCardMenu'
 import CommentCardEditForm from './CommentCardEditForm'
 import { KeyedMutator } from 'swr'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
 
 interface Props {
   comment: Comment
   mutate: KeyedMutator<Comment[]>
+  openModal: (commentId: string, handler: () => Promise<void>) => void
+  closeModal: () => void
 }
 
-function CommentCard({ comment, mutate }: Props) {
+function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
   const { createdAt, id, is_own_comment, user_name } = comment
   const [isEditing, setIsEditing] = useState(false)
 
-  const deleteHandler: MouseEventHandler<HTMLButtonElement> = () => {}
+  const deleteComment = async () => {
+    try {
+      await axiosAPI.delete(`/blog/comments/${id}`)
+      mutate()
+      toast.success('Comment deleted successfully!', { theme: 'dark' })
+      closeModal()
+    } catch (e) {
+      if (!axios.isAxiosError(e)) throw e
+      toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
+    }
+  }
+
+  const deleteHandler: MouseEventHandler<HTMLButtonElement> = () => {
+    openModal(comment.id, deleteComment)
+  }
 
   return (
     <li className="w-full border border-white/20 rounded px-5 py-3">
