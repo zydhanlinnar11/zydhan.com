@@ -64,6 +64,7 @@ const NewCommentSection: FC<Props> = ({ slug, mutate }) => {
       toast.success('Comment added successfully!', {
         theme: 'dark',
       })
+      commentRef.current.value = ''
     } catch (e) {
       if (!axios.isAxiosError(e)) throw e
       toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
