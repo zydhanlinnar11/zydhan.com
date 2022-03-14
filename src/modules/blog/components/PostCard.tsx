@@ -13,7 +13,7 @@ const PostCard: FC<Props> = ({ post, href }) => {
     <Link href={href}>
       <a
         key={post.slug}
-        className="bg-white dark:bg-transparent group h-72 rounded-xl max-w-xs w-full mx-auto shadow-md hover:scale-105 duration-300 dark:border dark:border-white/20 dark:hover:border-white/50 dark:duration-500"
+        className="bg-white dark:bg-transparent group h-72 rounded-xl max-w-xs w-full mx-auto shadow-md dark:shadow-none hover:scale-105 duration-300 dark:border dark:border-white/20 dark:hover:border-white/50 dark:duration-500"
       >
         <article className="h-full flex flex-col">
           <div

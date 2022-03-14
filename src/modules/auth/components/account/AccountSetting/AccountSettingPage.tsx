@@ -32,11 +32,7 @@ const AccountSettingPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-y-5 sm:flex-row sm:gap-x-5">
-            <div
-              className="sm:w-64 sm:h-fit bg-black flex flex-col w-full
-              border border-white/20 rounded p-6
-              justify-center text-center gap-y-5 break-words text-ellipsis overflow-hidden"
-            >
+            <div className="sm:w-64 sm:h-fit flex flex-col w-full shadow-sm bg-white dark:shadow-none dark:bg-transparent dark:border dark:border-white/20 rounded p-6 justify-center text-center gap-y-5 break-words text-ellipsis overflow-hidden">
               <>
                 <FontAwesomeIcon icon={faCircleUser} size={'4x'} />
                 <div>
