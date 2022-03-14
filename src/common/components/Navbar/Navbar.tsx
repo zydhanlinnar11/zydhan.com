@@ -4,8 +4,8 @@ import UserMenu from './UserMenu'
 export default function Navbar() {
   return (
     <nav
-      className="dark:bg-zinc-900/25 sticky top-0 min-h-[52px] sm:h-[52px] z-10 w-full backdrop-blur-[20px] backdrop-saturate-[1.80]
-      after:w-full after:h-px after:dark:bg-white/[0.24] after:content-[''] after:block after:absolute after:top-full
+      className="bg-white dark:bg-zinc-900/25 sticky top-0 min-h-[52px] sm:h-[52px] z-10 w-full backdrop-blur-[20px] backdrop-saturate-[1.80]
+      after:w-full after:h-px after:bg-black/[0.24] dark:after:bg-white/[0.24] after:content-[''] after:block after:absolute after:top-full
       print:hidden"
     >
       <div className="flex justify-between h-[52px] my-0 mx-auto py-0 max-w-5xl px-6">
