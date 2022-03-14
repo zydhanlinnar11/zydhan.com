@@ -32,7 +32,7 @@ export default function PostPage({ post }: { post: Post }) {
         <Header topText={createdAt} midText={title} bottomText={description} />
         <div className="text-center mx-auto">
           <div className="bg-black/[0.24] dark:bg-white/[0.24] h-px w-full"></div>
-          <Markdown markdown={markdown}></Markdown>
+          <Markdown markdown={markdown} allowHTML={true}></Markdown>
           <CommentSection post={post}></CommentSection>
         </div>
       </article>
