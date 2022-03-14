@@ -56,7 +56,9 @@ const RegisterPage = () => {
       <div className="grow flex flex-col items-center justify-center">
         <header className="text-center">
           <h1 className="text-3xl font-semibold">Register</h1>
-          <p className="mt-3 text-gray-400">Create new account</p>
+          <p className="mt-3 text-gray-600 dark:text-gray-400">
+            Create new account
+          </p>
         </header>
         <form
           className="text-center mt-5 max-w-xs mx-auto"

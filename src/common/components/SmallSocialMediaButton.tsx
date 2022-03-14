@@ -15,12 +15,12 @@ export default function SmallSocialMediaButton({
   return (
     <a
       href={url}
-      target='_blank'
-      rel='noreferrer'
-      className='max-h-3 max-w-3 text-white/75 hover:text-white/90 focus:text-white'
+      target="_blank"
+      rel="noreferrer"
+      className="max-h-3 max-w-3 text-black/75 hover:text-black/90 focus:text-black dark:text-white/75 hover:dark:text-white/90 focus:dark:text-white"
       aria-label={`Follow my ${name}`}
     >
-      <FontAwesomeIcon icon={icon} size='lg' />
+      <FontAwesomeIcon icon={icon} size="lg" />
     </a>
   )
 }

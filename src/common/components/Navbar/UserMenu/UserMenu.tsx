@@ -27,19 +27,19 @@ const UserMenu = () => {
   }
 
   return (
-    <Menu icon={faCircleUser} iconSize='2x'>
+    <Menu icon={faCircleUser} iconSize="2x">
       {userState.state === 'loading' && <UserInfo />}
       {userState.state === 'authenticated' && (
         <>
           <UserInfo user={userState.user} />
           <MenuItem onClick={() => Router.push('/auth/account')}>
-            <FontAwesomeIcon icon={faGear} className='mr-2 my-0' />
+            <FontAwesomeIcon icon={faGear} className="mr-2 my-0" />
             Setting
           </MenuItem>
           <MenuItem onClick={logoutHandler}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
-              className='mr-2 my-0'
+              className="mr-2 my-0"
             />
             Log out
           </MenuItem>
@@ -51,7 +51,7 @@ const UserMenu = () => {
           <MenuItem onClick={loginHandler}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
-              className='mr-2 my-0'
+              className="mr-2 my-0"
             />
             Log in
           </MenuItem>

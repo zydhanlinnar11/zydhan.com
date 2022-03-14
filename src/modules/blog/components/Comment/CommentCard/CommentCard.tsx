@@ -37,10 +37,10 @@ function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
   }
 
   return (
-    <li className="w-full border border-white/20 rounded px-5 py-3">
+    <li className="w-full shadow-sm dark:shadow-none bg-white dark:bg-transparent dark:border dark:border-white/20 rounded px-5 py-3">
       <div className="flex justify-between">
         <div className="w-full flex gap-3 mb-3">
-          <div className="h-10 w-10 bg-white rounded-full shrink-0 my-auto">
+          <div className="h-10 w-10 bg-black dark:bg-white rounded-full shrink-0 my-auto">
             <Image
               className="rounded-full shrink-0 my-auto"
               width={40}
@@ -51,7 +51,9 @@ function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
           </div>
           <div className="my-auto">
             <p className="text-sm">{user_name}</p>
-            <p className="text-xs text-gray-400">{createdAt}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {createdAt}
+            </p>
           </div>
         </div>
         {is_own_comment && (

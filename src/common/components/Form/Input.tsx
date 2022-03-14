@@ -26,9 +26,9 @@ const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
     <input
       {...props}
       ref={ref}
-      className={`block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none
+      className={`block focus:ring-4 focus:ring-blue-400 dark:focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none
             w-full pl-4 pr-4 relative ${getRoundedBorderClassName(position)}
-            shadow-sm h-10 bg-transparent border border-white/[0.24]
+            shadow-sm h-10 bg-transparent border border-black/40 dark:border-white/[0.24]
             ${isNeedBottomBorder && 'border-b-0'} ${className}`}
     />
   )

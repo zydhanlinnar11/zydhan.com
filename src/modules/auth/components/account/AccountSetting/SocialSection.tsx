@@ -96,10 +96,7 @@ const SocialSection: FC<Props> = ({ user }) => {
         isShowed={isUnlinkModalShowed}
         action={{ handler: unlinkModalAction, text: 'Unlink', type: 'danger' }}
       />
-      <div
-        className="flex flex-col
-border border-white/20 rounded px-6 py-5"
-      >
+      <div className="flex flex-col shadow-sm bg-white dark:shadow-none dark:bg-transparent dark:border dark:border-white/20 rounded px-6 py-5">
         <h3 className="text-lg font-semibold">Social Account</h3>
         <div className="h-px w-full bg-white/20 mt-3"></div>
         <div className="mt-5 flex flex-col gap-y-3">

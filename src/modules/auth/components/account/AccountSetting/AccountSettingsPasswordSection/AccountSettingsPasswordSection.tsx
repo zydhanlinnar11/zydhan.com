@@ -52,10 +52,7 @@ const AccountSettingsPasswordSection = () => {
   }
 
   return (
-    <div
-      className="sm:col-span-3 flex flex-col
-  border border-white/20 rounded px-6 py-5"
-    >
+    <div className="sm:col-span-3 flex flex-col shadow-sm bg-white dark:shadow-none dark:bg-transparent dark:border dark:border-white/20 rounded px-6 py-5">
       <h3 className="text-lg font-semibold">Change Password</h3>
       <div className="h-px w-full bg-white/20 mt-3"></div>
       <form
