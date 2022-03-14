@@ -1,13 +1,7 @@
-import AnchorLink from '@/common/components/AnchorLink'
-import Button from '@/common/components/Button'
-import TextArea from '@/common/components/Form/TextArea'
-import { useUserState } from '@/common/providers/UserProvider'
-import getBaseURL from '@/common/utils/GetBaseUrl'
-import axios from 'axios'
-import React, { FC, FormEvent, useRef } from 'react'
-import { toast } from 'react-toastify'
+import React, { FC } from 'react'
 import { Post } from '../ViewPostPage'
 import CommentCard from './CommentCard'
+import NewCommentSection from './NewCommentSection'
 import useComments from './useComments'
 
 type Props = {
@@ -17,35 +11,6 @@ type Props = {
 const CommentSection: FC<Props> = ({ post }) => {
   const { slug } = post
   const { comments, isError, isLoading, mutate } = useComments(slug)
-  const commentRef = useRef<HTMLTextAreaElement>(null)
-  const userState = useUserState()
-
-  const newCommentSubmitHandler = async (e: FormEvent) => {
-    e.preventDefault()
-    const comment = commentRef.current?.value
-    if (!comment) {
-      toast.error("Comment can't be empty.", { theme: 'dark' })
-      return
-    }
-    try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/${slug}/comments`,
-        {
-          comment,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      await mutate()
-      toast.success('Comment added successfully!', {
-        theme: 'dark',
-      })
-    } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
-      toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
-    }
-  }
 
   const deleteCommentHandler = async (deletedComment: Comment) => {
     // try {
@@ -93,32 +58,7 @@ const CommentSection: FC<Props> = ({ post }) => {
           There are currently no comments for this post
         </p>
       )}
-      <p className="text-xl font-medium mb-4 mt-6">Add new comment</p>
-      {userState.state === 'authenticated' ? (
-        <form onSubmit={newCommentSubmitHandler} id="add-new-comment">
-          <div className="mt-6 relative rounded-md shadow-sm">
-            <TextArea
-              className="h-36"
-              placeholder="Write comment here, markdown styling is supported"
-              ref={commentRef}
-            />
-          </div>
-          <div className="sm:w-48 ml-auto mt-3">
-            <Button>Post comment</Button>
-          </div>
-        </form>
-      ) : (
-        <p className="text-center mt-12 mb-6">
-          <AnchorLink
-            href={`/auth/login?next=${encodeURIComponent(
-              getBaseURL() + `/blog/posts/${slug}#add-new-comment`
-            )}`}
-          >
-            Log in
-          </AnchorLink>{' '}
-          to add comment.
-        </p>
-      )}
+      <NewCommentSection {...{ mutate, slug }} />
     </section>
   )
 }
