@@ -1,9 +1,11 @@
 import AnchorLink from '@/common/components/AnchorLink'
 import Button from '@/common/components/Button'
+import TextArea from '@/common/components/Form/TextArea'
 import { useUserState } from '@/common/providers/UserProvider'
 import getBaseURL from '@/common/utils/GetBaseUrl'
-import Router from 'next/router'
-import React, { FC, FormEvent, useEffect, useRef, useState } from 'react'
+import axios from 'axios'
+import React, { FC, FormEvent, useRef } from 'react'
+import { toast } from 'react-toastify'
 import { Post } from '../ViewPostPage'
 import CommentCard from './CommentCard'
 import useComments from './useComments'
@@ -14,19 +16,35 @@ type Props = {
 
 const CommentSection: FC<Props> = ({ post }) => {
   const { slug } = post
-  const { comments, isError, isLoading } = useComments(slug)
-  const newCommentRef = useRef(null)
+  const { comments, isError, isLoading, mutate } = useComments(slug)
+  const commentRef = useRef<HTMLTextAreaElement>(null)
   const userState = useUserState()
 
   const newCommentSubmitHandler = async (e: FormEvent) => {
-    // e.preventDefault()
-    // try {
-    //   const content = newCommentRef.current.value
-    //   const comment = await BlogConfig.COMMENT_SERVICE.addComment(slug, content)
-    //   setComments((prevComments) => [comment, ...prevComments])
-    //   Router.push('#comments-section')
-    //   newCommentRef.current.value = ''
-    // } catch (e) {}
+    e.preventDefault()
+    const comment = commentRef.current?.value
+    if (!comment) {
+      toast.error("Comment can't be empty.", { theme: 'dark' })
+      return
+    }
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/${slug}/comments`,
+        {
+          comment,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      await mutate()
+      toast.success('Comment added successfully!', {
+        theme: 'dark',
+      })
+    } catch (e) {
+      if (!axios.isAxiosError(e)) throw e
+      toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
+    }
   }
 
   const deleteCommentHandler = async (deletedComment: Comment) => {
@@ -79,15 +97,13 @@ const CommentSection: FC<Props> = ({ post }) => {
       {userState.state === 'authenticated' ? (
         <form onSubmit={newCommentSubmitHandler} id="add-new-comment">
           <div className="mt-6 relative rounded-md shadow-sm">
-            <textarea
-              name="post-markdown"
-              id="post-markdown"
-              className="block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-3 rounded-md h-36 bg-transparent border border-white/[0.24]"
+            <TextArea
+              className="h-36"
               placeholder="Write comment here, markdown styling is supported"
-              ref={newCommentRef}
+              ref={commentRef}
             />
           </div>
-          <div className="sm:w-48 ml-auto">
+          <div className="sm:w-48 ml-auto mt-3">
             <Button>Post comment</Button>
           </div>
         </form>
