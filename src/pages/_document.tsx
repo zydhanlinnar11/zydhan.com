@@ -16,32 +16,32 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel='stylesheet' href='https://rsms.me/inter/inter.css'></link>
-          <meta name='description' content='Welcome to My Personal Portfolio' />
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
+          <meta name="description" content="Welcome to My Personal Portfolio" />
           <meta
-            property='og:title'
+            property="og:title"
             content="Zydhan Linnar Putra's Personal Portfolio"
           />
-          <meta property='og:url' content='https://zydhan.xyz' />
+          <meta property="og:url" content="https://zydhan.xyz" />
           <meta
-            property='og:description'
-            content='Welcome to My Personal Portfolio'
+            property="og:description"
+            content="Welcome to My Personal Portfolio"
           />
-          <link rel='icon' href='/favicon.png' />
+          <link rel="icon" href="/favicon.png" />
           <link
-            rel='apple-touch-icon'
-            sizes='180x180'
-            href='/apple-touch-icon.png'
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
           ></link>
-          <meta name='theme-color' content='#111827' />
-          <meta property='og:type' content='website' />
-          <meta property='og:site_name' content='Zydhan Linnar Putra' />
-          <meta property='og:image' content='/logo.webp' />
-          <meta property='og:image:width' content='1080' />
-          <meta property='og:image:height' content='1080' />
-          <meta property='og:image:alt' content='Cartoonized photo of Zydhan' />
+          <meta name="theme-color" content="#111827" />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Zydhan Linnar Putra" />
+          <meta property="og:image" content="/logo.webp" />
+          <meta property="og:image:width" content="1080" />
+          <meta property="og:image:height" content="1080" />
+          <meta property="og:image:alt" content="Cartoonized photo of Zydhan" />
         </Head>
-        <body className='bg-black text-white scroll-smooth'>
+        <body className="dark:bg-black dark:text-white scroll-smooth">
           <Main />
           <NextScript />
         </body>
