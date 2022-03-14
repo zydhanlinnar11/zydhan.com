@@ -54,13 +54,13 @@ const CommentSection: FC<Props> = ({ post }) => {
     <section
       className="text-left px-2 pb-8
     target:before:content-[''] target:before:h-14 target:before:block target:before:-mt-14"
-      id='comments-section'
+      id="comments-section"
     >
-      <h2 className='border-b border-b-white/[0.24] mb-4 text-2xl pb-2 font-medium'>
+      <h2 className="border-b border-b-white/[0.24] mb-4 text-2xl pb-2 font-medium">
         Comments
       </h2>
       {comments && comments.length > 0 ? (
-        <ul className='mb-3 flex flex-col gap-5'>
+        <ul className="mb-3 flex flex-col gap-5">
           {comments.map((comment) => (
             <CommentCard
               // deleteHandler={deleteCommentHandler}
@@ -71,30 +71,32 @@ const CommentSection: FC<Props> = ({ post }) => {
           ))}
         </ul>
       ) : (
-        <p className='text-center my-12'>
+        <p className="text-center my-12">
           There are currently no comments for this post
         </p>
       )}
-      <p className='text-xl font-medium mb-4 mt-6'>Add new comment</p>
+      <p className="text-xl font-medium mb-4 mt-6">Add new comment</p>
       {userState.state === 'authenticated' ? (
-        <form onSubmit={newCommentSubmitHandler} id='add-new-comment'>
-          <div className='mt-6 relative rounded-md shadow-sm'>
+        <form onSubmit={newCommentSubmitHandler} id="add-new-comment">
+          <div className="mt-6 relative rounded-md shadow-sm">
             <textarea
-              name='post-markdown'
-              id='post-markdown'
-              className='block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-3 rounded-md h-36 bg-transparent border border-white/[0.24]'
-              placeholder='Write comment here, markdown styling is supported'
+              name="post-markdown"
+              id="post-markdown"
+              className="block focus:ring-4 focus:ring-blue-600 focus:ring-opacity-30 focus:outline-none w-full px-4 py-3 rounded-md h-36 bg-transparent border border-white/[0.24]"
+              placeholder="Write comment here, markdown styling is supported"
               ref={newCommentRef}
             />
           </div>
-          <div className='sm:w-48 ml-auto'>
+          <div className="sm:w-48 ml-auto">
             <Button>Post comment</Button>
           </div>
         </form>
       ) : (
-        <p className='text-center mt-12 mb-6'>
+        <p className="text-center mt-12 mb-6">
           <AnchorLink
-            href={`/auth/login?next=${getBaseURL()}%2Fblog%2Fposts%2F${slug}%23add-new-comment`}
+            href={`/auth/login?next=${encodeURIComponent(
+              getBaseURL() + `/blog/posts/${slug}#add-new-comment`
+            )}`}
           >
             Log in
           </AnchorLink>{' '}
