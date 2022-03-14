@@ -12,4 +12,33 @@ module.exports = withBundleAnalyzer({
       'media.discordapp.net',
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: 'https://zydhan.xyz/blog',
+        permanent: true,
+      },
+      {
+        source: '/post/:slug*',
+        destination: 'https://zydhan.xyz/blog/posts/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/login',
+        destination: 'https://zydhan.xyz/auth/login',
+        permanent: true,
+      },
+      {
+        source: '/register',
+        destination: 'https://zydhan.xyz/auth/register',
+        permanent: true,
+      },
+      {
+        source: '/admin/:path*',
+        destination: 'https://zydhan.xyz/blog/admin/:path*',
+        permanent: true,
+      },
+    ]
+  },
 })
