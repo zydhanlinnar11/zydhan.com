@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="dark">
+      <Html className="dark scroll-smooth">
         <Head>
           <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
           <meta name="description" content="Welcome to My Personal Portfolio" />
@@ -41,7 +41,7 @@ class MyDocument extends Document {
           <meta property="og:image:height" content="1080" />
           <meta property="og:image:alt" content="Cartoonized photo of Zydhan" />
         </Head>
-        <body className="bg-gray-100 dark:bg-black dark:text-white scroll-smooth">
+        <body className="bg-gray-100 dark:bg-black dark:text-white">
           <Main />
           <NextScript />
         </body>
