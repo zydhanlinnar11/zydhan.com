@@ -13,7 +13,7 @@ const Menu: FC<Props> = ({ children, icon, iconSize }) => {
   return (
     <HeadlessMenu as="div" className="ml-3 relative">
       <div>
-        <HeadlessMenu.Button className="bg-gray-800 flex text-sm rounded-full">
+        <HeadlessMenu.Button className="dark:bg-gray-800 flex text-sm rounded-full">
           <span className="sr-only">Open user menu</span>
           <span className="text-gray-700 dark:text-gray-300">
             <FontAwesomeIcon icon={icon} size={iconSize} />
@@ -31,8 +31,7 @@ const Menu: FC<Props> = ({ children, icon, iconSize }) => {
       >
         <HeadlessMenu.Items
           as="ol"
-          className="absolute origin-top-right bg-black flex flex-col
-                right-0 w-56 mt-2 border border-white/20 rounded z-10 break-all p-3 gap-y-1"
+          className="absolute origin-top-right dark:bg-black flex flex-col right-0 w-56 mt-2 shadow-md border-black/20 dark:border-white/20 rounded z-10 break-all p-3 gap-y-1"
         >
           {children}
         </HeadlessMenu.Items>
