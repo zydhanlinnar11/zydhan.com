@@ -13,17 +13,13 @@ const PostCard: FC<Props> = ({ post, href }) => {
     <Link href={href}>
       <a
         key={post.slug}
-        className="bg-white dark:bg-transparent group h-72 rounded-xl max-w-xs w-full mx-auto shadow-md dark:shadow-none hover:scale-105 duration-300 dark:border dark:border-white/20 dark:hover:border-white/50 dark:duration-500"
+        className="bg-white dark:bg-transparent group h-72 rounded-xl max-w-xs w-full mx-auto shadow-md dark:shadow-none hover:scale-105 duration-300 dark:border dark:border-white/30 overflow-hidden"
       >
         <article className="h-full flex flex-col">
-          <div
-            className="h-32 block w-full relative rounded-t-xl overflow-hidden
-  after:content-[''] after:inline-block after:h-full after:w-full dark:after:group-hover:bg-black/20 after:transition after:duration-500 after:ease-in-out z-10"
-          >
+          <div className="h-32 block w-full relative">
             <Image
               src={post.cover_url}
               alt={`${post.slug}-image`}
-              className="dark:group-hover:scale-110 transition duration-500 ease-in-out rounded-t-xl -z-10"
               layout="fill"
               objectFit="cover"
               sizes="320px"
