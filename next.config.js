@@ -7,6 +7,7 @@ const nextConfig = {
       'storage.googleapis.com',
       'cdn.discordapp.com',
       'avatars.dicebear.com',
+      'media.discordapp.net',
     ],
   },
   eslint: {
