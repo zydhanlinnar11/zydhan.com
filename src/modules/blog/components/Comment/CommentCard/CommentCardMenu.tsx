@@ -1,10 +1,15 @@
 import { faEllipsisV, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Fragment } from 'react'
+import { FC, Fragment, MouseEventHandler } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 
-const CommentCardMenu = () => {
+type Props = {
+  handleEdit: MouseEventHandler<HTMLButtonElement>
+  handleDelete: MouseEventHandler<HTMLButtonElement>
+}
+
+const CommentCardMenu: FC<Props> = ({ handleEdit, handleDelete }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <Menu.Button
@@ -26,7 +31,7 @@ const CommentCardMenu = () => {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={() => {}}
+                onClick={handleEdit}
                 className={`${
                   active && 'bg-blue-600/30'
                 } py-2 pl-3 pr-9 text-left transition-all duration-150`}
@@ -39,7 +44,7 @@ const CommentCardMenu = () => {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={() => {}}
+                onClick={handleDelete}
                 className={`${
                   active && 'bg-blue-600/30'
                 } py-2 pl-3 pr-9 text-left text-red-500 transition-all duration-150`}

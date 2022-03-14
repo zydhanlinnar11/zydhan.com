@@ -1,26 +1,49 @@
 import Button from '@/common/components/Button'
 import TextArea from '@/common/components/Form/TextArea'
 import Comment from '@/modules/blog/types/admin/Comment'
-import React, { FC, FormEvent, useRef } from 'react'
+import React, { FC, FormEvent, useRef, useState } from 'react'
+import { axiosAPI } from '@/common/utils/AxiosInstance'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import { KeyedMutator } from 'swr'
 
 interface Props {
   comment: Comment
-  closeHandler: React.MouseEventHandler<HTMLButtonElement>
+  closeHandler: () => void
+  mutate: KeyedMutator<Comment[]>
 }
-
-const editHandler = async (
-  e: FormEvent<HTMLFormElement>,
-  commentId: string
-) => {}
 
 const CommentCardEditForm: FC<Props> = ({
   comment: { comment, id },
   closeHandler,
+  mutate,
 }) => {
   const commentRef = useRef<HTMLTextAreaElement>(null)
+  const [isProcessing, setIsProcessing] = useState(false)
+
+  const editHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      setIsProcessing(true)
+      const comment = commentRef.current?.value
+      if (!comment) {
+        toast.error('The comment field is required!', { theme: 'dark' })
+        return
+      }
+      await axiosAPI.patch(`/blog/comments/${id}`, { comment })
+      await mutate()
+      toast.success('Successfully edited comment!', { theme: 'dark' })
+      closeHandler()
+    } catch (e) {
+      if (!axios.isAxiosError(e)) throw e
+      toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
+    } finally {
+      setIsProcessing(false)
+    }
+  }
 
   return (
-    <form onSubmit={(e) => editHandler(e, id)}>
+    <form onSubmit={editHandler}>
       <p className="text-lg font-medium px-1">Edit comment</p>
       <div className="mt-3 relative rounded-md shadow-sm">
         <TextArea
@@ -30,11 +53,13 @@ const CommentCardEditForm: FC<Props> = ({
           ref={commentRef}
         />
       </div>
-      <div className="sm:w-96 ml-auto flex gap-x-3 gap-y-1 flex-col sm:flex-row">
+      <div className="sm:w-96 ml-auto flex gap-x-3 gap-y-1 flex-col sm:flex-row mt-3">
         <Button type="button" onClick={closeHandler}>
           Cancel
         </Button>
-        <Button type="submit">Edit</Button>
+        <Button type="submit" disabled={isProcessing}>
+          Edit
+        </Button>
       </div>
     </form>
   )

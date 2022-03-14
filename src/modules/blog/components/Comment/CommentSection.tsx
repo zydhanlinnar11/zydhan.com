@@ -32,7 +32,7 @@ const CommentSection: FC<Props> = ({ post }) => {
         (comments.length > 0 ? (
           <ul className="mb-3 flex flex-col gap-5">
             {comments.map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
+              <CommentCard key={comment.id} comment={comment} mutate={mutate} />
             ))}
           </ul>
         ) : (
