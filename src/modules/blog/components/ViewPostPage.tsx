@@ -20,15 +20,18 @@ export default function PostPage({ post }: { post: Post }) {
   return (
     <div>
       <Head>
-        <title>{title} - zydhan.xyz</title>
-        <meta property='og:title' content='Blog - zydhan.xyz' />
-        <meta property='og:url' content={'https://zydhan.xyz/blog'} />
-        <meta property='og:description' content='Welcome to My Blog' />
+        <title>{title} - Blog - zydhan.xyz</title>
+        <meta property="og:title" content="Blog - zydhan.xyz" />
+        <meta
+          property="og:url"
+          content={`https://zydhan.xyz/blog/posts/${slug}`}
+        />
+        <meta property="og:description" content={description} />
       </Head>
-      <article className='flex flex-col mx-auto grow w-full max-w-5xl px-6'>
+      <article className="flex flex-col mx-auto grow w-full max-w-5xl px-6">
         <Header topText={createdAt} midText={title} bottomText={description} />
-        <div className='text-center mx-auto'>
-          <div className='bg-white/[0.24] h-px w-full'></div>
+        <div className="text-center mx-auto">
+          <div className="bg-white/[0.24] h-px w-full"></div>
           <Markdown markdown={markdown}></Markdown>
           <CommentSection post={post}></CommentSection>
         </div>
@@ -47,12 +50,10 @@ export const getStaticProps: GetStaticProps = async (req) => {
   let post: Post
 
   try {
-    const response = await axios.get(
+    const response = await axios.get<any, AxiosResponse<Post, any>>(
       `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/${slug}`
     )
-    const responseData = response.data
-
-    post = responseData.data
+    post = response.data
   } catch (e) {
     if (axios.isAxiosError(e)) console.log(e.response?.data)
     return {
@@ -67,8 +68,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/blog/posts`
   )
-  const responseData = response.data
-  const posts = responseData.data
+  const posts = response.data
 
   let paths: { params: { slug: string } }[] = []
   posts.forEach(({ slug }: { slug: string }) => {
