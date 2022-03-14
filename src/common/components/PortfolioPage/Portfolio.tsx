@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import NarrowPageContainer from '../NarrowPageContainer'
 import LangAndTools from './LangAndTools'
+import Projects from './Projects'
 
 const Portfolio = () => {
   return (
@@ -27,6 +28,7 @@ const Portfolio = () => {
 
       <main className="p-3 mt-8">
         <LangAndTools />
+        <Projects />
       </main>
     </NarrowPageContainer>
   )
