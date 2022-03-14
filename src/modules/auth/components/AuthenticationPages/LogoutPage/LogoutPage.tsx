@@ -17,7 +17,7 @@ const LogoutPage = () => {
     setModalShowed(false)
     try {
       await logout()
-      await router.replace('/')
+      await router.push(new URL(`${router.query['from']}`).toString())
       toast.success('Successfully logged out!', {
         theme: 'dark',
       })
@@ -45,8 +45,8 @@ const LogoutPage = () => {
       </Head>
       <PrivateRoute>
         <Modal
-          title='Log out'
-          bodyText='Are you sure want to log out?'
+          title="Log out"
+          bodyText="Are you sure want to log out?"
           isShowed={isModalShowed}
           handleClose={cancelLogout}
           action={{ handler: logoutHandler, text: 'Log out', type: 'danger' }}
