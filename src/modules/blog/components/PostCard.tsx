@@ -26,7 +26,6 @@ const PostCard: FC<Props> = ({ post, href }) => {
               className="group-hover:scale-110 transition duration-500 ease-in-out rounded-t-xl -z-10"
               layout="fill"
               objectFit="cover"
-              priority={true}
               sizes="320px"
             />
           </div>

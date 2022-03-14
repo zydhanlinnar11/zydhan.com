@@ -1,8 +1,8 @@
 import Header from '@/common/components/Header'
+import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 import { useUserState } from '@/common/providers/UserProvider'
 import axios, { AxiosResponse } from 'axios'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import PostCard from './PostCard'
 
 export type Post = {
@@ -12,19 +12,14 @@ export type Post = {
   created_at: string
 }
 
-type Response = {
-  status: 'success'
-  data: Post[]
-}
-
 const PostListPage = ({ posts }: { posts: Post[] }) => {
   const userState = useUserState()
 
   return (
-    <div className="flex flex-col mx-auto grow w-full max-w-5xl px-6">
+    <NarrowPageContainer>
       <Head>
-        <title>Blog - zydhan.xyz</title>
-        <meta property="og:title" content="Blog - zydhan.xyz" />
+        <title>Posts - Blog - zydhan.xyz</title>
+        <meta property="og:title" content="Posts - Blog - zydhan.xyz" />
         <meta property="og:url" content={'https://zydhan.xyz/blog'} />
         <meta property="og:description" content="Welcome to My Blog" />
       </Head>
@@ -52,16 +47,16 @@ const PostListPage = ({ posts }: { posts: Post[] }) => {
           ></Header>
         </div>
       )}
-    </div>
+    </NarrowPageContainer>
   )
 }
 
 export async function getStaticProps() {
-  const response = await axios.get<any, AxiosResponse<Response, any>, any>(
+  const response = await axios.get<any, AxiosResponse<Post[], any>, any>(
     `${process.env.NEXT_PUBLIC_API_URL}/blog/posts`
   )
-  const responseData = response.data
-  const posts = responseData.data
+  const posts = response.data
+  console.log(posts)
 
   return { props: { posts } }
 }
