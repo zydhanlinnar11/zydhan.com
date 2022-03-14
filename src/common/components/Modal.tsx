@@ -1,15 +1,12 @@
 import React, { FC, MouseEventHandler } from 'react'
+import ModalAction from '../types/ModalAction'
 
 type Props = {
   isShowed: boolean
   handleClose: MouseEventHandler<HTMLElement>
   title: string
   bodyText: string
-  action?: {
-    handler: MouseEventHandler<HTMLElement>
-    text: string
-    type: 'danger' | 'normal' | 'success'
-  }
+  action?: ModalAction
 }
 
 const Modal: FC<Props> = ({
@@ -34,14 +31,14 @@ const Modal: FC<Props> = ({
                   isShowed ? 'scale-100' : 'scale-0'
                 }`}
       >
-        <div className='p-4'>
+        <div className="p-4">
           <div>
-            <p className='font-bold text-lg'>{title}</p>
+            <p className="font-bold text-lg">{title}</p>
           </div>
           <p>{bodyText}</p>
         </div>
-        <div className='bg-gray-600 w-full h-px'></div>
-        <div className='grid grid-cols-2 min-h-[2.75rem]'>
+        <div className="bg-gray-600 w-full h-px"></div>
+        <div className="grid grid-cols-2 min-h-[2.75rem]">
           <button
             className={`hover:bg-gray-600 transition-colors ${
               !action && 'col-span-2'
