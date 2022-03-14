@@ -16,7 +16,7 @@ type Props = {
 
 const Markdown: FC<Props> = ({ markdown, allowHTML = false }) => {
   return (
-    <div className='text-left pb-2 px-2 max-w-full break-words'>
+    <div className="text-left max-w-full break-words">
       <ReactMarkdown
         rehypePlugins={allowHTML ? [rehypeRaw] : []}
         components={{
@@ -38,57 +38,57 @@ const Markdown: FC<Props> = ({ markdown, allowHTML = false }) => {
             )
           },
           a: ({ node, children, ...props }) => (
-            <AnchorLink href={props.href ?? '#'} target='_blank'>
+            <AnchorLink href={props.href ?? '#'} target="_blank">
               {children}
             </AnchorLink>
           ),
           ul: ({ children }) => (
-            <ul className='list-disc list-inside pl-4 mb-4'>{children}</ul>
+            <ul className="list-disc list-inside pl-4 mb-4">{children}</ul>
           ),
           ol: ({ children }) => (
-            <ul className='list-decimal list-inside mb-4'>{children}</ul>
+            <ul className="list-decimal list-inside mb-4">{children}</ul>
           ),
           img: ({ node, children, ...props }) => {
             if (!props.src) return <></>
             return (
-              <span className='max-w-xl h-56 sm:max-w-4xl sm:h-96 mx-auto relative block'>
+              <span className="max-w-xl h-56 sm:max-w-4xl sm:h-96 mx-auto relative block">
                 <Image
                   src={props.src}
                   alt={props.alt}
-                  className='mx-auto my-2'
-                  layout='fill'
-                  objectFit='contain'
-                  sizes='896px'
+                  className="mx-auto my-2"
+                  layout="fill"
+                  objectFit="contain"
+                  sizes="896px"
                   priority={props.loading === 'eager'}
                 />
               </span>
             )
           },
           h1: ({ children }) => (
-            <h1 className='border-b border-b-white/[0.24] mt-6 mb-4 text-3xl pb-2 font-medium'>
+            <h1 className="border-b border-b-white/[0.24] mt-6 mb-4 text-3xl pb-2 font-medium">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className='border-b border-b-white/[0.24] mt-6 mb-4 text-2xl pb-2 font-medium'>
+            <h2 className="border-b border-b-white/[0.24] mt-6 mb-4 text-2xl pb-2 font-medium">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className='text-xl font-medium mt-6 mb-4'>{children}</h3>
+            <h3 className="text-xl font-medium mt-6 mb-4">{children}</h3>
           ),
           h4: ({ children }) => (
-            <h4 className='font-medium mt-6 mb-4'>{children}</h4>
+            <h4 className="font-medium mt-6 mb-4">{children}</h4>
           ),
           h5: ({ children }) => (
-            <h5 className='text-sm font-medium mt-6 mb-4'>{children}</h5>
+            <h5 className="text-sm font-medium mt-6 mb-4">{children}</h5>
           ),
           h6: ({ children }) => (
-            <h6 className='text-sm text-white/50 font-medium mt-6 mb-4'>
+            <h6 className="text-sm text-white/50 font-medium mt-6 mb-4">
               {children}
             </h6>
           ),
-          p: ({ children }) => <p className='mb-4 mt-0'>{children}</p>,
+          p: ({ children }) => <p className="mb-4 mt-0">{children}</p>,
         }}
       >
         {markdown ?? 'Content not available'}
