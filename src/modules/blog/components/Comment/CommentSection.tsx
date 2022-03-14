@@ -13,27 +13,6 @@ const CommentSection: FC<Props> = ({ post }) => {
   const { slug } = post
   const { comments, isError, isLoading, mutate } = useComments(slug)
 
-  const deleteCommentHandler = async (deletedComment: Comment) => {
-    // try {
-    //   if (confirm('Are you sure want to delete this comment?')) {
-    //     await BlogConfig.COMMENT_SERVICE.deleteComment(deletedComment.id)
-    //     setComments((comments) =>
-    //       comments.filter((comment) => comment.id !== deletedComment.id)
-    //     )
-    //   }
-    // } catch (e) {}
-  }
-
-  const editPostHandler = async (id: string, content: string) => {
-    // const newComment = await BlogConfig.COMMENT_SERVICE.editComment(id, content)
-    // setComments((prevComments) =>
-    //   prevComments.map((comment) => {
-    //     if (comment.id === newComment.id) return newComment
-    //     return comment
-    //   })
-    // )
-  }
-
   return (
     <section
       className="text-left px-2 pb-8
@@ -53,12 +32,7 @@ const CommentSection: FC<Props> = ({ post }) => {
         (comments.length > 0 ? (
           <ul className="mb-3 flex flex-col gap-5">
             {comments.map((comment) => (
-              <CommentCard
-                // deleteHandler={deleteCommentHandler}
-                editHandler={editPostHandler}
-                key={comment.id}
-                comment={comment}
-              />
+              <CommentCard key={comment.id} comment={comment} />
             ))}
           </ul>
         ) : (
