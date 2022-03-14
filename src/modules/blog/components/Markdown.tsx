@@ -29,7 +29,8 @@ const Markdown: FC<Props> = ({ markdown, allowHTML = false }) => {
             ) : (
               <code
                 className={
-                  className + ' py-1 px-2 m-0 text-sm rounded bg-gray-700'
+                  className +
+                  ' py-1 px-2 m-0 text-sm rounded bg-gray-300 dark:bg-gray-700'
                 }
                 {...props}
               >
@@ -65,12 +66,12 @@ const Markdown: FC<Props> = ({ markdown, allowHTML = false }) => {
             )
           },
           h1: ({ children }) => (
-            <h1 className="border-b border-b-white/[0.24] mt-6 mb-4 text-3xl pb-2 font-medium">
+            <h1 className="border-b border-b-black/[0.24] dark:border-b-white/[0.24] mt-6 mb-4 text-3xl pb-2 font-medium">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="border-b border-b-white/[0.24] mt-6 mb-4 text-2xl pb-2 font-medium">
+            <h2 className="border-b border-b-black/[0.24] dark:border-b-white/[0.24] mt-6 mb-4 text-2xl pb-2 font-medium">
               {children}
             </h2>
           ),
