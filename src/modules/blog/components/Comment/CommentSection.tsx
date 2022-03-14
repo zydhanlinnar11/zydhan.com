@@ -37,7 +37,7 @@ const CommentSection: FC<Props> = ({ post }) => {
         {isLoading && <SpinnerLoading />}
         {(isError || !comments) && (
           <p className="text-center my-12">
-            I'm sorry, but i can't load all comments for now 😢
+            I&apos;m sorry, but i can&apos;t load all comments for now 😢
           </p>
         )}
         {comments &&
