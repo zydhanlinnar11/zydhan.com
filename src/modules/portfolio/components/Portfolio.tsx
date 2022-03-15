@@ -27,9 +27,19 @@ const Portfolio = () => {
           <h1 className="text-3xl font-medium">Zydhan Linnar Putra</h1>
           <p className="text-lg dark:text-gray-200">Full-stack Developer</p>
           <p className="dark:text-gray-300">
-            Web development enthusiast with {new Date().getFullYear() - 2021}{' '}
-            year of experience{new Date().getFullYear() > 2022 && 's'} of bla
-            bla bla
+            Hello friends!, you can call me{' '}
+            <span className="cursor-pointer group relative text-blue-600 dark:text-blue-400 visited:text-indigo-500 font-bold">
+              Zydhan
+              <span
+                className="h-[2px] absolute bg-blue-600 dark:bg-blue-400 group-visited:bg-indigo-500 w-full bottom-0 left-0
+        scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+              ></span>
+            </span>
+            . I'm web development enthusiast with{' '}
+            {new Date().getFullYear() - 2021} year of experience
+            {new Date().getFullYear() > 2022 && 's'} and currently study to
+            become Bachelor of Informatics Engineering at Sepuluh Nopember
+            Institute of Technology Surabaya.
           </p>
         </div>
       </header>
