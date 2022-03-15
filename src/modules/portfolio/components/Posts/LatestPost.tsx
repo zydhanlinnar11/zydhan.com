@@ -3,6 +3,7 @@ import { axiosAPI } from '@/common/utils/AxiosInstance'
 import Post from '@/modules/portfolio/types/Post'
 import Link from 'next/link'
 import useSWR from 'swr'
+import ListItem from '../elements/ListItem'
 
 const fetcher = (url: string) => axiosAPI.get(url).then((res) => res.data)
 
@@ -16,19 +17,13 @@ const LatestPost = () => {
         {data &&
           !error &&
           data.map(({ description, created_at, title, slug }) => (
-            <li key={slug}>
-              <Link href={`/blog/posts/${slug}`}>
-                <a className="relative flex justify-between py-6 after:content-[''] after:h-px after:w-full after:block after:absolute after:top-full dark:after:bg-white/[0.24] hover:scale-[1.02] duration-150">
-                  <div className="flex flex-col gap-y-3">
-                    <p className="text-xl">{title}</p>
-                    <p className="dark:text-gray-300">
-                      {description || 'No description available.'}
-                    </p>
-                  </div>
-                  <p>{created_at}</p>
-                </a>
-              </Link>
-            </li>
+            <ListItem
+              date={created_at}
+              title={title}
+              description={description}
+              url={`/blog/posts/${slug}`}
+              key={slug}
+            />
           ))}
       </ul>
       <AnchorLink href="/blog">Read all posts →</AnchorLink>
