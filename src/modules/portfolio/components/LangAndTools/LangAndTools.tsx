@@ -2,20 +2,24 @@ import Card from './Card'
 
 const datas = [
   {
-    name: 'TypeScript',
-    image: '/ts-logo-512.png',
+    name: 'Laravel',
+    image: '/laravel-logo.png',
   },
   {
     name: 'Next.js',
     image: '/nextjs-logo.png',
   },
   {
+    name: 'TypeScript',
+    image: '/ts-logo-512.png',
+  },
+  {
     name: 'PHP',
     image: '/php-logo.png',
   },
   {
-    name: 'Laravel',
-    image: '/laravel-logo.png',
+    name: 'Docker',
+    image: '/docker-logo.png',
   },
 ]
 
