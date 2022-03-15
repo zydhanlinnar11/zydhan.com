@@ -10,7 +10,10 @@ export default async function handler(
     any,
     AxiosResponse<RecentProject[], any>,
     any
-  >('https://api.github.com/users/zydhanlinnar11/repos?sort=update&per_page=5')
+  >(
+    'https://api.github.com/users/zydhanlinnar11/repos?sort=update&per_page=5',
+    { headers: { Authorization: `token ${process.env.GITHUB_API_TOKEN}` } }
+  )
   if (!response.data) {
     res.status(500).json(null)
     return
