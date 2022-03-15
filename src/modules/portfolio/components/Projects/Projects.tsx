@@ -3,6 +3,7 @@ import fetcher from '@/common/utils/AxiosSWRFetcher'
 import RecentProject from '@/modules/portfolio/types/RecentProject'
 import useSWR from 'swr'
 import ListItem from '../elements/ListItem'
+import PlaceholderListItem from '../elements/PlaceholderListItem'
 
 const Projects = () => {
   const { data, error } = useSWR<RecentProject[]>(
@@ -26,6 +27,12 @@ const Projects = () => {
               labels={topics}
             />
           ))}
+        {!data &&
+          !error &&
+          [1, 2, 3, 4, 5].map((num) => <PlaceholderListItem />)}
+        {error && (
+          <p className="text-center">An error occured when fetching data</p>
+        )}
       </ol>
       <AnchorLink
         href="https://github.com/zydhanlinnar11?tab=repositories"
