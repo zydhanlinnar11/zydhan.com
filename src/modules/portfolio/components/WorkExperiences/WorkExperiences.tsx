@@ -20,6 +20,7 @@ const WorkExperiences = () => {
           description={description}
           url={url}
           key={name}
+          target="_blank"
         />
       ))}
     </ol>
