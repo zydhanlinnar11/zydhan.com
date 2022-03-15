@@ -20,6 +20,7 @@ const Portfolio = () => {
             width={128}
             height={128}
             priority={true}
+            alt="Animated photo of Zydhan Linnar Putra"
           ></Image>
         </div>
         <div className="flex flex-col gap-y-3 max-w-lg">
