@@ -1,3 +1,4 @@
+import AnchorLink from '@/common/components/AnchorLink'
 import fetcher from '@/common/utils/AxiosSWRFetcher'
 import RecentProject from '@/modules/portfolio/types/RecentProject'
 import useSWR from 'swr'
@@ -25,6 +26,12 @@ const Projects = () => {
             />
           ))}
       </ol>
+      <AnchorLink
+        href="https://github.com/zydhanlinnar11?tab=repositories"
+        target="_blank"
+      >
+        View all repositories →
+      </AnchorLink>
     </>
   )
 }

@@ -12,7 +12,7 @@ const LatestPost = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-medium mt-4">Recent Posts</h2>
+      <h2 className="text-2xl font-medium mt-8">Recent Posts</h2>
       <ul className="py-4">
         {data &&
           !error &&
