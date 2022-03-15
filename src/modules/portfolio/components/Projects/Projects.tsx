@@ -29,7 +29,7 @@ const Projects = () => {
           ))}
         {!data &&
           !error &&
-          [1, 2, 3, 4, 5].map((num) => <PlaceholderListItem />)}
+          [1, 2, 3, 4, 5].map((num) => <PlaceholderListItem key={num} />)}
         {error && (
           <p className="text-center">An error occured when fetching data</p>
         )}
