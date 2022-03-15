@@ -17,7 +17,7 @@ export default async function handler(
   }
   const data: RecentProject[] = []
   response.data.forEach((project) => {
-    const { description, name, updated_at, html_url } = project
+    const { description, name, updated_at, html_url, topics } = project
     data.push({
       description,
       name,
@@ -25,6 +25,7 @@ export default async function handler(
         timeZone: 'Asia/Jakarta',
       }),
       html_url,
+      topics,
     })
   })
   res.status(200).json(data)

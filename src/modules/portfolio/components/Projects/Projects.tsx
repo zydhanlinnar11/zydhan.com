@@ -15,7 +15,7 @@ const Projects = () => {
       <ol className="py-4">
         {data &&
           !error &&
-          data.map(({ description, name, updated_at, html_url }) => (
+          data.map(({ description, name, updated_at, html_url, topics }) => (
             <ListItem
               date={updated_at}
               title={name}
@@ -23,6 +23,7 @@ const Projects = () => {
               url={html_url}
               key={name}
               target="_blank"
+              labels={topics}
             />
           ))}
       </ol>
