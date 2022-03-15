@@ -1,14 +1,13 @@
 import AnchorLink from '@/common/components/AnchorLink'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
 import Post from '@/modules/portfolio/types/Post'
-import Link from 'next/link'
 import useSWR from 'swr'
 import ListItem from '../elements/ListItem'
 
 const fetcher = (url: string) => axiosAPI.get(url).then((res) => res.data)
 
 const LatestPost = () => {
-  const { data, error } = useSWR<Post[]>('/blog/posts', fetcher)
+  const { data, error } = useSWR<Post[]>('/blog/posts/portfolio', fetcher)
 
   return (
     <>
