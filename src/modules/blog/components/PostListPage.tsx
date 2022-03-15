@@ -18,8 +18,8 @@ const PostListPage = ({ posts }: { posts: Post[] }) => {
   return (
     <NarrowPageContainer>
       <Head>
-        <title>Posts - Blog - zydhan.xyz</title>
-        <meta property="og:title" content="Posts - Blog - zydhan.xyz" />
+        <title>Blog - zydhan.xyz</title>
+        <meta property="og:title" content="Blog - zydhan.xyz" />
         <meta property="og:url" content={'https://zydhan.xyz/blog'} />
         <meta property="og:description" content="Welcome to My Blog" />
       </Head>
