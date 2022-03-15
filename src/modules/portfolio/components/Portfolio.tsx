@@ -26,13 +26,9 @@ const Portfolio = () => {
           <h1 className="text-3xl font-medium">Zydhan Linnar Putra</h1>
           <p className="text-lg dark:text-gray-200">Full-stack Developer</p>
           <p className="dark:text-gray-300">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Web development enthusiast with {new Date().getFullYear() - 2021}{' '}
+            year of experience{new Date().getFullYear() > 2022 && 's'} of bla
+            bla bla
           </p>
         </div>
       </header>
