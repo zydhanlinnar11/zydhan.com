@@ -10,7 +10,12 @@ const Portfolio = () => {
     <NarrowPageContainer>
       <header className="flex flex-col p-3 gap-y-3 md:flex-row-reverse md:justify-between">
         <div>
-          <Image src={'/logo.webp'} width={128} height={128}></Image>
+          <Image
+            src={'/logo.webp'}
+            width={128}
+            height={128}
+            priority={true}
+          ></Image>
         </div>
         <div className="flex flex-col gap-y-3 max-w-lg">
           <h1 className="text-3xl font-medium">Zydhan Linnar Putra</h1>
