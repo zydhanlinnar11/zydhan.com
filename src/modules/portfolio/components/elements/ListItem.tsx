@@ -21,15 +21,15 @@ const ListItem: FC<Props> = ({
       <Link href={url}>
         <a
           target={target}
-          className="relative flex justify-between py-6 after:content-[''] after:h-px after:w-full after:block after:absolute after:top-full dark:after:bg-white/[0.24] hover:scale-[1.02] duration-150"
+          className="relative flex flex-col gap-y-5 md:flex-row md:gap-x-12 justify-between py-6 after:content-[''] after:h-px after:w-full after:block after:absolute after:top-full dark:after:bg-white/[0.24] hover:scale-[1.02] duration-150"
         >
           <div className="flex flex-col gap-y-3">
-            <p className="text-xl">{title}</p>
+            <p className="text-xl font-medium">{title}</p>
             <p className="dark:text-gray-300">
               {description || 'No description available.'}
             </p>
           </div>
-          <p>{date}</p>
+          <p className="md:min-w-fit">{date}</p>
         </a>
       </Link>
     </li>

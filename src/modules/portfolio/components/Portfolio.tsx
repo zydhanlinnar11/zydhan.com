@@ -5,6 +5,7 @@ import Projects from './Projects'
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 import Head from 'next/head'
 import Posts from './Posts'
+import WorkExperiences from './WorkExperiences'
 
 const Portfolio = () => {
   return (
@@ -39,7 +40,9 @@ const Portfolio = () => {
       <main className="p-3 mt-8">
         <h2 className="text-2xl font-medium">Favourite Languages and Tools</h2>
         <LangAndTools />
-        <h2 className="text-2xl font-medium">Recent Projects</h2>
+        <h2 className="text-2xl font-medium">Work Experiences</h2>
+        <WorkExperiences />
+        <h2 className="text-2xl font-medium mt-4">Recent Projects</h2>
         <Projects />
         <h2 className="text-2xl font-medium mt-8">Recent Posts</h2>
         <Posts />
