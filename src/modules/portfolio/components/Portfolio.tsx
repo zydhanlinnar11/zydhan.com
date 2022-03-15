@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
-import NarrowPageContainer from '../NarrowPageContainer'
 import LangAndTools from './LangAndTools'
 import Posts from '../../../modules/portfolio/components/Posts'
 import Projects from './Projects'
+import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 
 const Portfolio = () => {
   return (

@@ -1,1 +1,1 @@
-export { default } from '@/components/PortfolioPage'
+export { default } from '@/modules/portfolio/components/Portfolio'
