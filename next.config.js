@@ -13,15 +13,6 @@ const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/blog',
-        permanent: false,
-      },
-    ]
-  },
 }
 
 module.exports = nextConfig
