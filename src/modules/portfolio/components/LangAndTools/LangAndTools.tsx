@@ -25,14 +25,11 @@ const datas = [
 
 const LangAndTools = () => {
   return (
-    <>
-      <h2 className="text-2xl font-medium">Favourite Languages and Tools</h2>
-      <div className="flex flex-wrap py-8 gap-8 last:col-start-2 justify-center">
-        {datas.map((data) => (
-          <Card {...data} key={data.name} />
-        ))}
-      </div>
-    </>
+    <div className="flex flex-wrap py-8 gap-8 last:col-start-2 justify-center">
+      {datas.map((data) => (
+        <Card {...data} key={data.name} />
+      ))}
+    </div>
   )
 }
 

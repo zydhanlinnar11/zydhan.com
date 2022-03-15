@@ -12,7 +12,6 @@ const Projects = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-medium">Recent Projects</h2>
       <ol className="py-4">
         {data &&
           !error &&

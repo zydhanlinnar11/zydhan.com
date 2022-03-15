@@ -37,8 +37,11 @@ const Portfolio = () => {
       </header>
 
       <main className="p-3 mt-8">
+        <h2 className="text-2xl font-medium">Favourite Languages and Tools</h2>
         <LangAndTools />
+        <h2 className="text-2xl font-medium">Recent Projects</h2>
         <Projects />
+        <h2 className="text-2xl font-medium mt-8">Recent Posts</h2>
         <Posts />
       </main>
     </NarrowPageContainer>
