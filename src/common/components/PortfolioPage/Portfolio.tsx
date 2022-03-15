@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import NarrowPageContainer from '../NarrowPageContainer'
 import LangAndTools from './LangAndTools'
+import Posts from '../../../modules/portfolio/components/Posts'
 import Projects from './Projects'
 
 const Portfolio = () => {
@@ -29,6 +30,7 @@ const Portfolio = () => {
       <main className="p-3 mt-8">
         <LangAndTools />
         <Projects />
+        <Posts />
       </main>
     </NarrowPageContainer>
   )
