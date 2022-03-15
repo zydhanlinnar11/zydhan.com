@@ -30,7 +30,10 @@ const ListItem: FC<Props> = ({
               {title}{' '}
               <span className="inline-flex gap-x-2 flex-wrap gap-y-1">
                 {labels?.map((label) => (
-                  <small className="dark:bg-blue-500/40 dark:text-sky-400 rounded-full px-3 text-sm">
+                  <small
+                    key={label}
+                    className="dark:bg-blue-500/40 dark:text-sky-400 rounded-full px-3 text-sm"
+                  >
                     {label}
                   </small>
                 ))}
