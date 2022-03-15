@@ -6,13 +6,23 @@ type Props = {
   description?: string | null
   date: string
   url: string
+  target?: React.HTMLAttributeAnchorTarget
 }
 
-const ListItem: FC<Props> = ({ date, title, url, description }) => {
+const ListItem: FC<Props> = ({
+  date,
+  title,
+  url,
+  description,
+  target = '_self',
+}) => {
   return (
     <li>
       <Link href={url}>
-        <a className="relative flex justify-between py-6 after:content-[''] after:h-px after:w-full after:block after:absolute after:top-full dark:after:bg-white/[0.24] hover:scale-[1.02] duration-150">
+        <a
+          target={target}
+          className="relative flex justify-between py-6 after:content-[''] after:h-px after:w-full after:block after:absolute after:top-full dark:after:bg-white/[0.24] hover:scale-[1.02] duration-150"
+        >
           <div className="flex flex-col gap-y-3">
             <p className="text-xl">{title}</p>
             <p className="dark:text-gray-300">

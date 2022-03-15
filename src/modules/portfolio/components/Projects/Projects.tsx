@@ -22,6 +22,7 @@ const Projects = () => {
               description={description}
               url={html_url}
               key={name}
+              target="_blank"
             />
           ))}
       </ol>
