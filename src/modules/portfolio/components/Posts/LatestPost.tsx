@@ -1,9 +1,8 @@
+import AnchorLink from '@/common/components/AnchorLink'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
 import Post from '@/modules/portfolio/types/Post'
-import Head from 'next/head'
 import Link from 'next/link'
 import useSWR from 'swr'
-import AnchorLink from '../../../../common/components/AnchorLink'
 
 const fetcher = (url: string) => axiosAPI.get(url).then((res) => res.data)
 
@@ -12,9 +11,6 @@ const LatestPost = () => {
 
   return (
     <>
-      <Head>
-        <title>Zydhan Linnar Putra - Full-stack Developer</title>
-      </Head>
       <h2 className="text-2xl font-medium mt-4">Recent Projects</h2>
       <ul className="py-4">
         {data &&
