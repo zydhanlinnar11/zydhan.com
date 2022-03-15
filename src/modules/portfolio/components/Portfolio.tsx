@@ -35,7 +35,7 @@ const Portfolio = () => {
         scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
               ></span>
             </span>
-            . I'm web development enthusiast with{' '}
+            . I&apos;m web development enthusiast with{' '}
             {new Date().getFullYear() - 2021} year of experience
             {new Date().getFullYear() > 2022 && 's'} and currently study to
             become Bachelor of Informatics Engineering at Sepuluh Nopember
