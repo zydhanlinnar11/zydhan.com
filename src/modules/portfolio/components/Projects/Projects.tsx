@@ -7,7 +7,7 @@ import PlaceholderListItem from '../elements/PlaceholderListItem'
 
 const Projects = () => {
   const { data, error } = useSWR<RecentProject[]>(
-    '/api/recent-projects',
+    '/api/portfolio/recent-projects',
     fetcher
   )
 
