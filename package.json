@@ -14,7 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@headlessui/react": "^1.5.0",
-    "@heroicons/react": "^1.0.5",
+    "@heroicons/react": "^1.0.6",
     "axios": "^0.26.1",
     "next": "^12.1.0",
     "react": "17.0.2",
