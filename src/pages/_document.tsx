@@ -15,32 +15,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html className="dark scroll-smooth" lang="en-US">
-        <Head>
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
-          <meta name="description" content="Welcome to My Personal Portfolio" />
-          <meta
-            property="og:title"
-            content="Zydhan Linnar Putra's Personal Portfolio"
-          />
-          <meta property="og:url" content="https://zydhan.xyz" />
-          <meta
-            property="og:description"
-            content="Welcome to My Personal Portfolio"
-          />
-          <link rel="icon" href="/favicon.png" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/apple-touch-icon.png"
-          ></link>
-          <meta name="theme-color" content="#111827" />
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content="Zydhan Linnar Putra" />
-          <meta property="og:image" content="/logo.webp" />
-          <meta property="og:image:width" content="1080" />
-          <meta property="og:image:height" content="1080" />
-          <meta property="og:image:alt" content="Cartoonized photo of Zydhan" />
-        </Head>
+        <Head />
         <body className="bg-gray-100 dark:bg-black dark:text-white">
           <Main />
           <NextScript />
