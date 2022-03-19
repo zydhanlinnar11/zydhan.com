@@ -32,9 +32,17 @@ export default function PostPage({ post }: { post: Post }) {
           property="og:image"
           content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
         />
-        <meta property="og:image:width" content="959" />
-        <meta property="og:image:height" content="480" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="600" />
         <meta property="og:image:alt" content={`${title} OpenGraph`} />
+
+        <meta
+          name="twitter:image:src"
+          content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${title} - Blog`} />
+        <meta property="twitter:description" content={description} />
       </Head>
 
       <article className="flex flex-col mx-auto grow w-full max-w-5xl px-6">
