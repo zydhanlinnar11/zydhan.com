@@ -3,16 +3,12 @@ import React from 'react'
 import LangAndTools from './LangAndTools'
 import Projects from './Projects'
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
-import Head from 'next/head'
 import Posts from './Posts'
 import WorkExperiences from './WorkExperiences'
 
 const Portfolio = () => {
   return (
     <NarrowPageContainer>
-      <Head>
-        <title>Zydhan Linnar Putra - Full-stack Developer</title>
-      </Head>
       <header className="flex flex-col p-3 gap-y-3 md:flex-row-reverse md:justify-between">
         <div>
           <Image

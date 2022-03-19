@@ -20,7 +20,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Zydhan Linnar Putra</title>
+        <title>Zydhan Linnar Putra - Full-stack Developer</title>
         <meta name="description" content={description} />
         <meta name="theme-color" content="#111827" />
 
