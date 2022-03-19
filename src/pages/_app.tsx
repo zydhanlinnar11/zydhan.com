@@ -22,12 +22,14 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
       <Head>
         <title>Zydhan Linnar Putra</title>
         <meta name="description" content={description} />
+        <meta name="theme-color" content="#111827" />
+
         <meta property="og:title" content="Zydhan Linnar Putra" />
         <meta property="og:url" content="https://zydhan.xyz" />
         <meta property="og:description" content={description} />
-        <meta name="theme-color" content="#111827" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Zydhan Linnar Putra" />
+
+        <meta property="og:site_name" content="zydhan.xyz" />
         <meta property="og:image" content="/logo.webp" />
         <meta property="og:image:width" content="1080" />
         <meta property="og:image:height" content="1080" />
