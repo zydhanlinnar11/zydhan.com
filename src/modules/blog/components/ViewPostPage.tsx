@@ -21,13 +21,22 @@ export default function PostPage({ post }: { post: Post }) {
     <>
       <Head>
         <title>{title} - Blog - zydhan.xyz</title>
-        <meta property="og:title" content="Blog - zydhan.xyz" />
+        <meta property="og:title" content={`${title} - Blog`} />
+        <meta property="og:type" content="website" />
         <meta
           property="og:url"
           content={`https://zydhan.xyz/blog/posts/${slug}`}
         />
         <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
+        />
+        <meta property="og:image:width" content="959" />
+        <meta property="og:image:height" content="480" />
+        <meta property="og:image:alt" content={`${title} OpenGraph`} />
       </Head>
+
       <article className="flex flex-col mx-auto grow w-full max-w-5xl px-6">
         <Header topText={createdAt} midText={title} bottomText={description} />
         <div className="text-center mx-auto max-w-full">
