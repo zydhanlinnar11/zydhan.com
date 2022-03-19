@@ -21,7 +21,14 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   const router = useRouter()
 
   if (router.pathname.startsWith('/og-image')) {
-    return <Component {...pageProps} />
+    return (
+      <>
+        <Head>
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
+        </Head>
+        <Component {...pageProps} />
+      </>
+    )
   }
 
   return (
