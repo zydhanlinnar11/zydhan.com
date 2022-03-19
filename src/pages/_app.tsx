@@ -39,7 +39,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
         ></link>
       </Head>
       <ToastContainer transition={Slide} />
-      <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-black dark:text-white">
+      <div className="min-h-screen flex flex-col">
         <UserProvider>
           <Navbar />
           <Component {...pageProps} />
