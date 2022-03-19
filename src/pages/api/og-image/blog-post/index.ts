@@ -1,6 +1,6 @@
 import getBaseURL from '@/common/utils/GetBaseUrl'
 import { NextApiRequest, NextApiResponse } from 'next'
-import puppeteer from 'puppeteer'
+import chromium from 'chrome-aws-lambda'
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,7 +10,7 @@ export default async function handler(
     .map((key) => key + '=' + req.query[key])
     .join('&')
 
-  const browser = await puppeteer.launch({
+  const browser = await chromium.puppeteer.launch({
     headless: true,
     args: ['--no-sandbox'],
     defaultViewport: {
