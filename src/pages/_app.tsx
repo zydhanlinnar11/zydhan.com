@@ -15,14 +15,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   const router = useRouter()
 
   if (router.pathname.startsWith('/og-image')) {
-    return (
-      <>
-        <Head>
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
-        </Head>
-        <Component {...pageProps} />
-      </>
-    )
+    return <Component {...pageProps} />
   }
 
   return (
@@ -30,7 +23,6 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
       <Head>
         <meta name="theme-color" content="#111827" />
 
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
         <link rel="icon" href="/favicon.png" />
         <link
           rel="apple-touch-icon"
