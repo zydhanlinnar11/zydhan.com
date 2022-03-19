@@ -26,9 +26,7 @@ const Portfolio = () => {
         />
         <meta property="og:url" content="https://zydhan.xyz" />
         <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
 
-        <meta property="og:site_name" content="zydhan.xyz" />
         <meta property="og:image" content="/logo.webp" />
         <meta property="og:image:width" content="1080" />
         <meta property="og:image:height" content="1080" />
