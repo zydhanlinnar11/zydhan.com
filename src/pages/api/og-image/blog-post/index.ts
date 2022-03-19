@@ -1,5 +1,4 @@
 import getBaseURL from '@/common/utils/GetBaseUrl'
-import axios from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
 import puppeteer from 'puppeteer'
 
@@ -20,11 +19,7 @@ export default async function handler(
     },
   })
   const page = await browser.newPage()
-  const html = (
-    await axios.get(`${getBaseURL()}/og-image/blog-post?${queryString}`)
-  ).data
-  console.log(html)
-  await page.setContent(html, { waitUntil: 'domcontentloaded' })
+  await page.goto(`${getBaseURL()}/og-image/blog-post?${queryString}`)
 
   await page.evaluate(async () => {
     const selectors = Array.from(document.querySelectorAll('img'))
