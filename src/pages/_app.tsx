@@ -8,6 +8,7 @@ import { ToastContainer, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { useRouter } from 'next/router'
 config.autoAddCss = false
 
 const description = `Hello friends!, you can call me Zydhan. I'm web development enthusiast with ${
@@ -17,6 +18,12 @@ const description = `Hello friends!, you can call me Zydhan. I'm web development
 } and currently study to become Bachelor of Informatics Engineering at Sepuluh Nopember Institute of Technology Surabaya.`
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+  const router = useRouter()
+
+  if (router.pathname.startsWith('/og-image')) {
+    return <Component {...pageProps} />
+  }
+
   return (
     <>
       <Head>
@@ -44,7 +51,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
         ></link>
       </Head>
       <ToastContainer transition={Slide} />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-black dark:text-white">
         <UserProvider>
           <Navbar />
           <Component {...pageProps} />
