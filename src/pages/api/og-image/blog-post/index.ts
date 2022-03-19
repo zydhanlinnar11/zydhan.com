@@ -13,6 +13,7 @@ export default async function handler(
   const browser = await chromium.puppeteer.launch({
     headless: true,
     args: ['--no-sandbox'],
+    executablePath: await chromium.executablePath,
     defaultViewport: {
       width: 959,
       height: 480,
