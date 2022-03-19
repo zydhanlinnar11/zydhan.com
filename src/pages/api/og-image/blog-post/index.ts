@@ -11,13 +11,11 @@ export default async function handler(
     .join('&')
 
   const browser = await chromium.puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox'],
+    args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+    defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath,
-    defaultViewport: {
-      width: 959,
-      height: 480,
-    },
+    headless: true,
+    ignoreHTTPSErrors: true,
   })
   const page = await browser.newPage()
   await page.goto(`${getBaseURL()}/og-image/blog-post?${queryString}`)
