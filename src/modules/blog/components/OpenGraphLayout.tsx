@@ -17,23 +17,23 @@ const OpenGraphLayout: FC<Props> = ({ title, description, date, userName }) => {
   return (
     <div
       id="opengraph"
-      className="w-[959px] h-[480px] bg-black text-white flex flex-col justify-between pt-16"
+      className="w-[1200px] h-[600px] bg-black text-white flex flex-col justify-between pt-16"
     >
       <div className="flex flex-col justify-center items-center text-center px-16">
         <div>
           <Image
             priority={true}
-            width={96}
-            height={96}
+            width={128}
+            height={128}
             src="/logo.webp"
             alt="Animated photo of Zydhan Linnar Putra"
           />
         </div>
-        <p className="mt-8 text-4xl font-medium">{title}</p>
-        <p className="mt-6 text-xl text-gray-400">{description}</p>
+        <p className="mt-8 text-5xl font-medium">{title}</p>
+        <p className="mt-6 text-2xl text-gray-400">{description}</p>
       </div>
       <div>
-        <div className="grid grid-cols-3 mb-4 text-gray-300 justify-items-center">
+        <div className="grid grid-cols-3 mb-4 text-gray-300 justify-items-center text-lg">
           <p>
             <FontAwesomeIcon className="my-auto mr-2" icon={faUser} />
             <span> {userName}</span>
