@@ -31,6 +31,13 @@ const Portfolio = () => {
         <meta property="og:image:width" content="1080" />
         <meta property="og:image:height" content="1080" />
         <meta property="og:image:alt" content="Cartoonized photo of Zydhan" />
+
+        <meta name="twitter:image:src" content="/logo.webp" />
+        <meta
+          name="twitter:title"
+          content="Zydhan Linnar Putra - Full-stack Developer"
+        />
+        <meta property="twitter:description" content={description} />
       </Head>
       <NarrowPageContainer>
         <header className="flex flex-col p-3 gap-y-3 md:flex-row-reverse md:justify-between">
