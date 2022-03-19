@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import CommentSection from './Comment/CommentSection'
 import Markdown from './Markdown'
+import TableOfContent from './TableOfContent'
 
 export type Post = {
   title: string
@@ -45,14 +46,23 @@ export default function PostPage({ post }: { post: Post }) {
         <meta property="twitter:description" content={description} />
       </Head>
 
-      <article className="flex flex-col mx-auto grow w-full max-w-5xl px-6">
-        <Header topText={createdAt} midText={title} bottomText={description} />
-        <div className="text-center mx-auto max-w-full">
-          <div className="bg-black/[0.24] dark:bg-white/[0.24] h-px w-full"></div>
-          <Markdown markdown={markdown} allowHTML={true}></Markdown>
-          <CommentSection post={post}></CommentSection>
-        </div>
-      </article>
+      <div className="flex grow w-full 2xl:pl-[17.5rem] mx-auto gap-x-4 justify-center">
+        <article className="flex flex-col w-full max-w-5xl px-6">
+          <Header
+            topText={createdAt}
+            midText={title}
+            bottomText={description}
+          />
+          <div className="text-center mx-auto max-w-full">
+            <div className="bg-black/[0.24] dark:bg-white/[0.24] h-px w-full"></div>
+            <div id="post-markdown">
+              <Markdown markdown={markdown} allowHTML={true}></Markdown>
+            </div>
+            <CommentSection post={post}></CommentSection>
+          </div>
+        </article>
+        <TableOfContent />
+      </div>
     </>
   )
 }
