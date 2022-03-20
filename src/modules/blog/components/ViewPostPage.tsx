@@ -1,5 +1,4 @@
 import Header from '@/common/components/Header'
-import SpinnerLoading from '@/common/components/SpinnerLoading'
 import config from '@/common/config'
 import axios, { AxiosResponse } from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
@@ -23,6 +22,8 @@ export default function PostPage({ post }: { post: Post }) {
     <>
       <Head>
         <title>{title} - Blog - zydhan.xyz</title>
+        <meta name="description" content={description} />
+
         <meta property="og:title" content={`${title} - Blog`} />
         <meta property="og:type" content="website" />
         <meta

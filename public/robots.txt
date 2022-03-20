@@ -1,5 +1,3 @@
-//robots.txt
-
 # Block all crawlers for /auth
 User-agent: *
 Disallow: /auth

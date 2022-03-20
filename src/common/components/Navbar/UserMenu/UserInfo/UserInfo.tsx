@@ -34,6 +34,7 @@ const withUser = (user: User) => (
         src={user.avatar_url}
         width={28}
         height={28}
+        alt="User profile picture"
       />
     ) : (
       <FontAwesomeIcon icon={faCircleUser} size={'2x'} />

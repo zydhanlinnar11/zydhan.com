@@ -13,16 +13,28 @@ export type Post = {
   created_at: string
 }
 
+const description = "Welcome to Zydhan Linnar Putra's Blog"
+const title = 'Blog - zydhan.xyz'
+
 const PostListPage = ({ posts }: { posts: Post[] }) => {
   const userState = useUserState()
 
   return (
     <NarrowPageContainer>
       <Head>
-        <title>Blog - zydhan.xyz</title>
-        <meta property="og:title" content="Blog - zydhan.xyz" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        <meta property="og:title" content={title} />
         <meta property="og:url" content={'https://zydhan.xyz/blog'} />
-        <meta property="og:description" content="Welcome to My Blog" />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content="/logo.webp" />
+        <meta property="og:image:width" content="1080" />
+        <meta property="og:image:height" content="1080" />
+        <meta property="og:image:alt" content="Cartoonized photo of Zydhan" />
+
+        <meta name="twitter:image:src" content="/logo.webp" />
+        <meta name="twitter:title" content={title} />
       </Head>
       <Header
         midText="Zydhan's Blog"

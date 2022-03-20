@@ -42,6 +42,7 @@ const AccountSettingPage = () => {
                       src={userState.user.avatar_url}
                       width={64}
                       height={64}
+                      alt="User profile picture"
                     />
                   </div>
                 ) : (

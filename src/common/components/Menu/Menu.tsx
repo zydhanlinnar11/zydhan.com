@@ -23,6 +23,7 @@ const Menu: FC<Props> = ({ children, icon, iconSize }) => {
                 src={icon}
                 width={28}
                 height={28}
+                alt="User profile picture"
               />
             ) : (
               <FontAwesomeIcon icon={icon} size={iconSize} />
