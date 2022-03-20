@@ -9,6 +9,7 @@ import User from '@/modules/auth/types/User'
 import fetchUser from '@/modules/auth/utils/FetchUser'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
+import config from '@/common/config'
 
 type Props = {
   user: User
@@ -32,7 +33,7 @@ const SocialSection: FC<Props> = ({ user }) => {
     const top = window.screenY + (window.outerHeight - height) / 2.5
 
     const popup = window.open(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/redirect`,
+      `${config.apiUrl}/auth/${provider}/redirect`,
       `Sign in with ${provider}`,
       `width=${width},height=${height},left=${left},top=${top}`
     )

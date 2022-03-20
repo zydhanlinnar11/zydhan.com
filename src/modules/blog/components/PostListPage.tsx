@@ -1,5 +1,6 @@
 import Header from '@/common/components/Header'
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
+import config from '@/common/config'
 import { useUserState } from '@/common/providers/UserProvider'
 import axios, { AxiosResponse } from 'axios'
 import Head from 'next/head'
@@ -53,7 +54,7 @@ const PostListPage = ({ posts }: { posts: Post[] }) => {
 
 export async function getStaticProps() {
   const response = await axios.get<any, AxiosResponse<Post[], any>, any>(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/posts`
+    `${config.apiUrl}/blog/posts`
   )
   const posts = response.data
 

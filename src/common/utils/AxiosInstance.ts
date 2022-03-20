@@ -1,6 +1,7 @@
 import axios from 'axios'
+import config from '@/common/config'
 
 export const axiosAPI = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: config.apiUrl,
   withCredentials: true,
 })

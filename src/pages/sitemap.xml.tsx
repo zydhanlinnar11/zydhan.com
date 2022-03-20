@@ -1,8 +1,8 @@
-import getBaseURL from '@/common/utils/GetBaseUrl'
+import config from '@/common/config'
 import { GetServerSideProps } from 'next'
 
 //pages/sitemap.xml.js
-const EXTERNAL_DATA_URL = `${process.env.NEXT_PUBLIC_API_URL}/blog/posts`
+const EXTERNAL_DATA_URL = `${config.apiUrl}/blog/posts`
 
 export type Post = {
   title: string
@@ -25,7 +25,7 @@ function generateSiteMap(posts: Post[]) {
        .map(({ slug }) => {
          return `
        <url>
-           <loc>${`${getBaseURL()}/blog/posts/${slug}`}</loc>
+           <loc>${`${config.baseUrl}/blog/posts/${slug}`}</loc>
        </url>
      `
        })

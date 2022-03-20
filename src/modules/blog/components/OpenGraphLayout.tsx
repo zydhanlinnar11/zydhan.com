@@ -1,4 +1,4 @@
-import getBaseURL from '@/common/utils/GetBaseUrl'
+import config from '@/common/config'
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -44,7 +44,7 @@ const OpenGraphLayout: FC<Props> = ({ title, description, date, userName }) => {
           </p>
           <p>
             <FontAwesomeIcon className="my-auto mr-2" icon={faGlobe} />
-            <span> {getBaseURL()}/blog</span>
+            <span> {config.baseUrl}/blog</span>
           </p>
         </div>
         <div className="h-3 w-full bg-sky-500"></div>

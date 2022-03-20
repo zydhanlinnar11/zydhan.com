@@ -1,3 +1,4 @@
+import config from '@/common/config'
 import SocialProvider from '@/modules/auth/types/SocialProvider'
 
 const socialLoginHandler = (provider: SocialProvider, callback: () => void) => {
@@ -7,7 +8,7 @@ const socialLoginHandler = (provider: SocialProvider, callback: () => void) => {
   const top = window.screenY + (window.outerHeight - height) / 2.5
 
   const popup = window.open(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/redirect`,
+    `${config.apiUrl}/auth/${provider}/redirect`,
     `Sign in with ${provider}`,
     `width=${width},height=${height},left=${left},top=${top}`
   )

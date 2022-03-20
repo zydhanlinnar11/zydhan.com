@@ -1,9 +1,9 @@
 import AnchorLink from '@/common/components/AnchorLink'
 import Button from '@/common/components/Button'
 import TextArea from '@/common/components/Form/TextArea'
+import config from '@/common/config'
 import { useUserState } from '@/common/providers/UserProvider'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
-import getBaseURL from '@/common/utils/GetBaseUrl'
 import Comment from '@/modules/blog/types/admin/Comment'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -20,7 +20,7 @@ const loginFirst = (slug: string) => (
   <p className="text-center mt-12 mb-6">
     <AnchorLink
       href={`/auth/login?next=${encodeURIComponent(
-        getBaseURL() + `/blog/posts/${slug}#add-new-comment`
+        config.baseUrl + `/blog/posts/${slug}#add-new-comment`
       )}`}
     >
       Log in

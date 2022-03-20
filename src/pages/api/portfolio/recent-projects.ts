@@ -1,3 +1,4 @@
+import config from '@/common/config'
 import RecentProject from '@/modules/portfolio/types/RecentProject'
 import axios, { AxiosResponse } from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -12,7 +13,7 @@ export default async function handler(
     any
   >(
     'https://api.github.com/users/zydhanlinnar11/repos?sort=updated&per_page=5',
-    { headers: { Authorization: `token ${process.env.GITHUB_API_TOKEN}` } }
+    { headers: { Authorization: `token ${config.githubToken}` } }
   )
   if (!response.data) {
     res.status(500).json(null)

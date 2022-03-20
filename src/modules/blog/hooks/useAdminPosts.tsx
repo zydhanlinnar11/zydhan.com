@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 import fetcher from '@/utils/AxiosSWRFetcher'
+import config from '@/common/config'
 
 type Post = {
   id: string
@@ -11,7 +12,7 @@ type Post = {
 
 const useAdminPosts = () => {
   const { data, error } = useSWR<Post[]>(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/admin/posts`,
+    `${config.apiUrl}/blog/admin/posts`,
     fetcher
   )
 

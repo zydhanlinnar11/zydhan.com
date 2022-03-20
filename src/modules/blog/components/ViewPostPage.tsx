@@ -1,5 +1,6 @@
 import Header from '@/common/components/Header'
 import SpinnerLoading from '@/common/components/SpinnerLoading'
+import config from '@/common/config'
 import axios, { AxiosResponse } from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
@@ -78,7 +79,7 @@ export const getStaticProps: GetStaticProps = async (req) => {
 
   try {
     const response = await axios.get<any, AxiosResponse<Post, any>>(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/${slug}`
+      `${config.apiUrl}/blog/posts/${slug}`
     )
     post = response.data
   } catch (e) {
@@ -92,9 +93,7 @@ export const getStaticProps: GetStaticProps = async (req) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/blog/posts`
-  )
+  const response = await axios.get(`${config.apiUrl}/blog/posts`)
   const posts = response.data
 
   let paths: { params: { slug: string } }[] = []

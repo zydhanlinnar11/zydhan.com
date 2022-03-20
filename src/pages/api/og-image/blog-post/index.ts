@@ -1,6 +1,6 @@
-import getBaseURL from '@/common/utils/GetBaseUrl'
 import { NextApiRequest, NextApiResponse } from 'next'
 import chromium from 'chrome-aws-lambda'
+import config from '@/common/config'
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,7 +18,7 @@ export default async function handler(
     ignoreHTTPSErrors: true,
   })
   const page = await browser.newPage()
-  await page.goto(`${getBaseURL()}/og-image/blog-post?${queryString}`)
+  await page.goto(`${config.baseUrl}/og-image/blog-post?${queryString}`)
 
   await page.evaluate(async () => {
     const selectors = Array.from(document.querySelectorAll('img'))
