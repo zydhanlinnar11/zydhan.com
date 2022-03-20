@@ -5,6 +5,7 @@ const config = {
       ? 'https://zydhan.xyz'
       : 'https://dev.zydhan.xyz',
   githubToken: process.env.GITHUB_API_TOKEN,
+  firebaseServiceAccountKey: process.env.FIREBASE_SERVICE_ACCOUNT_KEY ?? '',
 }
 
 export default config
