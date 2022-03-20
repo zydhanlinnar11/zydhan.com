@@ -46,7 +46,6 @@ const Portfolio = () => {
               src={'/logo.webp'}
               width={128}
               height={128}
-              priority={true}
               alt="Animated photo of Zydhan Linnar Putra"
             ></Image>
           </div>
