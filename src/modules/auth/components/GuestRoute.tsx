@@ -13,7 +13,7 @@ const GuestRoute: FC = ({ children }) => {
     if (state !== 'authenticated') return
 
     try {
-      const redirectTo = new URL(`${nextPath}`)
+      const redirectTo = new URL(nextPath.replace(/javascript:/g, ''))
       router.replace(redirectTo.toString())
     } catch (e) {
       router.replace('/')

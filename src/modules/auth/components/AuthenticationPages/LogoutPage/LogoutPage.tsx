@@ -17,7 +17,8 @@ const LogoutPage = () => {
     setModalShowed(false)
     try {
       await logout()
-      await router.push(new URL(`${router.query['from']}`).toString())
+      const removedJS = `${router.query['from']}`.replace(/javascript:/g, '')
+      await router.push(new URL(removedJS).toString())
       toast.success('Successfully logged out!', {
         theme: 'dark',
       })
@@ -32,7 +33,8 @@ const LogoutPage = () => {
   const cancelLogout = () => {
     setModalShowed(false)
     try {
-      router.push(new URL(`${router.query['from']}`).toString())
+      const removedJS = `${router.query['from']}`.replace(/javascript:/g, '')
+      router.push(new URL(removedJS).toString())
     } catch (e) {
       router.push('/')
     }
