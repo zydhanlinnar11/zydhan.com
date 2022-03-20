@@ -1,6 +1,7 @@
 import User from '@/modules/auth/types/User'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Image from 'next/image'
 import { FC, useEffect, useState } from 'react'
 
 type Props = {
@@ -27,7 +28,16 @@ const noUser = (
 
 const withUser = (user: User) => (
   <>
-    <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
+    {user.avatar_url ? (
+      <Image
+        className="h-8 w-8 rounded-full dark:bg-white transition duration-150 ease-in-out"
+        src={user.avatar_url}
+        width={28}
+        height={28}
+      />
+    ) : (
+      <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
+    )}
     <div className="text-center">
       <p>{user.name}</p>
       <small className="text-gray-600 dark:text-gray-400">{user.email}</small>

@@ -27,7 +27,14 @@ const UserMenu = () => {
   }
 
   return (
-    <Menu icon={faCircleUser} iconSize="2x">
+    <Menu
+      icon={
+        userState.state === 'authenticated' && userState.user.avatar_url
+          ? userState.user.avatar_url
+          : faCircleUser
+      }
+      iconSize="2x"
+    >
       {userState.state === 'loading' && <UserInfo />}
       {userState.state === 'authenticated' && (
         <>

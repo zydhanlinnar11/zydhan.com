@@ -6,6 +6,7 @@ type User = {
     google: boolean
   }
   admin: boolean
+  avatar_url: string | null
 }
 
 export default User

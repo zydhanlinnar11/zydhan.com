@@ -45,7 +45,10 @@ function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
               className="rounded-full shrink-0 my-auto"
               width={40}
               height={40}
-              src={`https://avatars.dicebear.com/api/human/${id}.svg`}
+              src={
+                comment.user_avatar_url ??
+                `https://avatars.dicebear.com/api/human/${id}.svg`
+              }
               alt={`Profile picture of ${user_name}`}
             ></Image>
           </div>

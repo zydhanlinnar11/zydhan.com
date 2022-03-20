@@ -3,9 +3,10 @@ import { Menu as HeadlessMenu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core'
+import Image from 'next/image'
 
 type Props = {
-  icon: IconProp
+  icon: IconProp | string
   iconSize: SizeProp
 }
 
@@ -16,7 +17,16 @@ const Menu: FC<Props> = ({ children, icon, iconSize }) => {
         <HeadlessMenu.Button className="flex text-sm rounded-full">
           <span className="sr-only">Open user menu</span>
           <span className="text-gray-700 dark:text-gray-300">
-            <FontAwesomeIcon icon={icon} size={iconSize} />
+            {typeof icon === 'string' ? (
+              <Image
+                className="h-8 w-8 rounded-full dark:bg-white hover:opacity-75 transition duration-150 ease-in-out"
+                src={icon}
+                width={28}
+                height={28}
+              />
+            ) : (
+              <FontAwesomeIcon icon={icon} size={iconSize} />
+            )}
           </span>
         </HeadlessMenu.Button>
       </div>
