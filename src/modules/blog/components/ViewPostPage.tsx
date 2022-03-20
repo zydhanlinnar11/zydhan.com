@@ -1,11 +1,23 @@
 import Header from '@/common/components/Header'
+import SpinnerLoading from '@/common/components/SpinnerLoading'
 import config from '@/common/config'
 import axios, { AxiosResponse } from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import CommentSection from './Comment/CommentSection'
-import Markdown from './Markdown'
 import TableOfContent from './TableOfContent'
+
+const Markdown = dynamic(() => import('@/modules/blog/components/Markdown'), {
+  loading: () => (
+    <div className="min-h-[50vh] flex items-center justify-center">
+      <SpinnerLoading />
+    </div>
+  ),
+})
+
+const CommentSection = dynamic(
+  () => import('@/modules/blog/components/Comment/CommentSection')
+)
 
 export type Post = {
   title: string
@@ -55,7 +67,7 @@ export default function PostPage({ post }: { post: Post }) {
             midText={title}
             bottomText={description}
           />
-          <div className="text-center mx-auto max-w-full">
+          <div className="text-center mx-auto w-full">
             <div className="bg-black/[0.24] dark:bg-white/[0.24] h-px w-full"></div>
             <div id="post-markdown">
               <Markdown markdown={markdown} allowHTML={true}></Markdown>
