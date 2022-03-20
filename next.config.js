@@ -8,6 +8,8 @@ const nextConfig = {
       'cdn.discordapp.com',
       'avatars.dicebear.com',
       'media.discordapp.net',
+      'dev.zydhan.xyz',
+      'zydhan.xyz',
     ],
   },
   eslint: {
