@@ -16,7 +16,7 @@
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "axios": "^0.26.1",
-    "chrome-aws-lambda": "^10.1.0",
+    "chrome-aws-lambda": "^8.0.2",
     "firebase-admin": "^10.0.2",
     "next": "^12.1.0",
     "puppeteer-core": "^13.5.1",
