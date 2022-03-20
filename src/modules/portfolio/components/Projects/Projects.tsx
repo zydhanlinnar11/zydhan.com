@@ -1,13 +1,18 @@
 import AnchorLink from '@/common/components/AnchorLink'
-import fetcher from '@/common/utils/AxiosSWRFetcher'
 import RecentProject from '@/modules/portfolio/types/RecentProject'
+import axios, { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import ListItem from '../elements/ListItem'
 import PlaceholderListItem from '../elements/PlaceholderListItem'
 
+const fetcher = (url: string) =>
+  axios
+    .get<any, AxiosResponse<RecentProject[], any>, any>(url)
+    .then((res) => res.data)
+
 const Projects = () => {
   const { data, error } = useSWR<RecentProject[]>(
-    '/api/portfolio/recent-projects',
+    'https://api.github.com/users/zydhanlinnar11/repos?sort=updated&per_page=5',
     fetcher
   )
 
@@ -18,7 +23,9 @@ const Projects = () => {
           !error &&
           data.map(({ description, name, updated_at, html_url, topics }) => (
             <ListItem
-              date={updated_at}
+              date={new Date(updated_at).toLocaleDateString('id-ID', {
+                timeZone: 'Asia/Jakarta',
+              })}
               title={name}
               description={description}
               url={html_url}
