@@ -6,6 +6,7 @@ import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 import Posts from './Posts'
 import WorkExperiences from './WorkExperiences'
 import Head from 'next/head'
+import animatedPic from '../../../../public/logo.webp'
 
 const description = `Hello friends!, you can call me Zydhan. I'm web development enthusiast with ${
   new Date().getFullYear() - 2021
@@ -43,12 +44,13 @@ const Portfolio = () => {
         <header className="flex flex-col p-3 gap-y-3 md:flex-row-reverse md:justify-between">
           <div>
             <Image
-              src={'/logo.webp'}
+              src={animatedPic}
               width={128}
               height={128}
-              priority={true}
+              placeholder="blur"
               alt="Animated photo of Zydhan Linnar Putra"
-            ></Image>
+              priority
+            />
           </div>
           <div className="flex flex-col gap-y-3 max-w-lg">
             <h1 className="text-3xl font-medium">Zydhan Linnar Putra</h1>

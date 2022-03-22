@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { FC } from 'react'
 
 type Props = {
-  image: string
+  image: string | StaticImageData
   name: string
 }
 
@@ -14,8 +14,9 @@ const Card: FC<Props> = ({ name, image }) => {
           src={image}
           height={48}
           width={48}
-          priority={true}
+          placeholder="blur"
           alt={`Image of ${name}`}
+          priority
         />
       </div>
       <p className="font-medium text-center">{name}</p>
