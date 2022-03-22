@@ -23,7 +23,6 @@ const PostCard: FC<Props> = ({ post, href }) => {
               layout="fill"
               objectFit="cover"
               sizes="320px"
-              placeholder="blur"
             />
           </div>
           <div className="text-left p-6 flex flex-col justify-between flex-auto">
