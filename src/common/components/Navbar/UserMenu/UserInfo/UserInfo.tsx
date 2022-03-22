@@ -1,6 +1,4 @@
 import User from '@/modules/auth/types/User'
-import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import { FC, useEffect, useState } from 'react'
 
@@ -10,7 +8,20 @@ type Props = {
 
 const loading = (
   <>
-    <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      fill="currentColor"
+      className="bi bi-person-circle"
+      viewBox="0 0 16 16"
+    >
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+      <path
+        fill-rule="evenodd"
+        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+      />
+    </svg>
     <div className="h-2 bg-slate-700 rounded animate-pulse py-1 w-full mt-1"></div>
     <div className="h-2 mx-5 bg-slate-700 rounded animate-pulse py-1 w-full"></div>
   </>
@@ -18,7 +29,20 @@ const loading = (
 
 const noUser = (
   <>
-    <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      fill="currentColor"
+      className="bi bi-person-circle"
+      viewBox="0 0 16 16"
+    >
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+      <path
+        fill-rule="evenodd"
+        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+      />
+    </svg>
     <div className="text-center">
       <p>Guest</p>
       <small className="text-gray-600 dark:text-gray-400">Welcome</small>
@@ -37,7 +61,20 @@ const withUser = (user: User) => (
         alt="User profile picture"
       />
     ) : (
-      <FontAwesomeIcon icon={faCircleUser} size={'2x'} />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        fill="currentColor"
+        className="bi bi-person-circle"
+        viewBox="0 0 16 16"
+      >
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+        <path
+          fill-rule="evenodd"
+          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+        />
+      </svg>
     )}
     <div className="text-center">
       <p>{user.name}</p>
