@@ -15,9 +15,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html className="dark scroll-smooth" lang="en-US">
-        <Head>
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

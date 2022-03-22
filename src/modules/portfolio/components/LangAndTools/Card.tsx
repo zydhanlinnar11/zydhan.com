@@ -16,7 +16,6 @@ const Card: FC<Props> = ({ name, image }) => {
           width={48}
           placeholder="blur"
           alt={`Image of ${name}`}
-          priority
         />
       </div>
       <p className="font-medium text-center">{name}</p>
