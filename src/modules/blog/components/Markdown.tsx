@@ -63,6 +63,7 @@ const Markdown: FC<Props> = ({ markdown, allowHTML = false }) => {
                   objectFit="contain"
                   sizes="896px"
                   priority={props.loading === 'eager'}
+                  placeholder="blur"
                 />
               </span>
             )

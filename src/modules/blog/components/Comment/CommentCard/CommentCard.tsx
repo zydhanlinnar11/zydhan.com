@@ -50,7 +50,8 @@ function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
                 `https://avatars.dicebear.com/api/human/${id}.svg`
               }
               alt={`Profile picture of ${user_name}`}
-            ></Image>
+              placeholder="blur"
+            />
           </div>
           <div className="my-auto">
             <p className="text-sm">{user_name}</p>
