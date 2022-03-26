@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import { Post } from './PostListPage'
+import HomePost from '../types/HomePost'
 
 type Props = {
-  post: Post
+  post: HomePost
   href: string
 }
 
@@ -18,7 +18,8 @@ const PostCard: FC<Props> = ({ post, href }) => {
         <article className="h-full flex flex-col">
           <div className="h-32 block w-full relative">
             <Image
-              src={post.cover_url}
+              src={post.cover}
+              placeholder="blur"
               alt={`${post.slug}-image`}
               layout="fill"
               objectFit="cover"
