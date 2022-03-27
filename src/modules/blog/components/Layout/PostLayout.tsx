@@ -69,7 +69,7 @@ const PostLayout: FC<Props> = ({
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"
       ></link>
 
-      <div className="w-full lg:max-w-5xl mx-auto pt-8 pb-8 px-8">
+      <div className="w-full lg:max-w-5xl mx-auto pt-8 pb-8">
         <h1 className="text-3xl font-bold">{title}</h1>
         <div className="mt-3 flex gap-x-2">
           <p className="text-sm text-gray-400">{createdAt}</p>
@@ -93,7 +93,7 @@ const PostLayout: FC<Props> = ({
         id="post-content"
         className="flex justify-between w-full lg:max-w-5xl mx-auto my-4"
       >
-        <article className="prose dark:prose-invert max-w-full lg:max-w-[650px] px-8 mx-auto lg:mx-0 scroll-pt-[108px]">
+        <article className="prose dark:prose-invert max-w-full lg:max-w-[650px] mx-auto lg:mx-0 scroll-pt-[108px]">
           {/* <Header
             topText={createdAt}
             midText={title}
@@ -104,7 +104,7 @@ const PostLayout: FC<Props> = ({
         <TableOfContent />
       </div>
       {!disableComment && (
-        <div className="px-4 py-4">
+        <div className="py-4">
           <CommentSection slug={slug} />
         </div>
       )}
