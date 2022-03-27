@@ -1,0 +1,128 @@
+import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+
+export const meta = {
+  author: 'Zydhan Linnar Putra',
+  slug: 'tugas-3-rekayasa-kebutuhan-b-genap-2021-2022',
+  description:
+    'Menjelaskan existing system information, stakeholder needs, organizational standards, dan regulation pada Sistem Informasi Berbasis Web Pada Koperasi Perkebunan Kelapa Sawit Juma Bolak',
+  createdAt: 'Saturday, February 26, 2022',
+  title: 'Tugas 3 Rekayasa Kebutuhan B Genap 2021-2022',
+}
+
+## Pendahuluan
+
+Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan menjelaskan beberapa hal mengenai existing system information, stakeholder needs, organizational standards, dan regulation pada Spesifikasi Kebutuhan Perangkat Lunak Aplikasi `Sistem Informasi Berbasis Web Pada Koperasi Perkebunan Kelapa Sawit Juma Bolak`.
+
+<div className="relative pt-[141.428%]">
+  <iframe
+    src="https://drive.google.com/file/d/1LQe4OIsXG0PLJX7qufdYoNqf3hjbsSFL/preview"
+    className="absolute top-0 left-0 w-full h-full"
+    allow="autoplay"
+    title="PDF - SKPL Sistem Informasi Berbasis Web Koperasi Juma Bolak"
+  ></iframe>
+</div>
+
+## Pembahasan
+
+### Poin Input
+
+#### _Existing System Information_
+
+Sistem Informasi yang akan dikembangkan adalah Sistem Informasi yang dapat membantu operasional koperasi serta mengatasi masalah pada sistem manual yaitu risiko kehilangan catatan hutang yang mengakibatkan kerugian koperasi.
+
+Fitur-fitur yang akan dikembangkan akan didasari dari keperluan yang ada yaitu mencatat pembayaran ongkos panen per kilogram dan total berat panen sehingga dapat memudahkan untuk menghitung total ongkos yang perlu dibayar, mencatat peminjam dan jumlah pinjaman pada saat ada yang berhutang, mencatat ongkos perawatan berupa jenis kegiatan dan biayanya, mencatat inventoris dan hal-hal terkait seperti daftar barang, jumlah barang, pegawai yang mengambil barang, pegawai penjaga gudang, dan jumlah barang yang diambil.
+
+#### _Stakeholder Needs_
+
+Berikut adalah kebutuhan yang diperlukan oleh masing-masing _stakeholders_:
+
+##### 1. Pemilik koperasi
+
+- Melihat data panen
+- Melihat hutang
+- Melihat ongkos perawatan
+- Melihat inventoris
+- Melihat laporan tahunan koperasi
+- Melihat pegawai yang melakukan masing-masing pencatatan
+
+##### 2. Pegawai koperasi
+
+- Mencatat pembayaran ongkos panen
+- Mencatat hutang
+- Mencatat ongkos perawatan
+- Mencatat inventoris
+
+#### _Organisational Standards_
+
+Standar yang ditetapkan untuk menilai atribut kualitas pada sistem informasi ini adalah:
+
+##### Reliability
+
+Sistem informasi diuji dengan data-data koperasi bulan Desember 2013 dan semua laporan dapat diunduh ditargetkan untuk tidak terjadi masalah.
+
+##### Availability
+
+Aplikasi dapat digunakan setiap waktu di komputer pegawai koperasi secara offline. Setiap data yang telah dimasukkan akan tersimpan di MySQL.
+
+##### Security
+
+Sebelum dapat mengakses aplikasi, pengguna harus memasukkan data username dan kata sandi.
+
+##### Maintainablitiy
+
+Untuk menggunakan aplikasi ini, disediakan tutorial yang terdapat pada menu Help sehingga pengguna yang baru pun dapat menggunakan sistem.
+
+##### Portability
+
+Aplikasi dapat dipindah ke jaringan koeprasi lain hanya dengan meng-copy folder aplikasi serta meng-install program WAMP server serta aplikasi browser seperti Google Chrome.
+
+#### _Regulation_
+
+Berikut adalah regulasi mengenai batasan yang ditetapkan pada pengembangan sistem informasi ini:
+
+1. Masalah yang diteliti adalah tentang pembukuan dan pembuatan
+   laporan Koperasi Juma Bolak.
+2. Sistem hanya bekerja untuk membuat laporan koperasi berdasarkan
+   data yang dimasukkan pengguna.
+3. Sistem akan berjalan di jaringan offline.
+4. Semua data yang akan diproses dimasukkan langsung oleh pengguna
+   secara manual.
+5. Tugas sistem selesai setelah laporan koperasi terbentuk.
+6. Sistem berbasis web dan dibuat dengan menggunakan bahasa
+   pemrograman PHP, HTML, CSS, Javascript, aplikasi pemrograman
+   basis data MySQL, dan web server Apache.
+
+#### _Domain Information_
+
+Sistem informasi ini akan berjalan di komputer yang ada pada koperasi dimana akan berguna dalam membantu pencatatan dan meminimalisir hilangnya buku pencatatan secara fisik karena keteledoran stakeholder koperasi.
+
+### Poin Output
+
+#### Agreed Requirements
+
+Berdasarkan studi kasus yang saya ambil, yang dapat diuraikan sebagai berikut :
+
+- Mencatat pembayaran ongkos panen per kilogram dan total berat panen sehingga dapat memudahkan untuk menghitung total ongkos yang perlu dibayar
+- Mencatat peminjam dan jumlah pinjaman pada saat ada yang berhutang
+- Mencatat ongkos perawatan berupa jenis kegiatan dan biayanya
+- Mencatat inventoris dan hal-hal terkait seperti daftar barang, jumlah barang, pegawai yang mengambil barang, pegawai penjaga gudang, dan jumlah barang yang diambil
+
+#### System Spesification
+
+Untuk spesifikasi rincinya sebagai berikut :
+
+- Komputer dengan memori minimal 8 GB, penyimpanan minimal 240 GB SSD, dan prosesor minimal Intel Pentium / AMD Athlon generasi terbaru untuk meminimalisir masalah
+- Jaringan internet minimal 20 Mbps yang diharapkan mampu untuk diakses oleh 3-5 pegawai dengan lancar
+- Aplikasi mampu menyimpan data yang dicatat di dalam cloud storage untuk meminimalisir potensi kehilangan data
+- Aplikasi hanya dapat diakses oleh pegawai dan pemilik koperasi
+- Aplikasi akan mencatat aksi yang dilakukan oleh penggunanya
+- Aplikasi bisa menampilkan data total pinjaman yang dilakukan oleh seseorang
+- Aplikasi mampu melakukan sorting dan filtering kegiatan pada inventoris yang dilakukan oleh pegawai seperti pegawai yang mengambil barang dan menjaga gudang
+
+#### System Model
+
+Berikut adalah flowchart dari sistem informasi:
+
+![flowchart](https://media.discordapp.net/attachments/695616852855881773/948261465079566387/unknown.png)
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>

@@ -2,17 +2,15 @@ import Modal from '@/common/components/Modal'
 import SpinnerLoading from '@/common/components/SpinnerLoading'
 import ModalAction from '@/common/types/ModalAction'
 import React, { FC, useState } from 'react'
-import { Post } from '../ViewPostPage'
 import CommentCard from './CommentCard'
 import NewCommentSection from './NewCommentSection'
 import useComments from './useComments'
 
 type Props = {
-  post: Post
+  slug: string
 }
 
-const CommentSection: FC<Props> = ({ post }) => {
-  const { slug } = post
+const CommentSection: FC<Props> = ({ slug }) => {
   const { comments, isError, isLoading, mutate } = useComments(slug)
   const [isModalShowed, setIsModalShowed] = useState(false)
   const [modalAction, setModalAction] = useState<ModalAction>()

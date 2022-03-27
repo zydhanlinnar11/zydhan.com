@@ -33,7 +33,7 @@ const TableOfContent = () => {
 
   useEffect(() => {
     const headingElements: HTMLHeadingElement[] = Array.from(
-      document.querySelectorAll('#post-markdown h2, #post-markdown h3')
+      document.querySelectorAll('#post-content h2, #post-content h3')
     )
 
     const newNestedHeadings = getNestedHeadings(headingElements)
@@ -41,9 +41,9 @@ const TableOfContent = () => {
   }, [])
 
   return (
-    <div className="hidden 2xl:flex 2xl:flex-col sticky top-24 w-64 h-[calc(100vh-12rem)] text-sm gap-y-3 text-gray-400 pr-4 transition-colors">
+    <aside className="hidden lg:flex lg:flex-col sticky top-24 w-64 h-[calc(100vh-12rem)] text-sm gap-y-3 text-gray-400 transition-colors">
       <p className="uppercase font-bold">Table Of Content</p>
-      <ul>
+      <ul className="flex flex-col gap-y-2">
         {nestedHeadings.map((heading) => (
           <li
             key={heading.id}
@@ -51,7 +51,7 @@ const TableOfContent = () => {
           >
             <a href={`#${heading.id}`}>{heading.title}</a>
             {heading && heading.items && heading.items?.length > 0 && (
-              <ul>
+              <ul className="flex flex-col gap-y-2 pt-2">
                 {heading.items?.map((child) => (
                   <li
                     key={child.id}
@@ -67,7 +67,7 @@ const TableOfContent = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </aside>
   )
 }
 
