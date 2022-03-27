@@ -69,7 +69,7 @@ const PostLayout: FC<Props> = ({
         id="post-content"
         className="flex justify-between w-full lg:max-w-5xl mx-auto my-4"
       >
-        <article className="prose dark:prose-invert max-w-none lg:max-w-[650px] px-8 mx-auto lg:mx-0 scroll-pt-[108px]">
+        <article className="prose dark:prose-invert max-w-full lg:max-w-[650px] px-8 mx-auto lg:mx-0 scroll-pt-[108px]">
           {/* <Header
             topText={createdAt}
             midText={title}

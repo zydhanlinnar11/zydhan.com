@@ -21,6 +21,9 @@ module.exports = {
             h3: {
               scrollMarginTop: '6rem',
             },
+            code: {
+              wordBreak: 'break-all',
+            },
           },
         },
       },
