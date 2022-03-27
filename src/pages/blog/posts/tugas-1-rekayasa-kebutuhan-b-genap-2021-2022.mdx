@@ -1,0 +1,91 @@
+import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+
+export const meta = {
+  author: 'Zydhan Linnar Putra',
+  slug: 'tugas-1-rekayasa-kebutuhan-b-genap-2021-2022',
+  description: 'Tugas mengenai Aplikasi Transaksi Parkir Non-Tunai',
+  createdAt: 'Friday, February 11, 2022',
+  title: 'Tugas 1 Rekayasa Kebutuhan B Genap 2021-2022',
+}
+
+## Pendahuluan
+
+Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan menjelaskan beberapa hal mengenai Aplikasi Transaksi Parkir Non Tunai.
+
+<div className="relative pb-[56.25%]">
+  <iframe
+    className="absolute top-0 left-0 w-full h-full"
+    src="https://www.youtube.com/embed/rcQKk4P_qVE"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Pembahasan
+
+### Deskripsi aplikasi
+
+Aplikasi parkir non-tunai adalah sistem dan peralatan parkir yang dikembangkan oleh Liquid Parking Technology dan ditujukan kepada pemilik bisnis / gedung yang memerlukan sistem parkir otomatis dan bersifat non-tunai. Pengguna hanya perlu menempelkan kartu e-toll atau scan QRIS untuk melakukan pembayaran parkir.
+
+Berikut adalah fitur-fitur yang disediakan oleh sistem ini:
+
+- Mendukung pembayaran non-tunai (menggunakan [QRIS](https://qris.id/homepage/) / kartu e-toll)
+- Bersifat _manless_ (tidak membutuhkan operator)
+- _ANPR (Automatic Car Number Plate Recognition) / LPR (License Plate Recognition)_ / Pendeteksi plat nomor otomatis
+- Sistem laporan secara daring
+
+### _User_ dan _Stakeholder_
+
+Berikut adalah _user_ maupun _stakeholder_ dari sistem ini:
+
+- _User_ : Masyarakat (Umum / pegawai gedung) yang ingin parkir, petugas keamanan (memantau cctv), admin
+- _Stakeholder_ : Pemesan aplikasi transaksi parkir non-tunai / pemilik gedung
+
+### Kebutuhan dari masing-masing _user / stakeholder_
+
+Berikut adalah penjelasan kebutuhan dari masing-masing _user / stakeholder_
+
+#### Kebutuhan masyarakat
+
+- Memasuki / keluar dari area parkir
+- Memiliki opsi pembayaran non-tunai yang cepat
+- Mengurangi interaksi kepada petugas untuk meredam persebaran Covid-19
+- Memerlukan kemudahan dan akses parkir yang cepat
+
+#### Kebutuhan petugas keamanan
+
+- Dapat memantau alur keluar masuk kendaraan pada gedung
+
+#### Kebutuhan admin
+
+- Mendapatkan informasi mengenai jumlah pengunjung
+- Mendapatkan informasi pendapatan dari pembayaran parkiran
+
+#### Kebutuhan pemesan aplikasi / pemilik gedung
+
+- Mengurangi biaya untuk honor staf parkir
+- Mempermudah mendapatkan informasi mengenai jumlah pengunjung
+- Mengurangi kontak fisik / interaksi antar manusia
+- Ingin agar gedungnya memiliki akses parkir yang mudah, cepat, dan reliabel
+
+### Aspek pendukung kelancaran aplikasi
+
+Aspek-aspek yang dapat mendukung kelancaran sistem / aplikasi ini antara lain:
+
+- Jaringan internet dan intranet yang memadai
+- Daya listrik yang cukup dan memiliki cadangan
+- Kamera CCTV
+- Sistem dari QRIS maupun E-Toll yang harus selalu aktif
+- Pemeliharaan rutin baik sistem maupun peralatan fisiknya
+
+## Penutup
+
+Sekian penjelasan mengenai Aplikasi Parkir Non-Tunai dari saya. Apabila terdapat kesalahan kata, mohon maaf. Jangan lupa tinggalkan komentar :). Terima kasih.
+
+Salam Hangat,
+
+Zydhan Linnar Putra.
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
