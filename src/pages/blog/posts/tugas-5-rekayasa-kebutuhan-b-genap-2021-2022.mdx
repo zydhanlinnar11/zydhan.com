@@ -1,0 +1,83 @@
+import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+import AirbnbLogo from '@/modules/blog/assets/img/tugas-3-rk-b/airbnb-logo.jpg'
+import Image from 'next/image'
+import AnchorLink from '@/components/AnchorLink'
+
+export const meta = {
+  author: 'Zydhan Linnar Putra',
+  slug: 'tugas-5-rekayasa-kebutuhan-b-genap-2021-2022',
+  description:
+    'Analisis business requirement, user requirement, functional requirement, dan non-functional requirement pada studi kasus Airbnb',
+  createdAt: 'Sunday, March 27, 2022',
+  title: 'Tugas 5 Rekayasa Kebutuhan B Genap 2021-2022',
+  disableComment: true,
+}
+
+## Pendahuluan
+
+Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan memaparkan hasil analisis _business requirement, user requirement, functional requirement_, dan _non-functional requirement_ pada studi kasus Airbnb.
+
+<Image src={AirbnbLogo} placeholder="blur" alt="Airbnb logo" />
+
+## Apa itu Airbnb?
+
+Airbnb, Inc. adalah perusahaan Amerika yang mengoperasikan pasar online untuk penginapan, terutama homestay untuk persewaan liburan, dan aktivitas pariwisata. Berbasis di San Francisco, California, platform ini dapat diakses melalui situs web dan aplikasi seluler.
+
+## Business Requirements
+
+- Menyediakan tempat penginapan
+- Menyediakan tempat untuk tuan rumah dalam menyewakan tempat tinggalnya
+- Menyediakan tips dan trik seputar perjalanan ke luar kota / luar negeri
+
+## User Requirements
+
+### Tuan Rumah
+
+- Dapat menyewakan setidaknya satu dari tempat tinggalnya
+- Dapat mengetahui potensi penghasilan dari penyewaan tempat tinggalnya
+- Mendapatkan opsi asuransi terhadap kerusakan yang ditimbulkan oleh tamu
+
+### Tamu
+
+- Mendapatkan tempat penginapan sesuai dengan lokasi, waktu, dan budget
+- Mendapatkan artikel mengenai tips dan trik dalam berlibur
+- Memiliki beberapa pilihan pembayaran
+
+## Functional Requirements
+
+- Tamu dapat mencari tempat tinggal yang diinginkan berdasarkan lokasi, waktu, jumlah tamu
+- Tamu mendapatkan perkiraan harga penginapan
+- Tamu dapat melakukan pembayaran penyewaan tempat tinggal secara tunai maupun non-tunai
+- Tamu dapat mengetahui profil tuan Rumah
+- Tamu dapat melihat detail fasilitas yang ditawarkan pada tempat tinggal
+- Tamu dapat melihat lokasi penginapan pada peta digital
+- Tamu dapat melihat ulasan tempat tinggal
+- Tamu dapat mengulas tempat tinggal
+- Tamu dapat melihat aturan pada tempat tinggal
+- Tuan rumah dapat memberi detail fasilitas pada tempat tinggal
+- Tuan rumah dapat mengatur peraturan pada tempat tinggal
+- Tuan rumah dapat membeli asuransi untuk kerusakan tempat tinggal akibat tamu
+- Tuan rumah dapat mengetahui potensi penghasilan dari penyewaan tempat tinggalnya
+
+## Non-Functional Requirements
+
+- Aplikasi dapat berjalan pada Android, iOS, maupun peramban web
+- Aplikasi dapat diakses secara instan < 1 detik dalam koneksi kabel 20 Mbps
+- Hasil pencarian tempat tinggal tidak boleh muncul lebih lama dari 3 detik
+- Aplikasi berjalan dalam minimal dua bahasa, yaitu Bahasa Indonesia dan Inggris
+- Aplikasi tidak memberikan data pribadi pengguna ke pihak ketiga
+- Aplikasi tidak memiliki celah keamanan
+
+## Penutup
+
+Sekian penjelasan mengenai studi kasus Airbnb dari saya. Apabila terdapat kesalahan kata, mohon maaf. Jangan lupa tinggalkan komentar 😁. Terima kasih.
+
+Salam Hangat,
+
+Zydhan Linnar Putra.
+
+## Referensi
+
+- [Airbnb - Wikipedia](https://en.wikipedia.org/wiki/Airbnb)
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
