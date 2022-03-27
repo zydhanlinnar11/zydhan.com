@@ -1,4 +1,7 @@
 import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+import Image from 'next/image'
+import LaravelWelcomeScreen from '@/modules/blog/assets/img/simple-and-easy-rest-api-implementation-with-laravel/laravel-welcome-screen.png'
+import CreatedModelAndMigrations from '@/modules/blog/assets/img/simple-and-easy-rest-api-implementation-with-laravel/created-model-and-migrations.png'
 
 export const meta = {
   author: 'Zydhan Linnar Putra',
@@ -17,15 +20,13 @@ API is a method where two or more software can communicate each other.
 
 REST (Representational State Transfer) API is an architecture that allow server and client to transfer the representation of the state of the resource to the requester or endpoint. The data can be transferred using JSON, XML, or another format but the most popular option is JSON (JavaScript Object Notation). You can watch [this video](https://youtu.be/iiADhChRriM) if you feel don't familiar with JSON format.
 
-## REST API Implementation with Laravel
-
-### Prerequisites
+## Prerequisites
 
 - PHP 8.0+
 - Composer v2.0+
 - [Postman](https://www.postman.com/)
 
-### Project Initialization
+## Project Initialization
 
 First, let initialize our Laravel project. This should automatically install the latest version of Laravel.
 
@@ -42,9 +43,13 @@ php artisan serve
 
 Then open [http://127.0.0.1:8000](http://127.0.0.1:8000), you should see this sweet Laravel welcome screen:
 
-![Laravel default welcome screen](https://media.discordapp.net/attachments/822059316806811651/954301257496018984/unknown.png?width=1020&height=671)
+<Image
+  src={LaravelWelcomeScreen}
+  placeholder="blur"
+  alt="Laravel default welcome screen"
+/>
 
-### Setting Up Database
+## Setting Up Database
 
 I want to make this tutorial to be as simple as possible, so we're going to use SQLite3 for our database connection.
 
@@ -63,7 +68,7 @@ Open your `.env` file and change `DB_CONNECTION` to `sqlite`, then delete `DB_HO
 DB_CONNECTION=sqlite
 ```
 
-### Creating Migrations and Model
+## Creating Migrations and Model
 
 We want to create model and migration for `Developer` table. Fortunately, Laravel provides easy way to make model and migrations with one single command:
 
@@ -73,9 +78,13 @@ php artisan make:model Developer --migration
 
 Then, you will have two new files `app/Models/Developer.php` for the model and `database/migrations/2022_03_18_090902_create_developers_table.php` for the migrations. Note that the timestamp of migration file depends on when you execute the command.
 
-![Created model and migration files](https://media.discordapp.net/attachments/822059316806811651/954305588400103444/unknown.png)
+<Image
+  src={CreatedModelAndMigrations}
+  placeholder="blur"
+  alt="Created model and migrations"
+/>
 
-### Migrate table
+## Migrate table
 
 ```php
 <?php
@@ -137,7 +146,7 @@ Then, run the migration:
 php artisan migrate
 ```
 
-### Creating Controller
+## Creating Controller
 
 To make simple controller for API, we can use default artisan command with `--model` and `--api` arguments:
 
@@ -216,7 +225,7 @@ class DeveloperController extends Controller
 
 Look, our controller methods have `$developer` argument. Laravel will find record in database automatically for `Developer` table with [Route model binding](https://laravel.com/docs/9.x/routing#route-model-binding).
 
-### Setting Up Routes
+## Setting Up Routes
 
 Now, open `routes/api.php` and add `DeveloperController` to the route:
 
@@ -240,9 +249,9 @@ Short explanations:
 - `PUT`/`PATCH` method for `api/developers/{developers}` will be handled by `update()` method in `DeveloperController`. This route is for updating specific resource.
 - `DELETE` method for `api/developers/{developers}` will be handled by `destroy()` method in `DeveloperController`. This route is for deleting specific resource.
 
-### Handling Request
+## Handling Request
 
-#### Creating Resource
+### Creating Resource
 
 When creating new resource, we need to take input `name` and `fav_lang` from user and put it to the database.
 
@@ -258,7 +267,7 @@ public function store(Request $request)
 }
 ```
 
-##### Test Create Resource API
+#### Test Create Resource API
 
 We're going to make `POST` request to `http://localhost:8000/api/developers` using Postman. First, we need to set `Content-Type` and `Accept` header to `application/json` to make sure we always receive JSON response from Laravel.
 
@@ -281,13 +290,13 @@ public function index()
 }
 ```
 
-##### Test Resources Listing
+#### Test Resources Listing
 
 To test this functionality, we should make `GET` request to `http://localhost:8000/api/developers`:
 
 ![Resource listing Postman](https://media.discordapp.net/attachments/822059316806811651/954624971815149578/unknown.png?width=661&height=479)
 
-#### Showing Specific Resource
+### Showing Specific Resource
 
 We only need to return `$developer` from method parameter:
 
@@ -298,13 +307,13 @@ public function show(Developer $developer)
 }
 ```
 
-##### Test Display Specific Resource
+#### Test Display Specific Resource
 
 We should make `GET` request to `http://localhost:8000/api/developers/{resource_id}`. According to [resources listing](#test-resources-listing) the resource id is 1, so we need to test `http://localhost:8000/api/developers/1`:
 
 ![Specific resource Postman](https://media.discordapp.net/attachments/822059316806811651/954626556188303400/unknown.png?width=665&height=479)
 
-#### Updating resources
+### Updating resources
 
 Like [resource creation](#creating-resource), we also need to take input from user, and update it to database. But for updating, we don't need to create new `Developer` instance, we only need to update instance that given in method param:
 
@@ -319,7 +328,7 @@ public function update(Request $request, Developer $developer)
 }
 ```
 
-##### Test Update Specific Resource
+#### Test Update Specific Resource
 
 Make a `PUT` request to `http://localhost:8000/api/developers/1` with body structure [resource creation](#creating-resource), but in this case we want to change his name to `Zydhan` and make `PHP` as his favourite language:
 
@@ -331,7 +340,7 @@ Then, [confirm if the resource is updated](#test-display-specific-resource):
 
 If you look at it, Laravel also automatically update `updated_at` column.
 
-#### Delete resource
+### Delete resource
 
 Eloquent provide `delete()` method to delete resource from table:
 
@@ -344,7 +353,7 @@ public function destroy(Developer $developer)
 }
 ```
 
-##### Test resource deletion
+#### Test resource deletion
 
 Method for this request is `DELETE` and we want to delete developer with name `Zydhan` which has ID of 1. So we make `DELETE` request to `http://localhost:8000/api/developers/1`:
 
