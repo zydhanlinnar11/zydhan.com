@@ -1,3 +1,5 @@
+import NarrowPageContainer from '@/common/components/NarrowPageContainer'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { FC } from 'react'
 import TableOfContent from '../TableOfContent'
@@ -12,12 +14,16 @@ type Props = {
   }
 }
 
+const CommentSection = dynamic(
+  async () => await import('../Comment/CommentSection')
+)
+
 const PostLayout: FC<Props> = ({
   children,
   meta: { createdAt, description, slug, title, author },
 }) => {
   return (
-    <>
+    <NarrowPageContainer>
       <Head>
         <title>{title} - Blog - zydhan.xyz</title>
         <meta name="description" content={description} />
@@ -50,7 +56,7 @@ const PostLayout: FC<Props> = ({
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"
       ></link>
 
-      <div className="w-full lg:max-w-5xl mx-auto pt-16 pb-8 px-8">
+      <div className="w-full lg:max-w-5xl mx-auto pt-8 pb-8 px-8">
         <h1 className="text-3xl font-semibold">{title}</h1>
         <div className="mt-3 flex gap-x-2">
           <p className="text-sm text-gray-400">{createdAt}</p>
@@ -73,8 +79,11 @@ const PostLayout: FC<Props> = ({
         </article>
         <TableOfContent />
       </div>
+      <div className="px-4 py-4">
+        <CommentSection slug={slug} />
+      </div>
       {/* </div> */}
-    </>
+    </NarrowPageContainer>
   )
 }
 
