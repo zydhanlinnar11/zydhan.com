@@ -1,4 +1,5 @@
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
+import { useUserState } from '@/common/providers/UserProvider'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { FC } from 'react'
@@ -12,6 +13,7 @@ type Props = {
     title: string
     author: string
     disableComment?: boolean
+    openGraphImage?: StaticImageData
   }
 }
 
@@ -21,8 +23,18 @@ const CommentSection = dynamic(
 
 const PostLayout: FC<Props> = ({
   children,
-  meta: { createdAt, description, slug, title, author, disableComment },
+  meta: {
+    createdAt,
+    description,
+    slug,
+    title,
+    author,
+    disableComment,
+    openGraphImage,
+  },
 }) => {
+  const userState = useUserState()
+
   return (
     <NarrowPageContainer>
       <Head>
@@ -35,19 +47,19 @@ const PostLayout: FC<Props> = ({
           property="og:url"
           content={`https://zydhan.xyz/blog/posts/${slug}`}
         />
-        <meta property="og:description" content={description} />
-        {/* <meta
-          property="og:image"
-          content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
-        /> */}
-        {/* <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="600" />
-        <meta property="og:image:alt" content={`${title} OpenGraph`} /> */}
 
-        {/* <meta
-          name="twitter:image:src"
-          content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
-        /> */}
+        {openGraphImage && (
+          <>
+            <meta property="og:description" content={description} />
+            <meta property="og:image" content={openGraphImage.src} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="600" />
+            <meta property="og:image:alt" content={`${title} OpenGraph`} />
+
+            <meta name="twitter:image:src" content={openGraphImage.src} />
+          </>
+        )}
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${title} - Blog`} />
         <meta property="twitter:description" content={description} />
@@ -63,6 +75,17 @@ const PostLayout: FC<Props> = ({
           <p className="text-sm text-gray-400">{createdAt}</p>
           <p className="text-sm text-gray-400">•</p>
           <p className="text-sm text-gray-400">Posted by {author}</p>
+          {userState.state === 'authenticated' && userState.user.admin && (
+            <>
+              <p className="text-sm text-gray-400">•</p>
+              <a
+                className="text-sm text-gray-400"
+                href={`/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
+              >
+                Generate OpenGraph
+              </a>
+            </>
+          )}
         </div>
       </div>
       {/* <div className="mt-16 flex grow w-full 2xl:pl-[17.5rem] mx-auto gap-x-4 justify-center"> */}
