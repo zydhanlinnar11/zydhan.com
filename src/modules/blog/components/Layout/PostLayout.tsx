@@ -11,6 +11,7 @@ type Props = {
     createdAt: string
     title: string
     author: string
+    disableComment?: boolean
   }
 }
 
@@ -20,7 +21,7 @@ const CommentSection = dynamic(
 
 const PostLayout: FC<Props> = ({
   children,
-  meta: { createdAt, description, slug, title, author },
+  meta: { createdAt, description, slug, title, author, disableComment },
 }) => {
   return (
     <NarrowPageContainer>
@@ -79,9 +80,11 @@ const PostLayout: FC<Props> = ({
         </article>
         <TableOfContent />
       </div>
-      <div className="px-4 py-4">
-        <CommentSection slug={slug} />
-      </div>
+      {!disableComment && (
+        <div className="px-4 py-4">
+          <CommentSection slug={slug} />
+        </div>
+      )}
       {/* </div> */}
     </NarrowPageContainer>
   )
