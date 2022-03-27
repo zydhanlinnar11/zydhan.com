@@ -1,6 +1,7 @@
 import mdx from '@next/mdx'
 import rehypeSlug from 'rehype-slug'
 import rehypeHighlight from 'rehype-highlight'
+import bundleAnalyzer from '@next/bundle-analyzer'
 
 const withMDX = mdx({
   extension: /\.mdx?$/,
@@ -10,6 +11,10 @@ const withMDX = mdx({
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",
   },
+})
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
 })
 
 /** @type {import('next').NextConfig} */
@@ -33,4 +38,4 @@ const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 }
 
-export default withMDX(nextConfig)
+export default withBundleAnalyzer(withMDX(nextConfig))
