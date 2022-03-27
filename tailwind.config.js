@@ -12,6 +12,18 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            h2: {
+              scrollMarginTop: '6rem',
+            },
+            h3: {
+              scrollMarginTop: '6rem',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
