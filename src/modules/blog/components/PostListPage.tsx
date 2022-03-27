@@ -1,8 +1,6 @@
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 import Head from 'next/head'
-import { FC } from 'react'
 import HomePosts from '../data/HomePosts'
-import HomePost from '../types/HomePost'
 import PostCard from './PostCard'
 
 export type Post = {
@@ -12,14 +10,11 @@ export type Post = {
   created_at: string
 }
 
-type Props = {
-  posts: HomePost[]
-}
-
 const description = "Welcome to Zydhan Linnar Putra's Blog"
 const title = 'Blog - zydhan.xyz'
+const posts = HomePosts
 
-const PostListPage: FC<Props> = ({ posts }) => {
+const PostListPage = () => {
   return (
     <NarrowPageContainer>
       <Head>
@@ -57,13 +52,3 @@ const PostListPage: FC<Props> = ({ posts }) => {
 }
 
 export default PostListPage
-
-export const getStaticProps = () => {
-  const posts = HomePosts
-
-  return {
-    props: {
-      posts,
-    },
-  }
-}
