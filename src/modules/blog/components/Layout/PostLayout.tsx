@@ -58,7 +58,7 @@ const PostLayout: FC<Props> = ({
       ></link>
 
       <div className="w-full lg:max-w-5xl mx-auto pt-8 pb-8 px-8">
-        <h1 className="text-3xl font-semibold">{title}</h1>
+        <h1 className="text-3xl font-bold">{title}</h1>
         <div className="mt-3 flex gap-x-2">
           <p className="text-sm text-gray-400">{createdAt}</p>
           <p className="text-sm text-gray-400">•</p>
