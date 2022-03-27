@@ -36,18 +36,18 @@ const PostLayout: FC<Props> = ({
           content={`https://zydhan.xyz/blog/posts/${slug}`}
         />
         <meta property="og:description" content={description} />
-        <meta
+        {/* <meta
           property="og:image"
           content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
-        />
-        <meta property="og:image:width" content="1200" />
+        /> */}
+        {/* <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
-        <meta property="og:image:alt" content={`${title} OpenGraph`} />
+        <meta property="og:image:alt" content={`${title} OpenGraph`} /> */}
 
-        <meta
+        {/* <meta
           name="twitter:image:src"
           content={`https://zydhan.xyz/api/og-image/blog-post?title=${title}&description=${description}&date=${createdAt}`}
-        />
+        /> */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${title} - Blog`} />
         <meta property="twitter:description" content={description} />
