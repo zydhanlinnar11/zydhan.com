@@ -2,6 +2,7 @@ import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 import { useUserState } from '@/common/providers/UserProvider'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { StaticImageData } from 'next/image'
 import { FC } from 'react'
 import TableOfContent from '../TableOfContent'
 

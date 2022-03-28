@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 type HomePost = {
   title: string
   cover: StaticImageData
