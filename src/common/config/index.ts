@@ -4,7 +4,6 @@ const config = {
     process.env.NODE_ENV === 'production'
       ? 'https://zydhan.xyz'
       : 'https://dev.zydhan.xyz',
-  githubToken: process.env.GITHUB_API_TOKEN,
 }
 
 export default config
