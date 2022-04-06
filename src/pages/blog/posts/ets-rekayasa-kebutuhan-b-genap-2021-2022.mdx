@@ -1,0 +1,86 @@
+import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+import GobizLogo from '@/modules/blog/assets/img/ets-rk-b/gobiz-logo.png'
+import OgImage from '@/modules/blog/assets/img/tugas-5-rk-b/og-image.png'
+import Image from 'next/image'
+
+export const meta = {
+  author: 'Zydhan Linnar Putra',
+  slug: 'ets-rekayasa-kebutuhan-b-genap-2021-2022',
+  description:
+    'Contoh-contoh requirement pada studi kasus Gobiz',
+  createdAt: 'Wednesday, April 6, 2022',
+  title: 'ETS Rekayasa Kebutuhan B Genap 2021-2022',
+  disableComment: true,
+  openGraphImage: OgImage,
+}
+
+## Pendahuluan
+
+Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan memaparkan mengenai macam-macam kebutuhan yang harus digali di dalam membuat perangkat lunak.
+
+<Image src={GobizLogo} placeholder="blur" alt="Gobiz logo" />
+
+## Penjelasan
+
+Kebutuhan-kebutuhan yang harus digali di dalam membuat perangkat lunak adalah sebagai berikut:
+
+### Business Requirements
+
+Business Requirements adalah apa yang harus dilakukan oleh sebuah perangkat lunak dari sudut pandang _end-user_. Contohnya pada Gobiz adalah:
+
+- Menyediakan platform untuk mengembangkan usaha
+- Menyediakan platform untuk mengontrol usaha
+- Menyediakan platform untuk mendapatkan info seputar usaha usaha
+
+### User Requirements
+
+User Requirements adalah apa yang harus dilakukan oleh sebuah perangkat lunak dari sudut pandang setiap aktor yang terlibat. Contohnya pada Gobiz adalah:
+
+#### Mitra usaha
+
+- Dapat melihat pesanan GoFood yang masuk dan yang telah selesai
+- Dapat melihat detail semua transaksi yang ada
+- Dapat melihat dan mencatat transaksi di toko
+- Dapat menyiapkan harga promo pada platform GoFood
+- Dapat melihat status pencairan keuntungan
+- Dapat menambah atau mengganti produk yang dijual di GoFood
+- Dapat menambah atau mengganti produk yang dijual di toko
+- Dapat mengatur jumlah stok barang di GoFood maupun di toko
+- Dapat memperbarui status buka / tutup toko di GoFood
+- Dapat memperbarui profil restoran di GoFood
+
+### Functional Requirements
+
+Functional requirements adalah kebutuhan yang berisi proses-proses apa saja / layanan apa saja yang nantinya harus disediakan oleh sistem, mencackup bagaimana sistem harus bereaksi pada input tertentu dan bagaimana perilaku sistem pada situasi tertentu. Contohnya pada Gobiz adalah:
+
+- Sistem dapat mengautentikasi pengguna
+- Sistem dapat mencatat dan menampilkan semua transaksi
+- Sistem dapat menyimpan data promo pada platform GoFood
+- Sistem dapat mencairkan dana keuntungan
+- Sistem dapat menyimpan data produk di toko maupun pada platform GoFood
+- Sistem dapat menyimpan data restoran
+
+### Non-Functional Requirements
+
+Non-Functional requirements adalah daftar atribut kualitas yang harus dimiliki oleh sistem untuk menunjang kebutuhan fungsionalnya. Beberapa contoh pada Gobiz antara lain:
+
+- Performance: sistem harus bisa diakses dalam waktu maksimal 1 detik pada koneksi kabel berkecepatan 20 Mbps
+- Security: sistem bebas dari serangan XSS, SQL Injection, maupun directory listing
+- Modifiability: perubahan pada sebuah modul tidak memerlukan untuk deployment secara keseluruhan
+- Reliability: maintenance pada sebuah modul tidak berdampak ke modul lainnya
+- Usability: sistem memiliki minimal dua bahasa, yaitu Indonesia dan Inggris
+- Availability: sistem memiliki uptime 99.9%
+
+## Penutup
+
+Sekian penjelasan mengenai dari saya. Apabila terdapat kesalahan kata, mohon maaf. Terima kasih 😁.
+
+Salam Hangat,
+
+Zydhan Linnar Putra.
+
+## Referensi
+
+- [Business requirements - Wikipedia](https://en.wikipedia.org/wiki/Business_requirements)
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
