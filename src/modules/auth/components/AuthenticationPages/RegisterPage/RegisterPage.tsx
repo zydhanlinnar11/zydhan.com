@@ -48,9 +48,9 @@ const RegisterPage = () => {
   return (
     <GuestRoute>
       <Head>
-        <title>Register - zydhan.xyz</title>
-        <meta property="og:title" content="Login - zydhan.xyz" />
-        <meta property="og:url" content="https://zydhan.xyz/auth/register" />
+        <title>Register - zydhan.com</title>
+        <meta property="og:title" content="Login - zydhan.com" />
+        <meta property="og:url" content="https://zydhan.com/auth/register" />
         <meta property="og:description" content="Create new account" />
       </Head>
       <div className="grow flex flex-col items-center justify-center">

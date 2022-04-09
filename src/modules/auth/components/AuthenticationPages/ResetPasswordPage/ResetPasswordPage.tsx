@@ -31,11 +31,11 @@ const ResetPasswordPage = () => {
   return (
     <GuestRoute>
       <Head>
-        <title>Reset Password - zydhan.xyz</title>
-        <meta property="og:title" content="Reset Password - zydhan.xyz" />
+        <title>Reset Password - zydhan.com</title>
+        <meta property="og:title" content="Reset Password - zydhan.com" />
         <meta
           property="og:url"
-          content="https://zydhan.xyz/auth/reset-password"
+          content="https://zydhan.com/auth/reset-password"
         />
         <meta property="og:description" content="Reset your account password" />
       </Head>

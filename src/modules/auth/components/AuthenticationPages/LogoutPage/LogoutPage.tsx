@@ -43,7 +43,7 @@ const LogoutPage = () => {
   return (
     <>
       <Head>
-        <title>Log out - zydhan.xyz</title>
+        <title>Log out - zydhan.com</title>
       </Head>
       <PrivateRoute>
         <Modal

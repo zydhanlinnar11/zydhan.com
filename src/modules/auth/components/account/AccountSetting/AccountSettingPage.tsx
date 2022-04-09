@@ -18,7 +18,7 @@ const AccountSettingPage = () => {
       {userState.state === 'authenticated' && (
         <>
           <Head>
-            <title>Account Setting - zydhan.xyz</title>
+            <title>Account Setting - zydhan.com</title>
           </Head>
           <div className="w-full flex flex-col pb-10 gap-y-3 items-center sm:flex-row justify-between align-middle">
             <h2 className="text-2xl">Account Setting</h2>

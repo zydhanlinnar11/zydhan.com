@@ -25,7 +25,7 @@ const Portfolio = () => {
           property="og:title"
           content="Zydhan Linnar Putra - Full-stack Developer"
         />
-        <meta property="og:url" content="https://zydhan.xyz" />
+        <meta property="og:url" content="https://zydhan.com" />
         <meta property="og:description" content={description} />
 
         <meta property="og:image" content="/logo.webp" />

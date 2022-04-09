@@ -10,10 +10,10 @@ function generateSiteMap(posts: HomePost[]) {
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>https://zydhan.xyz</loc>
+       <loc>https://zydhan.com</loc>
      </url>
      <url>
-       <loc>https://zydhan.xyz/blog</loc>
+       <loc>https://zydhan.com/blog</loc>
      </url>
      ${posts
        .map(({ slug }) => {

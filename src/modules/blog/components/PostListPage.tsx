@@ -11,7 +11,7 @@ export type Post = {
 }
 
 const description = "Welcome to Zydhan Linnar Putra's Blog"
-const title = 'Blog - zydhan.xyz'
+const title = 'Blog - zydhan.com'
 const posts = HomePosts
 
 const PostListPage = () => {
@@ -22,7 +22,7 @@ const PostListPage = () => {
         <meta name="description" content={description} />
 
         <meta property="og:title" content={title} />
-        <meta property="og:url" content={'https://zydhan.xyz/blog'} />
+        <meta property="og:url" content={'https://zydhan.com/blog'} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content="/logo.webp" />
         <meta property="og:image:width" content="1080" />

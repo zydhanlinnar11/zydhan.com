@@ -11,7 +11,7 @@ services:
     command: /bin/sh -c "npm run dev"
     networks: [nginx-proxy-network]
     extra_hosts:
-      - 'api.dev.zydhan.xyz:host-gateway'
+      - 'api.zydhan.dev:host-gateway'
     restart: always
 
 networks:

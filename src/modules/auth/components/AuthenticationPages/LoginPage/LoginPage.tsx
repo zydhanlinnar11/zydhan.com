@@ -40,9 +40,9 @@ const LoginPage = () => {
   return (
     <GuestRoute>
       <Head>
-        <title>Login - zydhan.xyz</title>
-        <meta property="og:title" content="Login - zydhan.xyz" />
-        <meta property="og:url" content="https://zydhan.xyz/auth/login" />
+        <title>Login - zydhan.com</title>
+        <meta property="og:title" content="Login - zydhan.com" />
+        <meta property="og:url" content="https://zydhan.com/auth/login" />
         <meta property="og:description" content="Log in to your account" />
       </Head>
       <div className="grow flex flex-col items-center justify-center">

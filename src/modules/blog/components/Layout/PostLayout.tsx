@@ -39,14 +39,14 @@ const PostLayout: FC<Props> = ({
   return (
     <NarrowPageContainer>
       <Head>
-        <title>{title} - Blog - zydhan.xyz</title>
+        <title>{title} - Blog - zydhan.com</title>
         <meta name="description" content={description} />
 
         <meta property="og:title" content={`${title} - Blog`} />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`https://zydhan.xyz/blog/posts/${slug}`}
+          content={`https://zydhan.com/blog/posts/${slug}`}
         />
 
         {openGraphImage && (

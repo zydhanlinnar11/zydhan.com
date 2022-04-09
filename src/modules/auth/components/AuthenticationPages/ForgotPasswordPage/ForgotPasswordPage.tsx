@@ -20,11 +20,11 @@ const ForgotPasswordPage = () => {
   return (
     <GuestRoute>
       <Head>
-        <title>Forgot Password - zydhan.xyz</title>
-        <meta property="og:title" content="Forgot Password - zydhan.xyz" />
+        <title>Forgot Password - zydhan.com</title>
+        <meta property="og:title" content="Forgot Password - zydhan.com" />
         <meta
           property="og:url"
-          content="https://zydhan.xyz/auth/forgot-password"
+          content="https://zydhan.com/auth/forgot-password"
         />
         <meta property="og:description" content="Reset your account password" />
       </Head>
