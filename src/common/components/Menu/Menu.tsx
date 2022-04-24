@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { Menu as HeadlessMenu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import Image from 'next/image'
@@ -7,7 +7,7 @@ type Props = {
   icon?: string
 }
 
-const Menu: FC<Props> = ({ children, icon }) => {
+const Menu: FC<PropsWithChildren<Props>> = ({ children, icon }) => {
   return (
     <HeadlessMenu as="div" className="ml-3 relative">
       <div>

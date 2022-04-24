@@ -1,10 +1,10 @@
 import FullscreenLoading from '@/common/components/FullscreenLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import { useRouter } from 'next/router'
-import React, { FC, useEffect } from 'react'
+import React, { FC, PropsWithChildren, useEffect } from 'react'
 import useNextPath from '../hooks/useNextPath'
 
-const GuestRoute: FC = ({ children }) => {
+const GuestRoute: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { state } = useUserState()
   const router = useRouter()
   const nextPath = useNextPath()

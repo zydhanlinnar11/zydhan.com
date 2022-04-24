@@ -1,12 +1,12 @@
 import { Menu } from '@headlessui/react'
-import { FC, MouseEventHandler } from 'react'
+import { FC, MouseEventHandler, PropsWithChildren } from 'react'
 
 type Props = {
   onClick: MouseEventHandler<HTMLLIElement> &
     ((event: { preventDefault: Function }) => void)
 }
 
-const MenuItem: FC<Props> = ({ children, onClick }) => {
+const MenuItem: FC<PropsWithChildren<Props>> = ({ children, onClick }) => {
   return (
     <Menu.Item
       as="li"

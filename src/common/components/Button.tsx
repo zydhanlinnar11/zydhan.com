@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react'
+import { FC, MouseEventHandler, PropsWithChildren } from 'react'
 
 type Props = {
   type?: 'button' | 'reset' | 'submit'
@@ -6,7 +6,12 @@ type Props = {
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-const Button: FC<Props> = ({ children, type, disabled, onClick }) => {
+const Button: FC<PropsWithChildren<Props>> = ({
+  children,
+  type,
+  disabled,
+  onClick,
+}) => {
   return (
     <button
       type={type}

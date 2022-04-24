@@ -1,10 +1,10 @@
 import NarrowPageContainer from '@/common/components/NarrowPageContainer'
 import { useUserState } from '@/common/providers/UserProvider'
 import FullscreenLoading from '@/common/components/FullscreenLoading'
-import { FC, useEffect } from 'react'
+import { FC, PropsWithChildren, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-const PrivateRoute: FC = ({ children }) => {
+const PrivateRoute: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { state } = useUserState()
   const router = useRouter()
 

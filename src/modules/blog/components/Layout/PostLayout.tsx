@@ -3,7 +3,7 @@ import { useUserState } from '@/common/providers/UserProvider'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { StaticImageData } from 'next/image'
-import { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import TableOfContent from '../TableOfContent'
 
 type Props = {
@@ -22,7 +22,7 @@ const CommentSection = dynamic(
   async () => await import('../Comment/CommentSection')
 )
 
-const PostLayout: FC<Props> = ({
+const PostLayout: FC<PropsWithChildren<Props>> = ({
   children,
   meta: {
     createdAt,

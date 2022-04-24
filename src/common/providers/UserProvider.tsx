@@ -7,6 +7,7 @@ import {
   Dispatch,
   useContext,
   useEffect,
+  PropsWithChildren,
 } from 'react'
 
 type UserState =
@@ -32,7 +33,7 @@ const initialState: UserState = {
 const UserStateContext = createContext<UserState>(initialState)
 const UserDispatchContext = createContext<Dispatch<Action>>(() => null)
 
-export const UserProvider: FC = ({ children }) => {
+export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {

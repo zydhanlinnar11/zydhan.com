@@ -1,12 +1,16 @@
 import Link from 'next/link'
-import React from 'react'
+import { FC, PropsWithChildren } from 'react'
 
 interface AnchorLinkProps {
   href: string
   target?: string
 }
 
-const AnchorLink: React.FC<AnchorLinkProps> = ({ href, children, target }) => {
+const AnchorLink: FC<PropsWithChildren<AnchorLinkProps>> = ({
+  href,
+  children,
+  target,
+}) => {
   return (
     <Link href={href}>
       <a
