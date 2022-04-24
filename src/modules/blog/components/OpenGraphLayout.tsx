@@ -44,7 +44,7 @@ const OpenGraphLayout: FC<Props> = ({ title, description, date, userName }) => {
           </p>
           <p>
             <FontAwesomeIcon className="my-auto mr-2" icon={faGlobe} />
-            <span> {config.baseUrl}/blog</span>
+            <span> https://zydhan.com/blog</span>
           </p>
         </div>
         <div className="h-3 w-full bg-sky-500"></div>
