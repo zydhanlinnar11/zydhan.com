@@ -5,9 +5,9 @@ import Markdown from '../../Markdown'
 import CommentCardMenu from './CommentCardMenu'
 import CommentCardEditForm from './CommentCardEditForm'
 import { KeyedMutator } from 'swr'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
+import { AxiosError } from 'axios'
 
 interface Props {
   comment: Comment
@@ -27,7 +27,7 @@ function CommentCard({ comment, mutate, openModal, closeModal }: Props) {
       toast.success('Comment deleted successfully!', { theme: 'dark' })
       closeModal()
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
     }
   }

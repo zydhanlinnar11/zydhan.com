@@ -3,10 +3,10 @@ import Input from '@/common/components/Form/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@/common/components/Button'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
+import { AxiosError } from 'axios'
 
 const AccountSettingsPasswordSection = () => {
   const [isInProgress, setInProgress] = useState<boolean>(false)
@@ -41,7 +41,7 @@ const AccountSettingsPasswordSection = () => {
       })
       toast.success('Password changed successfully', { theme: 'dark' })
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       if (e.response?.status === 401) userDispatch({ state: 'unauthenticated' })
       toast.error(e.response?.data?.message || 'Failed to change password', {
         theme: 'dark',

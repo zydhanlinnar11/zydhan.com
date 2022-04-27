@@ -5,7 +5,7 @@ import config from '@/common/config'
 import { useUserState } from '@/common/providers/UserProvider'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
 import Comment from '@/modules/blog/types/admin/Comment'
-import axios from 'axios'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import React, { FC, FormEvent, RefObject, useRef } from 'react'
 import { toast } from 'react-toastify'
@@ -66,7 +66,7 @@ const NewCommentSection: FC<Props> = ({ slug, mutate }) => {
       })
       commentRef.current.value = ''
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
     }
   }

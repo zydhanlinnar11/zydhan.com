@@ -9,8 +9,8 @@ import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonG
 import GuestRoute from '../../GuestRoute'
 import loginHandler from './loginHandler'
 import useNextPath from '@/modules/auth/hooks/useNextPath'
-import axios from 'axios'
 import { toast } from 'react-toastify'
+import { AxiosError } from 'axios'
 
 const LoginPage = () => {
   const emailRef = useRef<HTMLInputElement>(null)
@@ -28,7 +28,7 @@ const LoginPage = () => {
       const user = await fetchUser()
       userDispatch({ state: 'authenticated', user })
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       toast.error(e.response?.data?.message || e.message, {
         theme: 'dark',
       })

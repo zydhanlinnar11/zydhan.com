@@ -4,8 +4,8 @@ import Comment from '@/modules/blog/types/admin/Comment'
 import React, { FC, FormEvent, useRef, useState } from 'react'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
 import { toast } from 'react-toastify'
-import axios from 'axios'
 import { KeyedMutator } from 'swr'
+import { AxiosError } from 'axios'
 
 interface Props {
   comment: Comment
@@ -35,7 +35,7 @@ const CommentCardEditForm: FC<Props> = ({
       toast.success('Successfully edited comment!', { theme: 'dark' })
       closeHandler()
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       toast.error(e.response?.data?.message || e.message, { theme: 'dark' })
     } finally {
       setIsProcessing(false)

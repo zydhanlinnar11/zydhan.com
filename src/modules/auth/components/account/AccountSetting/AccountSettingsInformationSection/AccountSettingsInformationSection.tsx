@@ -6,9 +6,9 @@ import React, { FC, FormEventHandler, useRef, useState } from 'react'
 import fetchUser from '@/modules/auth/utils/FetchUser'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { toast } from 'react-toastify'
-import axios from 'axios'
 import User from '@/modules/auth/types/User'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
+import { AxiosError } from 'axios'
 
 type Props = {
   user: User
@@ -49,7 +49,7 @@ const AccountSettingsInformationSection: FC<Props> = ({ user }) => {
         theme: 'dark',
       })
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       if (e.response?.status === 401) userDispatch({ state: 'unauthenticated' })
       toast.error(e.response?.data?.message || 'Failed to change password', {
         theme: 'dark',

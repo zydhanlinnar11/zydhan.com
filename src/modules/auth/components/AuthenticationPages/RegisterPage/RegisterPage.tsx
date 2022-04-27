@@ -7,7 +7,7 @@ import SocialLoginButtonGroup from '@/modules/auth/components/SocialLoginButtonG
 import GuestRoute from '../../GuestRoute'
 import registerHandler from './registerHandler'
 import useNextPath from '@/modules/auth/hooks/useNextPath'
-import axios from 'axios'
+import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
@@ -36,7 +36,7 @@ const RegisterPage = () => {
         `/auth/login${nextPath && `?next=${encodeURIComponent(nextPath)}`}`
       )
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       toast.error(e.response?.data?.message || e.message, {
         theme: 'dark',
       })

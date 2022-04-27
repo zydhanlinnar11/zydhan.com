@@ -2,7 +2,6 @@ import React, { FC, MouseEventHandler, useState } from 'react'
 import Button from '@/common/components/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
-import axios from 'axios'
 import Modal from '@/common/components/Modal'
 import { toast } from 'react-toastify'
 import User from '@/modules/auth/types/User'
@@ -10,6 +9,7 @@ import fetchUser from '@/modules/auth/utils/FetchUser'
 import { useUserDispatch } from '@/common/providers/UserProvider'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
 import config from '@/common/config'
+import { AxiosError } from 'axios'
 
 type Props = {
   user: User
@@ -44,7 +44,7 @@ const SocialSection: FC<Props> = ({ user }) => {
         fetchUser()
           .then((user) => userDispatch({ state: 'authenticated', user }))
           .catch((e) => {
-            if (!axios.isAxiosError(e)) return
+            if (!(e instanceof AxiosError)) return
             if (e.response?.status === 401)
               userDispatch({ state: 'unauthenticated' })
           })
@@ -65,7 +65,7 @@ const SocialSection: FC<Props> = ({ user }) => {
         { theme: 'dark' }
       )
     } catch (e) {
-      if (!axios.isAxiosError(e)) throw e
+      if (!(e instanceof AxiosError)) throw e
       if (e.response?.status === 401) userDispatch({ state: 'unauthenticated' })
       toast.error(e.response?.data?.message || 'Failed to change password', {
         theme: 'dark',

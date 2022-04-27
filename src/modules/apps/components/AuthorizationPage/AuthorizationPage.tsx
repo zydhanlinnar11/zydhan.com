@@ -2,7 +2,7 @@ import FullscreenLoading from '@/common/components/FullscreenLoading'
 import { useUserState } from '@/common/providers/UserProvider'
 import { axiosAPI } from '@/common/utils/AxiosInstance'
 import PrivateRoute from '@/modules/auth/components/PrivateRoute'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -35,7 +35,7 @@ const AuthorizationPage = () => {
         router.push(redirect.toString())
       })
       .catch((e) => {
-        if (!axios.isAxiosError(e) || e.response?.status !== 400)
+        if (!(e instanceof AxiosError) || e.response?.status !== 400)
           router.replace('/500')
         router.replace('/400')
       })

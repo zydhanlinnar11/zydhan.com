@@ -1,5 +1,5 @@
 import { axiosAPI } from '@/common/utils/AxiosInstance'
-import axios from 'axios'
+import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 
 const ResetPasswordHandler = async (
@@ -33,7 +33,7 @@ const ResetPasswordHandler = async (
       theme: 'dark',
     })
   } catch (e) {
-    if (!axios.isAxiosError(e)) throw e
+    if (!(e instanceof AxiosError)) throw e
     toast.error(e.response?.data?.message || e.message, {
       theme: 'dark',
     })
