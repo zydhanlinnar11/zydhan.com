@@ -76,7 +76,7 @@ const PostLayout: FC<PropsWithChildren<Props>> = ({
           <p className="text-sm text-gray-400">{createdAt}</p>
           <p className="text-sm text-gray-400">•</p>
           <p className="text-sm text-gray-400">Posted by {author}</p>
-          {userState.state === 'authenticated' && userState.user.admin && (
+          {process.env.NODE_ENV !== 'production' && (
             <>
               <p className="text-sm text-gray-400">•</p>
               <a
