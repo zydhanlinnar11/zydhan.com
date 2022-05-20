@@ -1,0 +1,114 @@
+import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+import KasirPintarLogo from '@/modules/blog/assets/img/tugas-7-rk-b/logo_kasirpintar.webp'
+import OgImage from '@/modules/blog/assets/img/tugas-8-rk-b/og-image.jpg'
+import Image from 'next/image'
+import AnchorLink from '@/components/AnchorLink'
+
+export const meta = {
+  author: 'Zydhan Linnar Putra',
+  slug: 'tugas-8-rekayasa-kebutuhan-b-genap-2021-2022',
+  description: 'Analisis detail spesifikasi pada studi kasus Kasir Pintar',
+  createdAt: 'Friday, May 24, 2022',
+  title: 'Tugas 8 Rekayasa Kebutuhan B Genap 2021-2022',
+  disableComment: true,
+  openGraphImage: OgImage,
+}
+
+## Pendahuluan
+
+Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan memaparkan hasil analisis spesifikasi perangkat lunak pada studi kasus Kasir Pintar.
+
+<Image src={KasirPintarLogo} placeholder="blur" alt="Logo Kasir Pintar" />
+
+Fitur-fitur yang akan dibahas adalah fitur yang ada pada Kasir Pintar Free:
+
+<div className="relative pb-[56.25%]">
+  <iframe
+    className="absolute top-0 left-0 w-full h-full"
+    src="https://www.youtube.com/embed/0nc3viuCaQI"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Apa itu Kasir Pintar?
+
+Kasir Pintar adalah salah satu dari beberapa solusi kebutuhan kasir yang menawarkan mesin kasir modern yang akurat dan efisien, membantu UKM mengelola bisnis secara modern, serta menjadi solusi mahalnya mesin kasir untuk UKM.
+
+## Karakteristik Aktivitas Sistem
+
+Berikut adalah karakteristik aktivitas dari sistem:
+
+1. Login
+2. Register
+3. Transaksi Penjualan
+4. Kasbon
+5. PPOB
+6. Laporan
+7. Menambahkan barang
+8. Menghapus barang
+9. Mengubah barang
+10. Menambah kategori barang
+11. Menghapus kategori barang
+12. Mengubah kategori barang
+13. Menambah pelanggan
+14. Menghapus pelanggan
+15. Mengubah pelanggan
+16. Menambah kasbon
+17. Mengubah kasbon
+18. Menghapus kasbon
+19. Menambah transaksi
+20. Menghapus transaksi
+21. Mencetak struk transaksi
+22. Melakukan upgrade ke kasir pintar pro
+
+## Daftar Objek
+
+- Pelanggan
+- Kasir
+- Pemilik toko
+- Produk
+- Struk
+- Transaksi
+- Order
+
+## Detail Spesifikasi
+
+1. Sistem memiliki fitur login untuk pemilik / kasir
+2. Sistem memiliki fitur register untuk pemilik / kasir
+3. Sistem dapat menampilkan transaksi penjualan untuk pemilik / kasir
+4. Sistem dapat melakukan pencatatan kasbon untuk pemilik / kasir
+5. Sistem dapat melakukan manajemen PPOB untuk pemilik / kasir
+6. Sistem dapat melakukan manajemen laporan untuk pemilik / kasir
+7. Sistem menyediakan fitur menambah barang untuk pemilik / kasir
+8. Sistem menyediakan fitur menghapus barang untuk pemilik / kasir
+9. Sistem menyediakan fitur mengubah barang untuk pemilik / kasir
+10. Sistem menyediakan fitur menambah kategori barang untuk pemilik / kasir
+11. Sistem menyediakan fitur menghapus kategori barang untuk pemilik / kasir
+12. Sistem menyediakan fitur mengubah kategori barang untuk pemilik / kasir
+13. Sistem menyediakan fitur menambah pelanggan untuk pemilik / kasir
+14. Sistem menyediakan fitur menghapus pelanggan untuk pemilik / kasir
+15. Sistem menyediakan fitur mengubah data pelanggan untuk pemilik / kasir
+16. Sistem menyediakan fitur menambah kasbon untuk pemilik / kasir
+17. Sistem menyediakan fitur mengubah kasbon untuk pemilik / kasir
+18. Sistem menyediakan fitur menghapus kasbon untuk pemilik / kasir
+19. Sistem menyediakan fitur menambah transaksi untuk pemilik / kasir
+20. Sistem menyediakan fitur menghapus transaksi untuk pemilik / kasir
+21. Sistem menyediakan fitur mencetak transaksi untuk pemilik / kasir
+22. Terdapat beberapa fitur yang hanya disediakan pada versi Pro untuk pemilik / kasir
+
+## Penutup
+
+Sekian penjelasan mengenai studi kasus Kasir Pintar dari saya. Apabila terdapat kesalahan kata, mohon maaf. Terima kasih.
+
+Salam Hangat,
+
+Zydhan Linnar Putra.
+
+## Referensi
+
+- [Tentang Kasir Pintar](https://kasirpintar.co.id/about_us)
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
