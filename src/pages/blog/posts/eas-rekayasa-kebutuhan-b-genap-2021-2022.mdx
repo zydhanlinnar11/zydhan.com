@@ -1,0 +1,60 @@
+import PostLayout from '@/modules/blog/components/Layout/PostLayout'
+import RentCarImage from '@/modules/blog/assets/img/eas-rk-b/rent.png'
+import OgImage from '@/modules/blog/assets/img/eas-rk-b/og-image.png'
+import Image from 'next/image'
+
+export const meta = {
+  author: 'Zydhan Linnar Putra',
+  slug: 'eas-rekayasa-kebutuhan-b-genap-2021-2022',
+  description:
+    'Kebutuhan Fungsional dan Non Fungsional aplikasi pemesanan mobil AutoRent',
+  createdAt: 'Wednesday, June 8, 2022',
+  title: 'EAS Rekayasa Kebutuhan B Genap 2021-2022',
+  disableComment: true,
+  openGraphImage: OgImage,
+}
+
+## Pendahuluan
+
+Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan memaparkan mengenai macam-macam kebutuhan fungsional dan non-fungsional aplikasi pemesanan mobil AutoRent.
+
+<div className="mx-auto text-center rounded">
+    <Image src={RentCarImage} placeholder="blur" alt="Logo mobil" />
+</div>
+
+## Penjelasan
+
+Berikut kebutuhan-kebutuhan yang ada pada AutoRent:
+
+### Kebutuhan Fungsional
+
+Kebutuhan fungsional yang ada pada AutoRent antara lain:
+
+- Pengguna dapat melakukan registrasi akun
+- Pengguna dapat login menggunakan akunnya
+- Pengguna dapat melakukan pencarian dari mobil-mobil yang ada
+- Pengguna dapat melihat detail mobil
+- Pengguna dapat menyewa mobil tertentu
+- Pengguna dapat melakukan pembayaran
+- Pengguna dapat memberikan ulasan
+- Pemilik toko dapat mengubah data mobil
+- Pemilik toko dapat melihat daftar transaksi
+
+### Kebutuhan Non-Fungsional
+
+Kebutuhan non-fungsional yang ada pada AutoRent antara lain:
+
+- Sistem dapat diakses dalam waktu kurang dari 1 detik menggunakan koneksi data mobile
+- Sistem dapat diakses menggunakan peramban Chrome dan Mozilla Firefox
+- Sistem selalu tersedia pada jam kerja
+
+## Penutup
+
+Sekian penjelasan mengenai dari saya. Apabila terdapat kesalahan kata, mohon maaf. Terima kasih 😁.
+
+Salam Hangat,
+
+Zydhan Linnar Putra.
+
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
