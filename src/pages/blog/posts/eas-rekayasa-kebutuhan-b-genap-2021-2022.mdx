@@ -1,6 +1,10 @@
 import PostLayout from '@/modules/blog/components/Layout/PostLayout'
 import RentCarImage from '@/modules/blog/assets/img/eas-rk-b/rent.png'
 import OgImage from '@/modules/blog/assets/img/eas-rk-b/og-image.png'
+import bom from '@/modules/blog/assets/img/eas-rk-b/bom.jpg'
+import useCase from '@/modules/blog/assets/img/eas-rk-b/use-case.jpg'
+import fishbone from '@/modules/blog/assets/img/eas-rk-b/fishbone-diagram.jpg'
+import organzation from '@/modules/blog/assets/img/eas-rk-b/organzation-chart.jpg'
 import Image from 'next/image'
 
 export const meta = {
@@ -19,7 +23,7 @@ export const meta = {
 Pada kesempatan kali ini, saya Zydhan Linnar Putra dengan NRP 05111940000118 dari kelas Rekayasa Kebutuhan B akan memaparkan mengenai macam-macam kebutuhan fungsional dan non-fungsional aplikasi pemesanan mobil AutoRent.
 
 <div className="mx-auto text-center rounded">
-    <Image src={RentCarImage} placeholder="blur" alt="Logo mobil" />
+  <Image src={RentCarImage} placeholder="blur" alt="Logo mobil" />
 </div>
 
 ## Penjelasan
@@ -48,6 +52,54 @@ Kebutuhan non-fungsional yang ada pada AutoRent antara lain:
 - Sistem dapat diakses menggunakan peramban Chrome dan Mozilla Firefox
 - Sistem selalu tersedia pada jam kerja
 
+### Business Objective Model (BOM)
+
+<div className="mx-auto text-center rounded">
+  <Image src={bom} placeholder="blur" alt="BOM" />
+</div>
+
+### Feature Tree
+
+<div className="mx-auto text-center rounded">
+  <Image src={fishbone} placeholder="blur" alt="Feature Tree" />
+</div>
+
+### Organization Chart
+
+<div className="mx-auto text-center rounded">
+  <Image src={organzation} placeholder="blur" alt="Organization Chart" />
+</div>
+
+### Diagram Use Case
+
+<div className="mx-auto text-center rounded">
+  <Image src={useCase} placeholder="blur" alt="Diagram Use Case" />
+</div>
+
+### SKPL
+
+<div className="relative pt-[141.428%]">
+  <iframe
+    src="https://drive.google.com/file/d/1m55evLQ74CYUd2Cd6Zn2skhAnwYmE1PD/preview"
+    className="absolute top-0 left-0 w-full h-full"
+    allow="autoplay"
+    title="PDF - SKPL"
+  ></iframe>
+</div>
+
+### Video YouTube
+
+<div className="relative pb-[56.25%]">
+  <iframe
+    className="absolute top-0 left-0 w-full h-full"
+    src="https://www.youtube.com/embed/-C_CQSmkyk8"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
 ## Penutup
 
 Sekian penjelasan mengenai dari saya. Apabila terdapat kesalahan kata, mohon maaf. Terima kasih 😁.
@@ -55,6 +107,5 @@ Sekian penjelasan mengenai dari saya. Apabila terdapat kesalahan kata, mohon maa
 Salam Hangat,
 
 Zydhan Linnar Putra.
-
 
 export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
