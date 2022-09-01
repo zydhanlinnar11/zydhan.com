@@ -20,7 +20,7 @@
     "@next/mdx": "^12.2.5",
     "axios": "^0.27.2",
     "next": "^12.2.5",
-    "react": "18.1.0",
+    "react": "18.2.0",
     "react-dom": "18.1.0",
     "react-markdown": "^8.0.3",
     "react-toastify": "^9.0.3",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.2",
     "@types/node": "18.7.14",
-    "@types/react": "^18.0.10",
+    "@types/react": "^18.0.18",
     "autoprefixer": "^10.4.7",
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6",
