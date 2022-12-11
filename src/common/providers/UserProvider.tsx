@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { User } from '@/common/types/User'
 import { backendFetcher } from '@/common/hooks/useAxios'
-import useSWR from 'swr'
+import useSWR, { KeyedMutator, mutate } from 'swr'
 
 type State =
   | {
@@ -68,10 +68,16 @@ const initialState: State = {
 
 const StateContext = createContext<State>(initialState)
 const DispatchContext = createContext<Dispatch<Action>>(() => null)
+const RefetchUserContext = createContext<KeyedMutator<{ data: User }> | null>(
+  null
+)
 
 export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { data, error, isLoading } = useSWR<User>(`/api/user`, backendFetcher)
+  const { data, error, isLoading, mutate } = useSWR<{ data: User }>(
+    `/api/user`,
+    backendFetcher
+  )
 
   useEffect(() => {
     if (isLoading) dispatch({ payload: null, type: 'SET_LOADING' })
@@ -80,14 +86,16 @@ export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     else if (data)
       dispatch({
         type: 'LOG_IN',
-        payload: data,
+        payload: data.data,
       })
   }, [isLoading, data, error])
 
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
-        {children}
+        <RefetchUserContext.Provider value={mutate}>
+          {children}
+        </RefetchUserContext.Provider>
       </DispatchContext.Provider>
     </StateContext.Provider>
   )
@@ -95,3 +103,4 @@ export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 
 export const useUser = () => useContext(StateContext)
 export const useUserDispatch = () => useContext(DispatchContext)
+export const useRefetchUser = () => useContext(RefetchUserContext)

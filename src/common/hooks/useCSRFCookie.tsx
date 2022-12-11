@@ -1,7 +1,10 @@
-import useAxios from '@/common/hooks/useAxios'
+import { backendFetcher } from '@/common/hooks/useAxios'
+import { useEffect } from 'react'
 
 const useCSRFCookie = () => {
-  useAxios('/sanctum/csrf-cookie', 'get')
+  useEffect(() => {
+    backendFetcher.get('/sanctum/csrf-cookie')
+  }, [])
 }
 
 export default useCSRFCookie
