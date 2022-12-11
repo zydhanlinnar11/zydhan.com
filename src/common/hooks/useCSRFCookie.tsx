@@ -1,11 +1,7 @@
 import useAxios from '@/common/hooks/useAxios'
 
 const useCSRFCookie = () => {
-  useAxios({
-    method: 'get',
-    url: '/sanctum/csrf-cookie',
-    withCredentials: true,
-  })
+  useAxios('/sanctum/csrf-cookie', 'get')
 }
 
 export default useCSRFCookie
