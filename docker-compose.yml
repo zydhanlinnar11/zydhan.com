@@ -8,11 +8,10 @@ services:
       - ./:/home/node/app:rw
     expose: [8000]
     env_file: [docker.env]
-    command: /bin/sh -c "npm run dev"
+    command: /bin/sh -c "yarn install && yarn dev"
     networks: [nginx-proxy-network]
     extra_hosts:
       - 'api.zydhan.dev:host-gateway'
-    restart: always
 
 networks:
   nginx-proxy-network:
