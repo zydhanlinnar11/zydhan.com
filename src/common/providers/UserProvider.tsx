@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { User } from '@/common/types/User'
 import { backendFetcher } from '@/common/hooks/useAxios'
-import useSWR, { KeyedMutator, mutate } from 'swr'
+import useSWR, { KeyedMutator } from 'swr'
 
 type State =
   | {
@@ -75,7 +75,7 @@ const RefetchUserContext = createContext<KeyedMutator<{ data: User }> | null>(
 export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { data, error, isLoading, mutate } = useSWR<{ data: User }>(
-    `/api/user`,
+    `/auth/user`,
     backendFetcher
   )
 
