@@ -1,4 +1,5 @@
 import { backendFetcher } from '@/common/hooks/useAxios'
+import { convertQueryToSearchParams } from '@/common/tools/ConvertQueryToSearchParams'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import useSocialMediaList from './useSocialMediaList'
@@ -16,12 +17,7 @@ const useSocialMediaCallback = () => {
     const query = router.query
     delete query.socialMedia
 
-    const params = new URLSearchParams()
-    for (let key in query) {
-      const value = query[key]
-      if (typeof value !== 'string') continue
-      params.append(key, value)
-    }
+    const params = convertQueryToSearchParams(query)
 
     backendFetcher
       .get<{ message: string }>(

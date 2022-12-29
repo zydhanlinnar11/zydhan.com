@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@/common/*": ["src/common/*"],
-      "@/auth/*": ["src/modules/auth/*"]
+      "@/auth/*": ["src/modules/auth/*"],
+      "@/oauth/*": ["src/modules/oauth/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
