@@ -40,6 +40,13 @@ const Navbar = () => {
             </Button>
           </Link>
         </Box>
+        <Box as="li">
+          <Link href={'/blog'}>
+            <Button colorScheme="gray" variant="ghost" size={'sm'}>
+              Blog
+            </Button>
+          </Link>
+        </Box>
       </HStack>
       <HStack
         as="ul"

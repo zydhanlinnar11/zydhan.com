@@ -18,6 +18,7 @@
     "paths": {
       "@/common/*": ["src/common/*"],
       "@/auth/*": ["src/modules/auth/*"],
+      "@/blog/*": ["src/modules/blog/*"],
       "@/oauth/*": ["src/modules/oauth/*"],
       "@/portfolio/*": ["src/modules/portfolio/*"]
     }
