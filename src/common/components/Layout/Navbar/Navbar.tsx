@@ -1,26 +1,27 @@
-import { Box, Button, HStack } from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { Box, Button, Container, HStack, useColorMode } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from 'public/logo.webp'
 
 const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
+
   return (
-    <Box
+    <Container
+      maxW={'container.lg'}
       as={'header'}
       w="100%"
       h={'52px'}
       display={'flex'}
-      justifyContent={'center'}
+      justifyContent={'space-between'}
+      px={4}
     >
       <HStack
         as="ul"
-        maxW={'container.lg'}
-        w={'full'}
         listStyleType={'none'}
-        display="flex"
         alignItems={'center'}
         spacing={'16px'}
-        px={4}
       >
         <Box as="li">
           <Link href={'/'}>
@@ -40,7 +41,23 @@ const Navbar = () => {
           </Link>
         </Box>
       </HStack>
-    </Box>
+      <HStack
+        as="ul"
+        listStyleType={'none'}
+        alignItems={'center'}
+        spacing={'16px'}
+      >
+        <Box as="li">
+          <Button
+            colorScheme="gray"
+            size={'sm'}
+            onClick={() => toggleColorMode()}
+          >
+            {colorMode === 'dark' ? <MoonIcon /> : <SunIcon />}
+          </Button>
+        </Box>
+      </HStack>
+    </Container>
   )
 }
 
