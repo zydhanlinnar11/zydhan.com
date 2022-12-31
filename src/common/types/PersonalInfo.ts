@@ -3,4 +3,5 @@ export type PersonalInfo = {
   slogan: string
   name: string
   twitter?: string
+  github: string
 }

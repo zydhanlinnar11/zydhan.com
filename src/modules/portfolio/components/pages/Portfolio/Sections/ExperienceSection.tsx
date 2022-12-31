@@ -20,7 +20,7 @@ const experiences: SectionListItem[] = [
 const ExperienceSection = () => {
   return (
     <Section title="Work Experience">
-      <List>
+      <List w={'full'}>
         {experiences.map((experience) => (
           <SectionListLink key={experience.url} item={experience} />
         ))}

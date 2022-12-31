@@ -1,5 +1,5 @@
 import { SectionListItem } from '@/portfolio/types/SectionListItem'
-import { Box, ListItem, Stack, Text } from '@chakra-ui/react'
+import { Box, Flex, ListItem, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FC, PropsWithChildren } from 'react'
 
@@ -22,7 +22,11 @@ const SectionListLink: FC<Props> & SubComponents = ({
       transitionDuration={'150ms'}
     >
       <Link href={url}>
-        <Stack direction={{ base: 'column', md: 'row' }} py={4}>
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          py={4}
+          justifyContent={'space-between'}
+        >
           <Box>
             {title}
             <Text>{description}</Text>
@@ -30,7 +34,7 @@ const SectionListLink: FC<Props> & SubComponents = ({
           <Text w={'15em'} textAlign={{ base: 'inherit', md: 'right' }}>
             {date}
           </Text>
-        </Stack>
+        </Flex>
       </Link>
     </ListItem>
   )
