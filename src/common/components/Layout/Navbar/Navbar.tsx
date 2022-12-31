@@ -20,6 +20,7 @@ const Navbar = () => {
         display="flex"
         alignItems={'center'}
         spacing={'16px'}
+        px={4}
       >
         <Box as="li">
           <Link href={'/'}>
