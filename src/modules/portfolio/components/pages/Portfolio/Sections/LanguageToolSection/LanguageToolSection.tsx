@@ -19,7 +19,7 @@ const languageTools: LanguageToolType[] = [
 const LanguageToolSection = () => {
   return (
     <Section title="Favorite Language and Tools">
-      <Flex wrap={'wrap'} gap={4} justifyContent={'center'}>
+      <Flex wrap={'wrap'} gap={4} w={'full'} justifyContent={'center'}>
         {languageTools.map((item) => (
           <LanguageTool key={item.name} languageTool={item} />
         ))}
