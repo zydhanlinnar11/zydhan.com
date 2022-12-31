@@ -9,7 +9,12 @@ type Props = {
 
 const LanguageTool: FC<Props> = ({ languageTool: { image, name } }) => {
   return (
-    <Card>
+    <Card
+      _hover={{ transform: 'scale(1.05)' }}
+      transitionProperty={'transform'}
+      transitionTimingFunction={'cubic-bezier(0.4, 0, 0.2, 1)'}
+      transitionDuration={'150ms'}
+    >
       <CardBody>
         <VStack w={'120px'}>
           <Image src={image} alt={`${name} logo`} width={48} height={48} />
