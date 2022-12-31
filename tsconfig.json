@@ -18,7 +18,8 @@
     "paths": {
       "@/common/*": ["src/common/*"],
       "@/auth/*": ["src/modules/auth/*"],
-      "@/oauth/*": ["src/modules/oauth/*"]
+      "@/oauth/*": ["src/modules/oauth/*"],
+      "@/portfolio/*": ["src/modules/portfolio/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
