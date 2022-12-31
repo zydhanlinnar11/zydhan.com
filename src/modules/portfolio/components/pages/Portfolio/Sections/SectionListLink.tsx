@@ -21,7 +21,7 @@ const SectionListLink: FC<Props> & SubComponents = ({
       transitionTimingFunction={'cubic-bezier(0.4, 0, 0.2, 1)'}
       transitionDuration={'150ms'}
     >
-      <Link href={url}>
+      <Link href={url} target={'_blank'}>
         <Flex
           direction={{ base: 'column', md: 'row' }}
           py={4}
