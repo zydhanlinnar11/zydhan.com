@@ -16,11 +16,12 @@ const ProjectSection = () => {
           url: html_url,
           title: (
             <SectionListLink.Title>
-              <HStack wrap={'wrap'}>
+              <HStack as={'span'} wrap={'wrap'}>
                 <span>{name}</span>
                 <HStack as={'span'} spacing={2} wrap={'wrap'}>
                   {topics.map((topic) => (
                     <Badge
+                      key={`${html_url}-${topic}`}
                       as={'small'}
                       colorScheme={'cyan'}
                       px={3}
