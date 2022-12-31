@@ -4,4 +4,5 @@ export type PersonalInfo = {
   name: string
   twitter?: string
   github: string
+  linkedin: string
 }

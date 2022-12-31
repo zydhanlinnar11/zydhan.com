@@ -7,4 +7,5 @@ export const personalInfo: PersonalInfo = {
   name: 'Zydhan Linnar Putra',
   twitter: '@zydhanlinnar11',
   github: 'zydhanlinnar11',
+  linkedin: 'zydhanlinnar11',
 }
