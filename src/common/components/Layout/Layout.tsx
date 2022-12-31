@@ -10,7 +10,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
     <>
       <DefaultSeo {...nextSeoConfig} />
       <Navbar />
-      <Container as="main" maxW={'container.lg'} p={8}>
+      <Container as="main" maxW={'container.lg'} flex={'1'} p={8}>
         {children}
       </Container>
       <Footer />
