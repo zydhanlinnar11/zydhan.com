@@ -11,12 +11,14 @@ const ProfileSection = () => {
       flexDir={{ base: 'column', md: 'row' }}
       gap={4}
     >
-      <Image
-        src={logo}
-        alt={'Animated photo of Zydhan'}
-        width={128}
-        height={128}
-      />
+      <Box w={'full'} h={'full'} maxW={'128px'} maxH={'128px'}>
+        <Image
+          src={logo}
+          alt={'Animated photo of Zydhan'}
+          width={128}
+          height={128}
+        />
+      </Box>
       <VStack spacing={4} alignItems="start">
         <Heading as={'h1'} size={'2xl'}>
           {personalInfo.name}
