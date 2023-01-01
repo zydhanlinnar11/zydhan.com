@@ -2,7 +2,7 @@ import { Post } from '@/blog/types/Post'
 import { Heading, VStack, Icon, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { FaRegSadTear } from 'react-icons/fa'
-import { getAllPosts } from 'src/pages/blog/lib/api'
+import { getAllPosts } from '@/blog/lib/api'
 import PostCard from '@/blog/components/PostCard'
 import { Grid, GridItem } from '@chakra-ui/react'
 

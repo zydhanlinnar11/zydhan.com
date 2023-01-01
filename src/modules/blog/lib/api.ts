@@ -2,6 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 import { Post } from '@/blog/types/Post'
+import { getPostFeaturedImage } from '@/blog/lib/featured-image'
 
 const postsDirectory = join(process.cwd(), 'src/pages/blog/posts')
 
@@ -17,6 +18,7 @@ export function getPostBySlug(slug: string) {
   // @ts-ignore
   const post: Post = data
   post.slug = realSlug
+  post.featuredImage = getPostFeaturedImage(realSlug)
 
   return post
 }

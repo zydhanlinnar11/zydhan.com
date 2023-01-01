@@ -1,12 +1,13 @@
 import { Post } from '@/blog/types/Post'
 import {
+  Box,
   Card,
   CardBody,
   CardFooter,
   Heading,
-  Image,
   Text,
 } from '@chakra-ui/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -15,7 +16,7 @@ type Props = {
 }
 
 const PostCard: FC<Props> = ({
-  post: { author, createdAt, description, slug, title },
+  post: { author, createdAt, description, slug, title, featuredImage },
 }) => {
   return (
     <Card
@@ -29,10 +30,16 @@ const PostCard: FC<Props> = ({
       transitionDuration={'150ms'}
     >
       <Link href={`/blog/posts/${slug}`}>
-        <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-          alt="Green double couch with wooden legs"
-        />
+        <Box position={'relative'} w={'full'} h={'160px'} overflow={'hidden'}>
+          <Image
+            src={featuredImage.image}
+            alt={featuredImage.alt ?? `Featured image of ${title}`}
+            placeholder="blur"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            sizes={'320px'}
+          />
+        </Box>
         <CardBody>
           <Heading size="md">{title}</Heading>
         </CardBody>
