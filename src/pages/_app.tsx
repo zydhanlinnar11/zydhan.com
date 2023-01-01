@@ -9,11 +9,12 @@ import { FormEventHandler, useCallback } from 'react'
 import { backendFetcher } from '@/common/hooks/useAxios'
 import { ChakraProvider } from '@chakra-ui/react'
 import Layout from '@/common/components/Layout'
+import theme from 'theme'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

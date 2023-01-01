@@ -41,7 +41,7 @@ const Navbar = () => {
           </Link>
         </Box>
         <Box as="li">
-          <Link href={'/blog'}>
+          <Link href={'/blog/posts'}>
             <Button colorScheme="gray" variant="ghost" size={'sm'}>
               Blog
             </Button>

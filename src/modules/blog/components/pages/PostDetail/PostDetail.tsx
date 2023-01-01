@@ -1,11 +1,8 @@
 import { FC, PropsWithChildren } from 'react'
+import { Prose } from '@nikolovlazar/chakra-ui-prose'
 
-type Props = {
-  meta: any
-}
-
-const PostDetail: FC<PropsWithChildren<Props>> = ({ meta, children }) => {
-  return <div>{children}</div>
+const PostDetail: FC<PropsWithChildren> = ({ children }) => {
+  return <Prose>{children}</Prose>
 }
 
 export default PostDetail

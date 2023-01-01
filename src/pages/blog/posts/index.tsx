@@ -1,1 +1,1 @@
-export { default } from '@/blog/components/pages/PostList'
+export { default, getStaticProps } from '@/blog/components/pages/PostList'
