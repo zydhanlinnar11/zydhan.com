@@ -1,13 +1,13 @@
-import { Post } from '@/blog/types/Post'
 import { Heading, VStack, Icon, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { FaRegSadTear } from 'react-icons/fa'
-import { getAllPosts } from '@/blog/lib/api'
+import { getMetadataAllPosts } from '@/blog/lib/api'
 import PostCard from '@/blog/components/PostCard'
 import { Grid, GridItem } from '@chakra-ui/react'
+import { PostMetadata } from '@/blog/types/PostMetadata'
 
 type Props = {
-  posts: Post[]
+  posts: PostMetadata[]
 }
 
 const PostList: FC<Props> = ({ posts }) => {
@@ -49,7 +49,7 @@ const PostList: FC<Props> = ({ posts }) => {
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts()
+  const allPosts = getMetadataAllPosts()
 
   return {
     props: { posts: allPosts },

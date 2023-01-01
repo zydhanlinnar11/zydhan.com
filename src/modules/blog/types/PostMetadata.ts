@@ -1,6 +1,6 @@
 import { FeaturedImage } from './FeaturedImage'
 
-export type Post = {
+export type PostMetadata = {
   author: string
   description: string
   createdAt: string

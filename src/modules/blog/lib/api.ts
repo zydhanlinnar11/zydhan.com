@@ -1,32 +1,39 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
-import { Post } from '@/blog/types/Post'
 import { getPostFeaturedImage } from '@/blog/lib/featured-image'
+import { PostMetadata } from '@/blog/types/PostMetadata'
 
 const postsDirectory = join(process.cwd(), 'src/pages/blog/posts')
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory).filter((name) => /\.mdx$/.test(name))
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((name) => /\.mdx$/.test(name))
+    .map((slug) => slug.replace(/\.mdx$/, ''))
 }
 
-export function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.mdx$/, '')
-  const fullPath = join(postsDirectory, `${realSlug}.mdx`)
+const readFile = (slug: string) => {
+  const fullPath = join(postsDirectory, `${slug}.mdx`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(fileContents)
+
+  return fileContents
+}
+
+export function getPostMetadataBySlug(slug: string) {
+  const { data } = matter(readFile(slug))
   // @ts-ignore
-  const post: Post = data
-  post.slug = realSlug
-  post.featuredImage = getPostFeaturedImage(realSlug)
+  const post: PostMetadata = data
+  post.slug = slug
+  post.featuredImage = getPostFeaturedImage(slug)
 
   return post
 }
 
-export function getAllPosts() {
+export function getMetadataAllPosts() {
   const slugs = getPostSlugs()
   const posts = slugs
-    .map((slug) => getPostBySlug(slug))
+    .map((slug) => getPostMetadataBySlug(slug))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.createdAt > post2.createdAt ? -1 : 1))
   return posts

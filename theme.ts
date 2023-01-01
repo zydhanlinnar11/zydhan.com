@@ -6,6 +6,20 @@ const config: ThemeConfig = {
   useSystemColorMode: false,
 }
 
-const theme = extendTheme({ config }, withProse())
+const theme = extendTheme(
+  { config },
+  withProse({
+    baseStyle: {
+      code: {
+        wordBreak: 'break-all',
+        overflowX: 'scroll',
+      },
+      pre: {
+        maxW: '100%',
+        p: '0',
+      },
+    },
+  })
+)
 
 export default theme
