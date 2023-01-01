@@ -1,9 +1,11 @@
 import useSocialMediaList from '@/auth/hooks/useSocialMediaList'
+import withAuthRoute from '@/auth/hooks/withAuthRoute'
 import LoadingPage from '@/common/components/Pages/LoadingPage'
 import { config } from '@/common/config'
 import useCSRFCookie from '@/common/hooks/useCSRFCookie'
 import { Container, Heading, Text } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
+import { memo } from 'react'
 import SocialMediaLoginButton from '../../Button/SocialMediaLoginButton'
 
 const LoginPage = () => {
@@ -42,4 +44,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default withAuthRoute(memo(LoginPage))

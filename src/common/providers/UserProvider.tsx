@@ -76,7 +76,12 @@ export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { data, error, isLoading, mutate } = useSWR<{ data: User }>(
     `/auth/user`,
-    backendFetcher
+    backendFetcher,
+    {
+      onErrorRetry: () => {
+        return
+      },
+    }
   )
 
   useEffect(() => {

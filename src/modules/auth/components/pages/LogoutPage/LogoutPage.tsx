@@ -1,10 +1,11 @@
 import { config } from '@/common/config'
 import { backendFetcher } from '@/common/hooks/useAxios'
+import withPrivateRoute from '@/common/hooks/withPrivateRoute'
 import { useRefetchUser } from '@/common/providers/UserProvider'
 import { Button, Card, CardBody, Heading, HStack, Text } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
-import { useCallback } from 'react'
+import { memo, useCallback } from 'react'
 
 const LogoutPage = () => {
   const router = useRouter()
@@ -53,4 +54,4 @@ const LogoutPage = () => {
   )
 }
 
-export default LogoutPage
+export default withPrivateRoute(memo(LogoutPage), false)
