@@ -12,6 +12,7 @@ const nextConfig = {
 
 import WithMDX from '@next/mdx'
 import rehypeHighlight from 'rehype-highlight'
+import rehypeSlug from 'rehype-slug'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 const withMDX = WithMDX({
@@ -21,7 +22,7 @@ const withMDX = WithMDX({
     // as the package is ESM only
     // https://github.com/remarkjs/remark-gfm#install
     remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-    rehypePlugins: [rehypeHighlight],
+    rehypePlugins: [rehypeHighlight, rehypeSlug],
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",
   },

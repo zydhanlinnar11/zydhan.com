@@ -18,6 +18,12 @@ const theme = extendTheme(
         maxW: '100%',
         p: '0',
       },
+      h2: {
+        scrollMarginTop: '1em',
+      },
+      h3: {
+        scrollMarginTop: '1em',
+      },
     },
   })
 )
