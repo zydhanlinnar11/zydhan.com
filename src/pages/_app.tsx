@@ -22,23 +22,3 @@ export default function App({ Component, pageProps }: AppProps) {
     </UserProvider>
   )
 }
-
-const LogoutButton = () => {
-  const { user } = useUser()
-  const refetchUser = useRefetchUser()
-
-  const handleLogout: FormEventHandler = useCallback((e) => {
-    e.preventDefault()
-    backendFetcher.delete('/auth/logout').then(() => {
-      refetchUser && refetchUser()
-    })
-  }, [])
-
-  return user ? (
-    <form onSubmit={handleLogout}>
-      <button type="submit">Logout</button>
-    </form>
-  ) : (
-    <></>
-  )
-}

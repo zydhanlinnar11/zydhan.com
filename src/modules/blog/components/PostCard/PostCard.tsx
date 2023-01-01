@@ -1,4 +1,4 @@
-import { Post } from '@/blog/types/Post'
+import { PostMetadata } from '@/blog/types/PostMetadata'
 import {
   Box,
   Card,
@@ -12,11 +12,11 @@ import Link from 'next/link'
 import { FC } from 'react'
 
 type Props = {
-  post: Post
+  postMeta: PostMetadata
 }
 
 const PostCard: FC<Props> = ({
-  post: { author, createdAt, description, slug, title, featuredImage },
+  postMeta: { author, createdAt, description, slug, title, featuredImage },
 }) => {
   return (
     <Card

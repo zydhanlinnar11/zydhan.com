@@ -17,7 +17,7 @@ const SocialMediaLoginButton: FC<Props> = ({ socialMedia: { id, name } }) => {
       `/auth/${id}/redirect`
     )
     socialLoginHandler(name, data.redirect_url, () => {})
-  }, [])
+  }, [id, name])
 
   return <button onClick={handler}>{name}</button>
 }

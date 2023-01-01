@@ -7,6 +7,7 @@ import { backendFetcher } from '@/common/hooks/useAxios'
 const withAuthorizationRoute = <P,>(Component: ComponentType<P>) => {
   const ComponentWithProps = (props: P) => (
     <AuthorizationRoute>
+      {/* @ts-ignore */}
       <Component {...props} />
     </AuthorizationRoute>
   )

@@ -20,22 +20,22 @@ const useAxios = (
   const [error, setError] = useState('')
   const [loading, setloading] = useState(true)
 
-  const fetchData = () => {
-    axiosInstance[method](url, headers, body)
-      .then((res) => {
-        setResponse(res.data)
-      })
-      .catch((err) => {
-        setError(err)
-      })
-      .finally(() => {
-        setloading(false)
-      })
-  }
-
   useEffect(() => {
+    const fetchData = () => {
+      axiosInstance[method](url, headers, body)
+        .then((res) => {
+          setResponse(res.data)
+        })
+        .catch((err) => {
+          setError(err)
+        })
+        .finally(() => {
+          setloading(false)
+        })
+    }
+
     fetchData()
-  }, [method, url, body, headers])
+  }, [method, url, body, headers, axiosInstance])
 
   return { response, error, loading }
 }

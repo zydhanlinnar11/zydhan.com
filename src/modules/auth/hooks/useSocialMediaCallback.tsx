@@ -26,7 +26,7 @@ const useSocialMediaCallback = () => {
       .then(() => {
         window.close()
       })
-  }, [socialMedia, socialMediaList])
+  }, [socialMedia, socialMediaList, router.query])
 }
 
 export default useSocialMediaCallback

@@ -21,7 +21,8 @@ const PostList: FC<Props> = ({ posts }) => {
         <VStack w={'full'} py={16} spacing={'4'}>
           <Icon as={FaRegSadTear} boxSize={'16'} />
           <Text textAlign={'center'}>
-            I'm sorry, but currently we don't have anything to read. 📰
+            I&apos;m sorry, but currently we don&apos;t have anything to read.
+            📰
           </Text>
           <Text textAlign={'center'}>
             Please come back later and i will bring you good article! ☕
@@ -29,21 +30,21 @@ const PostList: FC<Props> = ({ posts }) => {
         </VStack>
       )}
 
-      {posts.map((post) => (
-        <Grid
-          templateColumns={{
-            base: 'repeat(1, 1fr)',
-            sm: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
-          }}
-          gap={6}
-          py={16}
-        >
-          <GridItem>
-            <PostCard key={post.slug} post={post} />
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          sm: 'repeat(2, 1fr)',
+          lg: 'repeat(3, 1fr)',
+        }}
+        gap={6}
+        py={16}
+      >
+        {posts.map((post) => (
+          <GridItem key={post.slug}>
+            <PostCard key={post.slug} postMeta={post} />
           </GridItem>
-        </Grid>
-      ))}
+        ))}
+      </Grid>
     </VStack>
   )
 }

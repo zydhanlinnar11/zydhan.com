@@ -48,4 +48,6 @@ SectionListLink.Title = ({ children }) => {
   )
 }
 
+SectionListLink.Title.displayName = 'SectionListLink.Title'
+
 export default SectionListLink
