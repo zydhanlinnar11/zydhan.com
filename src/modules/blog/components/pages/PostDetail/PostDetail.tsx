@@ -11,6 +11,8 @@ import {
 } from '@chakra-ui/react'
 import Head from 'next/head'
 import TableOfContent from './TableOfContent'
+import { NextSeo } from 'next-seo'
+import { config } from '@/common/config'
 
 type Props = {
   author: string
@@ -36,6 +38,15 @@ const PostDetail: FC<PropsWithChildren<Props>> = ({
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"
         ></link>
       </Head>
+      <NextSeo
+        title={`${title} – Blog`}
+        openGraph={{
+          url: `${config.frontendUrl}/blog/posts`,
+          description: description,
+          title: `${title} – Blog`,
+        }}
+        description={description}
+      />
       <Grid
         as={'article'}
         templateColumns={{

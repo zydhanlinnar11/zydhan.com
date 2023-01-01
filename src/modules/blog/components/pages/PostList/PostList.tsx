@@ -5,18 +5,33 @@ import { getMetadataAllPosts } from '@/blog/lib/api'
 import PostCard from '@/blog/components/PostCard'
 import { Grid, GridItem } from '@chakra-ui/react'
 import { PostMetadata } from '@/blog/types/PostMetadata'
+import { NextSeo } from 'next-seo'
+import { config } from '@/common/config'
 
 type Props = {
   posts: PostMetadata[]
 }
 
+const description = 'Here is some articles focused on web development.'
+
 const PostList: FC<Props> = ({ posts }) => {
   return (
     <VStack alignItems={'start'}>
+      <NextSeo
+        title="Blog"
+        openGraph={{
+          url: `${config.frontendUrl}/blog/posts`,
+          description: description,
+          title: 'Blog',
+          images: posts.map(({ featuredImage: { image, alt } }) => ({
+            url: image.src,
+            alt,
+          })),
+        }}
+        description={description}
+      />
       <Heading as={'h1'}>Blog</Heading>
-      <Text fontWeight={'semibold'}>
-        Here is some articles focused on web development.
-      </Text>
+      <Text fontWeight={'semibold'}>{description}</Text>
       {posts.length === 0 && (
         <VStack w={'full'} py={16} spacing={'4'}>
           <Icon as={FaRegSadTear} boxSize={'16'} />
