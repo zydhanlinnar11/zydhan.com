@@ -1,23 +1,43 @@
 import useSocialMediaList from '@/auth/hooks/useSocialMediaList'
+import LoadingPage from '@/common/components/Pages/LoadingPage'
+import { config } from '@/common/config'
 import useCSRFCookie from '@/common/hooks/useCSRFCookie'
-import { useUser } from '@/common/providers/UserProvider'
+import { Container, Heading, Text } from '@chakra-ui/react'
+import { NextSeo } from 'next-seo'
 import SocialMediaLoginButton from '../../Button/SocialMediaLoginButton'
 
 const LoginPage = () => {
   useCSRFCookie()
-  const { user } = useUser()
-  const { socialMediaList } = useSocialMediaList()
+  const { socialMediaList, isLoading } = useSocialMediaList()
+
+  if (isLoading) return <LoadingPage />
 
   return (
     <>
-      <p>LoginPage</p>
-      <p>{!user ? 'Currently unauthenticated' : `Hello ${user.name}`}</p>
-      {socialMediaList?.map((socialMedia) => (
-        <SocialMediaLoginButton
-          socialMedia={socialMedia}
-          key={socialMedia.id}
-        />
-      ))}
+      <NextSeo
+        title="Login"
+        openGraph={{
+          url: `${config.frontendUrl}/auth/login`,
+          title: 'Login',
+        }}
+      />
+      <Container
+        textAlign={'center'}
+        gap={'4'}
+        w={'full'}
+        maxW={'sm'}
+        centerContent
+      >
+        <Heading as={'h1'}>Login</Heading>
+        <Text>Log in to your account</Text>
+
+        {socialMediaList?.map((socialMedia) => (
+          <SocialMediaLoginButton
+            socialMedia={socialMedia}
+            key={socialMedia.id}
+          />
+        ))}
+      </Container>
     </>
   )
 }

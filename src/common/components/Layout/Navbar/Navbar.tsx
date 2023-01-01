@@ -3,6 +3,7 @@ import { Box, Button, Container, HStack, useColorMode } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from 'public/logo.webp'
+import Menu from './Menu'
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -63,6 +64,7 @@ const Navbar = () => {
             {colorMode === 'dark' ? <MoonIcon /> : <SunIcon />}
           </Button>
         </Box>
+        <Menu />
       </HStack>
     </Container>
   )

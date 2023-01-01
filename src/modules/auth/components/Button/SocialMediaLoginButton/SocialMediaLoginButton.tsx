@@ -1,5 +1,6 @@
 import { SocialMedia } from '@/auth/types/SocialMedia'
 import { backendFetcher } from '@/common/hooks/useAxios'
+import { Button } from '@chakra-ui/react'
 import { FC, memo, useCallback } from 'react'
 import socialLoginHandler from './SocialLoginHandler'
 
@@ -19,7 +20,11 @@ const SocialMediaLoginButton: FC<Props> = ({ socialMedia: { id, name } }) => {
     socialLoginHandler(name, data.redirect_url, () => {})
   }, [id, name])
 
-  return <button onClick={handler}>{name}</button>
+  return (
+    <Button onClick={handler} w={'full'}>
+      Log in using {name}
+    </Button>
+  )
 }
 
 export default memo(SocialMediaLoginButton)
