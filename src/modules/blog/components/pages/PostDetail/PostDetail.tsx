@@ -44,6 +44,19 @@ const PostDetail: FC<PropsWithChildren<Props>> = ({
           url: `${config.frontendUrl}/blog/posts`,
           description: description,
           title: `${title} – Blog`,
+          images: [
+            {
+              url: `${
+                config.frontendUrl
+              }/api/blog/og-image?author=${encodeURIComponent(
+                author
+              )}&date=${encodeURIComponent(
+                createdAt
+              )}&description=${encodeURIComponent(
+                description
+              )}&title=${encodeURIComponent(title)}`,
+            },
+          ],
         }}
         description={description}
       />
