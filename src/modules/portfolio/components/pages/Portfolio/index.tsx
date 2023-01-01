@@ -1,1 +1,1 @@
-export { default } from './Portfolio'
+export { default, getStaticProps } from './Portfolio'

@@ -1,10 +1,11 @@
 import { SectionListItem } from '@/portfolio/types/SectionListItem'
 import { Box, Flex, ListItem, Text } from '@chakra-ui/react'
 import Link from 'next/link'
-import { FC, PropsWithChildren } from 'react'
+import { FC, HTMLAttributeAnchorTarget, PropsWithChildren } from 'react'
 
 type Props = {
   item: SectionListItem
+  target?: HTMLAttributeAnchorTarget
 }
 
 interface SubComponents {
@@ -13,6 +14,7 @@ interface SubComponents {
 
 const SectionListLink: FC<Props> & SubComponents = ({
   item: { date, description, title, url },
+  target,
 }) => {
   return (
     <ListItem
@@ -21,7 +23,7 @@ const SectionListLink: FC<Props> & SubComponents = ({
       transitionTimingFunction={'cubic-bezier(0.4, 0, 0.2, 1)'}
       transitionDuration={'150ms'}
     >
-      <Link href={url} target={'_blank'}>
+      <Link href={url} target={target ?? '_blank'}>
         <Flex
           direction={{ base: 'column', md: 'row' }}
           py={4}
