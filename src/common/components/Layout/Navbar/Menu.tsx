@@ -22,15 +22,15 @@ const Menu = () => {
           <HamburgerIcon />
         </MenuButton>
       </Box>
-      <MenuList>
+      <MenuList p={'2'}>
         {!user && (
           <Link href={'/auth/login'}>
-            <MenuItem>Login</MenuItem>
+            <MenuItem rounded={'md'}>Login</MenuItem>
           </Link>
         )}
         {user && (
           <Link href={'/auth/logout'}>
-            <MenuItem>Logout</MenuItem>
+            <MenuItem rounded={'md'}>Logout</MenuItem>
           </Link>
         )}
       </MenuList>
