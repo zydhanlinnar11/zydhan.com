@@ -6,19 +6,21 @@ import {
   Divider,
   Flex,
   Heading,
+  Icon,
   List,
   ListItem,
   Text,
   VStack,
 } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
+import { FaRegSadTear } from 'react-icons/fa'
 import WriteGuestbook from './WriteGuestbook'
 
 const description =
   'Write down your comment below 📖. It could be anything, I would be excited to hear that! 🌎'
 
 const GuestbookPage = () => {
-  const { guestbooks, isLoading, revalidate } = useGuestbooks()
+  const { guestbooks, isLoading, revalidate, isError } = useGuestbooks()
 
   return (
     <VStack alignItems={'start'} h={'full'}>
@@ -42,6 +44,17 @@ const GuestbookPage = () => {
       {isLoading && (
         <VStack w={'full'}>
           <Loading />
+        </VStack>
+      )}
+
+      {isError && typeof guestbooks === 'undefined' && (
+        <VStack w={'full'} py={16} spacing={'4'}>
+          <Icon as={FaRegSadTear} boxSize={'16'} />
+          <Text textAlign={'center'}>
+            I&apos;m sorry, but we are unable to load Guestbooks for some
+            reason. 📖
+          </Text>
+          <Text textAlign={'center'}>Please come back later! ☕</Text>
         </VStack>
       )}
 
