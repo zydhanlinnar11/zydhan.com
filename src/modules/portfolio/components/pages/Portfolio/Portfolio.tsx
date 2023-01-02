@@ -7,7 +7,7 @@ import BlogSection from './Sections/BlogSection'
 import ExperienceSection from './Sections/ExperienceSection'
 import LanguageToolSection from './Sections/LanguageToolSection'
 import ProfileSection from './Sections/ProfileSection'
-import ProjectSection from './Sections/ProjectSection'
+import RepositorySection from './Sections/RepositorySection'
 
 type Props = {
   posts: PostMetadata[]
@@ -19,7 +19,7 @@ const Portfolio: FC<Props> = ({ posts }) => {
       <ProfileSection />
       <LanguageToolSection />
       <ExperienceSection />
-      <ProjectSection />
+      <RepositorySection />
       <BlogSection posts={posts} />
     </VStack>
   )

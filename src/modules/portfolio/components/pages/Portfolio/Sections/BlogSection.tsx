@@ -1,5 +1,6 @@
 import { PostMetadata } from '@/blog/types/PostMetadata'
 import { List } from '@chakra-ui/react'
+import Link from 'next/link'
 import { FC } from 'react'
 import Section from './Section'
 import SectionListLink from './SectionListLink'
@@ -25,6 +26,7 @@ const BlogSection: FC<Props> = ({ posts }) => {
           />
         ))}
       </List>
+      <Link href={'/blog/posts'}>View all posts →</Link>
     </Section>
   )
 }

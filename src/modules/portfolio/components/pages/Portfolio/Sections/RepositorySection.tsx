@@ -1,11 +1,12 @@
 import { personalInfo } from '@/common/config/personal-info'
 import useGithubRepo from '@/portfolio/hooks/useGithubRepo'
 import { SectionListItem } from '@/portfolio/types/SectionListItem'
-import { Badge, Box, HStack, List } from '@chakra-ui/react'
+import { Badge, HStack, List } from '@chakra-ui/react'
+import Link from 'next/link'
 import Section from './Section'
 import SectionListLink from './SectionListLink'
 
-const ProjectSection = () => {
+const RepositorySection = () => {
   const { repositories } = useGithubRepo(personalInfo.github)
 
   const projects: SectionListItem[] = repositories
@@ -42,14 +43,20 @@ const ProjectSection = () => {
     : []
 
   return (
-    <Section title="Recent Projects">
+    <Section title="Recent Repositories">
       <List w={'full'}>
         {projects.map((project) => (
           <SectionListLink key={project.url} item={project} />
         ))}
       </List>
+      <Link
+        href={`https://github.com/${personalInfo.github}`}
+        target={'_blank'}
+      >
+        View all repositories →
+      </Link>
     </Section>
   )
 }
 
-export default ProjectSection
+export default RepositorySection
