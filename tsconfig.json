@@ -20,6 +20,7 @@
       "@/admin/*": ["src/modules/admin/*"],
       "@/auth/*": ["src/modules/auth/*"],
       "@/blog/*": ["src/modules/blog/*"],
+      "@/guestbook/*": ["src/modules/guestbook/*"],
       "@/oauth/*": ["src/modules/oauth/*"],
       "@/portfolio/*": ["src/modules/portfolio/*"]
     }
