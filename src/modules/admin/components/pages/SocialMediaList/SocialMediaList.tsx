@@ -4,9 +4,10 @@ import { FC, useState } from 'react'
 import withAdminRoute from 'src/modules/admin/hooks/withAdminRoute'
 import Section from '@/admin/components/sections/Section'
 import SectionListItem from '@/admin/components/sections/SectionListItem'
-import { List, useDisclosure } from '@chakra-ui/react'
+import { Button, List, useDisclosure } from '@chakra-ui/react'
 import LoadingPage from '@/common/components/Pages/LoadingPage'
 import SocialMediaFormModal from './SocialMediaFormModal'
+import { AddIcon } from '@chakra-ui/icons'
 
 type Props = {
   user: User
@@ -19,11 +20,13 @@ const SocialMediaList: FC<Props> = ({ user }) => {
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = useDisclosure()
-  const [modalSocialMediaId, setModalSocialMediaId] = useState('')
+  const [modalSocialMediaId, setModalSocialMediaId] = useState<
+    string | undefined
+  >()
 
   if (isLoading) return <LoadingPage />
 
-  const openFormModal = (socialMediaId: string) => {
+  const openFormModal = (socialMediaId?: string) => {
     return () => {
       setModalSocialMediaId(socialMediaId)
       onModalOpen()
@@ -42,7 +45,14 @@ const SocialMediaList: FC<Props> = ({ user }) => {
         onClose={closeFormModal}
         socialMediaId={modalSocialMediaId}
       />
-      <Section title="Social Media">
+      <Section
+        title="Social Media"
+        rightTitleAction={
+          <Button onClick={openFormModal()} leftIcon={<AddIcon />}>
+            New
+          </Button>
+        }
+      >
         <List w="full">
           {socialMediaList?.map(({ created_at, id, name, socialite_name }) => (
             <SectionListItem

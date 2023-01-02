@@ -1,11 +1,16 @@
-import { Heading, VStack } from '@chakra-ui/react'
+import { Heading, HStack, VStack } from '@chakra-ui/react'
 import { FC, PropsWithChildren } from 'react'
 
 type Props = {
   title: string
+  rightTitleAction?: JSX.Element
 }
 
-const Section: FC<PropsWithChildren<Props>> = ({ title, children }) => {
+const Section: FC<PropsWithChildren<Props>> = ({
+  title,
+  children,
+  rightTitleAction,
+}) => {
   return (
     <VStack
       as="section"
@@ -14,9 +19,12 @@ const Section: FC<PropsWithChildren<Props>> = ({ title, children }) => {
       justifyContent={'start'}
       w={'100%'}
     >
-      <Heading as={'h2'} textAlign={'left'} fontSize={'2xl'}>
-        {title}
-      </Heading>
+      <HStack w={'full'} justifyContent={'space-between'} wrap={'wrap'}>
+        <Heading as={'h2'} textAlign={'left'} fontSize={'2xl'}>
+          {title}
+        </Heading>
+        {rightTitleAction}
+      </HStack>
       {children}
     </VStack>
   )

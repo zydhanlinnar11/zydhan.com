@@ -46,7 +46,14 @@ const SocialMediaFormModal: FC<Props> = ({
   const { isLoading, socialMedia } = useSocialMedia(socialMediaId)
 
   useEffect(() => {
-    if (!socialMedia) return
+    if (!socialMedia) {
+      setId('')
+      setName('')
+      setSocialiteName('')
+      setClientId('')
+      setClientSecret('')
+      return
+    }
     const { client_id, client_secret, id, name, socialite_name } = socialMedia
     setId(id)
     setName(name)
@@ -96,22 +103,44 @@ const SocialMediaFormModal: FC<Props> = ({
   const [isSubmitting, setSubmitting] = useState(false)
   const [validationError, setValidationError] =
     useState<ValidationErrorResponse>(emptyValidationError)
+  const formData = {
+    id,
+    name,
+    socialite_name: socialiteName,
+    client_id: clientId,
+    client_secret: clientSecret,
+  }
 
   const edit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     setSubmitting(true)
     setValidationError(emptyValidationError)
     backendFetcher
-      .put(`/admin/social-media/${socialMediaId}`, {
-        id,
-        name,
-        socialite_name: socialiteName,
-        client_id: clientId,
-        client_secret: clientSecret,
-      })
+      .put(`/admin/social-media/${socialMediaId}`, formData)
       .then((response) => {
         toast({
           title: 'Successfully edited.',
+          status: 'success',
+          isClosable: true,
+        })
+        onClose()
+      })
+      .catch((e) => {
+        if (!axios.isAxiosError(e) || e.response?.status !== 422) throw e
+        setValidationError(e.response.data)
+      })
+      .finally(() => setSubmitting(false))
+  }
+
+  const store: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setValidationError(emptyValidationError)
+    backendFetcher
+      .post(`/admin/social-media`, formData)
+      .then((response) => {
+        toast({
+          title: 'Successfully created.',
           status: 'success',
           isClosable: true,
         })
@@ -133,7 +162,7 @@ const SocialMediaFormModal: FC<Props> = ({
         <ModalBody pb={'4'}>
           <form
             id="form-social-media"
-            onSubmit={isEditing ? edit : undefined}
+            onSubmit={isEditing ? edit : store}
             style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}
           >
             {inputs.map(({ formKey, label, value, setter, hint }) => (
