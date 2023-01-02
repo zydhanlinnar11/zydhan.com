@@ -93,7 +93,6 @@ const SocialMediaFormModal: FC<Props> = ({
     },
   ]
 
-  const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setSubmitting] = useState(false)
   const [validationError, setValidationError] =
     useState<ValidationErrorResponse>(emptyValidationError)
@@ -116,6 +115,7 @@ const SocialMediaFormModal: FC<Props> = ({
           status: 'success',
           isClosable: true,
         })
+        onClose()
       })
       .catch((e) => {
         if (!axios.isAxiosError(e) || e.response?.status !== 422) throw e
@@ -133,7 +133,6 @@ const SocialMediaFormModal: FC<Props> = ({
         <ModalBody pb={'4'}>
           <form
             id="form-social-media"
-            ref={formRef}
             onSubmit={isEditing ? edit : undefined}
             style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}
           >
@@ -166,7 +165,7 @@ const SocialMediaFormModal: FC<Props> = ({
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost" type="submit" form={formRef.current?.id}>
+          <Button variant="ghost" type="submit" form={'form-social-media'}>
             {isEditing ? 'Edit' : 'Create'}
           </Button>
         </ModalFooter>

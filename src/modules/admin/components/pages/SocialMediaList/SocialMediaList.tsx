@@ -13,7 +13,7 @@ type Props = {
 }
 
 const SocialMediaList: FC<Props> = ({ user }) => {
-  const { socialMediaList, isLoading } = useSocialMediaList()
+  const { socialMediaList, isLoading, revalidate } = useSocialMediaList()
   const {
     isOpen: isModalOpen,
     onOpen: onModalOpen,
@@ -30,11 +30,16 @@ const SocialMediaList: FC<Props> = ({ user }) => {
     }
   }
 
+  const closeFormModal = () => {
+    revalidate()
+    onModalClose()
+  }
+
   return (
     <>
       <SocialMediaFormModal
         isOpen={isModalOpen}
-        onClose={onModalClose}
+        onClose={closeFormModal}
         socialMediaId={modalSocialMediaId}
       />
       <Section title="Social Media">
