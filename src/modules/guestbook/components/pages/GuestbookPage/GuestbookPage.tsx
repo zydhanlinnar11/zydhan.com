@@ -42,7 +42,7 @@ const GuestbookPage = () => {
       <WriteGuestbook onSent={() => revalidate()} />
 
       {isLoading && (
-        <VStack w={'full'}>
+        <VStack w={'full'} py={16}>
           <Loading />
         </VStack>
       )}

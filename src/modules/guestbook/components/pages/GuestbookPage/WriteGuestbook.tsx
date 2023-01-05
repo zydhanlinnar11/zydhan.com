@@ -66,7 +66,7 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
         <Text>Share a message for a future visitor of my site.</Text>
       </CardHeader>
       <CardBody>
-        {state === 'UNAUTHENTICATED' ? (
+        {state !== 'AUTHENTICATED' ? (
           <Button
             w={'full'}
             onClick={() =>
