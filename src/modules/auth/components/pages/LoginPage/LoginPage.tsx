@@ -1,14 +1,17 @@
 import useSocialMediaList from '@/auth/hooks/useSocialMediaList'
 import withAuthRoute from '@/auth/hooks/withAuthRoute'
+import { OAuthClientInfo } from '@/auth/types/OAuthClientInfo'
 import LoadingPage from '@/common/components/Pages/LoadingPage'
 import { config } from '@/common/config'
 import useCSRFCookie from '@/common/hooks/useCSRFCookie'
 import { Container, Heading, Text } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
-import { memo } from 'react'
+import { FC, memo } from 'react'
 import SocialMediaLoginButton from '../../Button/SocialMediaLoginButton'
 
-const LoginPage = () => {
+type Props = { client?: OAuthClientInfo }
+
+const LoginPage: FC<Props> = ({ client }) => {
   useCSRFCookie()
   const { socialMediaList, isLoading } = useSocialMediaList()
 
@@ -31,7 +34,7 @@ const LoginPage = () => {
         centerContent
       >
         <Heading as={'h1'}>Login</Heading>
-        <Text>Log in to your account</Text>
+        <Text>Log in to {client ? client.client_name : 'your account'}</Text>
 
         {socialMediaList?.map((socialMedia) => (
           <SocialMediaLoginButton
