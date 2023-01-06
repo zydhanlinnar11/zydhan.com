@@ -1,60 +1,111 @@
-import User from '@/modules/auth/types/User'
-import fetchUser from '@/modules/auth/utils/FetchUser'
 import {
   createContext,
-  FC,
-  useReducer,
   Dispatch,
+  FC,
+  PropsWithChildren,
   useContext,
   useEffect,
-  PropsWithChildren,
+  useReducer,
 } from 'react'
+import { User } from '@/common/types/User'
+import { backendFetcher } from '@/common/hooks/useAxios'
+import useSWR, { KeyedMutator } from 'swr'
 
-type UserState =
+type State =
   | {
-      state: 'loading'
+      state: 'LOADING'
+      user: null
     }
   | {
-      state: 'unauthenticated'
+      state: 'UNAUTHENTICATED'
+      user: null
     }
   | {
-      state: 'authenticated'
+      state: 'AUTHENTICATED'
       user: User
     }
 
-type Action = UserState
+type Action =
+  | {
+      type: 'LOG_IN'
+      payload: User
+    }
+  | {
+      type: 'SET_LOADING'
+      payload: null
+    }
+  | {
+      type: 'UNAUTHENTICATED'
+      payload: null
+    }
 
-const reducer = (state: UserState, action: Action): UserState => action
-
-const initialState: UserState = {
-  state: 'loading',
+const reducer = (state: State, { payload, type }: Action): State => {
+  switch (type) {
+    case 'LOG_IN':
+      return {
+        state: 'AUTHENTICATED',
+        user: payload,
+      }
+    case 'UNAUTHENTICATED':
+      return {
+        state: 'UNAUTHENTICATED',
+        user: null,
+      }
+    case 'SET_LOADING':
+      return {
+        state: 'LOADING',
+        user: null,
+      }
+    default:
+      throw Error('Unrecognized action')
+  }
 }
 
-const UserStateContext = createContext<UserState>(initialState)
-const UserDispatchContext = createContext<Dispatch<Action>>(() => null)
+const initialState: State = {
+  state: 'LOADING',
+  user: null,
+}
+
+const StateContext = createContext<State>(initialState)
+const DispatchContext = createContext<Dispatch<Action>>(() => null)
+const RefetchUserContext = createContext<KeyedMutator<{ data: User }> | null>(
+  null
+)
 
 export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const { data, error, isLoading, mutate } = useSWR<{ data: User }>(
+    `/auth/user`,
+    backendFetcher,
+    {
+      onErrorRetry: () => {
+        return
+      },
+    }
+  )
 
   useEffect(() => {
-    fetchUser()
-      .then((user) =>
-        dispatch({
-          state: 'authenticated',
-          user,
-        })
-      )
-      .catch(() => dispatch({ state: 'unauthenticated' }))
-  }, [])
+    if (isLoading) dispatch({ payload: null, type: 'SET_LOADING' })
+    else if (error || !data)
+      dispatch({ type: 'UNAUTHENTICATED', payload: null })
+    else if (data)
+      dispatch({
+        type: 'LOG_IN',
+        payload: data.data,
+      })
+  }, [isLoading, data, error])
 
   return (
-    <UserStateContext.Provider value={state}>
-      <UserDispatchContext.Provider value={dispatch}>
-        {children}
-      </UserDispatchContext.Provider>
-    </UserStateContext.Provider>
+    <StateContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
+        <RefetchUserContext.Provider value={mutate}>
+          {children}
+        </RefetchUserContext.Provider>
+      </DispatchContext.Provider>
+    </StateContext.Provider>
   )
 }
 
-export const useUserState = () => useContext(UserStateContext)
-export const useUserDispatch = () => useContext(UserDispatchContext)
+export const useUser = () => useContext(StateContext)
+export const useUserDispatch = () => useContext(DispatchContext)
+export const useRefetchUser = () => useContext(RefetchUserContext)

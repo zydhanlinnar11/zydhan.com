@@ -1,1 +1,1 @@
-export { default } from '@/modules/auth/components/AuthenticationPages/LogoutPage'
+export { default } from '@/auth/components/pages/LogoutPage'

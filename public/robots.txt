@@ -6,13 +6,13 @@ Disallow: /auth
 User-agent: *
 Disallow: /api
 
-# Block all crawlers for /blog/admin
+# Block all crawlers for /admin
 User-agent: *
-Disallow: /blog/admin
+Disallow: /admin
 
-# Block all crawlers for /og-image
+# Block all crawlers for /oauth
 User-agent: *
-Disallow: /og-image
+Disallow: /oauth
 
 # Allow all crawlers
 User-agent: *

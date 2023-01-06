@@ -1,25 +1,25 @@
-import config from '@/common/config'
-import HomePosts from '@/modules/blog/data/HomePosts'
-import HomePost from '@/modules/blog/types/HomePost'
+import { getMetadataAllPosts } from '@/blog/lib/api'
+import { PostMetadata } from '@/blog/types/PostMetadata'
+import { config } from '@/common/config'
 import { GetServerSideProps } from 'next'
 
-//pages/sitemap.xml.js
-
-function generateSiteMap(posts: HomePost[]) {
+function generateSiteMap(posts: PostMetadata[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <!--We manually set the two URLs we know already-->
      <url>
        <loc>https://zydhan.com</loc>
      </url>
      <url>
-       <loc>https://zydhan.com/blog</loc>
+       <loc>https://zydhan.com/guestbook</loc>
+     </url>
+     <url>
+       <loc>https://zydhan.com/blog/posts</loc>
      </url>
      ${posts
        .map(({ slug }) => {
          return `
        <url>
-           <loc>${`${config.baseUrl}/blog/posts/${slug}`}</loc>
+           <loc>${`${config.frontendUrl}/blog/posts/${slug}`}</loc>
        </url>
      `
        })
@@ -28,25 +28,17 @@ function generateSiteMap(posts: HomePost[]) {
  `
 }
 
-function SiteMap() {
-  // getServerSideProps will do the heavy lifting
-}
+function SiteMap() {}
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  // We make an API call to gather the URLs for our site
-  const posts = HomePosts
-
-  // We generate the XML sitemap with the posts data
+  const posts = getMetadataAllPosts()
   const sitemap = generateSiteMap(posts)
 
   res.setHeader('Content-Type', 'text/xml')
-  // we send the XML to the browser
   res.write(sitemap)
   res.end()
 
-  return {
-    props: {},
-  }
+  return { props: {} }
 }
 
 export default SiteMap

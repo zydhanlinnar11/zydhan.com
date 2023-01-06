@@ -1,18 +1,14 @@
-import PostLayout from '@/modules/blog/components/Layout/PostLayout'
-import Image from 'next/image'
-import LaravelWelcomeScreen from '@/modules/blog/assets/img/simple-and-easy-rest-api-implementation-with-laravel/laravel-welcome-screen.png'
-import CreatedModelAndMigrations from '@/modules/blog/assets/img/simple-and-easy-rest-api-implementation-with-laravel/created-model-and-migrations.png'
-import OgImage from '@/modules/blog/assets/img/simple-and-easy-rest-api-implementation-with-laravel/og-image.webp'
+---
+author: Zydhan Linnar Putra
+description: Laravel bring us ease of API development with eloquent, API controller, migration, etc.
+createdAt: Saturday, March 19, 2022
+title: Simple and Easy REST API Implementation With Laravel
+---
 
-export const meta = {
-  author: 'Zydhan Linnar Putra',
-  slug: 'simple-and-easy-rest-api-implementation-with-laravel',
-  description:
-    'Laravel bring us ease of API development with eloquent, API controller, migration, etc.',
-  createdAt: 'Saturday, March 19, 2022',
-  title: 'Simple and Easy REST API Implementation With Laravel',
-  openGraphImage: OgImage,
-}
+import PostDetail from '@/blog/components/pages/PostDetail'
+import Image from 'next/image'
+import LaravelWelcomeScreen from '@/blog/assets/images/simple-and-easy-rest-api-implementation-with-laravel/laravel-welcome-screen.png'
+import CreatedModelAndMigrations from '@/blog/assets/images/simple-and-easy-rest-api-implementation-with-laravel/created-model-and-migrations.png'
 
 ## What is API?
 
@@ -500,4 +496,6 @@ Now we got proper 422 - Unprocessable Content error and message that we must fil
 - [What is a REST API? - Red Hat](https://www.redhat.com/en/topics/api/what-is-a-rest-api)
 - [Laravel API Tutorial: Building & Testing a RESTful API | Toptal](https://www.toptal.com/laravel/restful-laravel-api-tutorial)
 
-export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
+export default ({ children }) => <PostDetail title={title} author={author} description={description} createdAt={createdAt}>{children}</PostDetail
+
+>

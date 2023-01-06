@@ -17,13 +17,12 @@
     "baseUrl": ".",
     "paths": {
       "@/common/*": ["src/common/*"],
-      "@/components/*": ["src/common/components/*"],
-      "@/hooks/*": ["src/common/hooks/*"],
-      "@/types/*": ["src/common/types/*"],
-      "@/utils/*": ["src/common/utils/*"],
-      "@/modules/*": ["src/modules/*"],
-      "@/pages/*": ["src/pages/*"],
-      "@/styles/*": ["src/styles/*"]
+      "@/admin/*": ["src/modules/admin/*"],
+      "@/auth/*": ["src/modules/auth/*"],
+      "@/blog/*": ["src/modules/blog/*"],
+      "@/guestbook/*": ["src/modules/guestbook/*"],
+      "@/oauth/*": ["src/modules/oauth/*"],
+      "@/portfolio/*": ["src/modules/portfolio/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

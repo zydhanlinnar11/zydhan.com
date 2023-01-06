@@ -1,41 +1,31 @@
-import mdx from '@next/mdx'
-import rehypeSlug from 'rehype-slug'
-import rehypeHighlight from 'rehype-highlight'
-import bundleAnalyzer from '@next/bundle-analyzer'
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  webpack: (config, { isServer }) => {
+    config.resolve.fallback = { fs: false }
 
-const withMDX = mdx({
+    return config
+  },
+}
+
+import WithMDX from '@next/mdx'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeSlug from 'rehype-slug'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
+const withMDX = WithMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [],
-    rehypePlugins: [rehypeSlug, rehypeHighlight],
+    // If you use remark-gfm, you'll need to use next.config.mjs
+    // as the package is ESM only
+    // https://github.com/remarkjs/remark-gfm#install
+    remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+    rehypePlugins: [rehypeHighlight, rehypeSlug],
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",
   },
 })
 
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: [
-      'lh3.googleusercontent.com',
-      'avatars.githubusercontent.com',
-      'storage.googleapis.com',
-      'cdn.discordapp.com',
-      'avatars.dicebear.com',
-      'media.discordapp.net',
-      'zydhan.dev',
-      'zydhan.com',
-    ],
-  },
-  eslint: {
-    dirs: ['src'],
-  },
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-}
-
-export default withBundleAnalyzer(withMDX(nextConfig))
+export default withMDX(nextConfig)
