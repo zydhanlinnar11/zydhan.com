@@ -1,6 +1,6 @@
 import { PostMetadata } from '@/blog/types/PostMetadata'
+import Link from '@/common/components/Link'
 import { List } from '@chakra-ui/react'
-import Link from 'next/link'
 import { FC } from 'react'
 import Section from './Section'
 import SectionListLink from './SectionListLink'

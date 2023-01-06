@@ -1,8 +1,8 @@
+import Link from '@/common/components/Link'
 import { personalInfo } from '@/common/config/personal-info'
 import useGithubRepo from '@/portfolio/hooks/useGithubRepo'
 import { SectionListItem } from '@/portfolio/types/SectionListItem'
 import { Badge, HStack, List } from '@chakra-ui/react'
-import Link from 'next/link'
 import Section from './Section'
 import SectionListLink from './SectionListLink'
 
