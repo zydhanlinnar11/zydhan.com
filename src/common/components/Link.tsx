@@ -1,14 +1,34 @@
-import { Box, color, Link as ChakraLink, useColorMode } from '@chakra-ui/react'
+import {
+  Box,
+  color,
+  Link as ChakraLink,
+  ResponsiveValue,
+  useColorMode,
+} from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { FC, HTMLAttributeAnchorTarget, PropsWithChildren } from 'react'
 
 type Props = {
+  fontWeight?: ResponsiveValue<
+    | number
+    | (string & {})
+    | 'light'
+    | 'bold'
+    | 'black'
+    | 'hairline'
+    | 'thin'
+    | 'normal'
+    | 'medium'
+    | 'semibold'
+    | 'extrabold'
+  >
   href?: string
   isExternal?: boolean
   target?: HTMLAttributeAnchorTarget
 }
 
 const Link: FC<PropsWithChildren<Props>> = ({
+  fontWeight,
   children,
   href,
   isExternal,
@@ -21,6 +41,7 @@ const Link: FC<PropsWithChildren<Props>> = ({
       as={NextLink}
       href={href}
       target={target}
+      fontWeight={fontWeight}
       role={'group'}
       position={'relative'}
       _hover={{ textDecoration: 'none' }}
@@ -31,7 +52,7 @@ const Link: FC<PropsWithChildren<Props>> = ({
       {children}
       <Box
         as="span"
-        h={'1px'}
+        h={fontWeight === 'bold' ? '2px' : '1px'}
         position="absolute"
         bg={'white'}
         w={'full'}

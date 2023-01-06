@@ -2,7 +2,7 @@ import Link from '@/common/components/Link'
 import { personalInfo } from '@/common/config/personal-info'
 import useGithubRepo from '@/portfolio/hooks/useGithubRepo'
 import { SectionListItem } from '@/portfolio/types/SectionListItem'
-import { Badge, HStack, List } from '@chakra-ui/react'
+import { Badge, Flex, HStack, List } from '@chakra-ui/react'
 import Section from './Section'
 import SectionListLink from './SectionListLink'
 
@@ -17,9 +17,9 @@ const RepositorySection = () => {
           url: html_url,
           title: (
             <SectionListLink.Title>
-              <HStack as={'span'} wrap={'wrap'}>
+              <Flex as={'span'} wrap={'wrap'} columnGap={'2'}>
                 <span>{name}</span>
-                <HStack as={'span'} spacing={2} wrap={'wrap'}>
+                <HStack as={'span'} spacing={2} wrap={'wrap'} marginLeft={'0'}>
                   {topics.map((topic) => (
                     <Badge
                       key={`${html_url}-${topic}`}
@@ -35,7 +35,7 @@ const RepositorySection = () => {
                     </Badge>
                   ))}
                 </HStack>
-              </HStack>
+              </Flex>
             </SectionListLink.Title>
           ),
         })

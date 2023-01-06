@@ -1,5 +1,5 @@
 import { SectionListItem } from '@/portfolio/types/SectionListItem'
-import { Box, Flex, ListItem, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, ListItem, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FC, HTMLAttributeAnchorTarget, PropsWithChildren } from 'react'
 
@@ -37,6 +37,7 @@ const SectionListLink: FC<Props> & SubComponents = ({
             {date}
           </Text>
         </Flex>
+        <Divider />
       </Link>
     </ListItem>
   )
