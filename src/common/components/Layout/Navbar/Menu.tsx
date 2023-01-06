@@ -1,5 +1,5 @@
 import { useUser } from '@/common/providers/UserProvider'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { FaUserAlt } from 'react-icons/fa'
 import {
   Box,
   Menu as ChakraMenu,
@@ -19,7 +19,7 @@ const Menu = () => {
     <ChakraMenu>
       <Box as="li">
         <MenuButton as={OptionButton}>
-          <HamburgerIcon />
+          <FaUserAlt />
         </MenuButton>
       </Box>
       <MenuList p={'2'}>
