@@ -7,7 +7,12 @@ const config: ThemeConfig = {
 }
 
 const theme = extendTheme(
-  { config },
+  {
+    config,
+    fonts: {
+      body: `'Inter', sans-serif`,
+    },
+  },
   withProse({
     baseStyle: {
       code: {
