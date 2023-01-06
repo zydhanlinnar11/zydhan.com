@@ -1,0 +1,19 @@
+# Block all crawlers for /auth
+User-agent: *
+Disallow: /auth
+
+# Block all crawlers for /api
+User-agent: *
+Disallow: /api
+
+# Block all crawlers for /admin
+User-agent: *
+Disallow: /admin
+
+# Block all crawlers for /oauth
+User-agent: *
+Disallow: /oauth
+
+# Allow all crawlers
+User-agent: *
+Allow: /
