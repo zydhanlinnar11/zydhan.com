@@ -1,5 +1,5 @@
 import { User } from '@/common/types/User'
-import { Card, CardBody, Text, Icon, useColorModeValue } from '@chakra-ui/react'
+import { Card, CardBody, Text, Icon } from '@chakra-ui/react'
 import { FC } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
 
@@ -11,7 +11,7 @@ const UserInfoSection: FC<Props> = ({ user: { name, email } }) => {
   return (
     <Card
       as={'section'}
-      variant={useColorModeValue('filled', 'outline')}
+      variant={'outline'}
       h={'fit-content'}
       minWidth={'fit-content'}
       maxWidth={{ base: 'full', md: 'xs' }}
