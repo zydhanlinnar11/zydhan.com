@@ -4,13 +4,24 @@ import {
   Box,
   Menu as ChakraMenu,
   MenuButton,
-  MenuItem,
+  MenuItem as ChakraMenuItem,
   MenuList,
   forwardRef,
   ButtonProps,
   Button,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import { FC, PropsWithChildren } from 'react'
+
+type MenuItemProps = {
+  href: string
+}
+
+const MenuItem: FC<PropsWithChildren<MenuItemProps>> = ({ children, href }) => (
+  <Link href={href}>
+    <ChakraMenuItem rounded={'md'}>{children}</ChakraMenuItem>
+  </Link>
+)
 
 const Menu = () => {
   const { user } = useUser()
@@ -23,15 +34,12 @@ const Menu = () => {
         </MenuButton>
       </Box>
       <MenuList p={'2'}>
-        {!user && (
-          <Link href={'/auth/login'}>
-            <MenuItem rounded={'md'}>Login</MenuItem>
-          </Link>
-        )}
+        {!user && <MenuItem href="/auth/login">Login</MenuItem>}
         {user && (
-          <Link href={'/auth/logout'}>
-            <MenuItem rounded={'md'}>Logout</MenuItem>
-          </Link>
+          <>
+            <MenuItem href="/auth/account/settings">Account settings</MenuItem>
+            <MenuItem href="/auth/logout">Logout</MenuItem>
+          </>
         )}
       </MenuList>
     </ChakraMenu>
