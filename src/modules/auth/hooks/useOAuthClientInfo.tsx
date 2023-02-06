@@ -16,7 +16,7 @@ const useOAuthClientInfo = () => {
   >(`/oauth/clients/info?${params.toString()}`, backendFetcher, {
     onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
       // Never retry if it is displaying OAuth2 error.
-      if (error.response?.data.data.action === 'display') return
+      if (error.response?.data?.data?.action === 'display') return
 
       // Retry after 5 seconds.
       setTimeout(() => revalidate({ retryCount }), 5000)
