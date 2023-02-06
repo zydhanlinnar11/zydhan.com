@@ -31,6 +31,7 @@
     "iron-session": "^6.3.1",
     "next": "13.0.6",
     "next-seo": "^5.15.0",
+    "randomstring": "^1.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
@@ -41,5 +42,8 @@
     "swr": "^2.0.0",
     "typescript": "4.9.4",
     "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "@types/randomstring": "^1.1.8"
   }
 }

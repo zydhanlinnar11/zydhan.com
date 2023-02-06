@@ -24,7 +24,7 @@ export class SocialMediaController extends BaseController {
     if (!Provider) return BaseController.notFound(res)
 
     return res.send({
-      redirect_url: ProviderBuilder.build(Provider).getRedirectUrl(),
+      redirect_url: await ProviderBuilder.build(Provider).getRedirectUrl(req),
     })
   }
 
