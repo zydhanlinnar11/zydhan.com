@@ -16,7 +16,7 @@ const useSocialMediaCallback = () => {
   const [error, setError] = useState<CallbackErrorMessage>()
 
   useEffect(() => {
-    if (!socialMedia || !socialMediaList) return
+    if (!socialMedia || !socialMediaList || !router.isReady) return
     const filtered = socialMediaList.filter(({ id }) => id === socialMedia)
     if (typeof socialMedia !== 'string' || filtered.length === 0)
       throw Error('not_found')
@@ -37,7 +37,7 @@ const useSocialMediaCallback = () => {
         if (!axios.isAxiosError(e) || !isCallbackErrorMessage(message)) throw e
         setError(message)
       })
-  }, [socialMedia, socialMediaList, router.query])
+  }, [socialMedia, socialMediaList, router.query, router.isReady])
 
   return { error }
 }
