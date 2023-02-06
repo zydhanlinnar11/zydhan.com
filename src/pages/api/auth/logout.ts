@@ -6,5 +6,5 @@ export default withIronSessionApiRoute(function logoutRoute(req, res) {
   if (req.method !== 'DELETE') return BaseController.methodNotAllowed(res)
 
   req.session.destroy()
-  res.status(204).send(null)
+  return BaseController.noContent(res)
 }, ironSessionOption)

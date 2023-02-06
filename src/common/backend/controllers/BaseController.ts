@@ -7,5 +7,7 @@ export abstract class BaseController {
     res.status(401).send({ message: 'Unauthorized!' })
 
   static methodNotAllowed = (res: NextApiResponse) =>
-    res.status(405).send({ message: 'Unauthorized!' })
+    res.status(405).send({ message: 'Method not allowed!' })
+
+  static noContent = (res: NextApiResponse) => res.status(204).send(null)
 }

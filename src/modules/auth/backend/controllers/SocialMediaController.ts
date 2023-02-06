@@ -57,6 +57,6 @@ export class SocialMediaController extends BaseController {
     req.session.userId = user?.id
     await req.session.save()
 
-    return res.status(204).send(null)
+    return BaseController.noContent(res)
   }
 }
