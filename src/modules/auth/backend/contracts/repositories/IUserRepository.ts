@@ -24,4 +24,9 @@ export interface IUserRepository {
     socialId: any,
     userId: string
   ) => Promise<void>
+
+  unlinkSocial: (
+    Provider: typeof AbstractProvider,
+    userId: string
+  ) => Promise<void>
 }

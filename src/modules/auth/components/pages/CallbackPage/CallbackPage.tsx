@@ -19,7 +19,7 @@ const CallbackPage = () => {
       <Heading as={'h1'}>400 - Bad Request</Heading>
       <Text>
         {error === 'already_linked_to_another_user'
-          ? 'This account is already linked with another account!'
+          ? 'This social account is already linked with another account!'
           : 'This email is already linked with existing account!'}
       </Text>
       {error && (

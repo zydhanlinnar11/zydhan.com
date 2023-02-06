@@ -121,4 +121,16 @@ export class FirestoreUserRepository implements IUserRepository {
 
     return linked
   }
+
+  unlinkSocial: (
+    Provider: typeof AbstractProvider,
+    userId: string
+  ) => Promise<void> = async (Provider, userId) => {
+    const user = await this.getById(userId)
+    const userExistInDb = user !== null
+    if (!userExistInDb) throw new Error('user_not_exist')
+
+    const userRef = db.collection('users').doc(userId)
+    await userRef.update({ [`${Provider.id}Id`]: null })
+  }
 }

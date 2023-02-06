@@ -94,7 +94,7 @@ const SocialLinkButton = ({
   const refetchUser = useRefetchUser()
   const link = useCallback(async () => {
     const { data } = await backendFetcher.get<RedirectResponseData>(
-      `/auth/${id}/redirect`
+      `/api/auth/social-media/${id}/redirect`
     )
     socialLoginHandler(name, data.redirect_url, () => {})
   }, [id, name])
@@ -109,7 +109,7 @@ const SocialLinkButton = ({
       status: 'loading',
     })
     backendFetcher
-      .delete(`/auth/user/social-media/${id}`)
+      .delete(`/api/auth/social-media/${id}/user`)
       .then((response) => {
         toast.update(loadingToast, {
           title: `${name} account successfully unlinked!`,
