@@ -1,1 +1,1 @@
-export { default } from './CallbackPage'
+export { default, getStaticPaths, getStaticProps } from './CallbackPage'

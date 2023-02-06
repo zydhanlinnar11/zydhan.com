@@ -1,8 +1,10 @@
+import { oauth2Providers } from '@/auth/backend/config/oauth2-providers'
 import useSocialMediaCallback from '@/auth/hooks/useSocialMediaCallback'
 import Link from '@/common/components/Link'
 import LoadingPage from '@/common/components/Pages/LoadingPage'
 import ServerErrorIcon from '@/common/components/Pages/ServerErrorPage/ServerErrorIcon'
 import { Flex, Heading, Text } from '@chakra-ui/react'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 const CallbackPage = () => {
   const { error } = useSocialMediaCallback()
@@ -28,6 +30,19 @@ const CallbackPage = () => {
       )}
     </Flex>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: oauth2Providers.map(({ id }) => ({ params: { socialMedia: id } })),
+    fallback: false,
+  }
 }
 
 export default CallbackPage
