@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { config } from '../config'
 
-const BASE_URL = config.backendUrl
 export const backendFetcher = axios.create({
   withCredentials: true,
-  baseURL: BASE_URL,
 })
 type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
