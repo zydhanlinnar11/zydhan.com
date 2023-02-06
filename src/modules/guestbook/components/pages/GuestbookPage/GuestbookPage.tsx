@@ -48,7 +48,7 @@ const Guestbooks = ({ guestbooks, isError, isLoading }: GuestbooksProps) => {
 
   return (
     <List w={'full'} pt={'8'}>
-      {guestbooks?.map(({ id, content, createdAt, user }) => (
+      {guestbooks?.map(({ id, content, created_at, user }) => (
         <ListItem key={id}>
           <Flex
             direction={{ base: 'column', md: 'row' }}
@@ -62,7 +62,7 @@ const Guestbooks = ({ guestbooks, isError, isLoading }: GuestbooksProps) => {
               <Text>{content}</Text>
             </Box>
             <Text w={'15em'} textAlign={{ base: 'inherit', md: 'right' }}>
-              {new Date(createdAt).toLocaleString()}
+              {new Date(created_at).toLocaleString()}
             </Text>
           </Flex>
           <Divider />

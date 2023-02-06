@@ -11,7 +11,7 @@ export type FirestoreUser = {
 export type FirestoreGuestbook = {
   userId: string
   content: string
-  createdAt: { _seconds: number; _nanoseconds: number } | Timestamp
+  created_at: { _seconds: number; _nanoseconds: number } | Timestamp
   userName: string
 }
 
@@ -24,16 +24,16 @@ export class FirestoreGuestbookRepository implements IGuestbookRepository {
     snapshot.forEach((doc) => {
       const docData = doc.data() as unknown as FirestoreGuestbook
       const timestamp =
-        '_seconds' in docData.createdAt
+        '_seconds' in docData.created_at
           ? new Timestamp(
-              docData.createdAt._seconds,
-              docData.createdAt._nanoseconds
+              docData.created_at._seconds,
+              docData.created_at._nanoseconds
             )
-          : docData.createdAt
+          : docData.created_at
 
       data.push({
         content: docData.content,
-        createdAt: timestamp.toDate().toISOString(),
+        created_at: timestamp.toDate().toISOString(),
         id: doc.id,
         user: docData.userName,
       })
@@ -63,7 +63,7 @@ export class FirestoreGuestbookRepository implements IGuestbookRepository {
 
     const newUser: FirestoreGuestbook = {
       content,
-      createdAt: Timestamp.now(),
+      created_at: Timestamp.now(),
       userId,
       userName: user.name,
     }
