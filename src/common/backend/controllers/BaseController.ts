@@ -1,8 +1,11 @@
 import { NextApiResponse } from 'next'
 export abstract class BaseController {
-  protected notFound = (res: NextApiResponse) =>
+  static notFound = (res: NextApiResponse) =>
     res.status(404).send({ message: 'Not Found!' })
 
-  protected unauthorized = (res: NextApiResponse) =>
+  static unauthorized = (res: NextApiResponse) =>
     res.status(401).send({ message: 'Unauthorized!' })
+
+  static methodNotAllowed = (res: NextApiResponse) =>
+    res.status(405).send({ message: 'Unauthorized!' })
 }

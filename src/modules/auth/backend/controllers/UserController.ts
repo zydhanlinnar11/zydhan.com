@@ -6,13 +6,13 @@ import { User } from '@/common/types/User'
 export class UserController extends BaseController {
   public index = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!('userId' in req.session) || typeof req.session.userId !== 'string')
-      return this.unauthorized(res)
+      return BaseController.unauthorized(res)
     const id = req.session.userId
     const userRef = db.collection('users').doc(id)
     const doc = await userRef.get()
-    if (!doc.exists) return this.unauthorized(res)
+    if (!doc.exists) return BaseController.unauthorized(res)
     const data = doc.data()
-    if (!data) return this.unauthorized(res)
+    if (!data) return BaseController.unauthorized(res)
 
     const user: User = {
       admin: false,

@@ -23,7 +23,7 @@ export class SocialMediaController extends BaseController {
 
   public getRedirectUrl = async (req: NextApiRequest, res: NextApiResponse) => {
     const Provider = this.getProvider(req)
-    if (!Provider) return this.notFound(res)
+    if (!Provider) return BaseController.notFound(res)
 
     return res.send({
       redirect_url: ProviderBuilder.build(Provider).getRedirectUrl(),
@@ -32,7 +32,7 @@ export class SocialMediaController extends BaseController {
 
   public callback = async (req: NextApiRequest, res: NextApiResponse) => {
     const Provider = this.getProvider(req)
-    if (!Provider) return this.notFound(res)
+    if (!Provider) return BaseController.notFound(res)
     const provider = ProviderBuilder.build(Provider)
 
     const socialUser = await provider.getUser(req)
