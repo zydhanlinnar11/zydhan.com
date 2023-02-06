@@ -1,32 +1,32 @@
-import { db } from '@/common/lib/firebase'
-import { Guestbook } from '@/guestbook/types/Guestbook'
+import { BaseController } from '@/common/backend/controllers/BaseController'
+import { guestbookRepository } from '@/guestbook/providers/dependencies'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { GuestbookFirestore } from '@/guestbook/backend/types/GuestbookFirestore'
-import { Timestamp } from 'firebase-admin/firestore'
 
 export class GuestbookController {
   public index = async (req: NextApiRequest, res: NextApiResponse) => {
-    const guestbooksRef = db.collection('guestbooks')
-    const snapshot = await guestbooksRef.get()
-    const data: Guestbook[] = []
-    snapshot.forEach((doc) => {
-      const docData = doc.data() as unknown as GuestbookFirestore
-      const timestamp = new Timestamp(
-        docData.createdAt._seconds,
-        docData.createdAt._nanoseconds
-      )
-      data.push({
-        content: docData.content,
-        createdAt: timestamp.toDate().toISOString(),
-        id: doc.id,
-        user: docData.userName,
-      })
-    })
-
-    res.send(data)
+    res.send(await guestbookRepository.getAll())
   }
 
   public store = async (req: NextApiRequest, res: NextApiResponse) => {
-    res.send({ message: 'store' })
+    const userId = req.session.userId
+    if (!userId) return BaseController.unauthorized(res)
+
+    // Input validation
+    const message = req.body.message
+
+    // TODO: handle errornya yang lebih bener
+    if (
+      typeof message !== 'string' ||
+      message.trim().length > 255 ||
+      message.trim().length === 0
+    )
+      return res.status(422).send({
+        message: 'Invalid message!',
+        errors: { message: ['Invalid message!'] },
+      })
+
+    await guestbookRepository.create(userId, message)
+
+    return BaseController.noContent(res)
   }
 }

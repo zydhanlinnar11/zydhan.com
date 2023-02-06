@@ -40,7 +40,7 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
     setSubmitting(true)
     setValidationError(emptyValidationError)
     backendFetcher
-      .post(`/guestbook/guestbooks`, { message: guestbook })
+      .post(`/api/guestbook/guestbooks`, { message: guestbook })
       .then((response) => {
         toast({
           title: 'Message successfully sent.',
