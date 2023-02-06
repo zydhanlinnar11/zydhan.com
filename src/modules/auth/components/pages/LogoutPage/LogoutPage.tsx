@@ -12,7 +12,7 @@ const LogoutPage = () => {
   const refetchUser = useRefetchUser()
 
   const logout = useCallback(() => {
-    backendFetcher.delete('/auth/logout').then(() => {
+    backendFetcher.delete('/api/auth/logout').then(() => {
       refetchUser && refetchUser()
     })
   }, [refetchUser])

@@ -75,7 +75,7 @@ const RefetchUserContext = createContext<KeyedMutator<{ data: User }> | null>(
 export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { data, error, isLoading, mutate } = useSWR<{ data: User }>(
-    `/auth/user`,
+    `/api/auth/user`,
     backendFetcher,
     {
       onErrorRetry: () => {
