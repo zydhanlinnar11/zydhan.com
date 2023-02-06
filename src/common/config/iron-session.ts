@@ -1,4 +1,6 @@
 import { IronSessionOptions } from 'iron-session'
+import { withIronSessionApiRoute } from 'iron-session/next'
+import { NextApiHandler } from 'next'
 
 const cookieName = process.env.IRON_SESSION_COOKIE_NAME
 const ironSessionPassword = process.env.IRON_SESSION_PASSWORD
@@ -14,4 +16,8 @@ export const ironSessionOption: IronSessionOptions = {
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',
   },
+}
+
+export function withSessionRoute(handler: NextApiHandler) {
+  return withIronSessionApiRoute(handler, ironSessionOption)
 }

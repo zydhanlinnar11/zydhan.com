@@ -1,10 +1,12 @@
 import { SocialMediaController } from '@/auth/backend/controllers/SocialMediaController'
 import { BaseController } from '@/common/backend/controllers/BaseController'
-import { ironSessionOption } from '@/common/config/iron-session'
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { withSessionRoute } from '@/common/config/iron-session'
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export default withIronSessionApiRoute(async (req, res) => {
+async function callbackRoute(req: NextApiRequest, res: NextApiResponse) {
   const controller = new SocialMediaController()
   if (req.method === 'GET') return controller.callback(req, res)
   return BaseController.methodNotAllowed(res)
-}, ironSessionOption)
+}
+
+export default withSessionRoute(callbackRoute)
