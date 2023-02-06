@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { OAuth2User } from '../../models/OAuth2User'
+import { OAuth2User } from '@/auth/backend/models/OAuth2User'
 import { AbstractProvider } from './AbstractProvider'
 
 export class GithubProvider extends AbstractProvider {
@@ -27,7 +27,7 @@ export class GithubProvider extends AbstractProvider {
 
     const user = response.data
     if (this.scopes.find((value) => value === 'user:email'))
-      user.email = this.getEmailByToken(token)
+      user.email = await this.getEmailByToken(token)
 
     return user
   }

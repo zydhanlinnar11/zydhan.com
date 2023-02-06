@@ -27,7 +27,7 @@ const useSocialMediaCallback = () => {
 
     backendFetcher
       .get<{ message: string }>(
-        `/auth/${socialMedia}/callback?${params.toString()}`
+        `/api/auth/social-media/${socialMedia}/callback?${params.toString()}`
       )
       .then(() => {
         window.close()
