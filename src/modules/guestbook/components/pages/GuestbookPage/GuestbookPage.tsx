@@ -1,6 +1,7 @@
 import Loading from '@/common/components/Loading'
 import { config } from '@/common/config'
 import useGuestbooks from '@/guestbook/hooks/useGuestbooks'
+import { Guestbook } from '@/guestbook/types/Guestbook'
 import {
   Box,
   Divider,
@@ -18,6 +19,58 @@ import WriteGuestbook from './WriteGuestbook'
 
 const description =
   'Write down your comment below 📖. It could be anything, I would be excited to hear that! 🌎'
+
+type GuestbooksProps = {
+  guestbooks: Guestbook[] | undefined
+  isLoading: boolean
+  isError: any
+}
+
+const Guestbooks = ({ guestbooks, isError, isLoading }: GuestbooksProps) => {
+  if (isError)
+    return (
+      <VStack w={'full'} py={16} spacing={'4'}>
+        <Icon as={FaRegSadTear} boxSize={'16'} />
+        <Text textAlign={'center'}>
+          I&apos;m sorry, but we are unable to load Guestbooks for some reason.
+          📖
+        </Text>
+        <Text textAlign={'center'}>Please come back later! ☕</Text>
+      </VStack>
+    )
+
+  if (isLoading)
+    return (
+      <VStack w={'full'} py={16}>
+        <Loading />
+      </VStack>
+    )
+
+  return (
+    <List w={'full'} pt={'8'}>
+      {guestbooks?.map(({ id, content, createdAt, user }) => (
+        <ListItem key={id}>
+          <Flex
+            direction={{ base: 'column', md: 'row' }}
+            py={4}
+            justifyContent={'space-between'}
+          >
+            <Box>
+              <Text fontSize={'xl'} fontWeight={'medium'}>
+                {user}
+              </Text>
+              <Text>{content}</Text>
+            </Box>
+            <Text w={'15em'} textAlign={{ base: 'inherit', md: 'right' }}>
+              {new Date(createdAt).toLocaleString()}
+            </Text>
+          </Flex>
+          <Divider />
+        </ListItem>
+      ))}
+    </List>
+  )
+}
 
 const GuestbookPage = () => {
   const { guestbooks, isLoading, revalidate, isError } = useGuestbooks()
@@ -40,46 +93,11 @@ const GuestbookPage = () => {
       </Text>
 
       <WriteGuestbook onSent={() => revalidate()} />
-
-      {isLoading && (
-        <VStack w={'full'} py={16}>
-          <Loading />
-        </VStack>
-      )}
-
-      {isError && typeof guestbooks === 'undefined' && (
-        <VStack w={'full'} py={16} spacing={'4'}>
-          <Icon as={FaRegSadTear} boxSize={'16'} />
-          <Text textAlign={'center'}>
-            I&apos;m sorry, but we are unable to load Guestbooks for some
-            reason. 📖
-          </Text>
-          <Text textAlign={'center'}>Please come back later! ☕</Text>
-        </VStack>
-      )}
-
-      <List w={'full'} pt={'8'}>
-        {guestbooks?.map(({ id, content, createdAt, user }) => (
-          <ListItem key={id}>
-            <Flex
-              direction={{ base: 'column', md: 'row' }}
-              py={4}
-              justifyContent={'space-between'}
-            >
-              <Box>
-                <Text fontSize={'xl'} fontWeight={'medium'}>
-                  {user}
-                </Text>
-                <Text>{content}</Text>
-              </Box>
-              <Text w={'15em'} textAlign={{ base: 'inherit', md: 'right' }}>
-                {new Date(createdAt).toLocaleString()}
-              </Text>
-            </Flex>
-            <Divider />
-          </ListItem>
-        ))}
-      </List>
+      <Guestbooks
+        guestbooks={guestbooks}
+        isError={isError}
+        isLoading={isLoading}
+      />
     </VStack>
   )
 }
