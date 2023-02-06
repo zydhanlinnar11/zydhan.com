@@ -4,7 +4,6 @@ import { GoogleProvider } from './GoogleProvider'
 
 export class ProviderBuilder {
   static build = (Provider: typeof AbstractProvider) => {
-    // TODO: ngganti config
     if (Provider.id === GoogleProvider.id)
       return new GoogleProvider(
         process.env.GOOGLE_CLIENT_ID ?? '',
