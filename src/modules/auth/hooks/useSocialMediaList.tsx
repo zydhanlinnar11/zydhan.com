@@ -4,7 +4,7 @@ import { SocialMedia } from '@/auth/types/SocialMedia'
 
 const useSocialMediaList = () => {
   const { data, error, isLoading } = useSWR<{ data: SocialMedia[] }>(
-    '/auth/social-media',
+    '/api/auth/social-media',
     backendFetcher
   )
 
