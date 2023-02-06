@@ -53,7 +53,6 @@ export class SocialMediaController extends BaseController {
     }
     if (!user) throw new Error('unable to retrieve user data')
 
-    // @ts-ignore
     req.session.userId = user?.id
     await req.session.save()
 
