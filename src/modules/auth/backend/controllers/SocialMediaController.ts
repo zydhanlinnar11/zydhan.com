@@ -1,12 +1,10 @@
 import { SocialMedia } from '@/auth/types/SocialMedia'
 import { BaseController } from '@/common/backend/controllers/BaseController'
-import { db } from '@/common/lib/firebase'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { oauth2Providers } from '../config/oauth2-providers'
 import { ProviderBuilder } from '../providers/OAuth2/ProviderBuilder'
-import { FieldValue } from 'firebase-admin/firestore'
-import { OAuth2User } from '../models/OAuth2User'
-import { AbstractProvider } from '../providers/OAuth2/AbstractProvider'
+import { userRepository } from '../providers/dependencies'
+import { uuid } from 'uuidv4'
 
 export class SocialMediaController extends BaseController {
   public index = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -36,67 +34,29 @@ export class SocialMediaController extends BaseController {
     const provider = ProviderBuilder.build(Provider)
 
     const socialUser = await provider.getUser(req)
-    const isUserExistInDb =
-      (
-        await db
-          .collection('users')
-          .where(`${Provider.id}Id`, '==', socialUser.getId())
-          .limit(1)
-          .count()
-          .get()
-      ).data().count !== 0
+    let user = await userRepository.getByProvider(Provider, socialUser.getId())
 
-    if (!isUserExistInDb) {
-      const userWithSameEmailCount = (
-        await db
-          .collection('users')
-          .where(`email`, '==', socialUser.getEmail())
-          .limit(1)
-          .count()
-          .get()
-      ).data().count
-      const isUserWithSameEmailExist = userWithSameEmailCount !== 0
-      if (isUserWithSameEmailExist) {
+    if (!user) {
+      const isUserWithSameEmailExist =
+        (await userRepository.getByEmail(socialUser.getEmail())) !== null
+      if (isUserWithSameEmailExist)
         return res.status(401).send({ message: 'user_with_same_email_exist' })
-      }
-      const userRef = db.collection('users').doc()
-      await userRef.set({
-        [`${Provider.id}Id`]: socialUser.getId(),
+
+      const userId = uuid()
+      await userRepository.create({
+        id: userId,
         email: socialUser.getEmail(),
         name: socialUser.getName(),
-        created_at: FieldValue.serverTimestamp(),
-        updated_at: FieldValue.serverTimestamp(),
       })
+      await userRepository.linkToSocial(Provider, socialUser.getId(), userId)
+      user = await userRepository.getByProvider(Provider, socialUser.getId())
     }
-
-    const userSnapshot = await this.getUserSnapshotFromSocialUser(
-      Provider,
-      socialUser
-    )
+    if (!user) throw new Error('unable to retrieve user data')
 
     // @ts-ignore
-    req.session.userId = userSnapshot.id
+    req.session.userId = user?.id
     await req.session.save()
 
     return res.status(204).send(null)
-  }
-
-  private async getUserSnapshotFromSocialUser(
-    Provider: typeof AbstractProvider,
-    socialUser: OAuth2User
-  ) {
-    const snapshot = await db
-      .collection('users')
-      .where(`${Provider.id}Id`, '==', socialUser.getId())
-      .limit(1)
-      .get()
-
-    let userData: any
-
-    snapshot.forEach((doc) => {
-      userData = { ...doc.data(), id: doc.id }
-    })
-
-    return userData
   }
 }
