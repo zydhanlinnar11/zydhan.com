@@ -14,7 +14,7 @@ const useAuthorization = () => {
   const { data, error, isLoading } = useSWRImmutable<
     AxiosResponse<AuthorizationConsentData | AuthorizationSuccess>,
     AxiosError<AuthorizationError>
-  >(`/oauth/authorize?${params.toString()}`, backendFetcher, {
+  >(`/api/oauth/interactions/${query.uid}`, backendFetcher, {
     onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
       // Never retry if it is displaying OAuth2 error.
       if (error.response?.data.data.action === 'display') return

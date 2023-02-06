@@ -8,14 +8,10 @@ import { AuthorizationError } from '@/oauth/types/AuthorizationError'
 import { AuthorizationSuccess } from '@/oauth/types/AuthorizationSuccess'
 import {
   Box,
-  BoxProps,
   Button,
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
   chakra,
-  forwardRef,
   Heading,
   HStack,
   ListItem,
@@ -24,11 +20,13 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 import { FormEventHandler, memo } from 'react'
 
 const AuthorizationPage = () => {
   const { data, error, isLoading } = useAuthorization()
   const errorPage = useAuthorizationErrorPage(error?.response?.data)
+  const { query } = useRouter()
 
   if (errorPage) return errorPage
   if (!data || isLoading) return <LoadingPage />
@@ -37,13 +35,12 @@ const AuthorizationPage = () => {
     return <LoadingPage />
   }
 
-  const { auth_token, client_id, client_name, scopes, state } = data
+  const { client_name, scopes } = data
 
   const authorize: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    const body = { auth_token, client_id, state }
     backendFetcher
-      .post<AuthorizationSuccess>('/oauth/authorize', body)
+      .post<AuthorizationSuccess>(`/api/oauth/interactions/${query.uid}`)
       .then((response) => {
         window.open(response.data.location, '_self')
       })
@@ -52,9 +49,7 @@ const AuthorizationPage = () => {
   const deny: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     backendFetcher
-      .delete(
-        `/oauth/authorize?auth_token=${auth_token}&client_id=${client_id}&state=${state}`
-      )
+      .delete(`/api/oauth/interactions/${query.uid}`)
       .catch((error) => {
         if (!axios.isAxiosError<AuthorizationError>(error))
           throw new Error('invalid_response')
