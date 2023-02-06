@@ -1,5 +1,5 @@
 export type Guestbook = {
-  id: number
+  id: string
   user: string
   content: string
   createdAt: string

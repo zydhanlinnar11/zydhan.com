@@ -4,7 +4,7 @@ import { Guestbook } from '@/guestbook/types/Guestbook'
 
 const useGuestbooks = () => {
   const { data, error, isLoading, mutate } = useSWR<{ data: Guestbook[] }>(
-    '/guestbook/guestbooks',
+    '/api/guestbook/guestbooks',
     backendFetcher
   )
 
