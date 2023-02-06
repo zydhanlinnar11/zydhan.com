@@ -26,7 +26,6 @@ export abstract class AbstractProvider {
   protected abstract mapUserToClass: (user: any) => OAuth2User
 
   public getRedirectUrl = async (req: NextApiRequest) => {
-    // TODO: implement PKCE verification
     const state = this.getState()
 
     if (!this.isStateless) req.session.state = state
@@ -47,7 +46,6 @@ export abstract class AbstractProvider {
   }
 
   protected getCodeFields = (state: string) => {
-    // TODO: implement PKCE verification
     return {
       client_id: this.clientId,
       redirect_uri: this.redirectUri,
@@ -74,7 +72,6 @@ export abstract class AbstractProvider {
 
     if (this.hasInvalidState(req)) throw new Error('invalid_state')
 
-    // TODO: implement PKCE verification
     const response = await this.getAccessTokenResponse(this.getCode(req))
     this.user = this.mapUserToClass(
       await this.getUserByToken(response.access_token)
@@ -99,7 +96,6 @@ export abstract class AbstractProvider {
       code: code,
       redirect_uri: this.redirectUri,
     }
-    // TODO: implement PKCE verification
   }
 
   protected getCode = (req: NextApiRequest) =>
