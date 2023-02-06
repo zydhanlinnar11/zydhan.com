@@ -47,7 +47,6 @@ export class FirestoreUserRepository implements IUserRepository {
 
     const user: User = {
       id: doc.id,
-      admin: false,
       email: data.email,
       name: data.name,
       social_media: this.getLinkedSocialMedia(
@@ -105,7 +104,6 @@ export class FirestoreUserRepository implements IUserRepository {
     snapshot.forEach((doc) => {
       const user = doc.data() as unknown as FirestoreUser
       userData = {
-        admin: false,
         email: user.email,
         id: doc.id,
         name: user.name,
