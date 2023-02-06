@@ -60,7 +60,7 @@ const PersonalInfoFormSection: FC<Props> = ({ user }) => {
     setSubmitting(true)
     setValidationError(emptyValidationError)
     backendFetcher
-      .patch('/auth/user', { name, email })
+      .patch('/api/auth/users/personal-info', { name, email })
       .then((response) => {
         toast({
           title: 'Personal information successfully updated!',

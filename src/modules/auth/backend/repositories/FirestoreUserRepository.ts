@@ -2,7 +2,7 @@ import { db } from '@/common/lib/firebase'
 import { User } from '@/common/types/User'
 import { IUserRepository } from '@/auth/backend/contracts/repositories/IUserRepository'
 import { AbstractProvider } from '@/auth/backend/providers/OAuth2/AbstractProvider'
-import { FieldValue } from 'firebase-admin/firestore'
+import { FieldPath, FieldValue } from 'firebase-admin/firestore'
 import { oauth2Providers } from '../config/oauth2-providers'
 
 export type FirestoreUser = {
@@ -82,12 +82,18 @@ export class FirestoreUserRepository implements IUserRepository {
     socialId: any,
     userId: string
   ) => Promise<void> = async (Provider, socialId, userId) => {
+    await this.getByIdOrFail(userId)
+
+    const userRef = db.collection('users').doc(userId)
+    await userRef.update({ [`${Provider.id}Id`]: socialId })
+  }
+
+  private async getByIdOrFail(userId: string) {
     const user = await this.getById(userId)
     const userExistInDb = user !== null
     if (!userExistInDb) throw new Error('user_not_exist')
 
-    const userRef = db.collection('users').doc(userId)
-    await userRef.update({ [`${Provider.id}Id`]: socialId })
+    return user
   }
 
   private mapSnapshotToUser(
@@ -126,11 +132,36 @@ export class FirestoreUserRepository implements IUserRepository {
     Provider: typeof AbstractProvider,
     userId: string
   ) => Promise<void> = async (Provider, userId) => {
-    const user = await this.getById(userId)
-    const userExistInDb = user !== null
-    if (!userExistInDb) throw new Error('user_not_exist')
+    await this.getByIdOrFail(userId)
 
     const userRef = db.collection('users').doc(userId)
     await userRef.update({ [`${Provider.id}Id`]: null })
+  }
+
+  update: (
+    id: string,
+    personalInfo: { email: string; name: string }
+  ) => Promise<void> = async (id, personalInfo) => {
+    await this.getByIdOrFail(id)
+
+    const userRef = db.collection('users').doc(id)
+    await userRef.update(personalInfo)
+
+    // TODO: update related guestbooks
+  }
+
+  isAnotherUserIdWithSameEmailExists: (
+    email: string,
+    excludedUserId: string
+  ) => Promise<boolean> = async (email, excludedUserId) => {
+    const res = await db
+      .collection('users')
+      .where(FieldPath.documentId(), '!=', excludedUserId)
+      .where('email', '==', email)
+      .limit(1)
+      .count()
+      .get()
+
+    return res.data().count !== 0
   }
 }
