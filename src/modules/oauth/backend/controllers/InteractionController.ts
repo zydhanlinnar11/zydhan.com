@@ -12,27 +12,41 @@ export class InteractionController extends BaseController {
     const { jti, prompt, params } = await provider.interactionDetails(req, res)
 
     if (req.query.redirect === 'true') {
-      if (
-        (prompt.name === 'login' &&
-          prompt.reasons.find((reason) => reason !== 'no_session')) ||
-        !req.session.userId
-      ) {
-        req.session.destroy()
-        return res.redirect(`/auth/login?uid=${jti}`)
+      if (prompt.name === 'consent')
+        return res.redirect(`/oauth/authorize?uid=${jti}`)
+
+      const hasOidcSession =
+        prompt.reasons.find(
+          (reason) => reason === 'no_session' || reason === 'max_age'
+        ) === undefined
+
+      if (!hasOidcSession && req.session.userId) {
+        await provider.interactionFinished(
+          req,
+          res,
+          {
+            login: { accountId: req.session.userId },
+          },
+          { mergeWithLastSubmission: true }
+        )
       }
 
-      return res.redirect(`/oauth/authorize?uid=${jti}`)
+      req.session.destroy()
+      return res.redirect(`/auth/login?uid=${jti}`)
     }
+
+    const userId = req.session.userId
+    if (!userId) return BaseController.unauthorized(res)
 
     const client = await provider.Client.find(params.client_id as string)
     if (!client) return res.status(400).send({ message: 'Bad request' })
 
+    const scopes = Array.isArray(prompt.details.missingOIDCScope)
+      ? prompt.details.missingOIDCScope
+      : []
     const data: AuthorizationConsentData = {
       client_name: client.clientName ?? '',
-      scopes:
-        client.scope
-          ?.split(' ')
-          .map((scope) => ({ description: scope, id: scope })) ?? [],
+      scopes: scopes.map((scope) => ({ description: scope, id: scope })),
     }
     res.send(data)
   }
@@ -81,10 +95,7 @@ export class InteractionController extends BaseController {
     const redirectTo = await provider.interactionResult(
       req,
       res,
-      {
-        consent,
-        login: { accountId: userId },
-      },
+      { consent },
       { mergeWithLastSubmission: true }
     )
 
