@@ -22,9 +22,13 @@ class FirestoreAdapter implements Adapter {
     }
 
     const ref = db.collection(this.collection).doc(id)
+    const newPayload: { [key: string]: any } = {}
+    for (let key in payload) {
+      newPayload[key] = payload[key] == undefined ? null : payload[key]
+    }
     await ref.set({
-      ...payload,
-      expiresAt: expiresAt ? Timestamp.fromDate(expiresAt) : undefined,
+      ...newPayload,
+      expiresAt: expiresAt ? Timestamp.fromDate(expiresAt) : null,
     })
   }
 
@@ -36,11 +40,13 @@ class FirestoreAdapter implements Adapter {
     const data = doc.data()
     if (!data) return undefined
 
-    const expiration = new Timestamp(
-      data.expiresAt._seconds,
-      data.expiresAt._nanoseconds
-    ).toDate()
-    if (expiration.getTime() < Date.now()) return undefined
+    const expiration = data.expiresAt
+      ? new Timestamp(
+          data.expiresAt._seconds,
+          data.expiresAt._nanoseconds
+        ).toDate()
+      : null
+    if (expiration && expiration.getTime() < Date.now()) return undefined
 
     return data
   }
@@ -59,11 +65,13 @@ class FirestoreAdapter implements Adapter {
 
     snapshot.forEach((doc) => (data = doc.data()))
 
-    const expiration = new Timestamp(
-      data.expiresAt._seconds,
-      data.expiresAt._nanoseconds
-    ).toDate()
-    if (expiration.getTime() < Date.now()) return undefined
+    const expiration = data.expiresAt
+      ? new Timestamp(
+          data.expiresAt._seconds,
+          data.expiresAt._nanoseconds
+        ).toDate()
+      : null
+    if (expiration && expiration.getTime() < Date.now()) return undefined
 
     return data
   }
@@ -80,31 +88,37 @@ class FirestoreAdapter implements Adapter {
 
     snapshot.forEach((doc) => (data = doc.data()))
 
-    const expiration = new Timestamp(
-      data.expiresAt._seconds,
-      data.expiresAt._nanoseconds
-    ).toDate()
-    if (expiration.getTime() < Date.now()) return undefined
+    const expiration = data.expiresAt
+      ? new Timestamp(
+          data.expiresAt._seconds,
+          data.expiresAt._nanoseconds
+        ).toDate()
+      : null
+    if (expiration && expiration.getTime() < Date.now()) return undefined
 
     return data
   }
 
   async consume(id: string): Promise<void | undefined> {
+    console.log('consume')
     const doc = await db.collection(this.collection).doc(id).get()
 
     if (!doc.exists) return undefined
     const data = doc.data()
     if (!data) return undefined
 
-    const expiration = new Timestamp(
-      data.expiresAt._seconds,
-      data.expiresAt._nanoseconds
-    ).toDate()
-    if (expiration.getTime() < Date.now()) return undefined
+    const expiration = data.expiresAt
+      ? new Timestamp(
+          data.expiresAt._seconds,
+          data.expiresAt._nanoseconds
+        ).toDate()
+      : null
+    if (expiration && expiration.getTime() < Date.now()) return undefined
 
-    await doc.ref.update({
+    const updateData = {
       consumed: Math.floor(Date.now() / 1000),
-    })
+    }
+    await doc.ref.update(updateData)
   }
 
   async destroy(id: string): Promise<void | undefined> {
