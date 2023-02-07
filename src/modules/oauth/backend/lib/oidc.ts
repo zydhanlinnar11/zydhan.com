@@ -25,6 +25,11 @@ export const getProvider = async (req: NextApiRequest) => {
     },
     features: {
       devInteractions: { enabled: false },
+      rpInitiatedLogout: { enabled: false },
+      pushedAuthorizationRequests: {
+        enabled: false,
+        requirePushedAuthorizationRequests: false,
+      },
     },
     cookies: {
       keys: latestKey ? [latestKey] : [],
