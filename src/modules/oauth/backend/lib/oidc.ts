@@ -1,9 +1,11 @@
 import { NextApiRequest } from 'next'
 import Provider, { Configuration } from 'oidc-provider'
-import { cookieKeyRepository } from '../providers/dependencies'
+import { cookieKeyRepository, jwkRepository } from '../providers/dependencies'
 
 export const getProvider = async (req: NextApiRequest) => {
   const latestKey = (await cookieKeyRepository.getLatest())?.getKey()
+  const jwks = await jwkRepository.getAll()
+
   const baseUrl = `${
     process.env.NODE_ENV === 'production' ? 'https' : 'http'
   }://${req.headers.host}`
@@ -26,6 +28,7 @@ export const getProvider = async (req: NextApiRequest) => {
     cookies: {
       keys: latestKey ? [latestKey] : [],
     },
+    jwks: { keys: jwks.map((jwk) => JSON.parse(jwk.getKey())) },
   }
 
   return new Provider(`${baseUrl}/api/oauth`, configuration)
