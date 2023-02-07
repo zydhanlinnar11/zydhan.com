@@ -1,5 +1,6 @@
 import { NextApiRequest } from 'next'
 import Provider, { Configuration } from 'oidc-provider'
+import FirestoreAdapter from '../adapters/FirestoreAdapter'
 import { cookieKeyRepository, jwkRepository } from '../providers/dependencies'
 
 export const getProvider = async (req: NextApiRequest) => {
@@ -29,6 +30,7 @@ export const getProvider = async (req: NextApiRequest) => {
       keys: latestKey ? [latestKey] : [],
     },
     jwks: { keys: jwks.map((jwk) => JSON.parse(jwk.getKey())) },
+    adapter: FirestoreAdapter,
   }
 
   return new Provider(`${baseUrl}/api/oauth`, configuration)
