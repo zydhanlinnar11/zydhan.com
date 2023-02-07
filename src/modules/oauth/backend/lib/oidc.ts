@@ -31,6 +31,7 @@ export const getProvider = async (req: NextApiRequest) => {
         enabled: false,
         requirePushedAuthorizationRequests: false,
       },
+      // TODO: harus login sebelum register
       registration: {
         enabled: true,
         idFactory: function (ctx) {
