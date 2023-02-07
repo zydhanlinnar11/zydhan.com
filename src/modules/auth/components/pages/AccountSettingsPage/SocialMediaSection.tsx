@@ -93,10 +93,7 @@ const SocialLinkButton = ({
   const { isOpen, onOpen, onClose } = useDisclosure()
   const refetchUser = useRefetchUser()
   const link = useCallback(async () => {
-    const { data } = await backendFetcher.get<RedirectResponseData>(
-      `/api/auth/social-media/${id}/redirect`
-    )
-    socialLoginHandler(name, data.redirect_url, () => {})
+    socialLoginHandler(name, `/api/auth/social-media/${id}/redirect`, () => {})
   }, [id, name])
   const isTheOnlyLinkedAccount = isLinked && user.social_media.length === 1
 
