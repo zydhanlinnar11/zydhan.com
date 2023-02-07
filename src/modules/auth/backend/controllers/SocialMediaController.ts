@@ -19,13 +19,13 @@ export class SocialMediaController extends BaseController {
   protected getProvider = (req: NextApiRequest) =>
     oauth2Providers.find(({ id }) => id === req.query.id)
 
-  public getRedirectUrl = async (req: NextApiRequest, res: NextApiResponse) => {
+  public redirect = async (req: NextApiRequest, res: NextApiResponse) => {
     const Provider = this.getProvider(req)
     if (!Provider) return BaseController.notFound(res)
 
-    return res.send({
-      redirect_url: await ProviderBuilder.build(Provider).getRedirectUrl(req),
-    })
+    return res.redirect(
+      await ProviderBuilder.build(Provider).getRedirectUrl(req)
+    )
   }
 
   public callback = async (req: NextApiRequest, res: NextApiResponse) => {

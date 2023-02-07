@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 async function redirectRoute(req: NextApiRequest, res: NextApiResponse) {
   const controller = new SocialMediaController()
-  if (req.method === 'GET') return controller.getRedirectUrl(req, res)
+  if (req.method === 'GET') return controller.redirect(req, res)
   return BaseController.methodNotAllowed(res)
 }
 

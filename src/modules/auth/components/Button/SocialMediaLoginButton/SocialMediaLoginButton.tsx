@@ -8,16 +8,9 @@ type Props = {
   socialMedia: SocialMedia
 }
 
-type ResponseData = {
-  redirect_url: string
-}
-
 const SocialMediaLoginButton: FC<Props> = ({ socialMedia: { id, name } }) => {
   const handler = useCallback(async () => {
-    const { data } = await backendFetcher.get<ResponseData>(
-      `/api/auth/social-media/${id}/redirect`
-    )
-    socialLoginHandler(name, data.redirect_url, () => {})
+    socialLoginHandler(name, `/api/auth/social-media/${id}/redirect`, () => {})
   }, [id, name])
 
   return (
