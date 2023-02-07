@@ -1,5 +1,6 @@
 import { NextApiRequest } from 'next'
 import Provider, { Configuration } from 'oidc-provider'
+import { uuid } from 'uuidv4'
 import FirestoreAdapter from '../adapters/FirestoreAdapter'
 import { cookieKeyRepository, jwkRepository } from '../providers/dependencies'
 
@@ -29,6 +30,12 @@ export const getProvider = async (req: NextApiRequest) => {
       pushedAuthorizationRequests: {
         enabled: false,
         requirePushedAuthorizationRequests: false,
+      },
+      registration: {
+        enabled: true,
+        idFactory: function (ctx) {
+          return uuid()
+        },
       },
     },
     cookies: {
