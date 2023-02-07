@@ -1,7 +1,9 @@
 import { NextApiRequest } from 'next'
 import Provider, { Configuration } from 'oidc-provider'
+import { cookieKeyRepository } from '../providers/dependencies'
 
-export const getProvider = (req: NextApiRequest) => {
+export const getProvider = async (req: NextApiRequest) => {
+  const latestKey = (await cookieKeyRepository.getLatest())?.getKey()
   const baseUrl = `${
     process.env.NODE_ENV === 'production' ? 'https' : 'http'
   }://${req.headers.host}`
@@ -20,6 +22,9 @@ export const getProvider = (req: NextApiRequest) => {
     },
     features: {
       devInteractions: { enabled: false },
+    },
+    cookies: {
+      keys: latestKey ? [latestKey] : [],
     },
   }
 

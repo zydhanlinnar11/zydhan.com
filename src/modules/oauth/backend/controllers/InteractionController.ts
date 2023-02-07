@@ -8,7 +8,7 @@ import { getProvider } from '../lib/oidc'
 export class InteractionController extends BaseController {
   public show = async (req: NextApiRequest, res: NextApiResponse) => {
     // TODO: handle sessionnotfound
-    const provider = getProvider(req)
+    const provider = await getProvider(req)
     const { jti, prompt, params } = await provider.interactionDetails(req, res)
 
     if (req.query.redirect === 'true') {
@@ -41,7 +41,7 @@ export class InteractionController extends BaseController {
     const userId = req.session.userId
     if (!userId) return BaseController.unauthorized(res)
 
-    const provider = getProvider(req)
+    const provider = await getProvider(req)
     const interactionDetails = await provider.interactionDetails(req, res)
     const {
       prompt: { name, details },
@@ -94,7 +94,7 @@ export class InteractionController extends BaseController {
   }
 
   deny = async (req: NextApiRequest, res: NextApiResponse) => {
-    const provider = getProvider(req)
+    const provider = await getProvider(req)
     const result = {
       error: 'access_denied',
       error_description: 'End-User aborted interaction',
