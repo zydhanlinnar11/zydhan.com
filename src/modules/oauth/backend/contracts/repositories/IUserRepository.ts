@@ -7,29 +7,15 @@ type NewUser = {
   name: string
 }
 
-type PersonalInfo = {
-  email: string
-  name: string
-}
-
 export interface IUserRepository {
   getByProvider: (
     Provider: typeof AbstractProvider,
     socialId: any
   ) => Promise<User | null>
 
-  isAnotherUserIdWithSameEmailExists: (
-    email: string,
-    excludedUserId: string
-  ) => Promise<boolean>
-
   getByEmail: (email: string) => Promise<User | null>
 
-  getById: (id: string) => Promise<User | null>
-
   create: (user: NewUser) => Promise<void>
-
-  update: (id: string, personalInfo: PersonalInfo) => Promise<void>
 
   linkToSocial: (
     Provider: typeof AbstractProvider,

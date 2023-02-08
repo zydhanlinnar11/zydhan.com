@@ -135,31 +135,4 @@ export class FirestoreUserRepository implements IUserRepository {
     const userRef = db.collection('users').doc(userId)
     await userRef.update({ [`${Provider.id}Id`]: null })
   }
-
-  update: (
-    id: string,
-    personalInfo: { email: string; name: string }
-  ) => Promise<void> = async (id, personalInfo) => {
-    await this.getByIdOrFail(id)
-
-    const userRef = db.collection('users').doc(id)
-    await userRef.update(personalInfo)
-
-    // TODO: update related guestbooks
-  }
-
-  isAnotherUserIdWithSameEmailExists: (
-    email: string,
-    excludedUserId: string
-  ) => Promise<boolean> = async (email, excludedUserId) => {
-    const res = await db
-      .collection('users')
-      .where(FieldPath.documentId(), '!=', excludedUserId)
-      .where('email', '==', email)
-      .limit(1)
-      .count()
-      .get()
-
-    return res.data().count !== 0
-  }
 }
