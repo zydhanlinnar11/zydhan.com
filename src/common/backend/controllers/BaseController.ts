@@ -1,5 +1,8 @@
 import { NextApiResponse } from 'next'
 export abstract class BaseController {
+  static badRequest = (res: NextApiResponse) =>
+    res.status(400).send({ message: 'Bad Request!' })
+
   static notFound = (res: NextApiResponse) =>
     res.status(404).send({ message: 'Not Found!' })
 
