@@ -4,10 +4,9 @@ import { userRepository } from '../providers/dependencies'
 
 export class UserController extends BaseController {
   public index = async (req: NextApiRequest, res: NextApiResponse) => {
-    if (!req.session.userId) return BaseController.unauthorized(res)
+    if (!req.session.userId) return res.send(null)
 
     const user = await userRepository.getById(req.session.userId)
-    if (!user) return BaseController.unauthorized(res)
 
     return res.send(user)
   }

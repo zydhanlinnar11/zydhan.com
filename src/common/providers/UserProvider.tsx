@@ -10,6 +10,7 @@ import {
 import { User } from '@/common/types/User'
 import { backendFetcher } from '@/common/hooks/useAxios'
 import useSWR, { KeyedMutator } from 'swr'
+import { AxiosResponse } from 'axios'
 
 type State =
   | {
@@ -68,13 +69,13 @@ const initialState: State = {
 
 const StateContext = createContext<State>(initialState)
 const DispatchContext = createContext<Dispatch<Action>>(() => null)
-const RefetchUserContext = createContext<KeyedMutator<{ data: User }> | null>(
-  null
-)
+const RefetchUserContext = createContext<KeyedMutator<
+  AxiosResponse<User | null>
+> | null>(null)
 
 export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { data, error, isLoading, mutate } = useSWR<{ data: User }>(
+  const { data, error, isLoading, mutate } = useSWR<AxiosResponse<User | null>>(
     `/api/auth/user`,
     backendFetcher,
     {
@@ -86,7 +87,7 @@ export const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 
   useEffect(() => {
     if (isLoading) dispatch({ payload: null, type: 'SET_LOADING' })
-    else if (error || !data)
+    else if (error || !data?.data)
       dispatch({ type: 'UNAUTHENTICATED', payload: null })
     else if (data)
       dispatch({
