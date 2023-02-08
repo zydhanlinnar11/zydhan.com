@@ -22,7 +22,7 @@ const LogoutPage = () => {
       <NextSeo
         title="Logout"
         openGraph={{
-          url: `${config.frontendUrl}/auth/logout`,
+          url: `${config.frontendUrl}/oauth/logout`,
           title: 'Logout',
         }}
       />

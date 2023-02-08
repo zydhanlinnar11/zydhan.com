@@ -9,7 +9,7 @@ const useRedirectToLogin = (redirectBackNeeded: boolean) => {
   useEffect(() => {
     if (state === 'UNAUTHENTICATED') {
       replace({
-        pathname: '/auth/login',
+        pathname: '/api/auth/login',
         query: redirectBackNeeded
           ? { redirect: window.location.href }
           : undefined,

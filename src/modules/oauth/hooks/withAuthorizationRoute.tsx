@@ -25,13 +25,13 @@ const AuthorizationRoute: FC<PropsWithChildren> = ({ children }) => {
     const params = convertQueryToSearchParams(router.query)
     params.append('oauth', 'true')
 
-    router.push(`/auth/login?${params.toString()}`)
+    router.push(`/api/auth/login?${params.toString()}`)
   }
   if (state === 'LOADING' || state === 'UNAUTHENTICATED') return <LoadingPage />
 
   if (router.query.prompt === 'login') {
     delete router.query.prompt
-    backendFetcher.delete('/auth/logout').then(() => {
+    backendFetcher.delete('/oauth/logout').then(() => {
       refetchUser && refetchUser()
     })
     return <LoadingPage />

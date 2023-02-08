@@ -34,11 +34,11 @@ const Menu = () => {
         </MenuButton>
       </Box>
       <MenuList p={'2'}>
-        {!user && <MenuItem href="/auth/login">Login</MenuItem>}
+        {!user && <MenuItem href="/api/auth/login">Login</MenuItem>}
         {user && (
           <>
             <MenuItem href="/auth/account/settings">Account settings</MenuItem>
-            <MenuItem href="/auth/logout">Logout</MenuItem>
+            <MenuItem href="/oauth/logout">Logout</MenuItem>
           </>
         )}
       </MenuList>
