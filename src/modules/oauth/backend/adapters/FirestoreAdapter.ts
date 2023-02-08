@@ -10,6 +10,21 @@ class FirestoreAdapter implements Adapter {
     this.collection = `oidc_${snakeCase(collection)}`
   }
 
+  private removeEmpty = (obj: any) => {
+    let newObj: { [key: string]: any } = {}
+
+    for (let key in obj) {
+      const value = obj[key]
+      if (value === undefined) continue
+
+      if (typeof value === 'object' && !Array.isArray(value))
+        newObj[key] = this.removeEmpty(value)
+      else newObj[key] = value
+    }
+
+    return newObj
+  }
+
   async upsert(
     id: string,
     payload: AdapterPayload,
@@ -22,12 +37,8 @@ class FirestoreAdapter implements Adapter {
     }
 
     const ref = db.collection(this.collection).doc(id)
-    const newPayload: { [key: string]: any } = {}
-    for (let key in payload) {
-      newPayload[key] = payload[key] == undefined ? null : payload[key]
-    }
     await ref.set({
-      ...newPayload,
+      ...this.removeEmpty(payload),
       expiresAt: expiresAt ? Timestamp.fromDate(expiresAt) : null,
     })
   }
@@ -100,7 +111,6 @@ class FirestoreAdapter implements Adapter {
   }
 
   async consume(id: string): Promise<void | undefined> {
-    console.log('consume')
     const doc = await db.collection(this.collection).doc(id).get()
 
     if (!doc.exists) return undefined
