@@ -60,7 +60,6 @@ const LoginPage = (props: LoginPageProps) => {
 export const getServerSideProps: GetServerSideProps = withSessionSsr(
   async ({ req, res, query }) => {
     const userId = req.session.userId
-    console.log(userId)
     if (userId) return { redirect: { destination: '/', permanent: false } }
 
     try {
