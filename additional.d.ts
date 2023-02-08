@@ -4,6 +4,9 @@ import * as IronSession from 'iron-session'
 declare module 'iron-session' {
   interface IronSessionData {
     userId?: string
-    state?: string
+    state?: {
+      id: string
+      state: string
+    }
   }
 }
