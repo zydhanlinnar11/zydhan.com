@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { OAuth2User } from '@/auth/backend/models/OAuth2User'
+import { OAuth2User } from '@/common/backend/models/OAuth2User'
 import { AbstractProvider } from './AbstractProvider'
 
 export class GithubProvider extends AbstractProvider {
@@ -7,6 +7,8 @@ export class GithubProvider extends AbstractProvider {
   static providerName: string = 'Github'
 
   protected scopes: string[] = ['user:email']
+
+  protected getId = () => GithubProvider.id
 
   protected getAuthUrl: (state: string) => string = (state) =>
     this.buildAuthUrlFromBase('https://github.com/login/oauth/authorize', state)

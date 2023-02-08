@@ -1,5 +1,4 @@
-import { SocialMedia } from '@/auth/types/SocialMedia'
-import { backendFetcher } from '@/common/hooks/useAxios'
+import { SocialMedia } from '@/common/types/SocialMedia'
 import { Button } from '@chakra-ui/react'
 import { FC, memo, useCallback } from 'react'
 import socialLoginHandler from './SocialLoginHandler'
@@ -10,7 +9,7 @@ type Props = {
 
 const SocialMediaLoginButton: FC<Props> = ({ socialMedia: { id, name } }) => {
   const handler = useCallback(async () => {
-    socialLoginHandler(name, `/api/auth/social-media/${id}/redirect`, () => {})
+    socialLoginHandler(name, `/api/oauth/social-media/${id}/redirect`, () => {})
   }, [id, name])
 
   return (

@@ -1,5 +1,5 @@
 import { User } from '@/common/types/User'
-import { AbstractProvider } from '@/auth/backend/providers/OAuth2/AbstractProvider'
+import { AbstractProvider } from '@/common/backend/providers/OAuth2/AbstractProvider'
 
 type NewUser = {
   id: string

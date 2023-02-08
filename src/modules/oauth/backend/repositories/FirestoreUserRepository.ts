@@ -1,9 +1,9 @@
+import { AbstractProvider } from '@/common/backend/providers/OAuth2/AbstractProvider'
 import { db } from '@/common/lib/firebase'
 import { User } from '@/common/types/User'
-import { IUserRepository } from '@/auth/backend/contracts/repositories/IUserRepository'
-import { AbstractProvider } from '@/auth/backend/providers/OAuth2/AbstractProvider'
 import { FieldPath, FieldValue } from 'firebase-admin/firestore'
-import { oauth2Providers } from '../config/oauth2-providers'
+import { oauth2Providers } from '@/common/config/oauth2-providers'
+import { IUserRepository } from '../contracts/repositories/IUserRepository'
 
 export type FirestoreUser = {
   created_at: { _seconds: number; _nanoseconds: number } | FieldValue

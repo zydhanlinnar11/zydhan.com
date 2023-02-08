@@ -1,5 +1,4 @@
-import useSocialMediaList from '@/auth/hooks/useSocialMediaList'
-import Loading from '@/common/components/Loading'
+import useSocialMediaList from '@/common/hooks/useSocialMediaList'
 import { backendFetcher } from '@/common/hooks/useAxios'
 import { User } from '@/common/types/User'
 import {
@@ -9,7 +8,6 @@ import {
   Heading,
   Divider,
   Button,
-  Box,
   useToast,
   Alert,
   AlertIcon,
@@ -24,7 +22,7 @@ import {
   Spinner,
 } from '@chakra-ui/react'
 import { FC, useCallback, useState } from 'react'
-import socialLoginHandler from '@/auth/components/Button/SocialMediaLoginButton/SocialLoginHandler'
+import socialLoginHandler from '@/oauth/Button/SocialMediaLoginButton/SocialLoginHandler'
 import { useRefetchUser } from '@/common/providers/UserProvider'
 
 type Props = {
@@ -35,7 +33,7 @@ const isSocialLinked = (socialMedia: string[], id: string) =>
   typeof socialMedia.find((item) => item === id) !== 'undefined'
 
 const SocialMediaSection: FC<Props> = ({ user }) => {
-  const { socialMediaList, isLoading } = useSocialMediaList()
+  const socialMediaList = useSocialMediaList()
 
   return (
     <Card as={'section'} variant={'outline'}>
@@ -57,12 +55,7 @@ const SocialMediaSection: FC<Props> = ({ user }) => {
             There must be at least 1 (one) social media linked
           </Alert>
         )}
-        {isLoading && (
-          <Box py={'4'}>
-            <Loading />
-          </Box>
-        )}
-        {socialMediaList?.map((social) => (
+        {socialMediaList.map((social) => (
           <SocialLinkButton
             key={social.id}
             isLinked={isSocialLinked(user.social_media, social.id)}

@@ -9,6 +9,8 @@ export class GoogleProvider extends AbstractProvider {
   protected scopeSeparator: string = ' '
   protected scopes: string[] = ['openid', 'profile', 'email']
 
+  protected getId = () => GoogleProvider.id
+
   protected getAuthUrl: (state: string) => string = (state) =>
     this.buildAuthUrlFromBase(
       'https://accounts.google.com/o/oauth2/auth',

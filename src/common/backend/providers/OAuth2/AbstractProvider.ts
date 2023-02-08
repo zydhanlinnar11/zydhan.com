@@ -1,5 +1,6 @@
-import { OAuth2User } from '@/auth/backend/models/OAuth2User'
+import { OAuth2User } from '@/common/backend/models/OAuth2User'
 import axios from 'axios'
+import { IncomingMessage } from 'http'
 import { NextApiRequest } from 'next'
 import randomstring from 'randomstring'
 
@@ -25,10 +26,12 @@ export abstract class AbstractProvider {
   protected abstract getUserByToken: (token: string) => Promise<object>
   protected abstract mapUserToClass: (user: any) => OAuth2User
 
+  protected abstract getId: () => string
+
   public getRedirectUrl = async (req: NextApiRequest) => {
     const state = this.getState()
 
-    if (!this.isStateless) req.session.state = state
+    if (!this.isStateless) req.session.state = { state, id: this.getId() }
 
     await req.session.save().then()
 
@@ -59,20 +62,24 @@ export abstract class AbstractProvider {
     return this.scopes.join(this.scopeSeparator)
   }
 
-  protected hasInvalidState = (req: NextApiRequest) => {
+  protected hasInvalidState = (req: IncomingMessage, state: string) => {
     if (this.isStateless) return false
 
-    const state = req.session.state
+    const sessionState = req.session.state?.state
 
-    return state === undefined || req.query.state !== state
+    return sessionState === undefined || sessionState !== state
   }
 
-  public getUser = async (req: NextApiRequest) => {
+  public getUser = async (
+    req: IncomingMessage,
+    code: string,
+    state: string
+  ) => {
     if (this.user) return this.user
 
-    if (this.hasInvalidState(req)) throw new Error('invalid_state')
+    if (this.hasInvalidState(req, state)) throw new Error('invalid_state')
 
-    const response = await this.getAccessTokenResponse(this.getCode(req))
+    const response = await this.getAccessTokenResponse(code)
     this.user = this.mapUserToClass(
       await this.getUserByToken(response.access_token)
     )
@@ -97,7 +104,4 @@ export abstract class AbstractProvider {
       redirect_uri: this.redirectUri,
     }
   }
-
-  protected getCode = (req: NextApiRequest) =>
-    JSON.parse(JSON.stringify(req.query['code']))
 }

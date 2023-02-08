@@ -1,10 +1,10 @@
-import { NextApiRequest } from 'next'
+import { IncomingMessage } from 'http'
 import Provider, { Configuration } from 'oidc-provider'
 import { uuid } from 'uuidv4'
 import FirestoreAdapter from '../adapters/FirestoreAdapter'
 import { cookieKeyRepository, jwkRepository } from '../providers/dependencies'
 
-export const getProvider = async (req: NextApiRequest) => {
+export const getProvider = async (req: IncomingMessage) => {
   const latestKey = (await cookieKeyRepository.getLatest())?.getKey()
   const jwks = await jwkRepository.getAll()
 
@@ -20,9 +20,8 @@ export const getProvider = async (req: NextApiRequest) => {
       },
     },
     interactions: {
-      url: async (ctx, interaction) => {
-        return `/api/oauth/interactions/${interaction.uid}?redirect=true`
-      },
+      url: async (ctx, interaction) =>
+        interaction.prompt.name === 'login' ? `/oauth/login` : `/oauth/consent`,
     },
     features: {
       devInteractions: { enabled: false },
