@@ -72,7 +72,7 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
             onClick={() =>
               push({
                 pathname: '/auth/login',
-                query: { redirect: window.location.href },
+                query: { callbackUrl: window.location.href },
               })
             }
           >

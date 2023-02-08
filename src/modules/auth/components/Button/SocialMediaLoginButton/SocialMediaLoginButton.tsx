@@ -12,9 +12,10 @@ const SocialMediaLoginButton: FC<Props> = ({ socialMedia: { id, name } }) => {
 
   const handler = useCallback(async () => {
     signIn(id, {
-      callbackUrl: typeof query.redirect === 'string' ? query.redirect : '/',
+      callbackUrl:
+        typeof query.callbackUrl === 'string' ? query.callbackUrl : '/',
     })
-  }, [id, query.redirect])
+  }, [id, query.callbackUrl])
 
   return (
     <Button onClick={handler} w={'full'}>

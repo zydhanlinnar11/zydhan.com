@@ -38,7 +38,7 @@ const PrivateRoute: FC<PropsWithChildren<Props<any & { user: User }>>> = ({
         pathname: '/auth/login',
         query: redirectBackNeeded
           ? {
-              redirect: window.location.href,
+              callbackUrl: window.location.href,
             }
           : undefined,
       })
