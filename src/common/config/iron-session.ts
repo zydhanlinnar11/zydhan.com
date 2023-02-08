@@ -1,6 +1,10 @@
 import { IronSessionOptions } from 'iron-session'
-import { withIronSessionApiRoute } from 'iron-session/next'
-import { NextApiHandler } from 'next'
+import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
+import {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  NextApiHandler,
+} from 'next'
 
 const cookieName = process.env.IRON_SESSION_COOKIE_NAME
 const ironSessionPassword = process.env.IRON_SESSION_PASSWORD
@@ -20,4 +24,14 @@ export const ironSessionOption: IronSessionOptions = {
 
 export function withSessionRoute(handler: NextApiHandler) {
   return withIronSessionApiRoute(handler, ironSessionOption)
+}
+
+export function withSessionSsr<
+  P extends { [key: string]: unknown } = { [key: string]: unknown }
+>(
+  handler: (
+    context: GetServerSidePropsContext
+  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
+) {
+  return withIronSessionSsr(handler, ironSessionOption)
 }
