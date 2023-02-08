@@ -1,5 +1,4 @@
 import { BaseController } from '@/common/backend/controllers/BaseController'
-import { withSessionRoute } from '@/common/config/iron-session'
 import { GuestbookController } from '@/guestbook/backend/controllers/GuestbookController'
 import { NextApiRequest, NextApiResponse } from 'next'
 
@@ -10,4 +9,4 @@ function guestbooksRoute(req: NextApiRequest, res: NextApiResponse) {
   return BaseController.methodNotAllowed(res)
 }
 
-export default withSessionRoute(guestbooksRoute)
+export default guestbooksRoute

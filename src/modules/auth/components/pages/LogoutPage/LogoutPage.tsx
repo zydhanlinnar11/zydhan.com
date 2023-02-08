@@ -1,21 +1,14 @@
 import { config } from '@/common/config'
 import { backendFetcher } from '@/common/hooks/useAxios'
 import withPrivateRoute from '@/common/hooks/withPrivateRoute'
-import { useRefetchUser } from '@/common/providers/UserProvider'
 import { Button, Card, CardBody, Heading, HStack, Text } from '@chakra-ui/react'
+import { signOut } from 'next-auth/react'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import { memo, useCallback } from 'react'
 
 const LogoutPage = () => {
   const router = useRouter()
-  const refetchUser = useRefetchUser()
-
-  const logout = useCallback(() => {
-    backendFetcher.delete('/api/auth/logout').then(() => {
-      refetchUser && refetchUser()
-    })
-  }, [refetchUser])
 
   return (
     <>
@@ -44,7 +37,7 @@ const LogoutPage = () => {
             >
               Cancel
             </Button>
-            <Button w={'full'} onClick={logout}>
+            <Button w={'full'} onClick={() => signOut()}>
               Yes
             </Button>
           </HStack>

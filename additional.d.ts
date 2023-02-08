@@ -1,9 +1,11 @@
-// You may need the next line in some situations
-import * as IronSession from 'iron-session'
+import { User } from '@/common/types/User'
+import NextAuth from 'next-auth'
 
-declare module 'iron-session' {
-  interface IronSessionData {
-    userId?: string
-    state?: string
+declare module 'next-auth' {
+  /**
+   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
+   */
+  interface Session {
+    user: User
   }
 }

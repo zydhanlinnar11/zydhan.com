@@ -1,8 +1,8 @@
-import { useUser } from '@/common/providers/UserProvider'
 import { ComponentType, FC, PropsWithChildren } from 'react'
 import LoadingPage from '@/common/components/Pages/LoadingPage'
-import useRedirectToLogin from './useRedirectToLogin'
 import { User } from '@/common/types/User'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 const withPrivateRoute = <P,>(
   Component: ComponentType<P & { user: User }>,
@@ -30,11 +30,23 @@ const PrivateRoute: FC<PropsWithChildren<Props<any & { user: User }>>> = ({
   Component,
   props,
 }) => {
-  const { state, user } = useUser()
-  useRedirectToLogin(redirectBackNeeded)
+  const { replace } = useRouter()
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      replace({
+        pathname: '/auth/login',
+        query: redirectBackNeeded
+          ? {
+              redirect: window.location.href,
+            }
+          : undefined,
+      })
+    },
+  })
 
-  if (state === 'UNAUTHENTICATED' || state === 'LOADING') return <LoadingPage />
-  return <Component {...props} user={user} />
+  if (!session?.user) return <LoadingPage />
+  return <Component {...props} user={session.user} />
 }
 
 export default withPrivateRoute

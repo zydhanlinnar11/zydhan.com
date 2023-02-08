@@ -1,5 +1,4 @@
 import { backendFetcher } from '@/common/hooks/useAxios'
-import { useRefetchUser } from '@/common/providers/UserProvider'
 import { User } from '@/common/types/User'
 import {
   emptyValidationError,
@@ -36,7 +35,6 @@ const PersonalInfoFormSection: FC<Props> = ({ user }) => {
   const [validationError, setValidationError] =
     useState<ValidationErrorResponse>(emptyValidationError)
   const toast = useToast()
-  const refetchUser = useRefetchUser()
 
   const inputs = [
     {
@@ -67,7 +65,7 @@ const PersonalInfoFormSection: FC<Props> = ({ user }) => {
           status: 'success',
           isClosable: true,
         })
-        refetchUser && refetchUser()
+        // TODO: refetch user
       })
       .catch((e) => {
         if (!axios.isAxiosError(e) || e.response?.status !== 422) throw e

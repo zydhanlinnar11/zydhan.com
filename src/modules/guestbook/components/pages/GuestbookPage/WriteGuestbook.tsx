@@ -1,5 +1,4 @@
 import { backendFetcher } from '@/common/hooks/useAxios'
-import { useUser } from '@/common/providers/UserProvider'
 import {
   emptyValidationError,
   ValidationErrorResponse,
@@ -19,6 +18,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { FC, FormEventHandler, useState } from 'react'
 
@@ -32,7 +32,7 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
   const [validationError, setValidationError] =
     useState<ValidationErrorResponse>(emptyValidationError)
   const toast = useToast()
-  const { state } = useUser()
+  const { status } = useSession()
   const { push } = useRouter()
 
   const send: FormEventHandler<HTMLFormElement> = (e) => {
@@ -66,7 +66,7 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
         <Text>Share a message for a future visitor of my site.</Text>
       </CardHeader>
       <CardBody>
-        {state !== 'AUTHENTICATED' ? (
+        {status !== 'authenticated' ? (
           <Button
             w={'full'}
             onClick={() =>

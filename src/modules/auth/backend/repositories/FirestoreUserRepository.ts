@@ -1,9 +1,8 @@
 import { db } from '@/common/lib/firebase'
 import { User } from '@/common/types/User'
 import { IUserRepository } from '@/auth/backend/contracts/repositories/IUserRepository'
-import { AbstractProvider } from '@/auth/backend/providers/OAuth2/AbstractProvider'
 import { FieldPath, FieldValue } from 'firebase-admin/firestore'
-import { oauth2Providers } from '../config/oauth2-providers'
+import { getProviders } from 'next-auth/react'
 
 export type FirestoreUser = {
   created_at: { _seconds: number; _nanoseconds: number } | FieldValue
@@ -15,18 +14,16 @@ export type FirestoreUser = {
 }
 
 export class FirestoreUserRepository implements IUserRepository {
-  getByProvider: (
-    Provider: typeof AbstractProvider,
-    socialId: any
-  ) => Promise<User | null> = async (Provider, socialId) => {
-    const snapshot = await db
-      .collection('users')
-      .where(`${Provider.id}Id`, '==', socialId)
-      .limit(1)
-      .get()
+  getByProvider: (providerId: string, socialId: any) => Promise<User | null> =
+    async (providerId, socialId) => {
+      const snapshot = await db
+        .collection('users')
+        .where(`${providerId}Id`, '==', socialId)
+        .limit(1)
+        .get()
 
-    return this.mapSnapshotToUser(snapshot)
-  }
+      return this.mapSnapshotToUser(snapshot)
+    }
 
   getByEmail: (email: string) => Promise<User | null> = async (email) => {
     const snapshot = await db
@@ -49,9 +46,10 @@ export class FirestoreUserRepository implements IUserRepository {
       id: doc.id,
       email: data.email,
       name: data.name,
-      social_media: this.getLinkedSocialMedia(
-        doc.data() as unknown as FirestoreUser
-      ),
+      // TODO: fix sosmed
+      // social_media: this.getLinkedSocialMedia(
+      //   doc.data() as unknown as FirestoreUser
+      // ),
     }
 
     return user
@@ -77,14 +75,14 @@ export class FirestoreUserRepository implements IUserRepository {
     }
 
   linkToSocial: (
-    Provider: typeof AbstractProvider,
+    providerId: string,
     socialId: any,
     userId: string
-  ) => Promise<void> = async (Provider, socialId, userId) => {
+  ) => Promise<void> = async (providerId, socialId, userId) => {
     await this.getByIdOrFail(userId)
 
     const userRef = db.collection('users').doc(userId)
-    await userRef.update({ [`${Provider.id}Id`]: socialId })
+    await userRef.update({ [`${providerId}Id`]: socialId })
   }
 
   private async getByIdOrFail(userId: string) {
@@ -107,7 +105,8 @@ export class FirestoreUserRepository implements IUserRepository {
         email: user.email,
         id: doc.id,
         name: user.name,
-        social_media: this.getLinkedSocialMedia(user),
+        // TODO: fix sosmed
+        // social_media: this.getLinkedSocialMedia(user),
       }
     })
 
@@ -117,23 +116,25 @@ export class FirestoreUserRepository implements IUserRepository {
   private getLinkedSocialMedia(user: FirestoreUser): string[] {
     const linked: string[] = []
 
-    oauth2Providers.forEach(({ id }) => {
-      const field = `${id}Id`
-      // @ts-ignore
-      if (field in user && user[field]) linked.push(id)
-    })
+    // const providers = Object.values(await getProviders())
+
+    // providers.forEach(({ id }) => {
+    //   const field = `${id}Id`
+    //   // @ts-ignore
+    //   if (field in user && user[field]) linked.push(id)
+    // })
 
     return linked
   }
 
-  unlinkSocial: (
-    Provider: typeof AbstractProvider,
-    userId: string
-  ) => Promise<void> = async (Provider, userId) => {
+  unlinkSocial: (providerId: string, userId: string) => Promise<void> = async (
+    providerId,
+    userId
+  ) => {
     await this.getByIdOrFail(userId)
 
     const userRef = db.collection('users').doc(userId)
-    await userRef.update({ [`${Provider.id}Id`]: null })
+    await userRef.update({ [`${providerId}Id`]: null })
   }
 
   update: (

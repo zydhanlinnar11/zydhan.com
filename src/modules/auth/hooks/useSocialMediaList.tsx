@@ -1,14 +1,14 @@
-import { oauth2Providers } from '../backend/config/oauth2-providers'
-import { SocialMedia } from '../types/SocialMedia'
+import useSWR from 'swr'
+import { getProviders } from 'next-auth/react'
 
 const useSocialMediaList = () => {
-  return oauth2Providers.map(
-    ({ id, providerName }) =>
-      ({
-        id,
-        name: providerName,
-      } as SocialMedia)
-  )
+  const { data } = useSWR('/api/auth/providers', async (arg) => {
+    // @ts-ignore
+    const providers = Object.values(await getProviders())
+    return providers
+  })
+
+  return data ?? []
 }
 
 export default useSocialMediaList

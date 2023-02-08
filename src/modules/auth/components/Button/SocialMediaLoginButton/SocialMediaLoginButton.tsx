@@ -1,24 +1,20 @@
-import { SocialMedia } from '@/auth/types/SocialMedia'
-import { backendFetcher } from '@/common/hooks/useAxios'
 import { Button } from '@chakra-ui/react'
+import { ClientSafeProvider, signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { FC, memo, useCallback } from 'react'
-import socialLoginHandler from './SocialLoginHandler'
 
 type Props = {
-  socialMedia: SocialMedia
-}
-
-type ResponseData = {
-  redirect_url: string
+  socialMedia: ClientSafeProvider
 }
 
 const SocialMediaLoginButton: FC<Props> = ({ socialMedia: { id, name } }) => {
+  const { query } = useRouter()
+
   const handler = useCallback(async () => {
-    const { data } = await backendFetcher.get<ResponseData>(
-      `/api/auth/social-media/${id}/redirect`
-    )
-    socialLoginHandler(name, data.redirect_url, () => {})
-  }, [id, name])
+    signIn(id, {
+      callbackUrl: typeof query.redirect === 'string' ? query.redirect : '/',
+    })
+  }, [id, query.redirect])
 
   return (
     <Button onClick={handler} w={'full'}>

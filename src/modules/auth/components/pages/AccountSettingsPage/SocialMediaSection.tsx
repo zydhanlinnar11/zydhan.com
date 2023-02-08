@@ -23,7 +23,6 @@ import {
 } from '@chakra-ui/react'
 import { FC, useCallback, useState } from 'react'
 import socialLoginHandler from '@/auth/components/Button/SocialMediaLoginButton/SocialLoginHandler'
-import { useRefetchUser } from '@/common/providers/UserProvider'
 
 type Props = {
   user: User
@@ -49,7 +48,8 @@ const SocialMediaSection: FC<Props> = ({ user }) => {
         flexDirection={'column'}
         rowGap={'4'}
       >
-        {user.social_media.length === 1 && (
+        {/* TODO: implement link social media */}
+        {/* {user.social_media.length === 1 && (
           <Alert status="warning">
             <AlertIcon />
             There must be at least 1 (one) social media linked
@@ -62,7 +62,7 @@ const SocialMediaSection: FC<Props> = ({ user }) => {
             user={user}
             {...social}
           />
-        ))}
+        ))} */}
       </CardBody>
     </Card>
   )
@@ -84,14 +84,14 @@ const SocialLinkButton = ({
   user: User
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const refetchUser = useRefetchUser()
   const link = useCallback(async () => {
     const { data } = await backendFetcher.get<RedirectResponseData>(
       `/api/auth/social-media/${id}/redirect`
     )
     socialLoginHandler(name, data.redirect_url, () => {})
   }, [id, name])
-  const isTheOnlyLinkedAccount = isLinked && user.social_media.length === 1
+  // TODO: check if this is the only one
+  const isTheOnlyLinkedAccount = false
 
   const toast = useToast()
   const [isLoading, setLoading] = useState(false)
@@ -120,7 +120,8 @@ const SocialLinkButton = ({
       })
       .finally(() => {
         setLoading(false)
-        refetchUser && refetchUser()
+        // TODO: refetch user
+        // refetchUser && refetchUser()
       })
   }
 
