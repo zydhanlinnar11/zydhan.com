@@ -1,18 +1,14 @@
-import { backendFetcher } from '@/common/hooks/useAxios'
-import useSWR from 'swr'
-import { SocialMedia } from '@/auth/types/SocialMedia'
+import { oauth2Providers } from '../backend/config/oauth2-providers'
+import { SocialMedia } from '../types/SocialMedia'
 
 const useSocialMediaList = () => {
-  const { data, error, isLoading } = useSWR<{ data: SocialMedia[] }>(
-    '/api/auth/social-media',
-    backendFetcher
+  return oauth2Providers.map(
+    ({ id, providerName }) =>
+      ({
+        id,
+        name: providerName,
+      } as SocialMedia)
   )
-
-  return {
-    socialMediaList: data?.data,
-    isLoading,
-    isError: error,
-  }
 }
 
 export default useSocialMediaList

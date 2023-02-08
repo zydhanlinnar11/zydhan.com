@@ -12,7 +12,7 @@ import useSocialMediaList from './useSocialMediaList'
 const useSocialMediaCallback = () => {
   const router = useRouter()
   const { socialMedia } = router.query
-  const { socialMediaList } = useSocialMediaList()
+  const socialMediaList = useSocialMediaList()
   const [error, setError] = useState<CallbackErrorMessage>()
 
   useEffect(() => {

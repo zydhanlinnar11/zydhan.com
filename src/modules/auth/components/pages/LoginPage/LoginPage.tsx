@@ -1,21 +1,34 @@
 import useSocialMediaList from '@/auth/hooks/useSocialMediaList'
-import withAuthRoute from '@/auth/hooks/withAuthRoute'
-import { OAuthClientInfo } from '@/auth/types/OAuthClientInfo'
 import LoadingPage from '@/common/components/Pages/LoadingPage'
 import { config } from '@/common/config'
 import useCSRFCookie from '@/common/hooks/useCSRFCookie'
+import { useUser } from '@/common/providers/UserProvider'
 import { Container, Heading, Text } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
-import { FC, memo } from 'react'
+import { useRouter } from 'next/router'
+import { memo, useEffect } from 'react'
 import SocialMediaLoginButton from '../../Button/SocialMediaLoginButton'
 
-type Props = { client?: OAuthClientInfo }
-
-const LoginPage: FC<Props> = ({ client }) => {
+const LoginPage = () => {
   useCSRFCookie()
-  const { socialMediaList, isLoading } = useSocialMediaList()
 
-  if (isLoading) return <LoadingPage />
+  const socialMediaList = useSocialMediaList()
+  const { state } = useUser()
+  const { replace, query, isReady } = useRouter()
+
+  useEffect(() => {
+    if (state !== 'AUTHENTICATED' || !isReady) return
+
+    const url = query.redirect
+    const origin = window.location.origin
+    if (typeof url !== 'string' || !url.startsWith(origin)) {
+      replace('/')
+      return
+    }
+    replace({ pathname: url.replace(origin, '') })
+  }, [state, replace, isReady, query])
+
+  if (state === 'AUTHENTICATED' || state === 'LOADING') return <LoadingPage />
 
   return (
     <>
@@ -34,7 +47,9 @@ const LoginPage: FC<Props> = ({ client }) => {
         centerContent
       >
         <Heading as={'h1'}>Login</Heading>
-        <Text>Log in to {client ? client.client_name : 'your account'}</Text>
+        <Text>
+          Log in to <b>zydhan.com</b>
+        </Text>
 
         {socialMediaList?.map((socialMedia) => (
           <SocialMediaLoginButton
@@ -47,4 +62,4 @@ const LoginPage: FC<Props> = ({ client }) => {
   )
 }
 
-export default withAuthRoute(memo(LoginPage))
+export default memo(LoginPage)

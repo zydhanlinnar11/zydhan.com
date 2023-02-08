@@ -6,10 +6,6 @@ Disallow: /auth
 User-agent: *
 Disallow: /api
 
-# Block all crawlers for /oauth
-User-agent: *
-Disallow: /oauth
-
 # Allow all crawlers
 User-agent: *
 Allow: /

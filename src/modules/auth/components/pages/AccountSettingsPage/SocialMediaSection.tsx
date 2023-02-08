@@ -1,5 +1,4 @@
 import useSocialMediaList from '@/auth/hooks/useSocialMediaList'
-import Loading from '@/common/components/Loading'
 import { backendFetcher } from '@/common/hooks/useAxios'
 import { User } from '@/common/types/User'
 import {
@@ -9,7 +8,6 @@ import {
   Heading,
   Divider,
   Button,
-  Box,
   useToast,
   Alert,
   AlertIcon,
@@ -35,7 +33,7 @@ const isSocialLinked = (socialMedia: string[], id: string) =>
   typeof socialMedia.find((item) => item === id) !== 'undefined'
 
 const SocialMediaSection: FC<Props> = ({ user }) => {
-  const { socialMediaList, isLoading } = useSocialMediaList()
+  const socialMediaList = useSocialMediaList()
 
   return (
     <Card as={'section'} variant={'outline'}>
@@ -56,11 +54,6 @@ const SocialMediaSection: FC<Props> = ({ user }) => {
             <AlertIcon />
             There must be at least 1 (one) social media linked
           </Alert>
-        )}
-        {isLoading && (
-          <Box py={'4'}>
-            <Loading />
-          </Box>
         )}
         {socialMediaList?.map((social) => (
           <SocialLinkButton
