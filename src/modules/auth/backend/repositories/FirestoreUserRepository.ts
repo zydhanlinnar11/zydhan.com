@@ -147,12 +147,14 @@ export class FirestoreUserRepository implements IUserRepository {
   getLinkedSocial: (userId: string) => Promise<string[]> = async (userId) => {
     // @ts-ignore
     const providers = Object.values(await getProviders())
-    const user = this.getByIdOrFail(userId)
+    const userSnapshot = await db.collection('users').doc(userId).get()
+    if (!userSnapshot.exists) throw new Error('user_not_found')
+    const user = userSnapshot.data()
+    if (!user) throw new Error('user_not_found')
 
     const linked: string[] = providers
       .filter((provider) => {
-        // @ts-ignore
-        const socialId = user[`${providerId}Id`]
+        const socialId = user[`${provider.id}Id`]
 
         return socialId ? true : false
       })
