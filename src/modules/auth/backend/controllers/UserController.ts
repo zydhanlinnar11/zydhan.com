@@ -1,18 +1,13 @@
 import { BaseController } from '@/common/backend/controllers/BaseController'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 import { userRepository } from '../providers/dependencies'
 
 export class UserController extends BaseController {
-  public index = async (req: NextApiRequest, res: NextApiResponse) => {
-    if (!req.session.userId) return res.send(null)
-
-    const user = await userRepository.getById(req.session.userId)
-
-    return res.send(user)
-  }
-
   public update = async (req: NextApiRequest, res: NextApiResponse) => {
-    const userId = req.session.userId
+    const session = await getServerSession(req, res, authOptions)
+    const userId = session?.user.id
     if (!userId) return BaseController.unauthorized(res)
 
     const user = await userRepository.getById(userId)
@@ -47,5 +42,13 @@ export class UserController extends BaseController {
     await userRepository.update(userId, { email, name })
 
     return BaseController.noContent(res)
+  }
+
+  public linkedSocial = async (req: NextApiRequest, res: NextApiResponse) => {
+    const session = await getServerSession(req, res, authOptions)
+    const userId = session?.user.id
+    if (!userId) return BaseController.unauthorized(res)
+
+    return res.send(await userRepository.getLinkedSocial(userId))
   }
 }

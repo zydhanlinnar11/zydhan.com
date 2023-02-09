@@ -1,6 +1,8 @@
 import { BaseController } from '@/common/backend/controllers/BaseController'
 import { guestbookRepository } from '@/guestbook/providers/dependencies'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'src/pages/api/auth/[...nextauth]'
 
 export class GuestbookController {
   public index = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -8,7 +10,8 @@ export class GuestbookController {
   }
 
   public store = async (req: NextApiRequest, res: NextApiResponse) => {
-    const userId = req.session.userId
+    const session = await getServerSession(req, res, authOptions)
+    const userId = session?.user.id
     if (!userId) return BaseController.unauthorized(res)
 
     // Input validation

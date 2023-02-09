@@ -2,7 +2,7 @@ import { db } from '@/common/lib/firebase'
 import { IGuestbookRepository } from '@/guestbook/backend/contracts/repositories/IGuestbookRepository'
 import { Guestbook } from '@/guestbook/types/Guestbook'
 import { Timestamp } from 'firebase-admin/firestore'
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 
 export type FirestoreUser = {
   name: string
@@ -59,7 +59,7 @@ export class FirestoreGuestbookRepository implements IGuestbookRepository {
     const user = await this.getUserById(userId)
     if (!user) throw new Error('user_not_found')
 
-    const guestbookRef = db.collection('guestbooks').doc(uuid())
+    const guestbookRef = db.collection('guestbooks').doc(uuidv4())
 
     const newUser: FirestoreGuestbook = {
       content,

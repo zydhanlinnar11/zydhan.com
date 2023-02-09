@@ -1,5 +1,4 @@
 import { User } from '@/common/types/User'
-import { AbstractProvider } from '@/auth/backend/providers/OAuth2/AbstractProvider'
 
 type NewUser = {
   id: string
@@ -13,10 +12,7 @@ type PersonalInfo = {
 }
 
 export interface IUserRepository {
-  getByProvider: (
-    Provider: typeof AbstractProvider,
-    socialId: any
-  ) => Promise<User | null>
+  getByProvider: (providerId: string, socialId: any) => Promise<User | null>
 
   isAnotherUserIdWithSameEmailExists: (
     email: string,
@@ -32,13 +28,12 @@ export interface IUserRepository {
   update: (id: string, personalInfo: PersonalInfo) => Promise<void>
 
   linkToSocial: (
-    Provider: typeof AbstractProvider,
+    providerId: string,
     socialId: any,
     userId: string
   ) => Promise<void>
 
-  unlinkSocial: (
-    Provider: typeof AbstractProvider,
-    userId: string
-  ) => Promise<void>
+  unlinkSocial: (providerId: string, userId: string) => Promise<void>
+
+  getLinkedSocial: (userId: string) => Promise<string[]>
 }

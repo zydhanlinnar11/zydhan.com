@@ -1,4 +1,3 @@
-import { useUser } from '@/common/providers/UserProvider'
 import { FaUserAlt } from 'react-icons/fa'
 import {
   Box,
@@ -11,20 +10,21 @@ import {
   Button,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import { FC, PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
+import { useSession } from 'next-auth/react'
 
 type MenuItemProps = {
   href: string
 }
 
-const MenuItem: FC<PropsWithChildren<MenuItemProps>> = ({ children, href }) => (
+const MenuItem = ({ children, href }: PropsWithChildren<MenuItemProps>) => (
   <Link href={href}>
     <ChakraMenuItem rounded={'md'}>{children}</ChakraMenuItem>
   </Link>
 )
 
 const Menu = () => {
-  const { user } = useUser()
+  const { status } = useSession()
 
   return (
     <ChakraMenu>
@@ -34,12 +34,13 @@ const Menu = () => {
         </MenuButton>
       </Box>
       <MenuList p={'2'}>
-        {!user && <MenuItem href="/auth/login">Login</MenuItem>}
-        {user && (
+        {status === 'authenticated' ? (
           <>
             <MenuItem href="/auth/account/settings">Account settings</MenuItem>
             <MenuItem href="/auth/logout">Logout</MenuItem>
           </>
+        ) : (
+          <MenuItem href="/auth/login">Login</MenuItem>
         )}
       </MenuList>
     </ChakraMenu>
