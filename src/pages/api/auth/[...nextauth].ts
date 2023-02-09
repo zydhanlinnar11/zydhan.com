@@ -18,6 +18,7 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/auth/login',
     signOut: '/auth/logout',
+    // TODO: error page
     error: '/auth/error',
   },
   adapter: NextAuthDbAdapter(),
