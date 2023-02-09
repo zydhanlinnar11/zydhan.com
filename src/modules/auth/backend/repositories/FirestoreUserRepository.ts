@@ -46,10 +46,6 @@ export class FirestoreUserRepository implements IUserRepository {
       id: doc.id,
       email: data.email,
       name: data.name,
-      // TODO: fix sosmed
-      // social_media: this.getLinkedSocialMedia(
-      //   doc.data() as unknown as FirestoreUser
-      // ),
     }
 
     return user
@@ -105,26 +101,10 @@ export class FirestoreUserRepository implements IUserRepository {
         email: user.email,
         id: doc.id,
         name: user.name,
-        // TODO: fix sosmed
-        // social_media: this.getLinkedSocialMedia(user),
       }
     })
 
     return userData
-  }
-
-  private getLinkedSocialMedia(user: FirestoreUser): string[] {
-    const linked: string[] = []
-
-    // const providers = Object.values(await getProviders())
-
-    // providers.forEach(({ id }) => {
-    //   const field = `${id}Id`
-    //   // @ts-ignore
-    //   if (field in user && user[field]) linked.push(id)
-    // })
-
-    return linked
   }
 
   unlinkSocial: (providerId: string, userId: string) => Promise<void> = async (
@@ -162,5 +142,22 @@ export class FirestoreUserRepository implements IUserRepository {
       .get()
 
     return res.data().count !== 0
+  }
+
+  getLinkedSocial: (userId: string) => Promise<string[]> = async (userId) => {
+    // @ts-ignore
+    const providers = Object.values(await getProviders())
+    const user = this.getByIdOrFail(userId)
+
+    const linked: string[] = providers
+      .filter((provider) => {
+        // @ts-ignore
+        const socialId = user[`${providerId}Id`]
+
+        return socialId ? true : false
+      })
+      .map((provider) => provider.id)
+
+    return linked
   }
 }

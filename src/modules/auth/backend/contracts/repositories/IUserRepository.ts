@@ -34,4 +34,6 @@ export interface IUserRepository {
   ) => Promise<void>
 
   unlinkSocial: (providerId: string, userId: string) => Promise<void>
+
+  getLinkedSocial: (userId: string) => Promise<string[]>
 }
