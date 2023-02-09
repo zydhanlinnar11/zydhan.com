@@ -22,6 +22,15 @@ export const authOptions: AuthOptions = {
     error: '/auth/error',
   },
   adapter: NextAuthDbAdapter(),
+
+  callbacks: {
+    session({ session, token, user }) {
+      return {
+        ...session,
+        user: { email: user.email ?? '', id: user.id, name: user.name ?? '' },
+      }
+    },
+  },
 }
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {

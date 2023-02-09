@@ -9,8 +9,6 @@ import {
   Divider,
   Button,
   useToast,
-  Alert,
-  AlertIcon,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -20,9 +18,16 @@ import {
   ModalBody,
   ModalFooter,
   Spinner,
+  VStack,
+  Text,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import { FC, useCallback, useState } from 'react'
 import socialLoginHandler from '@/auth/components/Button/SocialMediaLoginButton/SocialLoginHandler'
+import useLinkedSocialMedia from '@/auth/hooks/useLinkedSocialMedia'
+import { signIn } from 'next-auth/react'
+import Loading from '@/common/components/Loading'
 
 type Props = {
   user: User
@@ -32,7 +37,18 @@ const isSocialLinked = (socialMedia: string[], id: string) =>
   typeof socialMedia.find((item) => item === id) !== 'undefined'
 
 const SocialMediaSection: FC<Props> = ({ user }) => {
-  const socialMediaList = useSocialMediaList()
+  const {
+    error: errorSocialMedia,
+    isLoading: isLoadingSocialMedia,
+    socialMedia,
+  } = useSocialMediaList()
+  const {
+    error: errorLinkedSocialMedia,
+    isLoading: isLoadingLinkedSocialMedia,
+    linked,
+  } = useLinkedSocialMedia()
+
+  const onlyHaveOneSocialLinked = linked?.length === 1
 
   return (
     <Card as={'section'} variant={'outline'}>
@@ -48,21 +64,36 @@ const SocialMediaSection: FC<Props> = ({ user }) => {
         flexDirection={'column'}
         rowGap={'4'}
       >
-        {/* TODO: implement link social media */}
-        {/* {user.social_media.length === 1 && (
-          <Alert status="warning">
-            <AlertIcon />
-            There must be at least 1 (one) social media linked
-          </Alert>
+        {isLoadingLinkedSocialMedia || isLoadingSocialMedia ? (
+          <VStack py={4}>
+            <Loading />
+          </VStack>
+        ) : errorLinkedSocialMedia || errorSocialMedia ? (
+          <Text py={4}>
+            Sorry, we can&apos;t fetch social media right now. Please try again
+            later while we fix it!
+          </Text>
+        ) : (
+          <>
+            {onlyHaveOneSocialLinked && (
+              <Alert status="warning">
+                <AlertIcon />
+                There must be at least 1 (one) social media linked
+              </Alert>
+            )}
+            {linked &&
+              socialMedia?.map((social) => (
+                <SocialLinkButton
+                  key={social.id}
+                  isLinked={isSocialLinked(linked, social.id)}
+                  isDisabled={
+                    onlyHaveOneSocialLinked && isSocialLinked(linked, social.id)
+                  }
+                  {...social}
+                />
+              ))}
+          </>
         )}
-        {socialMediaList?.map((social) => (
-          <SocialLinkButton
-            key={social.id}
-            isLinked={isSocialLinked(user.social_media, social.id)}
-            user={user}
-            {...social}
-          />
-        ))} */}
       </CardBody>
     </Card>
   )
@@ -76,22 +107,15 @@ const SocialLinkButton = ({
   id,
   isLinked,
   name,
-  user,
+  isDisabled,
 }: {
   id: string
   isLinked: boolean
   name: string
-  user: User
+  isDisabled: boolean
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const link = useCallback(async () => {
-    const { data } = await backendFetcher.get<RedirectResponseData>(
-      `/api/auth/social-media/${id}/redirect`
-    )
-    socialLoginHandler(name, data.redirect_url, () => {})
-  }, [id, name])
-  // TODO: check if this is the only one
-  const isTheOnlyLinkedAccount = false
+  const { refetch } = useLinkedSocialMedia()
 
   const toast = useToast()
   const [isLoading, setLoading] = useState(false)
@@ -102,8 +126,9 @@ const SocialLinkButton = ({
       status: 'loading',
     })
     backendFetcher
-      .delete(`/api/auth/social-media/${id}/user`)
+      .delete(`/api/auth/users/linked-social-media/${id}/`)
       .then((response) => {
+        refetch()
         toast.update(loadingToast, {
           title: `${name} account successfully unlinked!`,
           status: 'success',
@@ -120,8 +145,6 @@ const SocialLinkButton = ({
       })
       .finally(() => {
         setLoading(false)
-        // TODO: refetch user
-        // refetchUser && refetchUser()
       })
   }
 
@@ -148,8 +171,8 @@ const SocialLinkButton = ({
       </Modal>
       <Button
         variant={isLinked ? 'outline' : 'solid'}
-        onClick={isLinked ? () => onOpen() : link}
-        disabled={isLoading || isTheOnlyLinkedAccount}
+        onClick={isLinked ? () => onOpen() : () => signIn(id)}
+        disabled={isLoading || isDisabled}
       >
         {isLinked ? 'Unlink from' : 'Link to'} {name}
       </Button>

@@ -43,4 +43,12 @@ export class UserController extends BaseController {
 
     return BaseController.noContent(res)
   }
+
+  public linkedSocial = async (req: NextApiRequest, res: NextApiResponse) => {
+    const session = await getServerSession(req, res, authOptions)
+    const userId = session?.user.id
+    if (!userId) return BaseController.unauthorized(res)
+
+    return res.send(await userRepository.getLinkedSocial(userId))
+  }
 }
