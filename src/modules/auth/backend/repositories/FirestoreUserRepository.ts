@@ -18,7 +18,7 @@ export class FirestoreUserRepository implements IUserRepository {
     async (providerId, socialId) => {
       const snapshot = await db
         .collection('users')
-        .where(`${providerId}Id`, '==', socialId)
+        .where(`${providerId}_id`, '==', socialId)
         .limit(1)
         .get()
 
@@ -78,7 +78,7 @@ export class FirestoreUserRepository implements IUserRepository {
     await this.getByIdOrFail(userId)
 
     const userRef = db.collection('users').doc(userId)
-    await userRef.update({ [`${providerId}Id`]: socialId })
+    await userRef.update({ [`${providerId}_id`]: socialId })
   }
 
   private async getByIdOrFail(userId: string) {
@@ -114,7 +114,7 @@ export class FirestoreUserRepository implements IUserRepository {
     await this.getByIdOrFail(userId)
 
     const userRef = db.collection('users').doc(userId)
-    await userRef.update({ [`${providerId}Id`]: null })
+    await userRef.update({ [`${providerId}_id`]: null })
   }
 
   update: (
@@ -154,7 +154,7 @@ export class FirestoreUserRepository implements IUserRepository {
 
     const linked: string[] = providers
       .filter((provider) => {
-        const socialId = user[`${provider.id}Id`]
+        const socialId = user[`${provider.id}_id`]
 
         return socialId ? true : false
       })
