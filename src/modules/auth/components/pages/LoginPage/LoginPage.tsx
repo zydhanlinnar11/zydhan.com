@@ -8,7 +8,7 @@ import { memo } from 'react'
 import SocialMediaLoginButton from '../../Button/SocialMediaLoginButton'
 
 const LoginPage = () => {
-  const socialMediaList = useSocialMediaList()
+  const { error, isLoading, socialMedia } = useSocialMediaList()
   const { status } = useSession()
 
   if (status === 'authenticated' || status === 'loading') return <LoadingPage />
@@ -34,7 +34,7 @@ const LoginPage = () => {
           Log in to <b>zydhan.com</b>
         </Text>
 
-        {socialMediaList?.map((socialMedia) => (
+        {socialMedia?.map((socialMedia) => (
           <SocialMediaLoginButton
             socialMedia={socialMedia}
             key={socialMedia.id}

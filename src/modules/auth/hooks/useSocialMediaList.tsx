@@ -2,13 +2,16 @@ import useSWR from 'swr'
 import { getProviders } from 'next-auth/react'
 
 const useSocialMediaList = () => {
-  const { data } = useSWR('/api/auth/providers', async (arg) => {
-    // @ts-ignore
-    const providers = Object.values(await getProviders())
-    return providers
-  })
+  const { data, error, isLoading } = useSWR(
+    '/api/auth/providers',
+    async (arg) => {
+      // @ts-ignore
+      const providers = Object.values(await getProviders())
+      return providers
+    }
+  )
 
-  return data ?? []
+  return { socialMedia: data, error, isLoading }
 }
 
 export default useSocialMediaList
