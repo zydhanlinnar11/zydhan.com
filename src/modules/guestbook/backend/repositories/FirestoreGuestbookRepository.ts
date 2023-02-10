@@ -9,10 +9,10 @@ export type FirestoreUser = {
 }
 
 export type FirestoreGuestbook = {
-  userId: string
+  user_id: string
   content: string
   created_at: { _seconds: number; _nanoseconds: number } | Timestamp
-  userName: string
+  user_name: string
 }
 
 export class FirestoreGuestbookRepository implements IGuestbookRepository {
@@ -35,7 +35,7 @@ export class FirestoreGuestbookRepository implements IGuestbookRepository {
         content: docData.content,
         created_at: timestamp.toDate().toISOString(),
         id: doc.id,
-        user: docData.userName,
+        user: docData.user_name,
       })
     })
 
@@ -64,8 +64,8 @@ export class FirestoreGuestbookRepository implements IGuestbookRepository {
     const newUser: FirestoreGuestbook = {
       content,
       created_at: Timestamp.now(),
-      userId,
-      userName: user.name,
+      user_id: userId,
+      user_name: user.name,
     }
 
     await guestbookRef.set(newUser)
