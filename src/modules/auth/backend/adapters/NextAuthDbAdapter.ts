@@ -43,24 +43,11 @@ export function NextAuthDbAdapter(): Adapter {
     },
 
     async updateUser(partialUser): Promise<AdapterUser> {
-      if (!partialUser.id) throw new Error('[updateUser] Missing id')
-      const user = await userRepository.getById(partialUser.id)
-      if (!user) throw new Error('[updateUser] User not found')
-
-      const email = partialUser.email ?? user.email
-      const name = partialUser.name ?? user.name
-
-      await userRepository.update(partialUser.id, { email, name })
-
-      const updatedUser = await userRepository.getById(partialUser.id)
-      if (!updatedUser)
-        throw new Error('[updateUser] Failed to fetch updated user')
-
-      return { ...updatedUser, emailVerified: null }
+      throw new Error('updateUser: method not implemented')
     },
 
     async deleteUser(userId) {
-      await userRepository.delete(userId)
+      throw new Error('deleteUser: method not implemented')
     },
 
     async linkAccount({

@@ -117,18 +117,6 @@ export class FirestoreUserRepository implements IUserRepository {
     await userRef.update({ [`${providerId}_id`]: null })
   }
 
-  update: (
-    id: string,
-    personalInfo: { email: string; name: string }
-  ) => Promise<void> = async (id, personalInfo) => {
-    await this.getByIdOrFail(id)
-
-    const userRef = db.collection('users').doc(id)
-    await userRef.update(personalInfo)
-
-    // TODO: update related guestbooks
-  }
-
   isAnotherUserIdWithSameEmailExists: (
     email: string,
     excludedUserId: string
@@ -161,9 +149,5 @@ export class FirestoreUserRepository implements IUserRepository {
       .map((provider) => provider.id)
 
     return linked
-  }
-
-  delete: (id: string) => Promise<void> = async (id) => {
-    await db.collection('users').doc(id).delete()
   }
 }
