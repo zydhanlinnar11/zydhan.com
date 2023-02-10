@@ -17,7 +17,6 @@ export class GuestbookController {
     // Input validation
     const message = req.body.message
 
-    // TODO: handle errornya yang lebih bener
     if (
       typeof message !== 'string' ||
       message.trim().length > 255 ||

@@ -1,9 +1,5 @@
 import { backendFetcher } from '@/common/hooks/useAxios'
 import {
-  emptyValidationError,
-  ValidationErrorResponse,
-} from '@/common/types/ValidationErrorResponse'
-import {
   Button,
   Card,
   CardBody,
@@ -29,32 +25,41 @@ type Props = {
 const WriteGuestbook: FC<Props> = ({ onSent }) => {
   const [guestbook, setGuestbook] = useState('')
   const [isSubmitting, setSubmitting] = useState(false)
-  const [validationError, setValidationError] =
-    useState<ValidationErrorResponse>(emptyValidationError)
+  const [error, setError] = useState<string | null>(null)
   const toast = useToast()
   const { status } = useSession()
   const { push } = useRouter()
 
-  const send: FormEventHandler<HTMLFormElement> = (e) => {
+  const send: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     setSubmitting(true)
-    setValidationError(emptyValidationError)
-    backendFetcher
-      .post(`/api/guestbook/guestbooks`, { message: guestbook })
-      .then((response) => {
-        toast({
-          title: 'Message successfully sent.',
-          status: 'success',
-          isClosable: true,
-        })
-        setGuestbook('')
-        onSent()
+    setError(null)
+
+    try {
+      // Validation
+      if (guestbook.trim().length > 255) {
+        setError("Message length can't be more than 255.")
+        return
+      }
+      await backendFetcher.post(`/api/guestbook/guestbooks`, {
+        message: guestbook,
       })
-      .catch((e) => {
-        if (!axios.isAxiosError(e) || e.response?.status !== 422) throw e
-        setValidationError(e.response.data)
+      toast({
+        title: 'Message successfully sent.',
+        status: 'success',
+        isClosable: true,
       })
-      .finally(() => setSubmitting(false))
+      setGuestbook('')
+      onSent()
+    } catch (e) {
+      toast({
+        title: 'Failed to write message.',
+        status: 'error',
+        isClosable: true,
+      })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -82,7 +87,8 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
           <form onSubmit={send}>
             <FormControl
               isDisabled={isSubmitting}
-              isInvalid={'message' in validationError.errors}
+              isInvalid={error !== null}
+              isRequired
             >
               <FormLabel>Message</FormLabel>
               <Input
@@ -91,10 +97,7 @@ const WriteGuestbook: FC<Props> = ({ onSent }) => {
                 onChange={(e) => setGuestbook(e.target.value)}
                 placeholder={'Your message...'}
               />
-              <FormErrorMessage>
-                {'message' in validationError.errors &&
-                  validationError.errors['message'][0]}
-              </FormErrorMessage>
+              {error !== null && <FormErrorMessage>{error}</FormErrorMessage>}
             </FormControl>
             <Button
               marginTop={'4'}
