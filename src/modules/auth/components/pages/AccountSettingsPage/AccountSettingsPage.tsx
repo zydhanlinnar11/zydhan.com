@@ -6,7 +6,6 @@ import { NextSeo } from 'next-seo'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
 import UserInfoSection from './UserInfoSection'
-import PersonalInfoFormSection from './PersonalInfoFormSection'
 import SocialMediaSection from './SocialMediaSection'
 
 type Props = {
@@ -43,7 +42,6 @@ const AccountSettingPage: FC<Props> = ({ user }) => {
       >
         <UserInfoSection user={user} />
         <Flex direction={'column'} rowGap={'4'} w={'full'}>
-          <PersonalInfoFormSection user={user} />
           <SocialMediaSection user={user} />
         </Flex>
       </Flex>
