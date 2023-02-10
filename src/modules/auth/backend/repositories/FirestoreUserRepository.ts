@@ -162,4 +162,8 @@ export class FirestoreUserRepository implements IUserRepository {
 
     return linked
   }
+
+  delete: (id: string) => Promise<void> = async (id) => {
+    await db.collection('users').doc(id).delete()
+  }
 }

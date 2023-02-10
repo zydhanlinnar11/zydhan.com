@@ -27,6 +27,8 @@ export interface IUserRepository {
 
   update: (id: string, personalInfo: PersonalInfo) => Promise<void>
 
+  delete: (id: string) => Promise<void>
+
   linkToSocial: (
     providerId: string,
     socialId: any,

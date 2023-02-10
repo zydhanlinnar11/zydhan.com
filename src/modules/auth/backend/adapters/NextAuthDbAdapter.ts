@@ -60,18 +60,7 @@ export function NextAuthDbAdapter(): Adapter {
     },
 
     async deleteUser(userId) {
-      // TODO: maybe later we need to delete user
-      // await db.runTransaction(async (transaction) => {
-      //   const accounts = await C.accounts
-      //     .where(mapper.toDb('userId'), '==', userId)
-      //     .get()
-      //   const sessions = await C.sessions
-      //     .where(mapper.toDb('userId'), '==', userId)
-      //     .get()
-      //   transaction.delete(C.users.doc(userId))
-      //   accounts.forEach((account) => transaction.delete(account.ref))
-      //   sessions.forEach((session) => transaction.delete(session.ref))
-      // })
+      await userRepository.delete(userId)
     },
 
     async linkAccount({
