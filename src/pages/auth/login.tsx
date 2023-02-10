@@ -1,1 +1,1 @@
-export { default, getStaticProps } from '@/auth/components/pages/LoginPage'
+export { default } from '@/auth/components/pages/LoginPage'

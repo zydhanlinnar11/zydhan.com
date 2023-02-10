@@ -1,1 +1,1 @@
-export { default, getStaticProps } from './LoginPage'
+export { default } from './LoginPage'
