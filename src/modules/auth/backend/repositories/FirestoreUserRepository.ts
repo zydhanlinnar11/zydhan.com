@@ -1,16 +1,16 @@
 import { db } from '@/common/lib/firebase'
 import { User } from '@/common/types/User'
 import { IUserRepository } from '@/auth/backend/contracts/repositories/IUserRepository'
-import { FieldPath, FieldValue } from 'firebase-admin/firestore'
+import { FieldPath, Timestamp } from 'firebase-admin/firestore'
 import { getProviders } from 'next-auth/react'
 
 export type FirestoreUser = {
-  created_at: { _seconds: number; _nanoseconds: number } | FieldValue
+  created_at: Timestamp
   email: string
-  githubId: string | null
-  googleId: string | null
+  github_id: string | null
+  google_id: string | null
+  discord_id: string | null
   name: string
-  updated_at: { _seconds: number; _nanoseconds: number } | FieldValue
 }
 
 export class FirestoreUserRepository implements IUserRepository {
@@ -61,10 +61,10 @@ export class FirestoreUserRepository implements IUserRepository {
       const newUser: FirestoreUser = {
         email,
         name,
-        githubId: null,
-        googleId: null,
-        created_at: FieldValue.serverTimestamp(),
-        updated_at: FieldValue.serverTimestamp(),
+        github_id: null,
+        google_id: null,
+        discord_id: null,
+        created_at: Timestamp.now(),
       }
 
       await userRef.set(newUser)
