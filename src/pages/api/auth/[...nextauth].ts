@@ -5,6 +5,11 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import DiscordProvider from 'next-auth/providers/discord'
 
+const useSecureCookies =
+  process.env.NEXTAUTH_URL?.startsWith('https://') !== undefined
+const cookiePrefix = useSecureCookies ? '__Secure-' : ''
+const hostName = new URL(process.env.NEXTAUTH_URL ?? '').hostname
+
 export const authOptions: AuthOptions = {
   providers: [
     GithubProvider({
@@ -34,6 +39,18 @@ export const authOptions: AuthOptions = {
         ...session,
         user: { email: user.email ?? '', id: user.id, name: user.name ?? '' },
       }
+    },
+  },
+  cookies: {
+    sessionToken: {
+      name: `${cookiePrefix}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+        domain: hostName == 'localhost' ? hostName : '.' + hostName,
+      },
     },
   },
 }
