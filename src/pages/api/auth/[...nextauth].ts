@@ -5,8 +5,7 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import DiscordProvider from 'next-auth/providers/discord'
 
-const useSecureCookies =
-  process.env.NEXTAUTH_URL?.startsWith('https://') !== undefined
+const useSecureCookies = process.env.NEXTAUTH_URL?.startsWith('https://')
 const cookiePrefix = useSecureCookies ? '__Secure-' : ''
 const hostName = new URL(process.env.NEXTAUTH_URL ?? '').hostname
 
