@@ -4,6 +4,7 @@ import NextAuth, { AuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import DiscordProvider from 'next-auth/providers/discord'
+import { authorizedCallbackOriginRepository } from '@/auth/backend/providers/dependencies'
 
 const useSecureCookies = process.env.NEXTAUTH_URL?.startsWith('https://')
 const cookiePrefix = useSecureCookies ? '__Secure-' : ''
@@ -38,6 +39,20 @@ export const authOptions: AuthOptions = {
         ...session,
         user: { email: user.email ?? '', id: user.id, name: user.name ?? '' },
       }
+    },
+
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      const urlInstance = new URL(url)
+      const origin = urlInstance.origin
+      const hostName = urlInstance.hostname
+      const isAuthorized =
+        await authorizedCallbackOriginRepository.isExistByHostName(hostName)
+      if (origin === baseUrl || isAuthorized) return url
+
+      return baseUrl
     },
   },
   cookies: {
