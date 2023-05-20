@@ -1,0 +1,59 @@
+@import '../styles/tokens/pallete.scss', '../styles/tokens/typeface.scss',
+  '../styles/tokens/easing-duration.scss';
+
+:root {
+  color-scheme: light;
+  --md-sys-color-on-background: var(--md-ref-palette-neutral6);
+  --md-sys-color-background: var(--md-ref-palette-neutral98);
+  --md-sys-color-secondary-container: var(--md-ref-palette-secondary90);
+  --md-sys-color-on-secondary-container: var(--md-ref-palette-secondary10);
+  --md-sys-color-surface-container: var(--md-ref-palette-neutral94);
+  --md-sys-color-on-surface: var(--md-ref-palette-neutral10);
+  --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant30);
+
+  --md-sys-typescale-label-medium-font: var(--md-ref-typeface-plain);
+  --md-sys-typescale-label-medium-line-height: 1rem;
+  --md-sys-typescale-label-medium-size: 0.75rem;
+  --md-sys-typescale-label-medium-tracking: calc(0.5 / 1rem);
+  --md-sys-typescale-label-medium-weight: var(--md-ref-typeface-weight-medium);
+
+  --md-sys-typescale-body-medium-font: var(--md-ref-typeface-plain);
+  --md-sys-typescale-body-medium-line-height: 1.25rem;
+  --md-sys-typescale-body-medium-size: 0.875rem;
+  --md-sys-typescale-body-medium-tracking: calc(0.25 / 1rem);
+  --md-sys-typescale-body-medium-weight: 400;
+}
+
+body {
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+
+  font-family: var(--md-sys-typescale-body-medium-font), sans-serif;
+  font-size: var(--md-sys-typescale-body-medium-size);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+  font-weight: var(--md-sys-typescale-body-medium-weight);
+  letter-spacing: var(--md-sys-typescale-body-medium-tracking);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
