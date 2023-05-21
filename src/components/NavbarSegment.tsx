@@ -12,8 +12,15 @@ export const NavbarSegment = ({ exact, href, icon, name }: Props) => {
   const isActive = exact ? pathname === href : pathname.startsWith(href)
 
   return (
-    <Link className={styles.navbar__segment} href={href}>
-      <div className={styles.navbar__iconContainer}>
+    <Link
+      className={clsx(
+        typograpy['label-medium'],
+        isActive && styles['navbar__segment--active'],
+        styles.navbar__segment
+      )}
+      href={href}
+    >
+      <div className={styles.navbar__iconContainer} aria-hidden={true}>
         <div
           className={clsx(
             styles.navbar__iconStateLayer,
@@ -30,15 +37,7 @@ export const NavbarSegment = ({ exact, href, icon, name }: Props) => {
           </span>
         </div>
       </div>
-      <p
-        className={clsx(
-          typograpy['label-medium'],
-          styles.navbar__label,
-          isActive && styles['navbar__label--active']
-        )}
-      >
-        {name}
-      </p>
+      {name}
     </Link>
   )
 }

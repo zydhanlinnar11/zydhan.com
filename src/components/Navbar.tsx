@@ -25,11 +25,11 @@ const destinations = [
 const Navbar = () => {
   return (
     <div className={styles.navbar}>
-      <div className={styles.navbar__destinations}>
+      <nav className={styles.navbar__destinations}>
         {destinations.map((destination) => (
           <NavbarSegment key={destination.href} {...destination} />
         ))}
-      </div>
+      </nav>
     </div>
   )
 }
