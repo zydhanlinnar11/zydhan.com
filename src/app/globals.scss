@@ -1,8 +1,13 @@
-@import '../styles/tokens/pallete.scss', '../styles/tokens/typeface.scss',
-  '../styles/tokens/easing-duration.scss';
+@use '../styles/tokens/pallete.scss';
+@use '../styles/tokens/typeface.scss';
+@use '../styles/tokens/easing-duration.scss';
 
 :root {
   color-scheme: light;
+  @include pallete.pallete;
+  @include typeface.typeface;
+  @include easing-duration.easing-duration;
+
   --md-sys-color-on-background: var(--md-ref-palette-neutral6);
   --md-sys-color-background: var(--md-ref-palette-neutral98);
   --md-sys-color-secondary-container: var(--md-ref-palette-secondary90);
