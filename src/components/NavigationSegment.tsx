@@ -1,13 +1,13 @@
 'use client'
 import typograpy from '@/styles/typography.module.scss'
-import styles from '@/styles/components/Navbar.module.scss'
+import styles from '@/styles/components/Navigation.module.scss'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import Link from 'next/link'
 
 type Props = { href: string; icon: string; name: string; exact: boolean }
 
-export const NavbarSegment = ({ exact, href, icon, name }: Props) => {
+export const NavigationSegment = ({ exact, href, icon, name }: Props) => {
   const pathname = usePathname()
   const isActive = exact ? pathname === href : pathname.startsWith(href)
 
@@ -15,22 +15,22 @@ export const NavbarSegment = ({ exact, href, icon, name }: Props) => {
     <Link
       className={clsx(
         typograpy['label-medium'],
-        isActive && styles['navbar__segment--active'],
-        styles.navbar__segment
+        isActive && styles['navigation__segment--active'],
+        styles.navigation__segment
       )}
       href={href}
     >
-      <div className={styles.navbar__iconContainer} aria-hidden={true}>
+      <div className={styles.navigation__iconContainer} aria-hidden={true}>
         <div
           className={clsx(
-            styles.navbar__iconStateLayer,
-            isActive && styles['navbar__iconStateLayer--active']
+            styles.navigation__iconStateLayer,
+            isActive && styles['navigation__iconStateLayer--active']
           )}
         >
           <span
             className={clsx(
-              styles.navbar__icon,
-              isActive && styles['navbar__icon--active']
+              styles.navigation__icon,
+              isActive && styles['navigation__icon--active']
             )}
           >
             {icon}

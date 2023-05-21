@@ -2,7 +2,7 @@
 @use '../tokens/layout.scss' as layout;
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
-.navbar {
+.navigation {
   background-color: var(--md-sys-color-surface-container);
   color: var(--md-sys-color-on-surface-variant);
   position: fixed;

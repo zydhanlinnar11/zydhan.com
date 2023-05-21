@@ -1,5 +1,5 @@
-import styles from '@/styles/components/Navbar.module.scss'
-import { NavbarSegment } from './NavbarSegment'
+import styles from '@/styles/components/Navigation.module.scss'
+import { NavigationSegment } from './NavigationSegment'
 
 const destinations = [
   {
@@ -22,16 +22,16 @@ const destinations = [
   },
 ]
 
-const Navbar = () => {
+const Navigation = () => {
   return (
-    <div className={styles.navbar}>
-      <nav className={styles.navbar__destinations}>
+    <div className={styles.navigation}>
+      <nav className={styles.navigation__destinations}>
         {destinations.map((destination) => (
-          <NavbarSegment key={destination.href} {...destination} />
+          <NavigationSegment key={destination.href} {...destination} />
         ))}
       </nav>
     </div>
   )
 }
 
-export default Navbar
+export default Navigation
