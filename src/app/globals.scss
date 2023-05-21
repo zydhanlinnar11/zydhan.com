@@ -39,8 +39,8 @@
 }
 
 body {
-  background-color: var(--md-sys-color-background);
-  color: var(--md-sys-color-on-background);
+  background-color: rgb(var(--md-sys-color-background));
+  color: rgb(var(--md-sys-color-on-background));
   min-width: 100vw;
   min-height: 100vh;
   margin: 0;
