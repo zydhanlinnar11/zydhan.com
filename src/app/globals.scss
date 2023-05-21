@@ -50,6 +50,10 @@ body {
   line-height: var(--md-sys-typescale-body-medium-line-height);
   font-weight: var(--md-sys-typescale-body-medium-weight);
   letter-spacing: var(--md-sys-typescale-body-medium-tracking);
+
+  transition-property: background-color, color;
+  transition-duration: var(--md-sys-motion-duration-medium2);
+  transition-timing-function: var(--md-sys-motion-easing-standard);
 }
 
 * {

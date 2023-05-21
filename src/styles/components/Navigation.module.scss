@@ -16,6 +16,9 @@ $states: (
   left: 0;
   width: 100%;
   @include layout.padding-x(8px);
+  transition-property: background-color, color;
+  transition-duration: var(--md-sys-motion-duration-medium2);
+  transition-timing-function: var(--md-sys-motion-easing-standard);
 
   @media (min-width: window.$screen-medium) {
     top: 0;

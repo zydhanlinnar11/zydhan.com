@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import './globals.scss'
 import { Roboto_Flex } from 'next/font/google'
+import { ThemeProvider } from '@/providers/ThemeProvider'
 import Navigation from '@/components/Navigation'
 
 const robotoFlex = Roboto_Flex({
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html className={robotoFlex.variable}>
       <body>
-        <Navigation />
-        {children}
+        <ThemeProvider>
+          <Navigation />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
