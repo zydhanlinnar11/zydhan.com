@@ -2,6 +2,12 @@
 @use '../tokens/layout.scss' as layout;
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
+$states: (
+  'focus': 'focus',
+  'hover': 'hover',
+  'active': 'pressed',
+);
+
 .navigation {
   background-color: rgb(var(--md-sys-color-surface-container));
   color: rgb(var(--md-sys-color-on-surface-variant));
@@ -55,6 +61,19 @@
       transition-timing-function: var(--md-sys-motion-easing-standard);
     }
 
+    &:hover {
+      color: rgb(var(--md-sys-color-on-secondary-container));
+    }
+
+    @each $state, $varName in $states {
+      &:#{$state} .navigation__iconStateLayer {
+        background-color: rgba(
+          var(--md-sys-color-on-secondary-container),
+          var(--md-sys-state- + $varName + -state-layer-opacity)
+        );
+      }
+    }
+
     &--active {
       color: rgb(var(--md-sys-color-on-surface));
     }
@@ -81,7 +100,7 @@
     transition-property: color, background-color;
 
     &--active {
-      background-color: rgb(var(--md-sys-color-secondary-container));
+      background-color: rgb(var(--md-sys-color-secondary-container)) !important;
       color: rgb(var(--md-sys-color-on-secondary-container));
     }
 
@@ -143,25 +162,13 @@
     transition-property: background-color;
     border: 0;
 
-    &:hover {
-      background-color: rgba(
-        var(--md-sys-color-on-primary-container),
-        var(--md-sys-state-hover-state-layer-opacity)
-      );
-    }
-
-    &:focus {
-      background-color: rgba(
-        var(--md-sys-color-on-primary-container),
-        var(--md-sys-state-focus-state-layer-opacity)
-      );
-    }
-
-    &:active {
-      background-color: rgba(
-        var(--md-sys-color-on-primary-container),
-        var(--md-sys-state-pressed-state-layer-opacity)
-      );
+    @each $state, $varName in $states {
+      &:#{$state} {
+        background-color: rgba(
+          var(--md-sys-color-on-primary-container),
+          var(--md-sys-state- + $varName + -state-layer-opacity)
+        );
+      }
     }
   }
 }
