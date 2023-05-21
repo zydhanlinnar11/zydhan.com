@@ -95,7 +95,7 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
         setTheme((prevTheme) => ({
           ...prevTheme,
           color: 'default',
-          mode: 'light',
+          mode: 'dark',
         }))
       }
     }
