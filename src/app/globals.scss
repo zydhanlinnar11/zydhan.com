@@ -10,11 +10,20 @@
 
   --md-sys-color-on-background: var(--md-ref-palette-neutral6);
   --md-sys-color-background: var(--md-ref-palette-neutral98);
+
+  --md-sys-color-primary-container: var(--md-ref-palette-primary90);
+  --md-sys-color-on-primary-container: var(--md-ref-palette-primary10);
+
   --md-sys-color-secondary-container: var(--md-ref-palette-secondary90);
   --md-sys-color-on-secondary-container: var(--md-ref-palette-secondary10);
+
   --md-sys-color-surface-container: var(--md-ref-palette-neutral94);
   --md-sys-color-on-surface: var(--md-ref-palette-neutral10);
   --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant30);
+
+  --md-sys-state-hover-state-layer-opacity: 0.08;
+  --md-sys-state-focus-state-layer-opacity: 0.12;
+  --md-sys-state-pressed-state-layer-opacity: 0.12;
 
   --md-sys-typescale-label-medium-font: var(--md-ref-typeface-plain);
   --md-sys-typescale-label-medium-line-height: 1rem;
@@ -61,4 +70,17 @@ figure,
 p,
 pre {
   margin: 0;
+}
+
+*,
+::before,
+::after {
+  border-width: 0;
+  border-style: solid;
+}
+
+button {
+  background: none;
+  color: inherit;
+  cursor: pointer;
 }

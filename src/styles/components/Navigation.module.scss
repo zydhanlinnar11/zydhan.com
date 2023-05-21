@@ -16,6 +16,7 @@
     bottom: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 80px;
     height: 100%;
     padding-top: 44px;
@@ -109,6 +110,58 @@
 
     &--active {
       font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+  }
+
+  &__menuAndFab {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+
+    width: 80px;
+    height: 56px;
+
+    @media (min-width: window.$screen-medium) {
+      display: flex;
+    }
+  }
+
+  &__fab {
+    border-radius: 16px;
+    border: 0;
+    overflow: hidden;
+    background-color: rgb(var(--md-sys-color-primary-container));
+    color: rgb(var(--md-sys-color-on-primary-container));
+  }
+
+  &__fabStateLayer {
+    padding: 16px;
+    transition-duration: var(--md-sys-motion-duration-medium2);
+    transition-timing-function: var(--md-sys-motion-easing-standard);
+    transition-property: background-color;
+    border: 0;
+
+    &:hover {
+      background-color: rgba(
+        var(--md-sys-color-on-primary-container),
+        var(--md-sys-state-hover-state-layer-opacity)
+      );
+    }
+
+    &:focus {
+      background-color: rgba(
+        var(--md-sys-color-on-primary-container),
+        var(--md-sys-state-focus-state-layer-opacity)
+      );
+    }
+
+    &:active {
+      background-color: rgba(
+        var(--md-sys-color-on-primary-container),
+        var(--md-sys-state-pressed-state-layer-opacity)
+      );
     }
   }
 }
