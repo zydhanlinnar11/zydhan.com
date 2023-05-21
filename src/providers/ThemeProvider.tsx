@@ -34,20 +34,10 @@ const getSystemPreferredTheme = () => {
   if (
     window.matchMedia &&
     window.matchMedia('(prefers-color-scheme: light)').matches
-  ) {
+  )
     return 'light'
-  }
 
-  // Check if the system prefers a dark theme
-  if (
-    window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  ) {
-    return 'dark'
-  }
-
-  // Return null if the system preference is not available or not supported
-  return null
+  return 'dark'
 }
 
 const updateTheme = (theme: Theme, newTheme: Partial<Theme>) => {
@@ -64,15 +54,13 @@ const updateTheme = (theme: Theme, newTheme: Partial<Theme>) => {
   // Add new theme class name
   const { color, mode } = { ...theme, ...newTheme }
   const themeStyles = themes[color]
-  if (themeStyles && themeStyles[mode]) {
+  if (themeStyles && themeStyles[mode])
     htmlElement.classList.add(themeStyles[mode])
-  }
 }
 
 // Create the ThemeProvider component
 const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useState(initialTheme)
-  console.log(theme)
 
   useEffect(() => {
     const handleClassNameChange = () => {
@@ -114,15 +102,13 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
     const persistedMode = localStorage.getItem('themeMode')
     if (persistedMode) {
       updateTheme(theme, { mode: persistedMode as 'light' | 'dark' })
-    } else {
-      // If theme.mode is undefined, check system's preferred theme
-      if (!theme.mode) {
-        const systemPreferredTheme = getSystemPreferredTheme()
-        updateTheme(theme, {
-          mode: systemPreferredTheme || 'dark',
-        })
-      }
+      return
     }
+
+    const systemPreferredTheme = getSystemPreferredTheme()
+    updateTheme(theme, {
+      mode: systemPreferredTheme || 'dark',
+    })
   }, [])
 
   useEffect(() => {
