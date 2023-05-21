@@ -1,0 +1,14 @@
+@mixin center-xy {
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin padding-x($padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin padding-y($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
