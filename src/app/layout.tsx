@@ -3,6 +3,7 @@ import './globals.scss'
 import { Roboto_Flex } from 'next/font/google'
 import { ThemeProvider } from '@/providers/ThemeProvider'
 import Navigation from '@/components/Navigation'
+import typography from '@/styles/typography.module.scss'
 
 const robotoFlex = Roboto_Flex({
   subsets: ['latin'],
@@ -21,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html className={robotoFlex.variable}>
-      <body>
+      <body className={typography['body-medium']}>
         <ThemeProvider>
           <Navigation />
           {children}
