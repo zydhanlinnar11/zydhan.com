@@ -1,4 +1,5 @@
 @use '../tokens/window-class.scss' as window;
+@use '../tokens/layout.scss';
 @use 'sass:map';
 
 .container {
@@ -11,6 +12,9 @@
     @media (min-width: map.get(window.$screens, 'medium')) {
       margin-left: 80px;
     }
+  }
+  @media (min-width: map.get(window.$screens, 'expanded')) {
+    @include layout.padding-y(24px);
   }
 }
 
@@ -27,4 +31,9 @@
   width: 100%;
   text-align: center;
   max-width: 1024px;
+
+  @media (min-width: map.get(window.$screens, 'expanded')) {
+    @include layout.padding-y(56px);
+    @include layout.padding-x(128px);
+  }
 }
