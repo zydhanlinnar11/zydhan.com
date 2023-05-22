@@ -13,7 +13,8 @@
     "next": "13.4.3",
     "next-intl": "^2.14.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "swr": "^2.1.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",

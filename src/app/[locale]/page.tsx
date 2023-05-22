@@ -2,6 +2,7 @@ import styles from '@/styles/pages/Home.module.scss'
 import { Header } from './Header'
 import { FavouriteSection } from './FavouriteSection'
 import { ExperiencesSection } from './ExperiencesSection'
+import { RecentRepositoriesSection } from './RecentRepositoriesSection'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <main className={styles.main}>
           <FavouriteSection />
           <ExperiencesSection />
+          <RecentRepositoriesSection />
         </main>
       </div>
     </div>

@@ -24,6 +24,10 @@
         "start_date": "Aug 2021",
         "end_date": "now"
       }
+    },
+    "repositories_section": {
+      "title": "Recent Repositories",
+      "no_desc_available": "No description available"
     }
   },
   "Navigation": {

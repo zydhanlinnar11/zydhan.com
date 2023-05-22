@@ -24,6 +24,10 @@
         "start_date": "Agustus 2021",
         "end_date": "sekarang"
       }
+    },
+    "repositories_section": {
+      "title": "Repositori Terbaru",
+      "no_desc_available": "Tidak ada deskripsi yang tersedia"
     }
   },
   "Navigation": {

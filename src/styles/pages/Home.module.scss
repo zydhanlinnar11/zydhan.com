@@ -11,7 +11,7 @@ $row-gap: 24px;
   display: flex;
   flex-direction: column;
   row-gap: $row-gap;
-  max-width: calc(1024px + (2 * $padding));
+  max-width: 1024px;
 
   &__wrapper {
     display: flex;
@@ -87,13 +87,6 @@ $row-gap: 24px;
   width: 100%;
   flex-wrap: wrap;
 
-  list-style-type: none;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 0;
-
   &__item {
     display: flex;
     flex-direction: column;
@@ -134,6 +127,7 @@ $row-gap: 24px;
 
 .listSection {
   &__item {
+    padding: 8px;
     color: rgb(var(--md-sys-color-on-surface-variant));
     transition-property: scale;
     transition-duration: var(--md-sys-motion-duration-medium2);
@@ -155,7 +149,6 @@ $row-gap: 24px;
   &__item {
     display: grid;
     grid-template-columns: 1fr;
-    padding: 8px;
 
     @media (min-width: map.get(window.$screens, 'medium')) {
       grid-template-columns: auto auto;
@@ -182,4 +175,62 @@ $row-gap: 24px;
       margin-top: 0;
     }
   }
+}
+
+.repo {
+  &__topics {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  &__topic {
+    border-radius: 8px;
+    padding: 6px 12px;
+    background-color: rgb(var(--md-sys-color-secondary-container));
+    color: rgb(var(--md-sys-color-on-secondary-container));
+  }
+}
+
+.spinner {
+  $duration: 1.75s;
+  animation: rotate $duration linear infinite;
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(270deg);
+    }
+  }
+  &__path {
+    transform-origin: center;
+    stroke: rgb(var(--md-sys-color-primary-container));
+    animation: dash $duration var(--md-sys-motion-easing-standard) infinite;
+    $offset: 122;
+    stroke-dasharray: $offset;
+    stroke-dashoffset: 0;
+
+    @keyframes dash {
+      0% {
+        stroke-dashoffset: $offset;
+      }
+      50% {
+        stroke-dashoffset: $offset/4;
+        transform: rotate(135deg);
+      }
+      100% {
+        stroke-dashoffset: $offset;
+        transform: rotate(450deg);
+      }
+    }
+  }
+}
+
+.errorLoadingContainer {
+  display: flex;
+  @include layout.center-xy;
+  width: 100%;
 }
