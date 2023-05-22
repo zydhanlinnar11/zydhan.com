@@ -1,0 +1,17 @@
+{
+  "Home": {
+    "header": {
+      "logo_alt": "Logo dari Zydhan Linnar Putra berupa kartun",
+      "title": "Zydhan Linnar Putra",
+      "subtitle": "Full-stack Developer",
+      "description": "Halo teman-teman! Kamu bisa memanggil saya Zydhan. Saya adalah seorang pengembang web dengan 2 tahun pengalaman dan saat ini sedang belajar untuk menjadi Sarjana Teknik Informatika di Institut Teknologi Sepuluh Nopember Surabaya."
+    }
+  },
+  "Navigation": {
+    "home": "Beranda",
+    "blog": "Blog",
+    "guestbook": "Buku Tamu",
+    "switch_to_dark_mode": "Ganti ke mode gelap",
+    "switch_to_light_mode": "Ganti ke mode terang"
+  }
+}

@@ -4,19 +4,19 @@ import { DarkModeToggleFab } from './DarkModeToggleFab'
 
 const destinations = [
   {
-    name: 'Home',
+    name: 'home',
     href: '/',
     icon: 'home',
     exact: true,
   },
   {
-    name: 'Blog',
+    name: 'blog',
     href: '/blog',
     icon: 'article',
     exact: false,
   },
   {
-    name: 'Guestbook',
+    name: 'guestbook',
     href: '/guestbook',
     icon: 'book',
     exact: false,

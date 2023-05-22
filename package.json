@@ -11,6 +11,7 @@
   "dependencies": {
     "clsx": "^1.2.1",
     "next": "13.4.3",
+    "next-intl": "^2.14.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
