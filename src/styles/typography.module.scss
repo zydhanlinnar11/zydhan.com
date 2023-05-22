@@ -1,31 +1,33 @@
-.label-medium {
-  font-family: var(--md-sys-typescale-label-medium-font), sans-serif;
-  font-size: var(--md-sys-typescale-label-medium-size);
-  line-height: var(--md-sys-typescale-label-medium-line-height);
-  font-weight: var(--md-sys-typescale-label-medium-weight);
-  letter-spacing: var(--md-sys-typescale-label-medium-tracking);
+@use 'tokens/window-class.scss' as window;
+@use 'sass:map';
+
+$types: 'label', 'headline', 'body';
+$sizes: 'large', 'medium', 'small';
+
+@mixin typography-builder($type, $size) {
+  font-family: var(--md-sys-typescale-#{$type}-#{$size}-font), sans-serif;
+  font-size: var(--md-sys-typescale-#{$type}-#{$size}-size);
+  line-height: var(--md-sys-typescale-#{$type}-#{$size}-line-height);
+  font-weight: var(--md-sys-typescale-#{$type}-#{$size}-weight);
+  letter-spacing: var(--md-sys-typescale-#{$type}-#{$size}-tracking);
 }
 
-.headline-medium {
-  font-family: var(--md-sys-typescale-headline-medium-font), sans-serif;
-  font-size: var(--md-sys-typescale-headline-medium-size);
-  line-height: var(--md-sys-typescale-headline-medium-line-height);
-  font-weight: var(--md-sys-typescale-headline-medium-weight);
-  letter-spacing: var(--md-sys-typescale-headline-medium-tracking);
+@each $type in $types {
+  @each $size in $sizes {
+    .#{$type}-#{$size} {
+      @include typography-builder($type, $size);
+    }
+  }
 }
 
-.body-medium {
-  font-family: var(--md-sys-typescale-body-medium-font), sans-serif;
-  font-size: var(--md-sys-typescale-body-medium-size);
-  line-height: var(--md-sys-typescale-body-medium-line-height);
-  font-weight: var(--md-sys-typescale-body-medium-weight);
-  letter-spacing: var(--md-sys-typescale-body-medium-tracking);
-}
-
-.body-small {
-  font-family: var(--md-sys-typescale-body-small-font), sans-serif;
-  font-size: var(--md-sys-typescale-body-small-size);
-  line-height: var(--md-sys-typescale-body-small-line-height);
-  font-weight: var(--md-sys-typescale-body-small-weight);
-  letter-spacing: var(--md-sys-typescale-body-small-tracking);
+@each $screen in map.keys(window.$screens) {
+  @each $type in $types {
+    @each $size in $sizes {
+      .screen-#{$screen}-#{$type}-#{$size} {
+        @media (min-width: map.get(window.$screens, $screen)) {
+          @include typography-builder($type, $size);
+        }
+      }
+    }
+  }
 }

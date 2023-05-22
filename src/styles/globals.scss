@@ -25,6 +25,12 @@
   --md-sys-state-focus-state-layer-opacity: 0.12;
   --md-sys-state-pressed-state-layer-opacity: 0.12;
 
+  --md-sys-typescale-body-large-font: var(--md-ref-typeface-plain);
+  --md-sys-typescale-body-large-line-height: 1.5rem;
+  --md-sys-typescale-body-large-size: 1rem;
+  --md-sys-typescale-body-large-tracking: calc(0.5 / 1rem);
+  --md-sys-typescale-body-large-weight: var(--md-ref-typeface-weight-regular);
+
   --md-sys-typescale-body-medium-font: var(--md-ref-typeface-plain);
   --md-sys-typescale-body-medium-line-height: 1.25rem;
   --md-sys-typescale-body-medium-size: 0.875rem;
@@ -36,6 +42,14 @@
   --md-sys-typescale-body-small-size: 0.75rem;
   --md-sys-typescale-body-small-tracking: calc(0.4 / 1rem);
   --md-sys-typescale-body-small-weight: var(--md-ref-typeface-weight-regular);
+
+  --md-sys-typescale-headline-large-font: var(--md-ref-typeface-plain);
+  --md-sys-typescale-headline-large-line-height: 2.5rem;
+  --md-sys-typescale-headline-large-size: 2rem;
+  --md-sys-typescale-headline-large-tracking: 0;
+  --md-sys-typescale-headline-large-weight: var(
+    --md-ref-typeface-weight-regular
+  );
 
   --md-sys-typescale-headline-medium-font: var(--md-ref-typeface-plain);
   --md-sys-typescale-headline-medium-line-height: 2.25rem;
