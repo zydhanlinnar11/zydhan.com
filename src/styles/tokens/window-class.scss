@@ -1,2 +1,4 @@
-$screen-medium: 600px;
-$screen-expanded: 840px;
+$screens: (
+  'medium': 600px,
+  'expanded': 840px,
+);

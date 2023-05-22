@@ -1,4 +1,5 @@
 @use '../tokens/window-class.scss' as window;
+@use 'sass:map';
 
 .container {
   padding: 16px;
@@ -7,7 +8,7 @@
     display: flex;
     justify-content: center;
 
-    @media (min-width: window.$screen-medium) {
+    @media (min-width: map.get(window.$screens, 'medium')) {
       margin-left: 80px;
     }
   }

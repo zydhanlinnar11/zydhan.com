@@ -1,5 +1,6 @@
 @use '../tokens/window-class.scss' as window;
 @use '../tokens/layout.scss' as layout;
+@use 'sass:map';
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
 $states: (
@@ -20,7 +21,7 @@ $states: (
   transition-duration: var(--md-sys-motion-duration-medium2);
   transition-timing-function: var(--md-sys-motion-easing-standard);
 
-  @media (min-width: window.$screen-medium) {
+  @media (min-width: map.get(window.$screens, 'medium')) {
     top: 0;
     bottom: auto;
     display: flex;
@@ -39,7 +40,7 @@ $states: (
     @include layout.center-xy;
     column-gap: 8px;
 
-    @media (min-width: window.$screen-medium) {
+    @media (min-width: map.get(window.$screens, 'medium')) {
       grid-template-columns: repeat(1, 1fr);
       row-gap: 4px;
       padding: 5px;
@@ -81,7 +82,7 @@ $states: (
       color: rgb(var(--md-sys-color-on-surface));
     }
 
-    @media (min-width: window.$screen-medium) {
+    @media (min-width: map.get(window.$screens, 'medium')) {
       @include layout.padding-y(0);
       height: 56px;
       justify-content: flex-start;
@@ -107,7 +108,7 @@ $states: (
       color: rgb(var(--md-sys-color-on-secondary-container));
     }
 
-    @media (min-width: window.$screen-medium) {
+    @media (min-width: map.get(window.$screens, 'medium')) {
       width: 56px;
       height: 32px;
     }
@@ -145,7 +146,7 @@ $states: (
     width: 80px;
     height: 56px;
 
-    @media (min-width: window.$screen-medium) {
+    @media (min-width: map.get(window.$screens, 'medium')) {
       display: flex;
     }
   }
