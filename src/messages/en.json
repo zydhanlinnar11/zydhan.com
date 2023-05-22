@@ -13,6 +13,17 @@
       "typescript": "TypeScript",
       "php": "PHP",
       "docker": "Docker"
+    },
+    "experiences_section": {
+      "title": "Experiences",
+      "until": "until",
+      "dptsi_its": {
+        "role": "Full-stack Developer Intern",
+        "company": "DPTSI ITS",
+        "description": "I was offered and accepted an internship offer with DPTSI - Directorate that manages Information Technology services in Sepuluh Nopember Institute of Technology Surabaya.",
+        "start_date": "Aug 2021",
+        "end_date": "now"
+      }
     }
   },
   "Navigation": {

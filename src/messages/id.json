@@ -13,6 +13,17 @@
       "typescript": "TypeScript",
       "php": "PHP",
       "docker": "Docker"
+    },
+    "experiences_section": {
+      "title": "Pengalaman",
+      "until": "sampai",
+      "dptsi_its": {
+        "role": "Magang Full-stack Developer",
+        "company": "DPTSI ITS",
+        "description": "Saya ditawari dan menerima tawaran magang di DPTSI - Direktorat yang mengelola layanan Teknologi Informasi di Institut Teknologi Sepuluh Nopember Surabaya.",
+        "start_date": "Agustus 2021",
+        "end_date": "sekarang"
+      }
     }
   },
   "Navigation": {

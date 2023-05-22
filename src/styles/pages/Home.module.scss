@@ -2,19 +2,25 @@
 @use '../tokens/layout.scss';
 @use 'sass:map';
 
+$row-gap: 24px;
+
 .container {
   $padding: 16px;
+
   padding: $padding;
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: $row-gap;
   max-width: calc(1024px + (2 * $padding));
 
   &__wrapper {
     display: flex;
     justify-content: center;
+    min-height: 100vh;
+    margin-bottom: 80px;
 
     @media (min-width: map.get(window.$screens, 'medium')) {
+      margin-bottom: 0;
       margin-left: 80px;
     }
   }
@@ -22,6 +28,12 @@
   @media (min-width: map.get(window.$screens, 'expanded')) {
     @include layout.padding-y(24px);
   }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  row-gap: $row-gap;
 }
 
 .header {
@@ -116,6 +128,58 @@
     @media (min-width: map.get(window.$screens, 'expanded')) {
       width: 48px;
       height: 48px;
+    }
+  }
+}
+
+.listSection {
+  &__item {
+    color: rgb(var(--md-sys-color-on-surface-variant));
+    transition-property: scale;
+    transition-duration: var(--md-sys-motion-duration-medium2);
+    transition-timing-function: var(--md-sys-motion-easing-standard);
+
+    &:hover,
+    &:focus,
+    &:active {
+      scale: 1.02;
+    }
+  }
+
+  &__title {
+    color: rgb(var(--md-sys-color-on-surface));
+  }
+}
+
+.experiences {
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 8px;
+
+    @media (min-width: map.get(window.$screens, 'medium')) {
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
+    }
+  }
+
+  &__date {
+    margin-top: 8px;
+  }
+
+  @media (min-width: map.get(window.$screens, 'medium')) {
+    &__title {
+      grid-row: 1 / 1;
+    }
+
+    &__description {
+      grid-row: 2 / -1;
+    }
+
+    &__date {
+      grid-column: 2;
+      grid-row: span 2;
+      margin-top: 0;
     }
   }
 }
