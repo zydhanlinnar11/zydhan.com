@@ -3,7 +3,12 @@
 @use 'sass:map';
 
 .container {
-  padding: 16px;
+  $padding: 16px;
+  padding: $padding;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  max-width: calc(1024px + (2 * $padding));
 
   &__wrapper {
     display: flex;
@@ -13,6 +18,7 @@
       margin-left: 80px;
     }
   }
+
   @media (min-width: map.get(window.$screens, 'expanded')) {
     @include layout.padding-y(24px);
   }
@@ -30,7 +36,6 @@
   row-gap: 8px;
   width: 100%;
   text-align: center;
-  max-width: 1024px;
 
   @media (min-width: map.get(window.$screens, 'expanded')) {
     @include layout.padding-y(56px);
@@ -46,6 +51,71 @@
     @media (min-width: map.get(window.$screens, 'expanded')) {
       width: 128px;
       height: 128px;
+    }
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  row-gap: 16px;
+
+  @media (min-width: map.get(window.$screens, 'expanded')) {
+    row-gap: 24px;
+  }
+}
+
+.favoriteLanguagesAndTools {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    gap: 8px;
+    width: 88px;
+    height: fit-content;
+
+    background-color: rgb(var(--md-sys-color-surface-container));
+    border-radius: 8px;
+
+    @media (min-width: map.get(window.$screens, 'expanded')) {
+      padding: 32px;
+      width: 140px;
+    }
+
+    transition-property: scale;
+    transition-duration: var(--md-sys-motion-duration-medium2);
+    transition-timing-function: var(--md-sys-motion-easing-standard);
+    &:hover {
+      scale: 1.05;
+    }
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    position: relative;
+
+    @media (min-width: map.get(window.$screens, 'expanded')) {
+      width: 48px;
+      height: 48px;
     }
   }
 }

@@ -59,6 +59,14 @@
     --md-ref-typeface-weight-regular
   );
 
+  --md-sys-typescale-headline-small-font: var(--md-ref-typeface-plain);
+  --md-sys-typescale-headline-small-line-height: 2rem;
+  --md-sys-typescale-headline-small-size: 1.5rem;
+  --md-sys-typescale-headline-small-tracking: 0;
+  --md-sys-typescale-headline-small-weight: var(
+    --md-ref-typeface-weight-regular
+  );
+
   --md-sys-typescale-label-medium-font: var(--md-ref-typeface-plain);
   --md-sys-typescale-label-medium-line-height: 1rem;
   --md-sys-typescale-label-medium-size: 0.75rem;

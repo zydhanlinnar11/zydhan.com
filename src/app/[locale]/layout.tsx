@@ -36,7 +36,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html className={robotoFlex.variable}>
+    <html lang={locale} className={robotoFlex.variable}>
       <body className={typography['body-medium']}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>
