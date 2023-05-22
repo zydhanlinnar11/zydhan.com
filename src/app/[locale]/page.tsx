@@ -13,12 +13,14 @@ export default function Home() {
     <div className={styles.container__wrapper}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <Image
-            src={siteLogo}
-            width={64}
-            height={64}
-            alt={t('header.logo_alt')}
-          />
+          <div className={styles.header__logo}>
+            <Image
+              src={siteLogo}
+              alt={t('header.logo_alt')}
+              sizes="(min-width: 840px) 128px, 64px"
+              fill
+            />
+          </div>
           <h1
             className={clsx(
               typography['headline-medium'],

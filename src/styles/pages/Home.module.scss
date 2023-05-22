@@ -35,5 +35,17 @@
   @media (min-width: map.get(window.$screens, 'expanded')) {
     @include layout.padding-y(56px);
     @include layout.padding-x(128px);
+    row-gap: 12px;
+  }
+
+  &__logo {
+    position: relative;
+    width: 64px;
+    height: 64px;
+
+    @media (min-width: map.get(window.$screens, 'expanded')) {
+      width: 128px;
+      height: 128px;
+    }
   }
 }
