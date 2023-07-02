@@ -6,6 +6,7 @@
 <slot />
 
 <style lang="scss" global>
+  @use '$lib/styles/typography.scss' as typography;
   @use '$lib/styles/tokens/pallete.scss';
   @use '$lib/styles/tokens/typeface.scss';
   @use '$lib/styles/tokens/easing-duration.scss';
@@ -102,6 +103,7 @@
   }
 
   :global(body) {
+    @include typography.typography-builder('body', 'medium');
     background-color: rgb(var(--md-sys-color-background));
     color: rgb(var(--md-sys-color-on-background));
     font-family: var(--md-sys-typescale-body-medium-font);

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  locally-unique-id-generator:
+    specifier: ^0.1.5
+    version: 0.1.5
+
 devDependencies:
   '@commitlint/cli':
     specifier: ^17.6.6
@@ -1956,6 +1961,10 @@ packages:
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
+
+  /locally-unique-id-generator@0.1.5:
+    resolution: {integrity: sha512-cdISIqzCk2IiO9GIfL0oPyvOhz0tOetKOOasYWLfKHD7W/23EpWb12GymG0xCy8nhG+TMon5x+SS9PLaDd+avg==}
+    dev: false
 
   /locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}

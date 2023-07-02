@@ -15,6 +15,17 @@
     },
     "home": {
       "title": "Zydhan Linnar Putra",
+      "experiences_section": {
+        "title": "Pengalaman",
+        "until": "sampai",
+        "dptsi_its": {
+          "role": "Magang Full-stack Developer",
+          "company": "DPTSI ITS",
+          "description": "Saya ditawari dan menerima tawaran magang di DPTSI - Direktorat yang mengelola layanan Teknologi Informasi di Institut Teknologi Sepuluh Nopember Surabaya.",
+          "start_date": "Agustus 2021",
+          "end_date": "Juni 2023"
+        }
+      },
       "fav_lang_section": {
         "title": "Bahasa Pemrograman dan Teknologi Favorit",
         "laravel": "Laravel",
