@@ -2,6 +2,7 @@
   import Experiences from '$lib/components/pages/home/experiences.svelte';
   import Favorite from '$lib/components/pages/home/favorite.svelte';
   import Header from '$lib/components/pages/home/header.svelte';
+  import RecentRepositories from '$lib/components/pages/home/recentRepositories.svelte';
   import { i } from '@inlang/sdk-js';
 </script>
 
@@ -15,6 +16,7 @@
     <main>
       <Favorite />
       <Experiences />
+      <RecentRepositories />
     </main>
   </div>
 </div>
