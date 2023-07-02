@@ -2,6 +2,8 @@
   "navigation": {
     "home": "Home",
     "blog": "Blog",
-    "guestbook": "Guestbook"
+    "guestbook": "Guestbook",
+    "switch_to_dark_mode": "Switch to dark mode",
+    "switch_to_light_mode": "Switch to light mode"
   }
 }

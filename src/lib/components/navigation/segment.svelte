@@ -1,6 +1,7 @@
 <script lang="ts">
   import { i, language } from '@inlang/sdk-js';
   import { page } from '$app/stores';
+  import clsx from 'clsx';
 
   export let href: string;
   export let icon: string;
@@ -16,7 +17,11 @@
 <a href={`/${language}${href}`} data-active={active}>
   <div aria-hidden={true}>
     <div data-active={active}>
-      <span data-active={active}>{icon}</span>
+      <span
+        data-active={active}
+        class={clsx('material-symbols-rounded', active && 'material-symbols-rounded--filled')}
+        >{icon}</span
+      >
     </div>
   </div>
   {i(`navigation.${nameLangKey}`)}
@@ -27,7 +32,6 @@
   @use '$lib/styles/tokens/layout.scss' as layout;
   @use '$lib/styles/tokens/window-class.scss' as window;
   @use 'sass:map';
-  @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
   $states: (
     'focus': 'focus',
@@ -97,29 +101,6 @@
         @media (min-width: map.get(window.$screens, 'medium')) {
           width: 56px;
           height: 32px;
-        }
-
-        & > span {
-          font-family: 'Material Symbols Rounded';
-          font-weight: normal;
-          font-style: normal;
-          font-size: 24px;
-          line-height: 1;
-          letter-spacing: normal;
-          text-transform: none;
-          display: inline-block;
-          white-space: nowrap;
-          word-wrap: normal;
-          direction: ltr;
-          -webkit-font-feature-settings: 'liga';
-          font-feature-settings: 'liga';
-          -webkit-font-smoothing: antialiased;
-          font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
-          transition-property: font-variation-settings;
-
-          &[data-active='true'] {
-            font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
-          }
         }
       }
     }
