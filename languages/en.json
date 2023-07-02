@@ -15,6 +15,14 @@
     },
     "home": {
       "title": "Zydhan Linnar Putra",
+      "fav_lang_section": {
+        "title": "Favorite Language and Tools",
+        "laravel": "Laravel",
+        "nextjs": "Next.js",
+        "typescript": "TypeScript",
+        "php": "PHP",
+        "docker": "Docker"
+      },
       "header": {
         "logo_alt": "Cartoonized picture of Zydhan Linnar Putra",
         "title": "Zydhan Linnar Putra",

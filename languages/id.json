@@ -15,6 +15,14 @@
     },
     "home": {
       "title": "Zydhan Linnar Putra",
+      "fav_lang_section": {
+        "title": "Bahasa Pemrograman dan Teknologi Favorit",
+        "laravel": "Laravel",
+        "nextjs": "Next.js",
+        "typescript": "TypeScript",
+        "php": "PHP",
+        "docker": "Docker"
+      },
       "header": {
         "logo_alt": "Logo dari Zydhan Linnar Putra berupa kartun",
         "title": "Zydhan Linnar Putra",

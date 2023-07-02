@@ -1,4 +1,5 @@
 <script>
+  import Favorite from '$lib/components/pages/home/favorite.svelte';
   import Header from '$lib/components/pages/home/header.svelte';
   import { i } from '@inlang/sdk-js';
 </script>
@@ -10,6 +11,9 @@
 <div class="container">
   <div class="content">
     <Header />
+    <main>
+      <Favorite />
+    </main>
   </div>
 </div>
 
@@ -18,6 +22,12 @@
   @use '$lib/styles/tokens/layout.scss';
   @use 'sass:map';
   $row-gap: 24px;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    row-gap: $row-gap;
+  }
 
   div.container {
     display: flex;
