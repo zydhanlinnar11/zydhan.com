@@ -1,30 +1,127 @@
 <script lang="ts">
-    import { i, language } from '@inlang/sdk-js'
-    import { page } from '$app/stores';
+  import { i, language } from '@inlang/sdk-js';
+  import { page } from '$app/stores';
 
-    export let href: string;
-    export let icon: string;
-    export let nameLangKey: string;
-    export let exact: boolean;
+  export let href: string;
+  export let icon: string;
+  export let nameLangKey: string;
+  export let exact: boolean;
 
-    $: localizedHref = href === '/' ? `/${language}` : `/${language}${href}`
-    $: active = exact ? $page.url.pathname === localizedHref : $page.url.pathname.startsWith(localizedHref);
+  $: localizedHref = href === '/' ? `/${language}` : `/${language}${href}`;
+  $: active = exact
+    ? $page.url.pathname === localizedHref
+    : $page.url.pathname.startsWith(localizedHref);
 </script>
 
-<style lang="scss">
-    @use '$lib/styles/typography.scss' as typography;
-    @import '$lib/components/navigation/segment.scss';
-
-    a {
-        @include typography.typography-builder('label', 'medium')
-    }
-</style>
-
-<a href={`/${language}${href}`} data-active={localizedHref}>
-    <div aria-hidden={true}>
-        <div data-active={active}>
-            <span data-active={active}>{icon}</span>
-        </div>
+<a href={`/${language}${href}`} data-active={active}>
+  <div aria-hidden={true}>
+    <div data-active={active}>
+      <span data-active={active}>{icon}</span>
     </div>
-    {i(`navigation.${nameLangKey}`)}
+  </div>
+  {i(`navigation.${nameLangKey}`)}
 </a>
+
+<style lang="scss">
+  @use '$lib/styles/typography.scss' as typography;
+  @use '$lib/styles/tokens/layout.scss' as layout;
+  @use '$lib/styles/tokens/window-class.scss' as window;
+  @use 'sass:map';
+  @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+
+  $states: (
+    'focus': 'focus',
+    'hover': 'hover',
+    'active': 'pressed',
+  );
+
+  a {
+    @include typography.typography-builder('label', 'medium');
+    display: flex;
+    @include layout.center-xy;
+    flex-direction: column;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    color: inherit;
+    row-gap: 4px;
+    text-align: center;
+    transition-property: color;
+
+    &,
+    & * {
+      transition-duration: var(--md-sys-motion-duration-medium2);
+      transition-timing-function: var(--md-sys-motion-easing-standard);
+    }
+
+    &:hover {
+      color: rgb(var(--md-sys-color-on-secondary-container));
+    }
+
+    @each $state, $varName in $states {
+      &:#{$state} > div > div {
+        background-color: rgba(
+          var(--md-sys-color-on-secondary-container),
+          var(--md-sys-state- + $varName + -state-layer-opacity)
+        );
+      }
+    }
+
+    &[data-active='true'] {
+      color: rgb(var(--md-sys-color-on-surface));
+    }
+
+    @media (min-width: map.get(window.$screens, 'medium')) {
+      @include layout.padding-y(0);
+      height: 56px;
+      justify-content: flex-start;
+    }
+
+    & > div {
+      border-radius: 16px;
+      overflow: hidden;
+
+      & > div {
+        display: flex;
+        @include layout.center-xy;
+        top: 0;
+        left: 0;
+        width: 64px;
+        height: 32px;
+        transition-property: color, background-color;
+
+        &[data-active='true'] {
+          background-color: rgb(var(--md-sys-color-secondary-container)) !important;
+          color: rgb(var(--md-sys-color-on-secondary-container));
+        }
+
+        @media (min-width: map.get(window.$screens, 'medium')) {
+          width: 56px;
+          height: 32px;
+        }
+
+        & > span {
+          font-family: 'Material Symbols Rounded';
+          font-weight: normal;
+          font-style: normal;
+          font-size: 24px;
+          line-height: 1;
+          letter-spacing: normal;
+          text-transform: none;
+          display: inline-block;
+          white-space: nowrap;
+          word-wrap: normal;
+          direction: ltr;
+          -webkit-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+          -webkit-font-smoothing: antialiased;
+          font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+          transition-property: font-variation-settings;
+
+          &[data-active='true'] {
+            font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+          }
+        }
+      }
+    }
+  }
+</style>
