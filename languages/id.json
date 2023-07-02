@@ -14,7 +14,13 @@
       "title": "Buku Tamu - zydhan.com"
     },
     "home": {
-      "title": "Zydhan Linnar Putra"
+      "title": "Zydhan Linnar Putra",
+      "header": {
+        "logo_alt": "Logo dari Zydhan Linnar Putra berupa kartun",
+        "title": "Zydhan Linnar Putra",
+        "subtitle": "Full-stack Developer",
+        "description": "Halo teman-teman! Kamu bisa memanggil saya Zydhan. Saya adalah seorang pengembang web dengan 2 tahun pengalaman dan saat ini sedang belajar untuk menjadi Sarjana Teknik Informatika di Institut Teknologi Sepuluh Nopember Surabaya."
+      }
     }
   }
 }

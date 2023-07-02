@@ -14,7 +14,13 @@
       "title": "Guestbook - zydhan.com"
     },
     "home": {
-      "title": "Zydhan Linnar Putra"
+      "title": "Zydhan Linnar Putra",
+      "header": {
+        "logo_alt": "Cartoonized picture of Zydhan Linnar Putra",
+        "title": "Zydhan Linnar Putra",
+        "subtitle": "Full-stack Developer",
+        "description": "Hello friends! You can call me Zydhan. I'm web development enthusiast with 2 years of experiences and currently study to become Bachelor of Informatics Engineering at Sepuluh Nopember Institute of Technology Surabaya."
+      }
     }
   }
 }

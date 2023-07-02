@@ -85,6 +85,7 @@
     --md-sys-typescale-label-medium-weight: var(--md-ref-typeface-weight-medium);
 
     &.dark {
+      color-scheme: dark;
       --md-sys-color-on-background: var(--md-ref-palette-neutral90);
       --md-sys-color-background: var(--md-ref-palette-neutral6);
 
