@@ -5,5 +5,16 @@
     "guestbook": "Guestbook",
     "switch_to_dark_mode": "Switch to dark mode",
     "switch_to_light_mode": "Switch to light mode"
+  },
+  "page": {
+    "blog": {
+      "title": "Blog - zydhan.com"
+    },
+    "guestbook": {
+      "title": "Guestbook - zydhan.com"
+    },
+    "home": {
+      "title": "Zydhan Linnar Putra"
+    }
   }
 }
