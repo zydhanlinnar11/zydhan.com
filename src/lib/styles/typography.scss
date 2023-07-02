@@ -11,3 +11,23 @@ $sizes: 'large', 'medium', 'small';
   font-weight: var(--md-sys-typescale-#{$type}-#{$size}-weight);
   letter-spacing: var(--md-sys-typescale-#{$type}-#{$size}-tracking);
 }
+
+// @each $type in $types {
+//   @each $size in $sizes {
+//     .#{$type}-#{$size} {
+//       @include typography-builder($type, $size);
+//     }
+//   }
+// }
+
+// @each $screen in map.keys(window.$screens) {
+//   @each $type in $types {
+//     @each $size in $sizes {
+//       .screen-#{$screen}-#{$type}-#{$size} {
+//         @media (min-width: map.get(window.$screens, $screen)) {
+//           @include typography-builder($type, $size);
+//         }
+//       }
+//     }
+//   }
+// }
