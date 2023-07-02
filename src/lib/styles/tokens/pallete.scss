@@ -1,0 +1,18 @@
+@mixin pallete {
+  --md-ref-palette-neutral6: 20, 18, 24;
+  --md-ref-palette-neutral10: 29, 27, 32;
+  --md-ref-palette-neutral12: 33, 31, 38;
+  --md-ref-palette-neutral90: 230, 224, 233;
+  --md-ref-palette-neutral94: 243, 237, 247;
+  --md-ref-palette-neutral98: 254, 247, 255;
+  --md-ref-palette-neutral-variant30: 73, 69, 79;
+  --md-ref-palette-neutral-variant80: 202, 196, 208;
+
+  --md-ref-palette-primary10: 33, 0, 93;
+  --md-ref-palette-primary30: 79, 55, 139;
+  --md-ref-palette-primary90: 234, 221, 255;
+
+  --md-ref-palette-secondary10: 29, 25, 43;
+  --md-ref-palette-secondary30: 74, 68, 88;
+  --md-ref-palette-secondary90: 232, 222, 248;
+}

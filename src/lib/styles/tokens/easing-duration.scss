@@ -1,0 +1,4 @@
+@mixin easing-duration {
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-duration-medium2: 300ms;
+}

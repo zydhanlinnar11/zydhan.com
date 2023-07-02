@@ -1,0 +1,13 @@
+@use 'tokens/window-class.scss' as window;
+@use 'sass:map';
+
+$types: 'label', 'headline', 'body';
+$sizes: 'large', 'medium', 'small';
+
+@mixin typography-builder($type, $size) {
+  font-family: var(--md-sys-typescale-#{$type}-#{$size}-font), sans-serif;
+  font-size: var(--md-sys-typescale-#{$type}-#{$size}-size);
+  line-height: var(--md-sys-typescale-#{$type}-#{$size}-line-height);
+  font-weight: var(--md-sys-typescale-#{$type}-#{$size}-weight);
+  letter-spacing: var(--md-sys-typescale-#{$type}-#{$size}-tracking);
+}
