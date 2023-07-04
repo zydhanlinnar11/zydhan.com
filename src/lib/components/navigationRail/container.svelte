@@ -8,9 +8,11 @@
 
 <div class={clsx('container', className)}>
   <nav>
-    {#each destinations as destination (destination.href)}
-      <Segment {...destination} />
-    {/each}
+    <ul>
+      {#each destinations as destination (destination.href)}
+        <li><Segment {...destination} /></li>
+      {/each}
+    </ul>
   </nav>
 
   <div>

@@ -12,7 +12,7 @@
 
 <a href={repository.html_url} target="_blank" aria-labelledby={linkId}>
   <article>
-    <h3>
+    <h3 id={linkId}>
       {repository.name}
     </h3>
     <p>{repository.description ?? i('page.home.repositories_section.no_desc_available')}</p>

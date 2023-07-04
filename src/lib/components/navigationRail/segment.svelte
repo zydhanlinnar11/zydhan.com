@@ -14,14 +14,15 @@
     : $page.url.pathname.startsWith(localizedHref);
 </script>
 
-<a href={`/${language}${href}`} data-active={active}>
+<a href={`/${language}${href}`} data-active={active} aria-current={active ? 'page' : 'false'}>
   <div aria-hidden={true}>
     <div data-active={active}>
       <span
         data-active={active}
         class={clsx('material-symbols-rounded', active && 'material-symbols-rounded--filled')}
-        >{icon}</span
       >
+        {icon}
+      </span>
     </div>
   </div>
   {i(`navigation.${nameLangKey}`)}

@@ -9,13 +9,17 @@
   <h2>
     {i('page.home.repositories_section.title')}
   </h2>
-  <div>
+  <ul>
     {#each $page.data.repositories as repository}
-      <RecentRepositoryItem {repository} />
+      <li><RecentRepositoryItem {repository} /></li>
     {/each}
-  </div>
+  </ul>
   <div class="button-wrapper">
-    <Button as="a" href="https://github.com/zydhanlinnar11" target="_blank" className="responsive-button"
+    <Button
+      as="a"
+      href="https://github.com/zydhanlinnar11"
+      target="_blank"
+      className="responsive-button"
       >{i('page.home.repositories_section.view_all_repositories')} →</Button
     >
   </div>

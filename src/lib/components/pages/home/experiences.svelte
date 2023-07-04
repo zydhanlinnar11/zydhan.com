@@ -16,11 +16,11 @@
   <h2>
     {i('page.home.experiences_section.title')}
   </h2>
-  <div>
+  <ul>
     {#each companies as { key, website, startDate, endDate } (key)}
-      <ExperienceItem {website} company={key} {endDate} {startDate} />
+      <li><ExperienceItem {website} company={key} {endDate} {startDate} /></li>
     {/each}
-  </div>
+  </ul>
 </section>
 
 <style lang="scss">
