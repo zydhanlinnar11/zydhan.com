@@ -1,5 +1,5 @@
 <script>
-  import Navigation from '$lib/components/navigation/container.svelte';
+  import Navigation from '$lib/components/navigation.svelte';
   import { onMount, setContext } from 'svelte';
   import { writable } from 'svelte/store';
   let darkMode = writable(false);
@@ -90,10 +90,14 @@
     --md-sys-color-primary-container: var(--md-ref-palette-primary90);
     --md-sys-color-on-primary-container: var(--md-ref-palette-primary10);
 
+    --md-sys-color-outline-variant: var(--md-ref-palette-neutral-variant80);
+
     --md-sys-color-secondary-container: var(--md-ref-palette-secondary90);
     --md-sys-color-on-secondary-container: var(--md-ref-palette-secondary10);
 
+    --md-sys-color-surface: var(--md-ref-palette-neutral98);
     --md-sys-color-surface-container: var(--md-ref-palette-neutral94);
+    --md-sys-color-surface-container-low: var(--md-ref-palette-neutral96);
     --md-sys-color-on-surface: var(--md-ref-palette-neutral10);
     --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant30);
 
@@ -149,6 +153,12 @@
     --md-sys-typescale-label-medium-tracking: calc(0.5 / 1rem);
     --md-sys-typescale-label-medium-weight: var(--md-ref-typeface-weight-medium);
 
+    --md-sys-typescale-title-small-font: var(--md-ref-typeface-plain);
+    --md-sys-typescale-title-small-line-height: 1.25rem;
+    --md-sys-typescale-title-small-size: 0.875rem;
+    --md-sys-typescale-title-small-tracking: calc(0.1 / 1rem);
+    --md-sys-typescale-title-small-weight: var(--md-ref-typeface-weight-medium);
+
     &.dark {
       color-scheme: dark;
       --md-sys-color-on-background: var(--md-ref-palette-neutral90);
@@ -159,10 +169,14 @@
       --md-sys-color-primary-container: var(--md-ref-palette-primary30);
       --md-sys-color-on-primary-container: var(--md-ref-palette-primary90);
 
+      --md-sys-color-outline-variant: var(--md-ref-palette-neutral-variant30);
+
+      --md-sys-color-surface: var(--md-ref-palette-neutral6);
       --md-sys-color-secondary-container: var(--md-ref-palette-secondary30);
       --md-sys-color-on-secondary-container: var(--md-ref-palette-secondary90);
 
       --md-sys-color-surface-container: var(--md-ref-palette-neutral12);
+      --md-sys-color-surface-container-low: var(--md-ref-palette-neutral10);
       --md-sys-color-on-surface: var(--md-ref-palette-neutral90);
       --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant80);
     }

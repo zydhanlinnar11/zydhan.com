@@ -1,30 +1,12 @@
 <script>
+  import { destinations } from '$lib/utils/navigation';
   import DarkModeFab from './darkModeFab.svelte';
   import Segment from './segment.svelte';
-
-  const destinations = [
-    {
-      nameLangKey: 'home',
-      href: '/',
-      icon: 'home',
-      exact: true,
-    },
-    {
-      nameLangKey: 'blog',
-      href: '/blog',
-      icon: 'article',
-      exact: false,
-    },
-    {
-      nameLangKey: 'guestbook',
-      href: '/guestbook',
-      icon: 'book',
-      exact: false,
-    },
-  ];
+  import clsx from 'clsx';
+  export let className = '';
 </script>
 
-<div class="container">
+<div class={clsx('container', className)}>
   <nav>
     {#each destinations as destination (destination.href)}
       <Segment {...destination} />

@@ -38,8 +38,12 @@
     justify-content: center;
     min-height: 100vh;
     margin-bottom: 80px;
+    --margin-top: 64px;
+    margin-top: var(--margin-top);
+    scroll-margin-top: var(--margin-top);
 
     @media (min-width: map.get(window.$screens, 'medium')) {
+      --margin-top: 0;
       margin-bottom: 0;
       margin-left: 80px;
     }

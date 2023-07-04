@@ -3,6 +3,9 @@
     "home": "Beranda",
     "blog": "Blog",
     "guestbook": "Buku Tamu",
+    "navigation": "Navigasi",
+    "preferences": "Preferensi",
+    "site_logo": "Logo situs",
     "switch_to_dark_mode": "Ganti ke mode gelap",
     "switch_to_light_mode": "Ganti ke mode terang"
   },
