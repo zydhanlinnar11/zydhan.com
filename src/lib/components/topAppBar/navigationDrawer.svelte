@@ -8,6 +8,7 @@
   import { getContext, onMount } from 'svelte';
   import NavigationDrawerItem from './navigationDrawerItem.svelte';
   import type { Writable } from 'svelte/store';
+  import clsx from 'clsx';
 
   let dialog: HTMLDialogElement | null = null;
   export let open = false;
@@ -45,30 +46,20 @@
     };
   });
 
-  function openDrawer() {
-    dialog?.showModal();
-    setTimeout(() => {
-      dialog?.classList.add('open');
-    }, 0);
-  }
-
-  function closeDrawer() {
-    dialog?.classList.remove('open');
-    setTimeout(() => {
-      dialog?.close();
-    }, 300);
-  }
-
   $: {
-    if (open && !dialog?.open) openDrawer();
-    if (!open && dialog?.open) closeDrawer();
+    if (open && !dialog?.open) dialog?.showModal();
+    if (!open && dialog?.open) {
+      setTimeout(() => {
+        dialog?.close();
+      }, 400);
+    }
   }
 
   const darkMode = getContext<Writable<boolean>>('darkMode');
   const labelId = newUniqueId();
 </script>
 
-<dialog bind:this={dialog} data-open={open} aria-labelledby={labelId}>
+<dialog bind:this={dialog} class={clsx(open && 'open')} aria-labelledby={labelId}>
   <div class="title">
     <h1 id={labelId} class="title-text">zydhan.com</h1>
   </div>
@@ -127,13 +118,20 @@
     border-radius: 0 16px 16px 0;
 
     background-color: rgb(var(--md-sys-color-surface-container-low));
+    transition-property: left, box-shadow;
+    transition-duration: var(--md-sys-motion-duration-medium4);
+    transition-timing-function: var(--md-sys-motion-easing-emphasized);
+    box-shadow: 0 0 0 100vw transparent;
+    &::backdrop {
+      background-color: transparent;
+    }
 
-    transition-property: all;
-    transition-duration: var(--md-sys-motion-duration-medium2);
-    transition-timing-function: var(--md-sys-motion-easing-standard);
-
-    &[data-open='true'] {
+    &.open {
       left: 0;
+
+      transition-duration: var(--md-sys-motion-duration-long2);
+      transition-timing-function: var(--md-sys-motion-easing-emphasized-decelerate);
+      box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.3);
     }
 
     & .title {
