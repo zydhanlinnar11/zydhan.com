@@ -121,6 +121,7 @@
     transition-property: left, box-shadow;
     transition-duration: var(--md-sys-motion-duration-medium4);
     transition-timing-function: var(--md-sys-motion-easing-emphasized);
+    color: rgb(var(--md-sys-color-on-surface-variant));
     box-shadow: 0 0 0 100vw transparent;
     &::backdrop {
       background-color: transparent;

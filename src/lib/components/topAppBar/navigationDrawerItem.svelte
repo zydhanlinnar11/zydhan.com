@@ -58,7 +58,7 @@
 
     border-radius: 100px;
     overflow: hidden;
-    color: rgb(var(--md-sys-color-on-surface-variant));
+    color: inherit;
     @include typography.typography-builder('label', 'large');
 
     &:visited {
