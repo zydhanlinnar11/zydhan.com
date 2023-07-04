@@ -6,6 +6,9 @@
   import nextjsBlack from '$lib/assets/images/nextjs-black.png';
   import php from '$lib/assets/images/php.png';
   import typescript from '$lib/assets/images/typescript.png';
+  import { getContext } from 'svelte';
+  import type { Writable } from 'svelte/store';
+  const darkMode = getContext<Writable<boolean>>('darkMode');
 
   const favourites = [
     { name: 'Laravel', icon: laravel },
@@ -26,8 +29,7 @@
         {#if typeof icon === 'string'}
           <img src={icon} alt={`${name} logo`} aria-hidden="true" />
         {:else}
-          <img src={icon.light} class="light" alt={`${name} logo`} aria-hidden="true" />
-          <img src={icon.dark} class="dark" alt={`${name} logo`} aria-hidden="true" />
+          <img src={$darkMode ? icon.dark : icon.light} alt={`${name} logo`} aria-hidden="true" />
         {/if}
         {name}
       </li>
@@ -91,20 +93,6 @@
           @media (min-width: map.get(window.$screens, 'expanded')) {
             width: 48px;
             height: 48px;
-          }
-
-          &.light {
-            display: block;
-            :global(.dark) & {
-              display: none;
-            }
-          }
-
-          &.dark {
-            display: none;
-            :global(.dark) & {
-              display: block;
-            }
           }
         }
       }

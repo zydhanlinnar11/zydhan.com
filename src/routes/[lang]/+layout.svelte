@@ -1,5 +1,67 @@
 <script>
   import Navigation from '$lib/components/navigation/container.svelte';
+  import { onMount, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
+  let darkMode = writable(false);
+
+  const isSystemPreferDarkMode = () => {
+    // Check if the system prefers a light theme
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+      return false;
+
+    return true;
+  };
+
+  function setDarkModeFromStorage() {
+    const persistedDarkMode = localStorage.getItem('darkMode');
+    if (persistedDarkMode == 'true' || persistedDarkMode == 'false') {
+      darkMode.set(persistedDarkMode == 'true');
+      return;
+    }
+
+    darkMode.set(isSystemPreferDarkMode());
+  }
+
+  function subscribeForDarkModeChanges() {
+    return darkMode.subscribe((value) => {
+      localStorage.setItem('darkMode', JSON.stringify(value));
+      const html = document.querySelector('html');
+      if (!html) return;
+      if (value && !html.classList.contains('dark')) {
+        html.classList.add('dark');
+        return;
+      }
+      if (!value && html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        return;
+      }
+    });
+  }
+
+  function subscribeForClassChanges() {
+    const html = document.querySelector('html');
+    const observer = new MutationObserver(() => {
+      darkMode.set(html?.classList.contains('dark') ?? false);
+    });
+    if (html) {
+      observer.observe(html, { attributes: true });
+    }
+
+    return observer;
+  }
+
+  onMount(() => {
+    setDarkModeFromStorage();
+    const unsubscribe = subscribeForDarkModeChanges();
+    const observer = subscribeForClassChanges();
+
+    return () => {
+      observer.disconnect();
+      unsubscribe();
+    };
+  });
+
+  setContext('darkMode', darkMode);
 </script>
 
 <Navigation />
