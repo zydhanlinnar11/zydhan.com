@@ -85,6 +85,8 @@
     --md-sys-color-on-background: var(--md-ref-palette-neutral6);
     --md-sys-color-background: var(--md-ref-palette-neutral98);
 
+    --md-sys-color-primary: var(--md-ref-palette-primary40);
+    --md-sys-color-on-primary: var(--md-ref-palette-primary100);
     --md-sys-color-primary-container: var(--md-ref-palette-primary90);
     --md-sys-color-on-primary-container: var(--md-ref-palette-primary10);
 
@@ -152,6 +154,8 @@
       --md-sys-color-on-background: var(--md-ref-palette-neutral90);
       --md-sys-color-background: var(--md-ref-palette-neutral6);
 
+      --md-sys-color-primary: var(--md-ref-palette-primary80);
+      --md-sys-color-on-primary: var(--md-ref-palette-primary20);
       --md-sys-color-primary-container: var(--md-ref-palette-primary30);
       --md-sys-color-on-primary-container: var(--md-ref-palette-primary90);
 

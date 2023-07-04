@@ -42,7 +42,8 @@
       },
       "repositories_section": {
         "title": "Recent Repositories",
-        "no_desc_available": "No description available."
+        "no_desc_available": "No description available.",
+        "view_all_repositories": "View all repositories"
       }
     }
   }

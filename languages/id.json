@@ -42,7 +42,8 @@
       },
       "repositories_section": {
         "title": "Repositori Terbaru",
-        "no_desc_available": "Tidak ada deskripsi"
+        "no_desc_available": "Tidak ada deskripsi",
+        "view_all_repositories": "Lihat semua repositori"
       }
     }
   }
