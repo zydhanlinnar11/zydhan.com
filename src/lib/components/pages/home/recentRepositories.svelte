@@ -15,7 +15,7 @@
     {/each}
   </div>
   <div class="button-wrapper">
-    <Button as="a" href="https://github.com/zydhanlinnar11" target="_blank"
+    <Button as="a" href="https://github.com/zydhanlinnar11" target="_blank" className="responsive-button"
       >{i('page.home.repositories_section.view_all_repositories')} →</Button
     >
   </div>
@@ -23,6 +23,7 @@
 
 <style lang="scss">
   @use '$lib/styles/typography.scss' as typography;
+  @use '$lib/styles/tokens/window-class.scss' as window;
   @use '$lib/components/pages/home/style.scss' as styles;
   @use 'sass:map';
 
@@ -41,5 +42,13 @@
     align-items: flex-end;
     gap: 0.625rem;
     align-self: stretch;
+
+    & > :global(.responsive-button) {
+      width: 100%;
+
+      @media (min-width: map.get(window.$screens, 'medium')) {
+        width: 240px;
+      }
+    }
   }
 </style>

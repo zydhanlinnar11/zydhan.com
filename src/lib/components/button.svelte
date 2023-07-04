@@ -1,17 +1,20 @@
 <script lang="ts">
+  import clsx from 'clsx';
+
   export let as: 'button' | 'a' = 'button';
   export let href: string = '';
   export let target: '_blank' | '_self' = '_self';
+  export let className: string = '';
 </script>
 
 {#if as === 'a'}
-  <a class="btn" {href} {target}>
+  <a class={clsx('btn', className)} {href} {target}>
     <div>
       <slot />
     </div>
   </a>
 {:else}
-  <button class="btn">
+  <button class={clsx('btn', className)}>
     <div>
       <slot />
     </div>
