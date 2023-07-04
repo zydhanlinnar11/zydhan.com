@@ -87,15 +87,15 @@
       flex: 1 0 0;
       align-self: stretch;
 
-      &[data-active='true'] {
-        background-color: rgb(var(--md-sys-color-secondary-container)) !important;
-        color: rgb(var(--md-sys-color-on-secondary-container));
-      }
-
       & > div {
         width: 24px;
         height: 24px;
       }
     }
+  }
+
+  a > div[data-active='true'] {
+    background-color: rgb(var(--md-sys-color-secondary-container)) !important;
+    color: rgb(var(--md-sys-color-on-secondary-container));
   }
 </style>
