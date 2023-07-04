@@ -15,9 +15,22 @@
       ? i('navigation.switch_to_light_mode')
       : i('navigation.switch_to_dark_mode')}
   >
-    <span class="material-symbols-rounded" aria-hidden="true">
-      {$darkMode ? 'light_mode' : 'dark_mode'}
-    </span>
+    <div class="icon-container">
+      <span
+        class="material-symbols-rounded"
+        style={`top: ${$darkMode ? 56 : 16}px;`}
+        aria-hidden="true"
+      >
+        dark_mode
+      </span>
+      <span
+        class="material-symbols-rounded"
+        style={`top: ${$darkMode ? 16 : -24}px;`}
+        aria-hidden="true"
+      >
+        light_mode
+      </span>
+    </div>
   </button>
 </div>
 
@@ -36,7 +49,7 @@
     color: rgb(var(--md-sys-color-on-primary-container));
 
     & > button {
-      padding: 16px;
+      padding: 0 16px;
       transition-duration: var(--md-sys-motion-duration-medium2);
       transition-timing-function: var(--md-sys-motion-easing-standard);
       transition-property: background-color;
@@ -51,5 +64,22 @@
         }
       }
     }
+  }
+
+  .icon-container {
+    width: 24px;
+    height: 56px;
+    background-color: transparent;
+    padding: 16px 0;
+    position: relative;
+  }
+
+  .material-symbols-rounded {
+    position: absolute;
+    left: 0;
+
+    transition-duration: var(--md-sys-motion-duration-long2);
+    transition-timing-function: var(--md-sys-motion-easing-emphasized);
+    transition-property: top;
   }
 </style>
