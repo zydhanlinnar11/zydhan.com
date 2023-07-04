@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import { destinations } from '$lib/utils/navigation';
-  import { i } from '@inlang/sdk-js';
+  import { i, language, switchLanguage } from '@inlang/sdk-js';
   import { getContext, onMount } from 'svelte';
   import NavigationDrawerItem from './navigationDrawerItem.svelte';
   import type { Writable } from 'svelte/store';
@@ -89,6 +89,16 @@
     <h2 class="section-header-text">{i('navigation.preferences')}</h2>
   </div>
   <ul>
+    <li>
+      <NavigationDrawerItem
+        click={() => {
+          switchLanguage(language === 'en' ? 'id' : 'en');
+        }}
+        as="button"
+        icon="translate"
+        nameLangKey={language === 'en' ? 'switch_to_indonesia' : 'switch_to_english'}
+      />
+    </li>
     <li>
       <NavigationDrawerItem
         click={() => {

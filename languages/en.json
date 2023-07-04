@@ -7,7 +7,9 @@
     "preferences": "Preferences",
     "site_logo": "Site logo",
     "switch_to_dark_mode": "Switch to dark mode",
-    "switch_to_light_mode": "Switch to light mode"
+    "switch_to_light_mode": "Switch to light mode",
+    "switch_to_lang": "Switch to ${lang}",
+    "switch_to_indonesia": "Switch to Indonesia"
   },
   "page": {
     "blog": {
