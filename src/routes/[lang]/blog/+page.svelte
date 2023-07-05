@@ -11,15 +11,17 @@
   <title>{i('page.blog.title')}</title>
 </svelte:head>
 
-<div>
-  <PageHeader title={i('page.blog.header.title')} subtitle={i('page.blog.header.subtitle')} />
-  <main>
-    <ul>
-      {#each data.posts as post (post.slug)}
-        <li><PostCard {post} /></li>
-      {/each}
-    </ul>
-  </main>
+<div class="container">
+  <div>
+    <PageHeader title={i('page.blog.header.title')} subtitle={i('page.blog.header.subtitle')} />
+    <main>
+      <ul>
+        {#each data.posts as post (post.slug)}
+          <li><PostCard {post} /></li>
+        {/each}
+      </ul>
+    </main>
+  </div>
 </div>
 
 <style lang="scss">
@@ -43,6 +45,24 @@
 
     @media (min-width: map.get(window.$screens, 'expanded')) {
       grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .container {
+    display: flex;
+    min-height: 100vh;
+    margin-bottom: 80px;
+    --margin-top: 64px;
+    margin-top: var(--margin-top);
+    scroll-margin-top: var(--margin-top);
+    $padding: 16px;
+
+    padding: $padding;
+
+    @media (min-width: map.get(window.$screens, 'medium')) {
+      --margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 80px;
     }
   }
 </style>

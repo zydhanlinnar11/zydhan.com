@@ -65,9 +65,7 @@
 </script>
 
 <Navigation />
-<div class="container">
-  <slot />
-</div>
+<slot />
 
 <style lang="scss" global>
   @use '$lib/styles/typography.scss' as typography;
@@ -259,24 +257,5 @@
 
   :global(.material-symbols-rounded--filled) {
     font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    margin-bottom: 80px;
-    --margin-top: 64px;
-    margin-top: var(--margin-top);
-    scroll-margin-top: var(--margin-top);
-    $padding: 16px;
-
-    padding: $padding;
-
-    @media (min-width: map.get(window.$screens, 'medium')) {
-      --margin-top: 0;
-      margin-bottom: 0;
-      margin-left: 80px;
-    }
   }
 </style>

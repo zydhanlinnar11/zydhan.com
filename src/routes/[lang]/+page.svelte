@@ -10,13 +10,15 @@
   <title>{i('page.home.title')}</title>
 </svelte:head>
 
-<div class="content">
-  <Header />
-  <main>
-    <Favorite />
-    <Experiences />
-    <RecentRepositories />
-  </main>
+<div class="container">
+  <div class="content">
+    <Header />
+    <main>
+      <Favorite />
+      <Experiences />
+      <RecentRepositories />
+    </main>
+  </div>
 </div>
 
 <style lang="scss">
@@ -39,6 +41,24 @@
 
     @media (min-width: map.get(window.$screens, 'expanded')) {
       @include layout.padding-y(24px);
+    }
+  }
+
+  .container {
+    display: flex;
+    min-height: 100vh;
+    margin-bottom: 80px;
+    --margin-top: 64px;
+    margin-top: var(--margin-top);
+    scroll-margin-top: var(--margin-top);
+    $padding: 16px;
+
+    padding: $padding;
+
+    @media (min-width: map.get(window.$screens, 'medium')) {
+      --margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 80px;
     }
   }
 </style>
