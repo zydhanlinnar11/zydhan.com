@@ -65,13 +65,17 @@
 </script>
 
 <Navigation />
-<slot />
+<div class="container">
+  <slot />
+</div>
 
 <style lang="scss" global>
   @use '$lib/styles/typography.scss' as typography;
   @use '$lib/styles/tokens/pallete.scss';
   @use '$lib/styles/tokens/typeface.scss';
   @use '$lib/styles/tokens/easing-duration.scss';
+  @use '$lib/styles/tokens/window-class.scss' as window;
+  @use 'sass:map';
   @import 'https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..1000&display=swap';
   @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
@@ -249,5 +253,24 @@
 
   :global(.material-symbols-rounded--filled) {
     font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    margin-bottom: 80px;
+    --margin-top: 64px;
+    margin-top: var(--margin-top);
+    scroll-margin-top: var(--margin-top);
+    $padding: 16px;
+
+    padding: $padding;
+
+    @media (min-width: map.get(window.$screens, 'medium')) {
+      --margin-top: 0;
+      margin-bottom: 0;
+      margin-left: 80px;
+    }
   }
 </style>

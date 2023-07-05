@@ -10,15 +10,13 @@
   <title>{i('page.home.title')}</title>
 </svelte:head>
 
-<div class="container">
-  <div class="content">
-    <Header />
-    <main>
-      <Favorite />
-      <Experiences />
-      <RecentRepositories />
-    </main>
-  </div>
+<div class="content">
+  <Header />
+  <main>
+    <Favorite />
+    <Experiences />
+    <RecentRepositories />
+  </main>
 </div>
 
 <style lang="scss">
@@ -33,26 +31,7 @@
     row-gap: $row-gap;
   }
 
-  div.container {
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    margin-bottom: 80px;
-    --margin-top: 64px;
-    margin-top: var(--margin-top);
-    scroll-margin-top: var(--margin-top);
-
-    @media (min-width: map.get(window.$screens, 'medium')) {
-      --margin-top: 0;
-      margin-bottom: 0;
-      margin-left: 80px;
-    }
-  }
-
   div.content {
-    $padding: 16px;
-
-    padding: $padding;
     display: flex;
     flex-direction: column;
     row-gap: $row-gap;
