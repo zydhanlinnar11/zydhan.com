@@ -173,7 +173,7 @@
     top: 16px;
     height: fit-content;
     max-height: calc(100vh - 32px);
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   @media (min-width: 840px) {
@@ -280,6 +280,6 @@
 
   main :global(pre) {
     max-width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 </style>
