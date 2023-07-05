@@ -12,7 +12,7 @@
 </svelte:head>
 
 <div class="container">
-  <div>
+  <div class="content">
     <PageHeader title={i('page.blog.header.title')} subtitle={i('page.blog.header.subtitle')} />
     <main>
       <ul>
@@ -27,7 +27,7 @@
 <style lang="scss">
   @use '$lib/styles/tokens/window-class.scss' as window;
   @use 'sass:map';
-  div {
+  .content {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -50,6 +50,8 @@
 
   .container {
     display: flex;
+    justify-content: center;
+    width: 100%;
     min-height: 100vh;
     margin-bottom: 80px;
     --margin-top: 64px;

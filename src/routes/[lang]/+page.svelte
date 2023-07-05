@@ -46,6 +46,7 @@
 
   .container {
     display: flex;
+    justify-content: center;
     min-height: 100vh;
     margin-bottom: 80px;
     --margin-top: 64px;
