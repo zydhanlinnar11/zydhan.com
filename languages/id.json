@@ -18,6 +18,10 @@
         "subtitle": "Berikut adalah beberapa artikel yang berfokus pada pengembangan web."
       }
     },
+    "post": {
+      "on_this_page": "Pada halaman ini",
+      "posted_by": "Diposting oleh {author}"
+    },
     "guestbook": {
       "title": "Buku Tamu - zydhan.com"
     },

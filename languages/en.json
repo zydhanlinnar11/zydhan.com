@@ -19,6 +19,10 @@
         "subtitle": "Here are some articles focused on web development."
       }
     },
+    "post": {
+      "on_this_page": "On this page",
+      "posted_by": "Posted by {author}"
+    },
     "guestbook": {
       "title": "Guestbook - zydhan.com"
     },

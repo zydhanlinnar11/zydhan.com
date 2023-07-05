@@ -14,6 +14,7 @@ export async function defineConfig(env) {
     plugins: [
       jsonPlugin({
         pathPattern: './languages/{language}.json',
+        variableReferencePattern: ['{', '}'],
       }),
       sdkPlugin({
         languageNegotiation: {

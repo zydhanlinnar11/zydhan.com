@@ -100,6 +100,7 @@
     --md-sys-color-surface: var(--md-ref-palette-neutral98);
     --md-sys-color-surface-container: var(--md-ref-palette-neutral94);
     --md-sys-color-surface-container-low: var(--md-ref-palette-neutral96);
+    --md-sys-color-surface-container-lowest: var(--md-ref-palette-neutral100);
     --md-sys-color-on-surface: var(--md-ref-palette-neutral10);
     --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant30);
 
@@ -161,6 +162,12 @@
     --md-sys-typescale-label-medium-tracking: calc(0.5 / 1rem);
     --md-sys-typescale-label-medium-weight: var(--md-ref-typeface-weight-medium);
 
+    --md-sys-typescale-title-medium-font: var(--md-ref-typeface-plain);
+    --md-sys-typescale-title-medium-line-height: 1.5rem;
+    --md-sys-typescale-title-medium-size: 1rem;
+    --md-sys-typescale-title-medium-tracking: calc(0.15 / 1rem);
+    --md-sys-typescale-title-medium-weight: var(--md-ref-typeface-weight-medium);
+
     --md-sys-typescale-title-small-font: var(--md-ref-typeface-plain);
     --md-sys-typescale-title-small-line-height: 1.25rem;
     --md-sys-typescale-title-small-size: 0.875rem;
@@ -185,6 +192,7 @@
 
       --md-sys-color-surface-container: var(--md-ref-palette-neutral12);
       --md-sys-color-surface-container-low: var(--md-ref-palette-neutral10);
+      --md-sys-color-surface-container-lowest: var(--md-ref-palette-neutral4);
       --md-sys-color-on-surface: var(--md-ref-palette-neutral90);
       --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant80);
     }
