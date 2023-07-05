@@ -12,7 +12,11 @@
   },
   "page": {
     "blog": {
-      "title": "Blog - zydhan.com"
+      "title": "Blog - zydhan.com",
+      "header": {
+        "title": "Blog",
+        "subtitle": "Berikut adalah beberapa artikel yang berfokus pada pengembangan web."
+      }
     },
     "guestbook": {
       "title": "Buku Tamu - zydhan.com"

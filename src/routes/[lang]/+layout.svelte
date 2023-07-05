@@ -109,6 +109,12 @@
     --md-sys-state-focus-state-layer-opacity: 0.12;
     --md-sys-state-pressed-state-layer-opacity: 0.12;
 
+    --md-sys-typescale-display-small-font: var(--md-ref-typeface-plain);
+    --md-sys-typescale-display-small-line-height: 2.75rem;
+    --md-sys-typescale-display-small-size: 2.25rem;
+    --md-sys-typescale-display-small-tracking: 0;
+    --md-sys-typescale-display-small-weight: var(--md-ref-typeface-weight-regular);
+
     --md-sys-typescale-body-large-font: var(--md-ref-typeface-plain);
     --md-sys-typescale-body-large-line-height: 1.5rem;
     --md-sys-typescale-body-large-size: 1rem;

@@ -1,0 +1,7 @@
+---
+author: Zydhan Linnar Putra
+description: Laravel bring us ease of API development with eloquent, API controller, migration, etc.
+createdAt: 2022-03-18T17:00:00.000Z
+title: Simple and Easy REST API Implementation With Laravel
+image: default-featured-image.jpg
+---

@@ -13,7 +13,11 @@
   },
   "page": {
     "blog": {
-      "title": "Blog - zydhan.com"
+      "title": "Blog - zydhan.com",
+      "header": {
+        "title": "Blog",
+        "subtitle": "Here are some articles focused on web development."
+      }
     },
     "guestbook": {
       "title": "Guestbook - zydhan.com"
