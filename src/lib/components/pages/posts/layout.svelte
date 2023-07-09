@@ -1,6 +1,7 @@
 <script>
   import { assets } from '$app/paths';
   import { i, language } from '@inlang/sdk-js';
+  import clsx from 'clsx';
   import { onMount } from 'svelte';
 
   export let author = '';
@@ -18,7 +19,7 @@
    */
   let headings = [];
 
-  onMount(() => {
+  function populateAllHeadings() {
     const headingElements = content.querySelectorAll('h2');
     /**
      * @type {{slug: string, text: string, active: boolean}[]}
@@ -32,6 +33,57 @@
       }
     });
     headings = temp;
+  }
+
+  onMount(() => {
+    populateAllHeadings();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        /**
+         * @type {string[]}
+         */
+        const visibleHeadings = [];
+        entries.forEach((entry) => {
+          const { target } = entry;
+          const { id } = target;
+          if (entry.isIntersecting && id) {
+            visibleHeadings.push(id);
+          }
+        });
+
+        if (visibleHeadings.length === 1) {
+          const [visibleHeading] = visibleHeadings;
+          // console.log(visibleHeading);
+          headings = headings.map((heading) => {
+            if (heading.slug === visibleHeading) {
+              return { ...heading, active: true };
+            }
+            return { ...heading, active: false };
+          });
+        } else if (visibleHeadings.length > 1) {
+          for (let i = 0; i < headings.length; i++) {
+            const isIntersecting = visibleHeadings.includes(headings[i].slug);
+            headings[i].active = isIntersecting;
+            if (isIntersecting) {
+              console.log(headings[i].slug);
+              break;
+            }
+          }
+        }
+      },
+      {
+        rootMargin: '0px 0px -40% 0px',
+      },
+    );
+
+    const headingElements = content.querySelectorAll('h2');
+    headingElements.forEach((heading) => {
+      observer.observe(heading);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   });
 
   $: dateCreatedAt = new Date(createdAt);
@@ -68,7 +120,9 @@
     <ul class="content">
       <!-- TODO: make table of content active observer -->
       {#each headings as heading (heading.slug)}
-        <li><a href={`#${heading.slug}`}>{heading.text}</a></li>
+        <li>
+          <a class={clsx(heading.active && 'active')} href={`#${heading.slug}`}>{heading.text}</a>
+        </li>
       {/each}
     </ul>
   </nav>
