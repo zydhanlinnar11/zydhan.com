@@ -1,0 +1,12 @@
+{
+  "Navbar": {
+    "logo": "Logo dari zydhan.com",
+    "open_navigation_menu": "Buka Menu Navigasi",
+    "close_navigation_menu": "Tutup Menu Navigasi",
+    "switch_to_dark_mode": "Beralih ke mode gelap",
+    "switch_to_light_mode": "Beralih ke mode terang",
+    "home": "Home",
+    "guestbook": "Guestbook",
+    "blog": "Blog"
+  }
+}

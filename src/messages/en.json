@@ -1,0 +1,12 @@
+{
+  "Navbar": {
+    "logo": "Logo of zydhan.com",
+    "open_navigation_menu": "Open Navigation Menu",
+    "close_navigation_menu": "Close Navigation Menu",
+    "switch_to_dark_mode": "Switch to dark mode",
+    "switch_to_light_mode": "Switch to light mode",
+    "home": "Home",
+    "guestbook": "Guestbook",
+    "blog": "Blog"
+  }
+}
