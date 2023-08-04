@@ -17,6 +17,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import NextLink from 'next/link'
 import { useId } from 'react'
+import { usePathname } from 'next/navigation'
 
 const menus = [
   {
@@ -33,11 +34,18 @@ const menus = [
   // },
 ]
 
-const Navbar = () => {
+const Navbar = ({ locale }: { locale: 'id' | 'en' }) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const t = useTranslations('Navbar')
   const { isOpen, onToggle } = useDisclosure()
   const collapseId = useId()
+  const pathName = usePathname()
+  const redirectedPathName = (locale: string) => {
+    if (!pathName) return '/'
+    const segments = pathName.split('/')
+    segments[1] = locale
+    return segments.join('/')
+  }
 
   return (
     <>
@@ -76,6 +84,18 @@ const Navbar = () => {
                 </Button>
               </li>
             ))}
+            <li>
+              <Button
+                as={NextLink}
+                variant="ghost"
+                size="sm"
+                href={redirectedPathName(locale === 'id' ? 'en' : 'id')}
+              >
+                {locale === 'id'
+                  ? 'Switch to English'
+                  : 'Ganti ke Bahasa Indonesia'}
+              </Button>
+            </li>
           </HStack>
         </HStack>
 
@@ -107,6 +127,15 @@ const Navbar = () => {
                 <NextLink href={menu.url}>{t(menu.slug as any)}</NextLink>
               </li>
             ))}
+            <li>
+              <NextLink
+                href={redirectedPathName(locale === 'id' ? 'en' : 'id')}
+              >
+                {locale === 'id'
+                  ? 'Switch to English'
+                  : 'Ganti ke Bahasa Indonesia'}
+              </NextLink>
+            </li>
           </Stack>
         </Container>
       </Collapse>
