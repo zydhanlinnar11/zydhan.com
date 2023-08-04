@@ -2,10 +2,10 @@ import Summary from './Summary'
 import { LanguageAndTools } from './LanguageAndTools'
 import { WorkExperiences } from './WorkExperiences'
 import { RecentRepositories } from './RecentRepositories'
-import { Suspense } from 'react'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import { config } from '@/config/common'
 import logo from '../../../public/logo.webp'
+import { createTranslator } from 'next-intl'
 
 type Props = {
   params: { locale: string }
@@ -14,15 +14,16 @@ type Props = {
 export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
-  const message = (await import(`@/messages/${locale}.json`)).default
+  const messages = (await import(`@/messages/${locale}.json`)).default
+  const t = createTranslator({ locale, messages })
 
   return {
     metadataBase: new URL(config.baseUrl),
-    title: `${message.HomePage.pageTitle} - ${config.siteName}`,
-    description: message.HomePage.description,
+    title: `${t('HomePage.pageTitle')} - ${config.siteName}`,
+    description: t('HomePage.description'),
     openGraph: {
-      title: message.HomePage.pageTitle,
-      description: message.HomePage.description,
+      title: t('HomePage.pageTitle'),
+      description: t('HomePage.description'),
       url: '/',
       type: 'website',
       images: [logo.src],
