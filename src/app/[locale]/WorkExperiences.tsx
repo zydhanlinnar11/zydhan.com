@@ -1,7 +1,6 @@
 'use client'
 import { useFormatter, useTranslations } from 'next-intl'
 import { Section } from './Section'
-import { useId } from 'react'
 import { PortofolioList, dateFormatting } from './PortofolioList'
 
 const experiences = [
@@ -35,8 +34,8 @@ const ExperienceItem = ({
 }) => {
   const t = useTranslations('HomePage')
   const format = useFormatter()
-  const titleId = useId()
-  const descriptionId = useId()
+  const titleId = `experience-title-${experience.key}`
+  const descriptionId = `experience-description-${experience.key}`
 
   return (
     <PortofolioList.Item

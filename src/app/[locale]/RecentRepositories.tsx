@@ -2,6 +2,7 @@ import { config } from '@/config/common'
 import { RecentRepositoriesClient } from './RecentRepositoriesClient'
 
 export type GithubRepo = {
+  id: number
   name: string
   description: string | null
   updated_at: string

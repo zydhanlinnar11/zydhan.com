@@ -1,11 +1,11 @@
 'use client'
 import { useFormatter, useTranslations } from 'next-intl'
 import { Section } from './Section'
-import { GithubRepo, githubUsername } from './RecentRepositories'
+import { GithubRepo } from './RecentRepositories'
 import { PortofolioList, dateFormatting } from './PortofolioList'
-import { useId } from 'react'
 import { Badge, Box, Flex } from '@chakra-ui/react'
 import Link from '@/components/Link'
+import { config } from '@/config/common'
 
 export const RecentRepositoriesClient = ({
   repositories,
@@ -23,7 +23,10 @@ export const RecentRepositoriesClient = ({
         ))}
       </PortofolioList>
       <Box>
-        <Link href={`https://github.com/${githubUsername}`} target="_blank">
+        <Link
+          href={`https://github.com/${config.githubUsername}`}
+          target="_blank"
+        >
           {`${t('viewAllRepositories')} →`}
         </Link>
       </Box>
@@ -32,8 +35,8 @@ export const RecentRepositoriesClient = ({
 }
 
 const RecentRepository = ({ repository }: { repository: GithubRepo }) => {
-  const titleId = useId()
-  const descriptionId = useId()
+  const titleId = `repository-title-${repository.id}`
+  const descriptionId = `repository-description-${repository.id}`
   const format = useFormatter()
   const t = useTranslations('HomePage')
 

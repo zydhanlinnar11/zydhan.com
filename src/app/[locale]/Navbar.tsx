@@ -16,7 +16,6 @@ import logo from '../../../public/logo.webp'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import NextLink from 'next-intl/link'
-import { useId } from 'react'
 import { usePathname } from 'next-intl/client'
 
 const menus = [
@@ -38,7 +37,7 @@ const Navbar = ({ locale }: { locale: 'id' | 'en' }) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const t = useTranslations('Navbar')
   const { isOpen, onToggle } = useDisclosure()
-  const collapseId = useId()
+  const collapseId = `Navbar__collapse`
   const pathName = usePathname()
 
   return (
