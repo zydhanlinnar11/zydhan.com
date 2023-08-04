@@ -94,11 +94,10 @@ const LanguageCard = ({ language }: { language: FavoriteLanguage }) => {
       >
         <Box width={'48px'} height={'48px'} position={'relative'}>
           <Image
-            src={
-              'light' in language.image
-                ? useColorModeValue(language.image.light, language.image.dark)
-                : language.image
-            }
+            src={useColorModeValue(
+              'light' in language.image ? language.image.light : language.image,
+              'dark' in language.image ? language.image.dark : language.image
+            )}
             alt={language.name}
             fill
             sizes="48px"

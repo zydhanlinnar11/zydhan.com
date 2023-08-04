@@ -7,8 +7,10 @@ export const Section = ({ children }: { children: ReactNode }) => (
     {children}
   </Flex>
 )
-Section.Title = ({ children }: { children: ReactNode }) => (
-  <Heading as={'h2'} fontSize={'2xl'}>
-    {children}
-  </Heading>
-)
+Section.Title = function SectionTitle({ children }: { children: ReactNode }) {
+  return (
+    <Heading as={'h2'} fontSize={'2xl'}>
+      {children}
+    </Heading>
+  )
+}

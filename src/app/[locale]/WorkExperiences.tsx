@@ -47,13 +47,13 @@ const ExperienceItem = ({
     >
       <PortofolioList.ItemContent>
         <PortofolioList.ItemTitle id={titleId}>
-          {`${t(`experiences.${experience.key}.title`)} @${t(
-            `experiences.${experience.key}.company`
-          )} - ${t(`experiences.${experience.key}.location`)}`}
+          {`${t(`experiences.${experience.key}.title` as any)} @${t(
+            `experiences.${experience.key}.company` as any
+          )} - ${t(`experiences.${experience.key}.location` as any)}`}
         </PortofolioList.ItemTitle>
 
         <PortofolioList.ItemDescription id={descriptionId}>
-          {t(`experiences.${experience.key}.description`)}
+          {t(`experiences.${experience.key}.description` as any)}
         </PortofolioList.ItemDescription>
       </PortofolioList.ItemContent>
       <PortofolioList.ItemTime>

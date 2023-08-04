@@ -11,10 +11,9 @@ type Props = {
   params: { locale: string }
 }
 
-export async function generateMetadata(
-  { params: { locale } }: Props,
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params: { locale },
+}: Props): Promise<Metadata> {
   const message = (await import(`@/messages/${locale}.json`)).default
 
   return {
