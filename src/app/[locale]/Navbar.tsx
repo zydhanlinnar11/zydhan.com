@@ -23,14 +23,14 @@ const menus = [
     slug: 'home',
     url: '/',
   },
-  {
-    slug: 'guestbook',
-    url: '/guestbook',
-  },
-  {
-    slug: 'blog',
-    url: '/blog',
-  },
+  // {
+  //   slug: 'guestbook',
+  //   url: '/guestbook',
+  // },
+  // {
+  //   slug: 'blog',
+  //   url: '/blog',
+  // },
 ]
 
 const Navbar = () => {

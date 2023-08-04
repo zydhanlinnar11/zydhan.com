@@ -5,8 +5,28 @@
     "close_navigation_menu": "Tutup Menu Navigasi",
     "switch_to_dark_mode": "Beralih ke mode gelap",
     "switch_to_light_mode": "Beralih ke mode terang",
-    "home": "Home",
+    "home": "Beranda",
     "guestbook": "Guestbook",
     "blog": "Blog"
+  },
+  "HomePage": {
+    "logo": "Logo of zydhan.com",
+    "pageTitle": "Beranda",
+    "title": "Zydhan Linnar Putra",
+    "subtitle": "Pengembang Web Full-stack",
+    "description": "Halo teman-teman! Kalian bisa memanggil saya Zydhan. Saya adalah seorang penggemar pengembangan web dengan pengalaman selama 2 tahun, dan saat ini sedang belajar untuk menjadi Sarjana Teknik Informatika di Institut Teknologi Sepuluh Nopember Surabaya.",
+    "favoriteLanguages": "Bahasa Pemrograman dan Alat Favorit",
+    "workExperiences": "Pengalaman Kerja",
+    "experiences": {
+      "dptsi_fullstack": {
+        "title": "Magang Full-stack Web Developer",
+        "company": "DPTSI ITS",
+        "location": "Surabaya, Indonesia",
+        "description": "Saya ditawari oleh dosen selaku direktur dari DPTSI - Direktorat Layanan Teknologi Informasi di Institut Teknologi Sepuluh Nopember Surabaya."
+      }
+    },
+    "recentRepositories": "Repositori Terbaru",
+    "noDescriptionAvailable": "Tidak ada deskripsi yang tersedia.",
+    "viewAllRepositories": "Lihat Semua Repositori"
   }
 }
