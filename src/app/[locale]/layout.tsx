@@ -5,6 +5,7 @@ import { Providers } from './providers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import ClientLayout from './ClientLayout'
+import Footer from './Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,6 +39,7 @@ export default async function LocaleLayout({
           <Providers>
             <Navbar locale={locale as 'id' | 'en'} />
             <ClientLayout>{children}</ClientLayout>
+            <Footer />
           </Providers>
         </NextIntlClientProvider>
       </body>
