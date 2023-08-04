@@ -1,7 +1,7 @@
 'use client'
 import { Box, Divider, Flex, Link, Text } from '@chakra-ui/react'
 import { DateTimeFormatOptions } from 'next-intl'
-import NextLink from 'next/link'
+import NextLink from 'next-intl/link'
 import { ReactNode } from 'react'
 
 export const dateFormatting: DateTimeFormatOptions = {

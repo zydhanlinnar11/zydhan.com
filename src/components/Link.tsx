@@ -4,7 +4,7 @@ import {
   ResponsiveValue,
   useColorMode,
 } from '@chakra-ui/react'
-import NextLink from 'next/link'
+import NextLink from 'next-intl/link'
 import { FC, HTMLAttributeAnchorTarget, PropsWithChildren } from 'react'
 
 type Props = {

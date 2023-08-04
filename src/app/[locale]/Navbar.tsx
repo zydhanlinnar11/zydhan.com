@@ -15,9 +15,9 @@ import {
 import logo from '../../../public/logo.webp'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import NextLink from 'next/link'
+import NextLink from 'next-intl/link'
 import { useId } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next-intl/client'
 
 const menus = [
   {
@@ -40,12 +40,6 @@ const Navbar = ({ locale }: { locale: 'id' | 'en' }) => {
   const { isOpen, onToggle } = useDisclosure()
   const collapseId = useId()
   const pathName = usePathname()
-  const redirectedPathName = (locale: string) => {
-    if (!pathName) return '/'
-    const segments = pathName.split('/')
-    segments[1] = locale
-    return segments.join('/')
-  }
 
   return (
     <>
@@ -89,7 +83,8 @@ const Navbar = ({ locale }: { locale: 'id' | 'en' }) => {
                 as={NextLink}
                 variant="ghost"
                 size="sm"
-                href={redirectedPathName(locale === 'id' ? 'en' : 'id')}
+                href={pathName}
+                locale={locale === 'id' ? 'en' : 'id'}
               >
                 {locale === 'id'
                   ? 'Switch to English'
@@ -128,9 +123,7 @@ const Navbar = ({ locale }: { locale: 'id' | 'en' }) => {
               </li>
             ))}
             <li>
-              <NextLink
-                href={redirectedPathName(locale === 'id' ? 'en' : 'id')}
-              >
+              <NextLink href={pathName} locale={locale === 'id' ? 'en' : 'id'}>
                 {locale === 'id'
                   ? 'Switch to English'
                   : 'Ganti ke Bahasa Indonesia'}
