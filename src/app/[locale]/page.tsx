@@ -51,9 +51,7 @@ export default function Home() {
       <Summary />
       <LanguageAndTools />
       <WorkExperiences />
-      <Suspense fallback={<div>Loading...</div>}>
-        <RecentRepositories />
-      </Suspense>
+      <RecentRepositories />
     </div>
   )
 }

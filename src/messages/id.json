@@ -27,6 +27,9 @@
     },
     "recentRepositories": "Repositori Terbaru",
     "noDescriptionAvailable": "Tidak ada deskripsi yang tersedia.",
-    "viewAllRepositories": "Lihat Semua Repositori"
+    "viewAllRepositories": "Lihat Semua Repositori",
+    "failedToLoadRepositories": "Gagal memuat repositori.",
+    "tryAgain": "Coba Lagi",
+    "noRepositoriesFound": "Tidak ada repositori yang ditemukan."
   }
 }

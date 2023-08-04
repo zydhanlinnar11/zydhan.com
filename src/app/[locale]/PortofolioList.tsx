@@ -9,9 +9,17 @@ export const dateFormatting: DateTimeFormatOptions = {
   month: 'short',
 }
 
-export const PortofolioList = ({ children }: { children: ReactNode }) => (
-  <Flex as={'ul'} listStyleType={'none'} flexDirection={'column'}>
-    {children}
+export const PortofolioList = (props: {
+  children: ReactNode
+  'aria-busy'?: boolean
+}) => (
+  <Flex
+    as={'ul'}
+    listStyleType={'none'}
+    flexDirection={'column'}
+    aria-busy={props['aria-busy']}
+  >
+    {props.children}
   </Flex>
 )
 PortofolioList.Item = function PortofolioListItem({

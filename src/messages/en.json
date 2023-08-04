@@ -27,6 +27,9 @@
     },
     "recentRepositories": "Recent Repositories",
     "noDescriptionAvailable": "No description available.",
-    "viewAllRepositories": "View All Repositories"
+    "viewAllRepositories": "View All Repositories",
+    "failedToLoadRepositories": "Failed to load repositories.",
+    "tryAgain": "Try Again",
+    "noRepositoriesFound": "No repositories found."
   }
 }
