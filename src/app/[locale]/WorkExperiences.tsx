@@ -1,7 +1,8 @@
 'use client'
 import { useFormatter, useTranslations } from 'next-intl'
 import { Section } from './Section'
-import { PortofolioList, dateFormatting } from './PortofolioList'
+import { PortofolioList } from './PortofolioList'
+import { dateFormatting } from '@/config/common'
 
 const experiences = [
   {

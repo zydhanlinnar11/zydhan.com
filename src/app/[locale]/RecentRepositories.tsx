@@ -1,8 +1,8 @@
 'use client'
-import { config } from '@/config/common'
+import { config, dateFormatting } from '@/config/common'
 import { useFormatter, useTranslations } from 'next-intl'
 import { Section } from './Section'
-import { PortofolioList, dateFormatting } from './PortofolioList'
+import { PortofolioList } from './PortofolioList'
 import {
   Badge,
   Box,

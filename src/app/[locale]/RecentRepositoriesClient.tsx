@@ -2,10 +2,10 @@
 import { useFormatter, useTranslations } from 'next-intl'
 import { Section } from './Section'
 import { GithubRepo } from './RecentRepositories'
-import { PortofolioList, dateFormatting } from './PortofolioList'
+import { PortofolioList } from './PortofolioList'
 import { Badge, Box, Flex } from '@chakra-ui/react'
 import Link from '@/components/Link'
-import { config } from '@/config/common'
+import { config, dateFormatting } from '@/config/common'
 
 export const RecentRepositoriesClient = ({
   repositories,

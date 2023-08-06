@@ -1,13 +1,7 @@
 'use client'
 import { Box, Divider, Flex, Link, Text } from '@chakra-ui/react'
-import { DateTimeFormatOptions } from 'next-intl'
 import NextLink from 'next-intl/link'
 import { ReactNode } from 'react'
-
-export const dateFormatting: DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'short',
-}
 
 export const PortofolioList = (props: {
   children: ReactNode
