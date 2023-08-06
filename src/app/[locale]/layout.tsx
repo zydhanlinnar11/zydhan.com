@@ -34,7 +34,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body
+        className={inter.className}
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <Navbar locale={locale as 'id' | 'en'} />
