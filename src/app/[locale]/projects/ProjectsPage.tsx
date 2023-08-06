@@ -58,8 +58,9 @@ const ProjectsPage = ({ metadatas }: { metadatas: ProjectMetadata[] }) => {
                   aria-hidden
                 >
                   <Image
-                    src={`/${metadata.slug}.jpg`}
+                    src={metadata.thumbnail}
                     alt={metadata.title}
+                    placeholder="blur"
                     fill
                     sizes="(max-width: 30em) 100vw, (max-width: 48em) 50vw, 33vw"
                   />

@@ -41,7 +41,8 @@ const ProjectPage = ({
             overflow={'hidden'}
           >
             <Image
-              src={`/${metadata.slug}.jpg`}
+              src={metadata.thumbnail}
+              placeholder="blur"
               alt={metadata.title}
               fill
               priority
