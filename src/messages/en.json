@@ -36,5 +36,13 @@
   "ProjectsPage": {
     "title": "Projects",
     "subtitle": "Showcasing my tech adventures! 🚀"
+  },
+  "ProjectPage": {
+    "type": {
+      "web_app": "Web Application"
+    }
+  },
+  "TableOfContent": {
+    "title": "Table of Contents"
   }
 }

@@ -36,5 +36,13 @@
   "ProjectsPage": {
     "title": "Proyek",
     "subtitle": "Menunjukkan petualangan teknologi saya! 🚀"
+  },
+  "ProjectPage": {
+    "type": {
+      "web_app": "Aplikasi Web"
+    }
+  },
+  "TableOfContent": {
+    "title": "Daftar Isi"
   }
 }

@@ -33,7 +33,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} style={{ scrollBehavior: 'smooth' }}>
       <body
         className={inter.className}
         style={{

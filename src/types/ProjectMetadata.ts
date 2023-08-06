@@ -4,4 +4,5 @@ export type ProjectMetadata = {
   startDate: string
   endDate: string
   slug: string
+  appType: 'web_app'
 }
