@@ -7,7 +7,8 @@
     "switch_to_light_mode": "Switch to light mode",
     "home": "Home",
     "guestbook": "Guestbook",
-    "blog": "Blog"
+    "blog": "Blog",
+    "projects": "Projects"
   },
   "HomePage": {
     "logo": "Logo of zydhan.com",
@@ -31,5 +32,9 @@
     "failedToLoadRepositories": "Failed to load repositories.",
     "tryAgain": "Try Again",
     "noRepositoriesFound": "No repositories found."
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "subtitle": "Showcasing my tech adventures! 🚀"
   }
 }

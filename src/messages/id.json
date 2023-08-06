@@ -7,7 +7,8 @@
     "switch_to_light_mode": "Beralih ke mode terang",
     "home": "Beranda",
     "guestbook": "Guestbook",
-    "blog": "Blog"
+    "blog": "Blog",
+    "projects": "Proyek"
   },
   "HomePage": {
     "logo": "Logo of zydhan.com",
@@ -31,5 +32,9 @@
     "failedToLoadRepositories": "Gagal memuat repositori.",
     "tryAgain": "Coba Lagi",
     "noRepositoriesFound": "Tidak ada repositori yang ditemukan."
+  },
+  "ProjectsPage": {
+    "title": "Proyek",
+    "subtitle": "Menunjukkan petualangan teknologi saya! 🚀"
   }
 }

@@ -23,6 +23,10 @@ const menus = [
     slug: 'home',
     url: '/',
   },
+  {
+    slug: 'projects',
+    url: '/projects',
+  },
   // {
   //   slug: 'guestbook',
   //   url: '/guestbook',
