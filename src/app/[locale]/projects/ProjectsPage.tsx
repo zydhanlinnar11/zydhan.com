@@ -50,6 +50,7 @@ const ProjectsPage = ({ metadatas }: { metadatas: ProjectMetadata[] }) => {
                   transform: 'scale(1.05)',
                 }}
                 as={'article'}
+                height={'100%'}
               >
                 <CardHeader
                   p={0}
