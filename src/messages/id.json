@@ -18,6 +18,7 @@
     "description": "Halo teman-teman! Kalian bisa memanggil saya Zydhan. Saya adalah seorang penggemar pengembangan web dengan pengalaman selama 2 tahun, dan saat ini sedang belajar untuk menjadi Sarjana Teknik Informatika di Institut Teknologi Sepuluh Nopember Surabaya.",
     "favoriteLanguages": "Bahasa Pemrograman dan Alat Favorit",
     "workExperiences": "Pengalaman Kerja",
+    "projects": "Proyek",
     "experiences": {
       "dptsi_fullstack": {
         "title": "Magang Full-stack Web Developer",
@@ -31,7 +32,8 @@
     "viewAllRepositories": "Lihat Semua Repositori",
     "failedToLoadRepositories": "Gagal memuat repositori.",
     "tryAgain": "Coba Lagi",
-    "noRepositoriesFound": "Tidak ada repositori yang ditemukan."
+    "noRepositoriesFound": "Tidak ada repositori yang ditemukan.",
+    "viewAllProjects": "Lihat Semua Proyek"
   },
   "ProjectsPage": {
     "title": "Proyek",

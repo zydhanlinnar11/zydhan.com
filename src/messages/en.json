@@ -18,6 +18,7 @@
     "description": "Hello friends! You can call me Zydhan. I'm web development enthusiast with 2 year of experiences and currently study to become Bachelor of Informatics Engineering at Sepuluh Nopember Institute of Technology Surabaya.",
     "favoriteLanguages": "Favorite Languages and Tools",
     "workExperiences": "Work Experiences",
+    "projects": "Projects",
     "experiences": {
       "dptsi_fullstack": {
         "title": "Full-stack Web Developer Intern",
@@ -31,7 +32,8 @@
     "viewAllRepositories": "View All Repositories",
     "failedToLoadRepositories": "Failed to load repositories.",
     "tryAgain": "Try Again",
-    "noRepositoriesFound": "No repositories found."
+    "noRepositoriesFound": "No repositories found.",
+    "viewAllProjects": "View All Projects"
   },
   "ProjectsPage": {
     "title": "Projects",

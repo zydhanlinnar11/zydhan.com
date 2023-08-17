@@ -6,6 +6,8 @@ import { Metadata } from 'next'
 import { config } from '@/config/common'
 import logo from '../../../public/logo.webp'
 import { createTranslator } from 'next-intl'
+import { getProjectsMetadata } from '@/lib/projects'
+import { Projects } from './Projects'
 
 type Props = {
   params: { locale: string }
@@ -40,7 +42,15 @@ export async function generateMetadata({
   }
 }
 
-export default function Home() {
+export default async function Home({
+  params: { locale },
+}: {
+  params: { locale: 'en' | 'id' }
+}) {
+  const projectsMetadata = (await getProjectsMetadata(locale))
+    .sort((a, b) => b.startDate.localeCompare(a.startDate))
+    .slice(0, 3)
+
   return (
     <div
       style={{
@@ -52,6 +62,7 @@ export default function Home() {
       <Summary />
       <LanguageAndTools />
       <WorkExperiences />
+      <Projects projects={projectsMetadata} />
       <RecentRepositories />
     </div>
   )
