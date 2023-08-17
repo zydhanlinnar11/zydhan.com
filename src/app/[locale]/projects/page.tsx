@@ -10,7 +10,7 @@ type Props = {
 
 export async function generateMetadata(
   { params: { locale } }: Props,
-  parent?: ResolvingMetadata
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const messages = (await import(`@/messages/${locale}.json`)).default
   const t = createTranslator({ locale, messages })

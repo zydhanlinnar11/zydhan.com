@@ -40,7 +40,7 @@ const useNestedHeadings = (contentId: string) => {
 
     const newNestedHeadings = getNestedHeadings(headingElements)
     setNestedHeadings(newNestedHeadings)
-  }, [])
+  }, [contentId])
 
   return { nestedHeadings }
 }

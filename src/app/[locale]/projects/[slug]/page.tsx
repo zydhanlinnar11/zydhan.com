@@ -11,12 +11,12 @@ type Props = {
 
 export async function generateMetadata(
   { params: { locale, slug } }: Props,
-  parent?: ResolvingMetadata
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const messages = (await import(`@/messages/${locale}.json`)).default
   const t = createTranslator({ locale, messages })
   // optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent)?.openGraph?.images || []
+  const previousImages = (await parent).openGraph?.images || []
 
   try {
     const metadata = await readProjectMetadata(slug, locale)
