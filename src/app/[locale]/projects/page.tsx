@@ -43,7 +43,9 @@ const ProjectsPageServerWrapper = async ({
 }: {
   params: { locale: 'en' | 'id' }
 }) => {
-  const projectsMetadata = await getProjectsMetadata(locale)
+  const projectsMetadata = (await getProjectsMetadata(locale)).sort((a, b) =>
+    b.startDate.localeCompare(a.startDate)
+  )
 
   return <ProjectsPage metadatas={projectsMetadata} />
 }
