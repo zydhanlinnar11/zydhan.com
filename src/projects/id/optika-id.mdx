@@ -1,0 +1,120 @@
+import thumbnail from '@/assets/projects/optika-id.webp'
+import homePageScreenshot from '@/assets/projects/optika-id-screenshots/home-page.png'
+import newsPageScreenshot from '@/assets/projects/optika-id-screenshots/news-page.png'
+import newsCreationPageScreenshot from '@/assets/projects/optika-id-screenshots/news-creation-page.png'
+import dashboardPageScreenshot from '@/assets/projects/optika-id-screenshots/dashboard-page.png'
+import profilePageScreenshot from '@/assets/projects/optika-id-screenshots/profile-page.png'
+import penukaranPoinPageScreenshot from '@/assets/projects/optika-id-screenshots/penukaran-poin-page.png'
+import adminPageScreenshot from '@/assets/projects/optika-id-screenshots/admin-page.png'
+import Image from 'next/image'
+
+export const meta = {
+  title: 'Optika.id',
+  subtitle:
+    'Portal digital yang berfokus pada berita, fitur, tulisan investigasi, tulisan mendalam, video, animasi, dan lain sebagainya.',
+  startDate: '2022-07-30',
+  endDate: '2022-12-12',
+  appType: 'web_app',
+  thumbnail,
+}
+
+## Gambaran Proyek
+
+Optika.id adalah portal berita yang revolusioner yang telah berkembang melebihi keterbatasannya sebelumnya untuk memberikan pengalaman konsumsi berita yang lebih menarik dan fleksibel. Awalnya dibangun di atas platform berbasis WordPress, Optika.id menyadari kebutuhan akan solusi yang lebih dapat disesuaikan dan efisien, sehingga mengarah pada pembuatan portal baru menggunakan Next.js dan Laravel.
+
+## Permasalahan
+
+Platform awal berbasis WordPress menawarkan liputan berita tetapi kurang fleksibilitas dan efisiensi yang diperlukan untuk portal berita yang berkembang. Alur kerja moderasi dan sistem poin sulit untuk diimplementasikan dengan efektif, membatasi potensi platform untuk keterlibatan komunitas.
+
+## Solusi
+
+Memahami kebutuhan akan solusi yang lebih dapat disesuaikan, Optika.id beralih ke platform baru yang dikembangkan dengan Next.js dan Laravel. Evolusi ini memungkinkan pendekatan yang disesuaikan untuk keterlibatan pengguna, moderasi konten, dan imbalan, meningkatkan pengalaman pengguna secara keseluruhan.
+
+## Peran dan Fitur
+
+### Komunitas
+
+Anggota komunitas Optika.id dapat memposting artikel berita di berbagai kategori dan tag. Namun, sebelum artikel diterbitkan, artikel tersebut melewati proses persetujuan oleh peran admin untuk memastikan akurasi dan kualitasnya. Setiap kali artikel anggota komunitas dibaca, mereka mengumpulkan poin yang dapat ditukarkan menjadi uang, dengan syarat persetujuan oleh peran admin.
+
+### Wartawan
+
+Wartawan memiliki hak yang serupa dengan anggota komunitas dalam hal memposting artikel berita. Namun, wartawan diberi kompensasi langsung oleh Optika.id atas kontribusinya dan tidak mengumpulkan poin atau memerlukan persetujuan untuk penarikan.
+
+### Admin
+
+Peran admin memainkan peran penting dalam mempertahankan integritas Optika.id. Admin meninjau dan memoderasi artikel berita yang diajukan oleh peran komunitas dan wartawan, memastikan konten sejalan dengan standar platform. Mereka juga mengawasi proses persetujuan atau penolakan permintaan penarikan uang oleh anggota komunitas. Selain itu, admin memoderasi komentar untuk memfasilitasi lingkungan diskusi yang hormat dan konstruktif.
+
+### Pemirsa Statistik
+
+Peran pemirsa statistik memberikan wawasan berharga kepada pengguna dengan memungkinkan mereka melihat data statistik tentang jumlah artikel berita yang diposting oleh setiap pengguna dalam periode waktu tertentu. Fitur ini berkontribusi pada pemahaman transparan dan berbasis data tentang keterlibatan pengguna platform.
+
+## Teknologi yang Digunakan
+
+Optika.id menggunakan tumpukan teknologi yang kuat untuk memberikan pengalaman pengguna yang mulus:
+
+- **Frontend:** Menggunakan Next.js, kerangka kerja React yang serbaguna, untuk menciptakan frontend yang responsif dan interaktif, meningkatkan keterlibatan dan navigasi pengguna.
+- **Backend:** Berbasis pada Laravel, kerangka PHP yang tangguh, sebagai dasar backend untuk mengelola data secara efisien dan berkomunikasi lancar dengan frontend.
+- **Database:** Menggunakan MySQL sebagai sistem manajemen database untuk menyimpan dan mengelola artikel berita, informasi pengguna, dan data penting lainnya.
+- **Arsitektur MVC:** Mengadopsi pola arsitektur Model-View-Controller (MVC) untuk memberikan kontribusi pada kode yang terorganisir dan mudah dijaga.
+
+## Interaksi dan Keterlibatan Pengguna
+
+Optika.id menyediakan fitur komentar untuk semua peran, memungkinkan pembaca berbagi pemikiran dan pendapat mereka tentang artikel berita. Fitur ini mendorong keterlibatan komunitas dan mendorong dialog terbuka di antara pengguna.
+
+## Hasil dan Dampak
+
+Sejak awal, Optika.id telah mencapai hasil yang mencolok dan dampak positif:
+
+- **Liputan Berita Beragam:** Liputan platform tentang berbagai subjek telah menarik pembaca beragam yang mencari berbagai informasi.
+- **Keterlibatan Pengguna:** Sistem penukaran poin dan uang memotivasi anggota komunitas untuk berkontribusi dengan konten berkualitas, meningkatkan keterlibatan keseluruhan di platform.
+- **Kontrol Kualitas:** Pengawasan peran admin memastikan artikel yang dipublikasikan memenuhi standar editorial yang tinggi, membangun kepercayaan di antara pembaca.
+
+## Peran Saya
+
+Dalam proyek Optika.id, peran saya mencakup sejumlah tanggung jawab yang luas:
+
+- Merumuskan cetak biru arsitektural dengan strategis menggabungkan model MVC bersama tumpukan Laravel, Next.js, dan MySQL, membangun pondasi teknologi yang tangguh.
+- Mendekonstruksi platform menjadi lima modul yang berbeda, secara cermat disesuaikan dengan berbagai peran pengguna, meningkatkan fungsionalitas dan pengalaman berbasis pengguna.
+- Merancang desain database yang komprehensif, meliputi Model Data Konseptual (CDM) dan Model Data Fisik (PDM), mengoptimalkan manajemen dan aksesibilitas data.
+- Membuat cerita pengguna yang rumit, menangkap perjalanan pengguna dengan detail cermat untuk memastikan keselarasan yang mulus antara upaya pengembangan dan harapan pengguna.
+- Membuat rancangan visual dengan merancang desain Figma untuk modul komunitas, membentuk dasar visual untuk antarmuka dan pengalaman penggunanya.
+- Mengintegrasikan komponen frontend dan backend dengan lancar untuk modul komunitas, menyelaraskan interaksi dan keterlibatan pengguna.
+- Menavigasi kompleksitas Continuous Integration dan Continuous Deployment (CI/CD) pipelines, menyederhanakan siklus pengembangan-hingga-penyebaran.
+- Mengimplementasikan kerangka otentikasi yang tangguh dan aman, menggabungkan mekanisme berbasis OAuth2 dan berbasis kata sandi, diperkuat oleh fitur "lupa kata sandi" yang andal.
+- Mengatur koordinasi efektif di antara tim beranggotakan enam anggota yang berdedikasi pada modul khusus, yang mencakup peran frontend, backend, atau fullstack.
+
+Dalam peran yang kompleks ini, saya berperan penting dalam membentuk Optika.id, menggabungkan kecakapan teknologi dengan pandangan strategis untuk memberdayakan pengguna dan administrator dalam ekosistem dinamis platform.
+
+## Tangkapan Layar
+
+### Halaman Utama
+
+<Image src={homePageScreenshot} alt="Halaman Utama" />
+
+### Halaman Berita
+
+<Image src={newsPageScreenshot} alt="Halaman Berita" />
+
+### Halaman Pembuatan Berita
+
+<Image src={newsCreationPageScreenshot} alt="Halaman Pembuatan Berita" />
+
+### Halaman Dasbor
+
+<Image src={dashboardPageScreenshot} alt="Halaman Dasbor" />
+
+### Halaman Profil
+
+<Image src={profilePageScreenshot} alt="Halaman Profil" />
+
+### Halaman Penukaran Poin
+
+<Image src={penukaranPoinPageScreenshot} alt="Halaman Penukaran Poin" />
+
+### Halaman Admin
+
+<Image src={adminPageScreenshot} alt="Halaman Admin" />
+
+## Kesimpulan
+
+Optika.id adalah portal berita yang revolusioner yang telah berkembang melebihi keterbatasannya sebelumnya untuk memberikan pengalaman konsumsi berita yang lebih menarik dan fleksibel. Dengan fokus pada topik mulai dari politik hingga teknologi, gaya hidup, pendidikan, dan lebih jauh lagi, Optika.id memastikan bahwa pembaca memiliki akses pada pemahaman yang komprehensif tentang peristiwa-peristiwa terkini. Lebih dari itu, platform ini mendorong keterlibatan pengguna dengan memberikan ruang bagi pembaca untuk berkontribusi dengan pandangan mereka melalui komentar.

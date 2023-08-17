@@ -1,0 +1,50 @@
+{
+  "Navbar": {
+    "logo": "Logo of zydhan.com",
+    "open_navigation_menu": "Open Navigation Menu",
+    "close_navigation_menu": "Close Navigation Menu",
+    "switch_to_dark_mode": "Switch to dark mode",
+    "switch_to_light_mode": "Switch to light mode",
+    "home": "Home",
+    "guestbook": "Guestbook",
+    "blog": "Blog",
+    "projects": "Projects"
+  },
+  "HomePage": {
+    "logo": "Logo of zydhan.com",
+    "pageTitle": "Home",
+    "title": "Zydhan Linnar Putra",
+    "subtitle": "Full-stack Web Developer",
+    "description": "Hello friends! You can call me Zydhan. I'm web development enthusiast with 2 year of experiences and currently study to become Bachelor of Informatics Engineering at Sepuluh Nopember Institute of Technology Surabaya.",
+    "favoriteLanguages": "Favorite Languages and Tools",
+    "workExperiences": "Work Experiences",
+    "projects": "Projects",
+    "experiences": {
+      "dptsi_fullstack": {
+        "title": "Full-stack Web Developer Intern",
+        "company": "DPTSI ITS",
+        "location": "Surabaya, Indonesia",
+        "description": "I was offered by a lecturer acting as the director of DPTSI - Directorate of Information Technology Services at Sepuluh Nopember Institute of Technology Surabaya."
+      }
+    },
+    "recentRepositories": "Recent Repositories",
+    "noDescriptionAvailable": "No description available.",
+    "viewAllRepositories": "View All Repositories",
+    "failedToLoadRepositories": "Failed to load repositories.",
+    "tryAgain": "Try Again",
+    "noRepositoriesFound": "No repositories found.",
+    "viewAllProjects": "View All Projects"
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "subtitle": "Showcasing my tech adventures! 🚀"
+  },
+  "ProjectPage": {
+    "type": {
+      "web_app": "Web Application"
+    }
+  },
+  "TableOfContent": {
+    "title": "Table of Contents"
+  }
+}
