@@ -1,12 +1,13 @@
 {
-  "name": "new.zydhan.com",
-  "version": "0.1.0",
+  "name": "zydhan.com",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "standard-version"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.0",
@@ -33,6 +34,7 @@
     "rehype-slug": "^5.1.0",
     "remark-frontmatter": "^4.0.1",
     "sharp": "^0.32.4",
+    "standard-version": "^9.5.0",
     "swr": "^2.2.0",
     "typescript": "5.1.6"
   }
