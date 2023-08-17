@@ -63,6 +63,9 @@ const ProjectsPage = ({ metadatas }: { metadatas: ProjectMetadata[] }) => {
                     placeholder="blur"
                     fill
                     sizes="(max-width: 30em) 100vw, (max-width: 48em) 50vw, 33vw"
+                    style={{
+                      objectFit: 'cover',
+                    }}
                   />
                 </CardHeader>
                 <CardBody display={'flex'} flexDir={'column'} rowGap={1}>
