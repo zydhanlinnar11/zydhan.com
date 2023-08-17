@@ -1,41 +1,169 @@
+import thumbnail from '@/assets/projects/snpmb-utbk-snbt-2023.jpg'
+import biodataPageScreenshot from '@/assets/projects/utbk-screenshots/biodata-page.png'
+import memilihProdiPageScreenshot from '@/assets/projects/utbk-screenshots/memilih-prodi-page.png'
+import portofolioPageScreenshot from '@/assets/projects/utbk-screenshots/portofolio-page.png'
+import pusatUtbkPageScreenshot from '@/assets/projects/utbk-screenshots/pusat-utbk-page.png'
+import antrianPendaftaranPageScreenshot from '@/assets/projects/utbk-screenshots/antrian-pendaftaran-page.png'
+import riwayatPendaftaranPageScreenshot from '@/assets/projects/utbk-screenshots/riwayat-pendaftaran-page.png'
+import kartuPesertaPageScreenshot from '@/assets/projects/utbk-screenshots/kartu-peserta-page.png'
+import Image from 'next/image'
+
 export const meta = {
   title: 'SNPMB UTBK-SNBT 2023',
   subtitle:
-    'Website untuk memfasilitasi pendaftaran ujian masuk nasional di Indonesia untuk masuk ke perguruan tinggi negeri.',
+    'Sebuah website untuk memfasilitasi pendaftaran ujian masuk perguruan tinggi di Indonesia untuk masuk ke universitas negeri.',
   startDate: '2023-01-15',
   endDate: '2023-06-30',
   appType: 'web_app',
+  thumbnail,
 }
 
-## Hos scelus nondum innocuos odit nobis petendo
+## Gambaran Proyek
 
-Lorem markdownum fatis consumpta Pallante digitis, vulnere in, detraxit
-[nubilaque ego fallere](http://occultadracone.net/etcaelo.html) munere gressu
-umbram auctor canendo! Longius in, te fuit aere Aethalion ut ramos **quodsi**,
-me summis ab in conlegerat quo albaque.
+Proyek ini bertujuan untuk menciptakan platform pendaftaran online yang efisien untuk ujian UTBK-SNBT, menyederhanakan proses aplikasi bagi calon mahasiswa universitas. Proyek kami berfokus pada menciptakan platform pendaftaran online yang efisien dan ramah pengguna untuk ujian UTBK-SNBT, mengatasi berbagai persyaratan kompleks untuk menampung banyak calon mahasiswa.
 
-## Hos scelus nondum innocuos odit nobis petendo
+## Permasalahan yang Dihadapi
 
-### Hos scelus nondum innocuos odit nobis petendo
+Tantangan melibatkan berbagai aspek dalam proses pendaftaran:
 
-Lorem markdownum fatis consumpta Pallante digitis, vulnere in, detraxit
-[nubilaque ego fallere](http://occultadracone.net/etcaelo.html) munere gressu
-umbram auctor canendo! Longius in, te fuit aere Aethalion ut ramos **quodsi**,
-me summis ab in conlegerat quo albaque.
+1. **Aplikasi Komprehensif:** Mendesain formulir yang ramah pengguna bagi calon pelamar untuk memberikan informasi pribadi, detail keluarga, dan disabilitas (tuna netra dan tuna daksa), untuk memastikan inklusivitas.
+2. **Pemilihan Universitas Terbatas:** Mengimplementasikan logika yang membatasi penerima KIP-K untuk mendaftar ke institusi PTKIN/UIN karena regulasi tertentu.
+3. **Portofolio Mata Kuliah:** Mengembangkan fitur bagi calon pelamar untuk mengunggah portofolio mata kuliah jika diperlukan.
+4. **Pusat UTBK Seat Booking:** Menjamin mekanisme pemesanan kursi berbasis antrian di Pusat UTBK untuk mencegah masalah konkurensi dan memastikan alokasi kursi dan kode pembayaran unik.
+5. **Kartu dan Sertifikat Aman:** Mendesain Kartu Pembayaran, Kartu Peserta, dan Sertifikat UTBK yang aman dengan QR code terenkripsi untuk mencegah manipulasi.
+6. **Menangani Beban Tinggi:** Merancang untuk performa optimal dan waktu downtime minimal sambil menampung jumlah peserta sebanyak 800.000 calon.
+7. **Manajemen Kedaluwarsa Pembayaran:** Melepas kursi ujian dalam jangka waktu tertentu jika pembayaran tidak dilakukan, sehingga pelamar lain dapat mengisi kursi tersebut.
 
-> Temptabat nexaque iubet violenta includite at vias imo aut, in lucum spumis:
-> si de quoque Phoebum forma. Undis vacuo, si dare hactenus mater figis minimas
-> et fuerunt albus. Talia elige, bibuntur illa: plangor, at sua isto.
+## Solusi dan Fitur
 
-## Hos scelus nondum innocuos odit nobis petendo
+Untuk mengatasi tantangan-tantangan ini, platform pendaftaran UTBK-SNBT kami menyediakan:
 
-### Hos scelus nondum innocuos odit nobis petendo
+- **Formulir Intuitif:** Formulir aplikasi yang disederhanakan dengan bagian untuk detail pribadi, disabilitas, dan informasi keluarga.
+- **Pemilihan Universitas Dinamis:** Logika untuk memberlakukan pembatasan pemilihan universitas berdasarkan status KIP-K.
+- **Unggah Portofolio Mata Kuliah:** Antarmuka yang ramah pengguna untuk mengunggah portofolio mata kuliah jika diperlukan.
+- **Antrian Pusat UTBK:** Sistem pemesanan kursi berbasis antrian di Pusat UTBK untuk memastikan integritas alokasi kursi.
+- **Sertifikat Aman:** Sertifikat UTBK dengan QR code terenkripsi untuk menampilkan nilai ujian secara aman.
+- **Infrastruktur Skalabel:** Menggunakan arsitektur yang kuat untuk menangani lalu lintas tinggi dan memastikan performa.
+- **Penanganan Kedaluwarsa Pembayaran:** Melepas kursi ujian yang tidak dibayar dalam jangka waktu tertentu untuk mengoptimalkan pemanfaatan kursi.
 
-Lorem markdownum fatis consumpta Pallante digitis, vulnere in, detraxit
-[nubilaque ego fallere](http://occultadracone.net/etcaelo.html) munere gressu
-umbram auctor canendo! Longius in, te fuit aere Aethalion ut ramos **quodsi**,
-me summis ab in conlegerat quo albaque.
+## Teknologi yang Digunakan
 
-> Temptabat nexaque iubet violenta includite at vias imo aut, in lucum spumis:
-> si de quoque Phoebum forma. Undis vacuo, si dare hactenus mater figis minimas
-> et fuerunt albus. Talia elige, bibuntur illa: plangor, at sua isto.
+Proyek ini dibangun secara detail menggunakan rangkaian teknologi yang komprehensif, termasuk:
+
+- **Frontend:** Next.js, kerangka kerja React yang kuat, dipilih karena kemampuannya dalam server rendering, dipadukan dengan Chakra UI untuk bahasa desain yang modern dan konsisten, menghasilkan pengalaman yang mulus dan menarik secara visual.
+- **Backend:** Laravel, kerangka kerja PHP yang kuat, digunakan untuk membangun infrastruktur backend, dengan penggunaan OpenID Connect untuk otentikasi yang aman dan tanpa masalah, memastikan privasi pengguna dan perlindungan data.
+- **Database:** Firestore, basis data cloud yang skalabel dan real-time oleh Google Cloud Platform (GCP), digunakan untuk mengelola dan menyimpan data dengan efisien, menawarkan dasar yang handal untuk aplikasi.
+- **Infrastruktur:** Google Cloud Platform (GCP) berfungsi sebagai tulang punggung infrastruktur proyek, memberikan lingkungan yang skalabel dan aman untuk meng-host dan mengelola aplikasi.
+- **Keamanan:** Penerapan kode QR terenkripsi menambahkan lapisan keamanan ekstra, memastikan integritas data penting di seluruh aplikasi.
+
+## Desain dan Pengalaman Pengguna
+
+Desain platform ini memprioritaskan kesederhanaan dan kejelasan, memastikan proses aplikasi yang mudah bagi semua pengguna. Antarmuka pengguna dioptimalkan untuk perangkat desktop dan perangkat seluler.
+
+## Proses Pengembangan
+
+Proyek ini mengikuti metodologi agile dengan iterasi berkelanjutan dan kolaborasi erat antara tim frontend dan backend.
+
+## Hasil dan Dampak
+
+Sejak diluncurkan, platform pendaftaran UTBK-SNBT telah menunjukkan hasil yang luar biasa dan dampak positif:
+
+- **Peningkatan Pengalaman Pengguna:** Integrasi Next.js dan Chakra UI berkontribusi pada antarmuka pengguna yang mulus dan intuitif, yang menghasilkan peningkatan kepuasan pengguna.
+- **Pendaftaran Tersederhanakan:** Penggunaan Laravel dan Firestore memungkinkan manajemen data yang efisien, menghasilkan proses pendaftaran yang mulus dan bebas dari kesalahan bagi para pelamar.
+- **Otentikasi Aman:** Implementasi OpenID Connect memastikan otentikasi yang kuat dan aman, melindungi informasi dan privasi pengguna.
+- **Infrastruktur Skalabel:** Memanfaatkan GCP untuk infrastruktur memungkinkan platform untuk menghandle lonjakan pelamar dengan waktu henti minimal, memastikan pengalaman yang handal.
+- **Integritas Data:** Implementasi QR code terenkripsi memperkuat integritas dan keamanan data di berbagai dokumen, meningkatkan kepercayaan pada platform.
+- **Aturan Bisnis dan Arsitektur:** Penerapan Domain-Driven Design (DDD), pola Agregat, dan CQRS meningkatkan keberlanjutan, skalabilitas, dan keselarasan backend dengan persyaratan bisnis yang kompleks.
+- **Kolaborasi Tim:** Kolaborasi yang efektif dengan antrian pemesanan kursi, pekerja pelepasan kursi, tim manajemen UTBK, dan integrasi Google Analytics berkontribusi pada ekosistem proyek yang terintegrasi dan seimbang.
+
+## Peran Saya
+
+Sebagai seorang lead software engineer, saya memainkan peran yang sangat penting dalam kesuksesan proyek:
+
+- **Desain dan Pengembangan Frontend:** Saya memimpin desain dan pengembangan frontend menggunakan Next.js dan Chakra UI, memastikan antarmuka yang menarik dan ramah pengguna.
+- **Implementasi Backend:** Saya secara aktif berkontribusi dalam pengembangan backend menggunakan Laravel, mengintegrasikan OpenID Connect untuk otentikasi pengguna yang aman, dan merancang aturan bisnis dengan DDD dan pola Agregat.
+- **Kolaborasi Tim:** Saya bekerja sama erat dengan antrian pemesanan kursi, pekerja pelepasan kursi, dan tim manajemen UTBK untuk memastikan komunikasi antar tim yang lancar dan integrasi fungsionalitas yang mulus.
+- **Integrasi Analitik:** Saya berhasil mengintegrasikan Google Analytics untuk memahami perilaku pengguna dan kinerja aplikasi.
+
+## Tangkapan Layar
+
+### Halaman Biodata
+
+Halaman ini terdiri dari formulir bagi para pelamar untuk memberikan informasi pribadi, detail keluarga, dan disabilitas (tuna netra dan tuna daksa).
+
+<Image src={biodataPageScreenshot} alt="Tangkapan Layar Halaman Biodata" />
+
+### Halaman Pemilihan Universitas
+
+Halaman ini memungkinkan para pelamar untuk memilih universitas pilihan mereka, dengan logika yang membatasi penerima KIP-K untuk mendaftar ke institusi PTKIN/UIN.
+
+<Image
+  src={memilihProdiPageScreenshot}
+  alt="Tangkapan Layar Halaman Pemilihan Universitas"
+/>
+
+### Halaman Portofolio
+
+Halaman ini memungkinkan para pelamar mengunggah portofolio mata kuliah jika diperlukan.
+
+<Image
+  src={portofolioPageScreenshot}
+  alt="Tangkapan Layar Halaman Portofolio"
+/>
+
+### Halaman Pusat UTBK
+
+Halaman ini memungkinkan para pelamar untuk memesan kursi di Pusat UTBK, dengan sistem berbasis antrian untuk memastikan integritas alokasi kursi.
+
+<Image src={pusatUtbkPageScreenshot} alt="Tangkapan Layar Halaman Pusat UTBK" />
+
+### Halaman Antrian Pendaftaran
+
+Halaman ini menampilkan antrian bagi para pelamar untuk melacak perkembangan pendaftaran mereka.
+
+<Image
+  src={antrianPendaftaranPageScreenshot}
+  alt="Tangkapan Layar Halaman Antrian Pendaftaran"
+/>
+
+### Halaman Riwayat Pendaftaran
+
+Halaman ini menampilkan riwayat pendaftaran pelamar.
+
+<Image
+  src={riwayatPendaftaranPageScreenshot}
+  alt="Tangkapan Layar Halaman Riwayat Pendaftaran"
+/>
+
+### Halaman Kartu Peserta
+
+Halaman ini menampilkan Kartu Peserta para pelamar, dengan QR code terenkripsi untuk mencegah manipulasi.
+
+<Image
+  src={kartuPesertaPageScreenshot}
+  alt="Tangkapan Layar Halaman Kartu Peserta"
+/>
+
+## Pelajaran yang Dipetik
+
+Proyek ini memberikan wawasan berharga dan pelajaran yang telah memperkaya keahlian saya:
+
+- **Integrasi yang Dioptimalkan:** Mengintegrasikan berbagai teknologi seperti Next.js, Chakra UI, Laravel, dan GCP memperkuat kemampuan saya dalam merancang sistem yang kompleks.
+- **Fokus Keamanan dan Privasi:** Implementasi OpenID Connect untuk otentikasi dan QR code terenkripsi menegaskan pentingnya keamanan dan privasi data.
+- **Arsitektur Lanjutan:** Merancang aturan bisnis menggunakan DDD dan pola Agregat, bersama dengan implementasi CQRS, menunjukkan efektivitas pola-pola arsitektural ini dalam mengelola kompleksitas dan perubahan.
+
+## Rencana Masa Depan
+
+Melihat ke depan, kami memiliki rencana ambisius untuk lebih meningkatkan platform ini:
+
+- **Analitik Lanjutan:** Mengimplementasikan alat analitik untuk memahami perilaku pengguna, kinerja aplikasi, dan area yang perlu ditingkatkan.
+- **Langkah Keamanan Tambahan:** Mengeksplorasi langkah-langkah keamanan lanjutan dan kerangka kerja kepatuhan untuk memperkuat perlindungan data.
+- **Kolaborasi Berkelanjutan:** Melanjutkan kolaborasi yang efektif dengan tim-tim terkait untuk perbaikan yang berkelanjutan.
+- **Evolusi Arsitektur:** Terus mengembangkan arsitektur sambil mempertimbangkan pelajaran dari DDD, pola Agregat, CQRS, dan kolaborasi tim.
+- **Migrasi Backend:** Menjajaki perpindahan backend dari Laravel ke Golang untuk mengoptimalkan performa dan pemanfaatan sumber daya.
+
+## Liputan Media
+
+- [Pendaftaran UTBK SNBT 2023 Dibuka, Simak Cara Daftar dan Biaya - CNN Indonesia](https://www.cnnindonesia.com/nasional/20230404100415-25-933251/pendaftaran-utbk-snbt-2023-dibuka-simak-cara-daftar-dan-biaya)
+- [Panduan Lengkap Cara Pembayaran Biaya UTBK-SNBT 2023 - Medcom](https://www.medcom.id/pendidikan/news-pendidikan/VNx07ZBN-panduan-lengkap-cara-pembayaran-biaya-utbk-snbt-2023)
+- [Cara Cek Nilai UTBK SNBT 2023 Lengkap dengan Linknya - Detik](https://www.detik.com/jateng/berita/d-6792902/cara-cek-nilai-utbk-snbt-2023-lengkap-dengan-linknya)

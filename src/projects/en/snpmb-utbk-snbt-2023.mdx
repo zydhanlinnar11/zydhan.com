@@ -1,4 +1,12 @@
 import thumbnail from '@/assets/projects/snpmb-utbk-snbt-2023.jpg'
+import biodataPageScreenshot from '@/assets/projects/utbk-screenshots/biodata-page.png'
+import memilihProdiPageScreenshot from '@/assets/projects/utbk-screenshots/memilih-prodi-page.png'
+import portofolioPageScreenshot from '@/assets/projects/utbk-screenshots/portofolio-page.png'
+import pusatUtbkPageScreenshot from '@/assets/projects/utbk-screenshots/pusat-utbk-page.png'
+import antrianPendaftaranPageScreenshot from '@/assets/projects/utbk-screenshots/antrian-pendaftaran-page.png'
+import riwayatPendaftaranPageScreenshot from '@/assets/projects/utbk-screenshots/riwayat-pendaftaran-page.png'
+import kartuPesertaPageScreenshot from '@/assets/projects/utbk-screenshots/kartu-peserta-page.png'
+import Image from 'next/image'
 
 export const meta = {
   title: 'SNPMB UTBK-SNBT 2023',
@@ -10,41 +18,150 @@ export const meta = {
   thumbnail,
 }
 
-## Hos scelus nondum innocuos odit nobis petendo
+## Project Overview
 
-### Hos scelus nondum innocuos odit nobis petendo
+This project aimed to create a streamlined online registration platform for the UTBK-SNBT exam, simplifying the application process for aspiring university students. Our project focuses on creating an efficient and user-friendly online registration platform for the UTBK-SNBT exam, addressing various complex requirements to accommodate a large number of applicants.
 
-Lorem markdownum fatis consumpta Pallante digitis, vulnere in, detraxit
-[nubilaque ego fallere](http://occultadracone.net/etcaelo.html) munere gressu
-umbram auctor canendo! Longius in, te fuit aere Aethalion ut ramos **quodsi**,
-me summis ab in conlegerat quo albaque.
+## Problem Statement
 
-> Temptabat nexaque iubet violenta includite at vias imo aut, in lucum spumis:
-> si de quoque Phoebum forma. Undis vacuo, si dare hactenus mater figis minimas
-> et fuerunt albus. Talia elige, bibuntur illa: plangor, at sua isto.
+The challenges encompass multiple aspects of the registration process:
 
-## Hos scelus nondum innocuos odit nobis petendo
+1. **Comprehensive Application:** Designing a user-friendly form for applicants to provide personal information, family details, and disabilities (tuna netra and tuna daksa), ensuring inclusivity.
+2. **University Selection Constraints:** Implementing logic that restricts KIP-K recipients from applying to PTKIN/UIN institutions due to specific regulations.
+3. **Subject Portfolio:** Developing a feature for applicants to submit subject portfolios where required.
+4. **Pusat UTBK Seat Booking:** Ensuring a queue-based seat booking mechanism for Pusat UTBK to prevent concurrency issues and ensure unique seat assignments and payment codes.
+5. **Secure Cards and Certificates:** Designing secure Kartu Pembayaran, Kartu Peserta, and Sertifikat UTBK with encrypted QR codes to prevent tampering.
+6. **Handling High Traffic:** Strategizing for optimal performance and minimal downtime while accommodating a significant volume of 800,000 applicants.
+7. **Payment Expiry Management:** Releasing exam seats within a specified time frame if payment is not made, allowing other applicants to utilize those seats.
 
-### Hos scelus nondum innocuos odit nobis petendo
+## Solution and Features
 
-Lorem markdownum fatis consumpta Pallante digitis, vulnere in, detraxit
-[nubilaque ego fallere](http://occultadracone.net/etcaelo.html) munere gressu
-umbram auctor canendo! Longius in, te fuit aere Aethalion ut ramos **quodsi**,
-me summis ab in conlegerat quo albaque.
+To address these challenges, our UTBK-SNBT registration platform provides:
 
-> Temptabat nexaque iubet violenta includite at vias imo aut, in lucum spumis:
-> si de quoque Phoebum forma. Undis vacuo, si dare hactenus mater figis minimas
-> et fuerunt albus. Talia elige, bibuntur illa: plangor, at sua isto.
+- **Intuitive Form:** A streamlined application form with sections for personal details, disabilities, and family information.
+- **Dynamic University Selection:** Logic to enforce university selection constraints based on KIP-K status.
+- **Subject Portfolio Upload:** A user-friendly interface for uploading subject portfolios where applicable.
+- **Pusat UTBK Queue:** A queue-based seat booking system at Pusat UTBK to ensure seat allocation integrity.
+- **Secure Certificates:** Sertifikat UTBK with encrypted QR codes to securely display exam scores.
+- **Scalable Infrastructure:** Employing robust architecture to handle high traffic and ensure performance.
+- **Payment Expiry Handling:** Automated release of unpaid seats to optimize seat utilization.
 
-## Hos scelus nondum innocuos odit nobis petendo
+## Technologies Used
 
-### Hos scelus nondum innocuos odit nobis petendo
+The project was meticulously crafted using a comprehensive tech stack, including:
 
-Lorem markdownum fatis consumpta Pallante digitis, vulnere in, detraxit
-[nubilaque ego fallere](http://occultadracone.net/etcaelo.html) munere gressu
-umbram auctor canendo! Longius in, te fuit aere Aethalion ut ramos **quodsi**,
-me summis ab in conlegerat quo albaque.
+- **Frontend:** Next.js, a powerful React framework, was chosen for its server-rendering capabilities, coupled with Chakra UI for a modern and consistent design language, resulting in a seamless and visually appealing user experience.
+- **Backend:** Laravel, a robust PHP framework, was employed to build the backend infrastructure, with OpenID Connect used for secure and seamless authentication, ensuring user privacy and data protection.
+- **Database:** Firestore, a scalable and real-time cloud database by Google Cloud Platform (GCP), was utilized to efficiently manage and store data, offering a reliable foundation for the application.
+- **Infrastructure:** Google Cloud Platform (GCP) served as the backbone for the project's infrastructure, providing a scalable and secure environment to host and manage the application.
+- **Security:** The implementation of encrypted QR codes added an extra layer of security, ensuring the integrity of critical data throughout the application.
 
-> Temptabat nexaque iubet violenta includite at vias imo aut, in lucum spumis:
-> si de quoque Phoebum forma. Undis vacuo, si dare hactenus mater figis minimas
-> et fuerunt albus. Talia elige, bibuntur illa: plangor, at sua isto.
+## Design and User Experience
+
+The platform's design prioritizes simplicity and clarity, ensuring an effortless application process for all users. The user interface was optimized for both desktop and mobile devices.
+
+## Development Process
+
+The project followed agile methodologies with continuous iterations and close collaboration between frontend and backend teams.
+
+## Results and Impact
+
+Since its launch, the UTBK-SNBT registration platform has exhibited remarkable results and positive impact:
+
+- **Enhanced User Experience:** The integration of Next.js and Chakra UI contributed to a smooth and intuitive user interface, resulting in increased user satisfaction.
+- **Streamlined Registration:** The utilization of Laravel and Firestore allowed for efficient data management, leading to a seamless and error-free registration process for applicants.
+- **Secure Authentication:** OpenID Connect implementation ensured robust and secure authentication, safeguarding user information and privacy.
+- **Scalable Infrastructure:** Leveraging GCP for infrastructure enabled the platform to handle the substantial influx of applicants with minimal downtime, ensuring a reliable experience.
+- **Data Integrity:** The implementation of encrypted QR codes strengthened data integrity and security across various documents, boosting trust in the platform.
+- **Business Rules and Architecture:** Employing Domain-Driven Design (DDD), Aggregate pattern, and CQRS enhanced the backend's maintainability, scalability, and alignment with complex business requirements.
+- **Team Collaboration:** Collaborating effectively with seat booking queue, seat release worker, manajemen UTBK team, and integrating Google Analytics contributed to a well-rounded and holistic project ecosystem.
+
+## My Role
+
+As a lead software engineer, I played a pivotal role in the project's success:
+
+- **Frontend Design and Development:** I led the design and development of the frontend using Next.js and Chakra UI, ensuring an engaging and user-friendly interface.
+- **Backend Implementation:** I actively contributed to the backend development using Laravel, integrating OpenID Connect for secure user authentication, and designing business rules with DDD and Aggregate pattern.
+- **Team Collaboration:** I collaborated closely with seat booking queue, seat release worker, and manajemen UTBK team to ensure smooth inter-team communication and seamless integration of functionalities.
+- **Analytics Integration:** I successfully integrated Google Analytics to gain insights into user behavior and application performance.
+
+## Screenshots
+
+### Biodata Page
+
+This page consists of a form for applicants to provide their personal information, family details, and disabilities (tuna netra and tuna daksa).
+
+<Image src={biodataPageScreenshot} alt="Screenshot of Biodata Page" />
+
+### University Selection Page
+
+This page allows applicants to select their preferred universities, with logic to restrict KIP-K recipients from applying to PTKIN/UIN institutions.
+
+<Image
+  src={memilihProdiPageScreenshot}
+  alt="Screenshot of University Selection Page"
+/>
+
+### Portfolio Page
+
+This page allows applicants to upload subject portfolios where applicable.
+
+<Image src={portofolioPageScreenshot} alt="Screenshot of Portfolio Page" />
+
+### Pusat UTBK Page
+
+This page allows applicants to book seats at Pusat UTBK, with a queue-based system to ensure seat allocation integrity.
+
+<Image src={pusatUtbkPageScreenshot} alt="Screenshot of Pusat UTBK Page" />
+
+### Antrian Pendaftaran Page
+
+This page displays the queue for applicants to track their registration progress.
+
+<Image
+  src={antrianPendaftaranPageScreenshot}
+  alt="Screenshot of Antrian Pendaftaran Page"
+/>
+
+### Riwayat Pendaftaran Page
+
+This page displays the applicant's registration history.
+
+<Image
+  src={riwayatPendaftaranPageScreenshot}
+  alt="Screenshot of Riwayat Pendaftaran Page"
+/>
+
+### Kartu Peserta Page
+
+This page displays the applicant's Kartu Peserta, with an encrypted QR code to prevent tampering.
+
+<Image
+  src={kartuPesertaPageScreenshot}
+  alt="Screenshot of Kartu Peserta Page"
+/>
+
+## Lessons Learned
+
+The project provided invaluable insights and lessons that have enriched my expertise:
+
+- **Optimized Integration:** Integrating diverse technologies such as Next.js, Chakra UI, Laravel, and GCP reinforced my ability to architect complex systems.
+- **Security and Privacy Focus:** Implementing OpenID Connect for authentication and encrypted QR codes emphasized the significance of data security and privacy.
+- **Scalability Considerations:** Navigating the challenges of accommodating a massive number of applicants highlighted the importance of scalable infrastructure design.
+- **Advanced Architecture:** Designing business rules using DDD and Aggregate pattern, along with implementing CQRS, demonstrated the effectiveness of these architectural patterns in managing complexity and change.
+
+## Future Plans
+
+Looking ahead, we have ambitious plans to further enhance the platform:
+
+- **Advanced Analytics:** Implementing analytics tools to gain insights into user behavior, application performance, and areas for improvement.
+- **Expanded Security Measures:** Exploring advanced security measures and compliance frameworks to strengthen data protection.
+- **Continued Collaboration:** Sustaining effective collaboration with interlinked teams for ongoing improvements.
+- **Architecture Evolution:** Continuing to evolve the architecture while considering lessons from DDD, Aggregate pattern, CQRS, and team collaboration.
+- **Backend Migration:** Exploring the transition of the backend from Laravel to Golang to optimize performance and resource utilization.
+
+## Media Coverages
+
+- [Pendaftaran UTBK SNBT 2023 Dibuka, Simak Cara Daftar dan Biaya - CNN Indonesia](https://www.cnnindonesia.com/nasional/20230404100415-25-933251/pendaftaran-utbk-snbt-2023-dibuka-simak-cara-daftar-dan-biaya)
+- [Panduan Lengkap Cara Pembayaran Biaya UTBK-SNBT 2023 - Medcom](https://www.medcom.id/pendidikan/news-pendidikan/VNx07ZBN-panduan-lengkap-cara-pembayaran-biaya-utbk-snbt-2023)
+- [Cara Cek Nilai UTBK SNBT 2023 Lengkap dengan Linknya - Detik](https://www.detik.com/jateng/berita/d-6792902/cara-cek-nilai-utbk-snbt-2023-lengkap-dengan-linknya)
