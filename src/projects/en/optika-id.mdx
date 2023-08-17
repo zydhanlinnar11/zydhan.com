@@ -1,0 +1,121 @@
+import thumbnail from '@/assets/projects/optika-id.webp'
+import homePageScreenshot from '@/assets/projects/optika-id-screenshots/home-page.png'
+import newsPageScreenshot from '@/assets/projects/optika-id-screenshots/news-page.png'
+import newsCreationPageScreenshot from '@/assets/projects/optika-id-screenshots/news-creation-page.png'
+import dashboardPageScreenshot from '@/assets/projects/optika-id-screenshots/dashboard-page.png'
+import profilePageScreenshot from '@/assets/projects/optika-id-screenshots/profile-page.png'
+import penukaranPoinPageScreenshot from '@/assets/projects/optika-id-screenshots/penukaran-poin-page.png'
+import adminPageScreenshot from '@/assets/projects/optika-id-screenshots/admin-page.png'
+import Image from 'next/image'
+
+export const meta = {
+  title: 'Optika.id',
+  subtitle:
+    'Digital portal that focuses on news, features, investigative writing, in-depth writing, videos, animations, and so on.',
+  startDate: '2022-07-30',
+  endDate: '2022-12-12',
+  appType: 'web_app',
+  thumbnail,
+
+}
+
+## Project Overview
+
+Optika.id is a transformative news portal that has evolved beyond its previous limitations to provide a more engaging and flexible news consumption experience. Originally built on a WordPress-based platform, Optika.id recognized the need for a more customizable and efficient solution, leading to the creation of a new portal using Next.js and Laravel.
+
+## Problem Statement
+
+The initial WordPress-based platform offered news coverage but lacked the flexibility and efficiency needed for an evolving news portal. The moderation workflow and points system were challenging to implement effectively, limiting the platform's potential for community engagement.
+
+## Solution
+
+Understanding the need for a more adaptable solution, Optika.id transitioned to a new platform developed with Next.js and Laravel. This evolution allowed for a tailored approach to user engagement, content moderation, and rewards, enhancing the overall user experience.
+
+## Roles and Features
+
+### Community
+
+Members of the Optika.id community can post news articles across different categories and tags. However, before an article is published, it undergoes an approval process by the admin role to ensure accuracy and quality. Each time a community member's article is read, they accumulate points that can be redeemed for money, subject to approval by the admin role.
+
+### Wartawan
+
+Wartawan, or journalists, have similar privileges to the community members in terms of posting news articles. However, wartawan are compensated directly by Optika.id for their contributions and do not accumulate points or require approval for redemption.
+
+### Admin
+
+The admin role plays a crucial part in maintaining the integrity of Optika.id. Admins review and moderate news articles submitted by the community and wartawan roles, ensuring that the content aligns with the platform's standards. They also oversee the process of approving or rejecting money redemption requests by community members. Additionally, admins moderate comments to foster a respectful and constructive discussion environment.
+
+### Statistik Viewer
+
+The statistik viewer role provides valuable insights to users by allowing them to view statistical data on the number of news articles posted by each user within a specified time frame. This feature contributes to a transparent and data-driven understanding of the platform's user engagement.
+
+## Technologies Used
+
+Optika.id employs a powerful tech stack to deliver a seamless user experience:
+
+- **Frontend:** Next.js, a versatile React framework, is utilized to create a responsive and interactive frontend that enhances user engagement and navigation.
+- **Backend:** Laravel, a robust PHP framework, serves as the foundation for the backend, ensuring efficient data management and seamless communication with the frontend.
+- **Database:** MySQL is employed as the database management system to store and manage news articles, user information, and other essential data.
+- **MVC Architecture:** The use of the Model-View-Controller (MVC) architectural pattern contributes to a well-organized and maintainable codebase.
+
+## User Interaction and Engagement
+
+Optika.id offers a commenting feature for all roles, allowing readers to share their thoughts and opinions on news articles. This feature fosters a sense of community engagement and encourages open dialogue among users.
+
+## Result and Impact
+
+Since its inception, Optika.id has achieved notable results and positive impact:
+
+- **Diverse News Coverage:** The platform's comprehensive coverage of various subjects has attracted a diverse readership seeking a variety of information.
+- **User Engagement:** The points and money redemption system motivates community members to contribute quality content, enhancing the overall engagement on the platform.
+- **Quality Control:** The admin role's oversight ensures that published articles meet high editorial standards, building trust among readers.
+
+## My roles
+
+In the Optika.id project, my role encompassed a wide range of responsibilities:
+
+- Formulating the architectural blueprint by strategically incorporating the MVC model alongside the Laravel, Next.js, and MySQL stack, establishing a robust technological foundation.
+- Deconstructing the platform into five distinct modules, meticulously aligned with various user roles, enhancing functionality and user-centric experiences.
+- Crafting a comprehensive database design, encompassing both the Conceptual Data Model (CDM) and the Physical Data Model (PDM), optimizing data management and accessibility.
+- Constructing intricate user stories, capturing user journeys with meticulous detail to ensure a seamless alignment of development efforts with user expectations.
+- Creating visual blueprints by crafting Figma designs for the community module, laying the visual groundwork for its interface and experience.
+- Seamlessly integrating both frontend and backend components for the community module, harmonizing user interactions and engagement.
+- Navigating the intricacies of Continuous Integration and Continuous Deployment (CI/CD) pipelines, streamlining the development-to-deployment lifecycle.
+- Implementing a robust and secure authentication framework, combining OAuth2-based and password-based mechanisms, fortified by a reliable "forgot password" feature.
+- Orchestrating effective coordination among a diverse team of six members, each dedicated to specific modules, spanning either frontend, backend, or fullstack roles.
+
+In this multifaceted role, I played a pivotal part in shaping Optika.id, combining technological acumen with strategic insight to empower users and administrators within the platform's dynamic ecosystem.
+
+## Screenshots
+
+### Home Page
+
+<Image src={homePageScreenshot} alt="Home Page" />
+
+### News Page
+
+<Image src={newsPageScreenshot} alt="News Page" />
+
+### News Creation Page
+
+<Image src={newsCreationPageScreenshot} alt="News Creation Page" />
+
+### Dashboard Page
+
+<Image src={dashboardPageScreenshot} alt="Dashboard Page" />
+
+### Profile Page
+
+<Image src={profilePageScreenshot} alt="Profile Page" />
+
+### Penukaran Poin Page
+
+<Image src={penukaranPoinPageScreenshot} alt="Penukaran Poin Page" />
+
+### Admin Page
+
+<Image src={adminPageScreenshot} alt="Admin Page" />
+
+## Conclusion
+
+Optika.id is a transformative news portal that has evolved beyond its previous limitations to provide a more engaging and flexible news consumption experience. With a focus on topics ranging from politics to technology, lifestyle, education, and beyond, Optika.id ensures that readers have access to a well-rounded understanding of current events. Moreover, the platform encourages user engagement by providing a space for readers to contribute their perspectives through comments.
