@@ -102,7 +102,7 @@ const TableOfContent = ({ contentId }: { contentId: string }) => {
                     listStylePosition={'inside'}
                     ml={'4'}
                     color={
-                      heading.id === activeId
+                      child.id === activeId
                         ? colorMode === 'dark'
                           ? 'white'
                           : 'black'
