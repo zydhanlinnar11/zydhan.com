@@ -4,9 +4,22 @@ import { Section } from './Section'
 import { PortofolioList } from './PortofolioList'
 import { dateFormatting } from '@/config/common'
 
-const experiences = [
+type Experience = {
+  key: string
+  url: string
+  startDate: string
+  endDate: string | null
+}
+
+const experiences: Experience[] = [
   {
     key: 'dptsi_fullstack',
+    url: 'https://www.its.ac.id/dptsi/',
+    startDate: '2023-09-01',
+    endDate: null,
+  },
+  {
+    key: 'dptsi_fullstack_intern',
     url: 'https://www.its.ac.id/dptsi/',
     startDate: '2021-08-01',
     endDate: '2023-06-30',
@@ -28,11 +41,7 @@ export const WorkExperiences = () => {
   )
 }
 
-const ExperienceItem = ({
-  experience,
-}: {
-  experience: (typeof experiences)[0]
-}) => {
+const ExperienceItem = ({ experience }: { experience: Experience }) => {
   const t = useTranslations('HomePage')
   const format = useFormatter()
   const titleId = `experience-title-${experience.key}`
@@ -61,9 +70,13 @@ const ExperienceItem = ({
           {format.dateTime(new Date(experience.startDate), dateFormatting)}
         </time>{' '}
         -{' '}
-        <time dateTime={experience.endDate}>
-          {format.dateTime(new Date(experience.endDate), dateFormatting)}
-        </time>
+        {experience.endDate === null ? (
+          <span>{t('now')}</span>
+        ) : (
+          <time dateTime={experience.endDate}>
+            {format.dateTime(new Date(experience.endDate), dateFormatting)}
+          </time>
+        )}
       </PortofolioList.ItemTime>
     </PortofolioList.Item>
   )

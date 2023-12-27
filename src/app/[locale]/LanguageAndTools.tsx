@@ -7,12 +7,13 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import NextJs from '@/assets/nextjs.png'
-import NextJsBlack from '@/assets/nextjs-black.png'
-import TypeScript from '@/assets/typescript.png'
-import Docker from '@/assets/docker.png'
-import Laravel from '@/assets/laravel.png'
-import Php from '@/assets/php.png'
+import NextJs from '@/assets/images/languages/nextjs.png'
+import NextJsBlack from '@/assets/images/languages/nextjs-black.png'
+import TypeScript from '@/assets/images/languages/typescript.png'
+import Docker from '@/assets/images/languages/docker.png'
+import Laravel from '@/assets/images/languages/laravel.png'
+import GoBlue from '@/assets/images/languages/go-blue.webp'
+import GoWhite from '@/assets/images/languages/go-white.webp'
 import { useTranslations } from 'next-intl'
 import Image, { StaticImageData } from 'next/image'
 import { Section } from './Section'
@@ -36,20 +37,23 @@ const favoriteLanguages: FavoriteLanguage[] = [
     },
   },
   {
+    name: 'Laravel',
+    image: Laravel,
+  },
+  {
+    name: 'Go',
+    image: {
+      dark: GoWhite,
+      light: GoBlue,
+    },
+  },
+  {
     name: 'TypeScript',
     image: TypeScript,
   },
   {
     name: 'Docker',
     image: Docker,
-  },
-  {
-    name: 'Laravel',
-    image: Laravel,
-  },
-  {
-    name: 'PHP',
-    image: Php,
   },
 ]
 

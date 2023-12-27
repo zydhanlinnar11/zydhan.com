@@ -15,18 +15,25 @@
     "pageTitle": "Beranda",
     "title": "Zydhan Linnar Putra",
     "subtitle": "Pengembang Web Full-stack",
-    "description": "Halo teman-teman! Kalian bisa memanggil saya Zydhan. Saya adalah seorang penggemar pengembangan web dengan pengalaman selama 2 tahun, dan saat ini sedang belajar untuk menjadi Sarjana Teknik Informatika di Institut Teknologi Sepuluh Nopember Surabaya.",
+    "description": "Halo teman-teman! Kalian bisa memanggil saya Zydhan. Saya adalah seorang Sarjana Teknik Informatika Institut Teknologi Sepuluh Nopember Surabaya dan penggemar pengembangan web dengan pengalaman selama 2 tahun.",
     "favoriteLanguages": "Bahasa Pemrograman dan Alat Favorit",
     "workExperiences": "Pengalaman Kerja",
     "projects": "Proyek",
     "experiences": {
-      "dptsi_fullstack": {
+      "dptsi_fullstack_intern": {
         "title": "Magang Full-stack Web Developer",
         "company": "DPTSI ITS",
         "location": "Surabaya, Indonesia",
         "description": "Saya ditawari oleh dosen selaku direktur dari DPTSI - Direktorat Layanan Teknologi Informasi di Institut Teknologi Sepuluh Nopember Surabaya."
+      },
+      "dptsi_fullstack": {
+        "title": "Full-stack Web Developer",
+        "company": "DPTSI ITS",
+        "location": "Surabaya, Indonesia",
+        "description": "Modernisasi teknologi back-end dari PHP ke Go dan modernisasi Sistem Informasi Akademik dari PHP ke Go dan Next.js."
       }
     },
+    "now": "Sekarang",
     "recentRepositories": "Repositori Terbaru",
     "noDescriptionAvailable": "Tidak ada deskripsi yang tersedia.",
     "viewAllRepositories": "Lihat Semua Repositori",
