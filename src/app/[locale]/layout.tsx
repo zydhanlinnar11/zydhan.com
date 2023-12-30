@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
-import { defaultLocale, locales } from '@/i18n'
+import { Locale, defaultLocale, locales } from '@/i18n'
 import { getTranslations } from 'next-intl/server'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const generateMetadata = async ({
   params: { locale },
 }: {
-  params: { locale: (typeof locales)[number] }
+  params: { locale: Locale }
 }) => {
   const t = await getTranslations({ locale, namespace: 'Metadata' })
 
@@ -51,7 +51,7 @@ export default function LocaleLayout({
 }: {
   children: ReactNode
   params: {
-    locale: (typeof locales)[number]
+    locale: Locale
   }
 }) {
   return (
