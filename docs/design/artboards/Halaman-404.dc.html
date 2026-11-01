@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Halaman tidak ditemukan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.glass{background:var(--glass);border:1px solid var(--glassline);box-shadow:var(--shadow),inset 0 1px 0 var(--glasshi);border-radius:22px}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+.glass{-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%)}
+}
+@media (prefers-reduced-transparency:reduce){.glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.bar-glass{background:var(--glassbar)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.bar-glass{-webkit-backdrop-filter:blur(10px) saturate(160%);backdrop-filter:blur(10px) saturate(160%)}}
+@media (prefers-reduced-transparency:reduce){.bar-glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.surface{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.mesh{background:radial-gradient(circle 420px at 14% 22%,var(--m1),transparent 72%),radial-gradient(circle 440px at 88% 30%,var(--m2),transparent 72%),radial-gradient(circle 380px at 52% 88%,var(--m3),transparent 72%)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 15px Inter,system-ui,sans-serif;text-decoration:none;box-sizing:border-box}
+.btn-primary{background:var(--accent);color:var(--onaccent)}
+.btn-ghost{background:var(--chip);color:var(--text);border:1px solid var(--line)}
+a{color:inherit}
+.link{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 20px;text-decoration:none;font:600 17px Inter,system-ui,sans-serif}
+</style>
+</helmet>
+<div style="{{vars}} position:relative; overflow:hidden; background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif; min-height:900px; box-sizing:border-box">
+  <div class="mesh" aria-hidden="true" style="position:absolute; inset:0"></div>
+  <div style="position:relative; max-width:1120px; margin:0 auto; padding:24px; display:flex; flex-direction:column; gap:64px">
+    <header class="glass bar-glass" style="border-radius:999px; padding:8px 12px 8px 10px; display:flex; align-items:center; justify-content:space-between; gap:12px">
+      <a href="Main.dc.html" aria-label="Zydhan, ke Home" style="display:inline-flex; border-radius:50%"><img src="/_blob/76f354f1e0e572759e72c25b3ac8ee54" alt="" width="40" height="40" style="width:40px; height:40px; border-radius:50%; display:block"></a>
+      <a class="btn btn-primary" href="#kontak" style="min-height:44px">Hubungi saya</a>
+    </header>
+
+    <main class="glass" style="padding:56px; max-width:720px; display:flex; flex-direction:column; gap:24px">
+      <h1 style="margin:0; font-size:48px; line-height:1.08; letter-spacing:-0.03em">Halaman ini tidak ada</h1>
+      <p style="margin:0; font-size:18px; line-height:1.6; max-width:540px">Alamatnya mungkin salah ketik, atau halamannya sudah dipindah. Dari sini kamu bisa lanjut ke bagian lain.</p>
+      <nav class="surface" aria-label="Halaman yang tersedia" style="display:flex; flex-direction:column; overflow:hidden">
+        <a class="link" href="Main.dc.html" style="border-bottom:1px solid var(--line)"><span>Home</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+        <a class="link" href="CV.dc.html"><span>CV</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>      </nav>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center">
+        <a class="btn btn-primary" href="Main.dc.html">Kembali ke Home</a>
+        <a class="btn btn-ghost" href="mailto:zydhanlinnar11@gmail.com?subject=Tautan%20rusak%20di%20zydhan.com">Laporkan tautan rusak</a>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["terang","gelap"],"default":"terang"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'gelap';
+    const t = dark ? {
+      bg:'#12141C', text:'#F1EEEA', muted:'#BDBAB8', glass:'rgba(24,27,38,0.62)', glassline:'rgba(255,255,255,0.20)', glasshi:'rgba(255,255,255,0.16)',
+      shadow:'0 12px 40px rgba(0,0,0,0.45)', solid:'#1E212C', accent:'#BFDDE1', accenttint:'rgba(191,221,225,0.14)', onaccent:'#12141C', chip:'rgba(255,255,255,0.08)',
+      surface:'rgba(255,255,255,0.045)', line:'rgba(255,255,255,0.13)', focus:'#DAEAED',
+      m1:'#2E5560', m2:'#7A5440', m3:'#46413C'
+    } : {
+      bg:'#EEF3F4', text:'#12141C', muted:'#46413C', glass:'rgba(255,255,255,0.58)', glassline:'rgba(255,255,255,0.85)', glasshi:'rgba(255,255,255,0.9)',
+      shadow:'0 0 0 1px rgba(18,20,28,0.08), 0 12px 40px rgba(70,65,60,0.16)', solid:'#FFFFFF', accent:'#1F6F7A', accenttint:'rgba(31,111,122,0.12)', onaccent:'#FFFFFF', chip:'rgba(18,20,28,0.07)',
+      surface:'rgba(255,255,255,0.72)', line:'rgba(18,20,28,0.12)', focus:'#1F6F7A',
+      m1:'#BFDDE1', m2:'#D7AB8E', m3:'#A19E9D'
+    };
+    const vars = Object.keys(t).map((k) => '--' + k + ':' + t[k] + ';').join(' ') + ' --glassbar:' + (dark ? 'rgba(24,27,38,0.30)' : 'rgba(255,255,255,0.24)') + ';';
+    return { vars };
+  }
+}
+</script>
+</body>
+</html>

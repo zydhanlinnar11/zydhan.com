@@ -1,0 +1,53 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "CV.dc.html": { "expand": "fill", "h": 2300, "title": "CV deep dive (desktop)", "w": 1440, "x": 1520, "y": 0 },
+    "Main.dc.html": { "expand": "fill", "h": 2400, "title": "Home (desktop)", "w": 1440, "x": 0, "y": 0 },
+    "Mobile.dc.html": { "h": 2500, "title": "Home (mobile 390)", "w": 390, "x": 3040, "y": 0 },
+    "Mobile-menu.dc.html": { "h": 844, "title": "Menu mobile (terbuka)", "w": 390, "x": 3510, "y": 0 },
+    "CV-mobile.dc.html": { "h": 4700, "title": "CV (mobile 390)", "w": 390, "x": 3980, "y": 0 },
+    "CV-mobile-bar.dc.html": { "h": 844, "title": "CV mobile, bar melayang (setelah menggulir)", "w": 390, "x": 4450, "y": 0 },
+    "CV-mobile-bar-menu.dc.html": { "h": 844, "title": "CV mobile, bar melayang, isi CV terbuka", "w": 390, "x": 4920, "y": 0 },
+    "Home-wide.dc.html": { "h": 2700, "title": "Home (desktop lebar 1920)", "w": 1920, "x": 0, "y": 2740 },
+    "Home-tablet.dc.html": { "h": 3500, "title": "Home (tablet 768)", "w": 768, "x": 2000, "y": 2740 },
+    "Halaman-404.dc.html": { "expand": "fill", "h": 900, "title": "Halaman 404", "w": 1440, "x": 2848, "y": 2740 },
+    "Open-graph.dc.html": { "h": 630, "title": "Kartu Open Graph (1200x630)", "w": 1200, "x": 4368, "y": 2740 },
+    "Mobile-bar.dc.html": { "h": 844, "title": "Home mobile, bar melayang (setelah menggulir)", "w": 390, "x": 5390, "y": 0 },
+    "Komponen.dc.html": { "h": 1700, "title": "Komponen (tema gelap)", "w": 1280, "x": 5688, "y": 2740 }
+  },
+  "createdOnFiles": { "at": "2026-11-01T12:00:00Z", "v": 1 },
+  "designSystems": [],
+  "launch": { "view": "canvas" },
+  "notes": {
+    "t1": {
+      "kind": "title1",
+      "maxW": 5400,
+      "text": "zydhan.com v2: kaca selektif, latar kabut dari palet avatar, aksen teal. Baris atas: layar utama dan mobile. Baris bawah: desktop lebar, tablet, 404. Tweak 'theme' untuk terang/gelap.",
+      "w": 240,
+      "x": 0,
+      "y": -260
+    },
+    "t4": {
+      "text": "Bar melayang Home muncul setelah pengguna menggulir melewati tombol utama 'Lihat CV lengkap' di hero, dan hilang saat kembali ke atas. Aksi utama (Lihat CV) di kanan, sama seperti posisi aksi utama di bar CV.",
+      "w": 320,
+      "x": 5390,
+      "y": -220
+    },
+    "t3": {
+      "text": "Open Graph: og:title 'Zydhan Linnar Putra, backend engineer di Surabaya'. og:description 'Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai.' Gambar 1200x630, ekspor dari layar ini.",
+      "w": 320,
+      "x": 4368,
+      "y": 2480
+    },
+    "t2": {
+      "text": "Bar melayang muncul setelah pengguna menggulir melewati baris pil isi CV, dan hilang saat kembali ke atas. Margin 16px dari tepi dan jarak 12px ke panel, sama dengan header di menu atas.",
+      "w": 320,
+      "x": 4450,
+      "y": -220
+    }
+  },
+  "order": ["Main.dc.html", "CV.dc.html", "Mobile.dc.html", "Mobile-menu.dc.html", "CV-mobile.dc.html", "CV-mobile-bar.dc.html", "CV-mobile-bar-menu.dc.html", "Home-wide.dc.html", "Home-tablet.dc.html", "Halaman-404.dc.html", "Open-graph.dc.html", "Mobile-bar.dc.html", "Komponen.dc.html"],
+  "pages": [],
+  "title": "zydhan.com Rewrite Design"
+}

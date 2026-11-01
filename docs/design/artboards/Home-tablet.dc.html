@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Home tablet zydhan.com</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.glass{background:var(--glass);border:1px solid var(--glassline);box-shadow:var(--shadow),inset 0 1px 0 var(--glasshi);border-radius:22px}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+.glass{-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%)}
+}
+@media (prefers-reduced-transparency:reduce){.glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.bar-glass{background:var(--glassbar)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.bar-glass{-webkit-backdrop-filter:blur(10px) saturate(160%);backdrop-filter:blur(10px) saturate(160%)}}
+@media (prefers-reduced-transparency:reduce){.bar-glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.surface{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.mesh,.mesh-c{background:radial-gradient(circle 340px at 12% 14%,var(--m1),transparent 72%),radial-gradient(circle 360px at 92% 24%,var(--m2),transparent 72%),radial-gradient(circle 320px at 55% 70%,var(--m3),transparent 72%)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font:600 15px Inter,system-ui,sans-serif;text-decoration:none;box-sizing:border-box}
+.btn-primary{background:var(--accent);color:var(--onaccent)}
+.btn-ghost{background:var(--chip);color:var(--text);border:1px solid var(--line)}
+.chip{font:600 13px Inter,system-ui,sans-serif;padding:4px 12px;border-radius:999px;background:var(--accenttint);color:var(--accent)}
+a{color:inherit}
+.nav a{text-decoration:none;color:var(--muted);font:500 15px Inter,system-ui,sans-serif;padding:10px 14px;border-radius:999px}
+.row{padding:18px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;align-items:center;text-decoration:none}
+.date{color:var(--muted);font:500 14px Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+</style>
+</helmet>
+<div style="{{vars}} position:relative; overflow:hidden; width:768px; min-height:3500px; box-sizing:border-box; background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif">
+  <div class="mesh" aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:900px; -webkit-mask-image:linear-gradient(#000 62%, transparent); mask-image:linear-gradient(#000 62%, transparent)"></div>
+
+  <div style="position:relative; padding:20px 20px 56px; display:flex; flex-direction:column; gap:64px">
+
+    <header class="glass bar-glass" style="border-radius:999px; padding:8px 8px 8px 10px; display:flex; align-items:center; justify-content:space-between; gap:12px">
+      <a href="Home-tablet.dc.html" aria-label="Zydhan, ke Home" style="display:inline-flex; border-radius:50%"><img src="/_blob/76f354f1e0e572759e72c25b3ac8ee54" alt="" width="40" height="40" style="width:40px; height:40px; border-radius:50%; display:block"></a>
+      <nav class="nav" aria-label="Utama" style="display:flex; gap:2px">
+        <a href="CV.dc.html">CV</a>      </nav>
+      <div style="display:flex; align-items:center; gap:6px">
+        <button aria-label="Ganti bahasa: sekarang Bahasa Indonesia, ganti ke English" style="min-height:44px; min-width:44px; padding:0 10px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--text); font:600 14px Inter,system-ui,sans-serif; cursor:pointer">EN</button>
+        <button aria-label="Ganti tema: sekarang terang, ganti ke gelap" style="min-height:44px; min-width:44px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--text); display:inline-flex; align-items:center; justify-content:center; cursor:pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a class="btn btn-primary" href="#kontak">Hubungi</a>
+      </div>
+    </header>
+
+    <section style="display:flex; flex-direction:column; gap:36px">
+      <div style="display:flex; flex-direction:column; gap:22px">
+        <h1 style="margin:0; font-size:50px; line-height:1.06; letter-spacing:-0.035em; font-weight:700; max-width:640px">Aku memimpin tim developer dan mendampingi klien sampai sistemnya dipakai.</h1>
+        <p style="margin:0; font-size:18px; line-height:1.6; color:var(--muted); max-width:560px">Zydhan Linnar Putra, backend engineer di Surabaya. Aku memimpin 20 developer di ITS dan mendampingi go-live SEVIMA PENA langsung di lokasi klien.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px">
+          <a class="btn btn-primary" href="CV.dc.html">Lihat CV lengkap</a>
+          <a class="btn btn-ghost" href="#kontak">Ajak kerja sama</a>
+        </div>
+      </div>
+      <aside class="glass" style="padding:28px; display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between">
+        <div style="flex:1 1 360px; display:flex; flex-direction:column; gap:10px; min-width:0">
+          <h2 style="margin:0; font-size:22px; letter-spacing:-0.02em">Menerima proyek freelance</h2>
+          <p style="margin:0; font-size:15px; line-height:1.6">Proyek apa pun boleh dibicarakan. Yang paling sering kukerjakan: backend dan API, modernisasi sistem lama, dan arsitektur untuk beban besar.</p>
+        </div>
+        <div style="flex:0 1 260px; display:flex; flex-direction:column; gap:8px">
+          <a class="btn btn-ghost" href="mailto:zydhanlinnar11@gmail.com" style="justify-content:flex-start">zydhanlinnar11@gmail.com</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/zydhanlinnar11/" style="justify-content:flex-start">LinkedIn</a>
+        </div>
+      </aside>
+    </section>
+
+    <section aria-label="Dampak" style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px">
+      <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:6px; background:var(--accent); border-color:var(--accent); color:var(--onaccent)"><span style="font-size:34px; font-weight:700; letter-spacing:-0.03em">1 juta+</span><span style="font-size:15px; line-height:1.5">pengguna pendaftaran UTBK-SNBT</span></div>
+      <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:6px"><span style="font-size:34px; font-weight:700; letter-spacing:-0.03em">~US$60 ribu</span><span style="font-size:15px; line-height:1.5; color:var(--muted)">penghematan per tahun dari optimasi SSO SNPMB, sekitar Rp1 miliar pada kurs 2024</span></div>
+      <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:6px"><span style="font-size:34px; font-weight:700; letter-spacing:-0.03em">140+</span><span style="font-size:15px; line-height:1.5; color:var(--muted)">aplikasi tetap kompatibel saat migrasi SSO ke Azure AD</span></div>
+      <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:6px"><span style="font-size:34px; font-weight:700; letter-spacing:-0.03em">15+</span><span style="font-size:15px; line-height:1.5; color:var(--muted)">mahasiswa magang dibimbing dalam DDD dan Clean Architecture</span></div>
+    </section>
+
+    <section aria-labelledby="h-cv" style="display:flex; flex-direction:column; gap:22px">
+      <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:14px">
+        <h2 id="h-cv" style="margin:0; font-size:32px; letter-spacing:-0.03em">Tiga peran terakhir</h2>
+        <a class="btn btn-ghost" href="CV.dc.html">Lihat semua peran di CV</a>
+      </div>
+      <div class="surface" style="padding:0 24px">
+        <a class="row" href="CV.dc.html#peran-pena"><span><span style="display:block; font-weight:600; font-size:17px">Software Engineer di SEVIMA PENA</span><span style="color:var(--muted); font-size:15px">Memimpin arsitektur dan tim engineering produk K-12</span></span><span class="date" style="color:var(--accent); font-weight:700">Jan 2026 – sekarang</span></a>
+        <a class="row" href="CV.dc.html#peran-dptsi"><span><span style="display:block; font-weight:600; font-size:17px">Full-stack Developer di DPTSI ITS</span><span style="color:var(--muted); font-size:15px">Sistem enrollment mahasiswa, SSO proxy, myITS Portal Mobile</span></span><span class="date">Sep 2023 – Agu 2025</span></a>
+        <a class="row" href="CV.dc.html#peran-snpmb" style="border-bottom:0"><span><span style="display:block; font-weight:600; font-size:17px">Full-stack Engineer di SNPMB</span><span style="color:var(--muted); font-size:15px">UTBK-SNBT dan SSO nasional, part-time paralel</span></span><span class="date" style="color:var(--accent); font-weight:700">2022 – sekarang</span></a>
+      </div>
+    </section>
+
+    <section id="proyek" aria-labelledby="h-proyek" style="display:flex; flex-direction:column; gap:22px">
+      <h2 id="h-proyek" style="margin:0; font-size:32px; letter-spacing:-0.03em">Proyek unggulan</h2>
+      <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px">
+        <a class="surface" href="CV.dc.html#peran-pena" style="padding:24px; display:flex; flex-direction:column; gap:10px; text-decoration:none"><span class="date">2026, memimpin arsitektur</span><span style="font-weight:600; font-size:20px">SEVIMA PENA</span><span style="color:var(--muted); font-size:15px; line-height:1.6">Platform K-12 dari nol sampai launch, terintegrasi dengan CBT, SSO, FinanceCloud, dan Edufin.</span><span style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">React</span></span></a>
+        <a class="surface" href="CV.dc.html#peran-snpmb" style="padding:24px; display:flex; flex-direction:column; gap:10px; text-decoration:none"><span class="date">2022 – sekarang, full-stack</span><span style="font-weight:600; font-size:20px">UTBK-SNBT dan SSO SNPMB</span><span style="color:var(--muted); font-size:15px; line-height:1.6">Registrasi seleksi nasional untuk 1 juta+ pengguna, ditambah SSO yang menghemat sekitar Rp1 miliar per tahun.</span><span style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">Firestore</span><span class="chip">Cloud Run</span></span></a>
+        <a class="surface" href="CV.dc.html#peran-dptsi" style="padding:24px; display:flex; flex-direction:column; gap:10px; text-decoration:none"><span class="date">2023 – 2025, arsitek</span><span style="font-weight:600; font-size:20px">Sistem Enrollment Mahasiswa ITS</span><span style="color:var(--muted); font-size:15px; line-height:1.6">Menggantikan sistem PHP 5 berumur 17 tahun dengan Go, PostgreSQL, Next.js, dan Kafka.</span><span style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">PostgreSQL</span><span class="chip">Kafka</span></span></a>
+        <a class="surface" href="CV.dc.html#peran-dptsi" style="padding:24px; display:flex; flex-direction:column; gap:10px; text-decoration:none"><span class="date">2023 – 2025, inisiator</span><span style="font-weight:600; font-size:20px">myITS Portal Mobile</span><span style="color:var(--muted); font-size:15px; line-height:1.6">Aplikasi lintas platform untuk mahasiswa, staf, dan dosen, target 30 ribu+ pengguna.</span><span style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Expo</span><span class="chip">React Native</span></span></a>
+      </div>
+    </section>
+
+    <section id="tulisan" aria-labelledby="h-tulis" style="display:flex; flex-direction:column; gap:18px">
+      <h2 id="h-tulis" style="margin:0; font-size:26px; letter-spacing:-0.03em">Tulisan</h2>
+      <div class="surface" style="padding:0 24px">
+        <a class="row" href="https://dev.to/zydhanlinnar11/simple-and-easy-rest-api-implementation-with-laravel-4je7"><span><span style="display:block; font-weight:600; font-size:16px">Simple and Easy REST API Implementation with Laravel</span><span style="color:var(--muted); font-size:14px">Artikel di Dev.to</span></span><span class="btn btn-ghost">Baca</span></a>
+        <a class="row" href="https://www.linkedin.com/posts/zydhanlinnar11_better-way-to-debug-gogolang-code-in-visual-activity-7341781881425752064-jUwY" style="border-bottom:0"><span><span style="display:block; font-weight:600; font-size:16px">Better way to debug Go code in Visual Studio Code</span><span style="color:var(--muted); font-size:14px">Post di LinkedIn, 4.432 tayangan</span></span><span class="btn btn-ghost">Baca</span></a>
+      </div>
+    </section>
+
+    <section id="kontak" style="position:relative; overflow:hidden; border-radius:30px; padding:32px; background:var(--bg)">
+      <div class="mesh-c" aria-hidden="true" style="position:absolute; inset:0"></div>
+      <div class="glass" style="position:relative; padding:36px; display:flex; flex-direction:column; gap:18px; align-items:flex-start">
+        <h2 style="margin:0; font-size:36px; line-height:1.1; letter-spacing:-0.035em; max-width:520px">Ada sistem yang perlu dibangun atau dirombak?</h2>
+        <p style="margin:0; font-size:16px; line-height:1.6; max-width:500px">Tulis apa yang ingin dibangun, kapan harus selesai, dan batasannya. Aku balas lewat email atau LinkedIn.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px"><a class="btn btn-primary" href="mailto:zydhanlinnar11@gmail.com?subject=Proyek%20freelance">Kirim email</a><a class="btn btn-ghost" href="https://www.linkedin.com/in/zydhanlinnar11/">Hubungi di LinkedIn</a></div>
+      </div>
+    </section>
+
+    <footer style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; color:var(--muted); font-size:14px">
+      <span>© 2026 Zydhan Linnar Putra</span>
+      <span style="display:flex; gap:20px"><a href="https://github.com/zydhanlinnar11">GitHub</a><a href="https://www.linkedin.com/in/zydhanlinnar11/">LinkedIn</a></span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["terang","gelap"],"default":"terang"},"$preview":{"width":768,"height":3500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'gelap';
+    const t = dark ? {
+      bg:'#12141C', text:'#F1EEEA', muted:'#BDBAB8', glass:'rgba(24,27,38,0.62)', glassline:'rgba(255,255,255,0.20)', glasshi:'rgba(255,255,255,0.16)',
+      shadow:'0 12px 40px rgba(0,0,0,0.45)', solid:'#1E212C', accent:'#BFDDE1', accenttint:'rgba(191,221,225,0.14)', onaccent:'#12141C', chip:'rgba(255,255,255,0.08)',
+      surface:'rgba(255,255,255,0.045)', line:'rgba(255,255,255,0.13)', focus:'#DAEAED',
+      m1:'#2E5560', m2:'#7A5440', m3:'#46413C'
+    } : {
+      bg:'#EEF3F4', text:'#12141C', muted:'#46413C', glass:'rgba(255,255,255,0.58)', glassline:'rgba(255,255,255,0.85)', glasshi:'rgba(255,255,255,0.9)',
+      shadow:'0 0 0 1px rgba(18,20,28,0.08), 0 12px 40px rgba(70,65,60,0.16)', solid:'#FFFFFF', accent:'#1F6F7A', accenttint:'rgba(31,111,122,0.12)', onaccent:'#FFFFFF', chip:'rgba(18,20,28,0.07)',
+      surface:'rgba(255,255,255,0.72)', line:'rgba(18,20,28,0.12)', focus:'#1F6F7A',
+      m1:'#BFDDE1', m2:'#D7AB8E', m3:'#A19E9D'
+    };
+    const vars = Object.keys(t).map((k) => '--' + k + ':' + t[k] + ';').join(' ') + ' --glassbar:' + (dark ? 'rgba(24,27,38,0.30)' : 'rgba(255,255,255,0.24)') + ';';
+    return { vars };
+  }
+}
+</script>
+</body>
+</html>

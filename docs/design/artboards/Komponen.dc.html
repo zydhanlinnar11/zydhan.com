@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Komponen zydhan.com</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.glass{background:var(--glass);border:1px solid var(--glassline);box-shadow:var(--shadow),inset 0 1px 0 var(--glasshi);border-radius:22px}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+.glass{-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%)}
+}
+@media (prefers-reduced-transparency:reduce){.glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.bar-glass{background:var(--glassbar)}
+.ov-glass{background:var(--glassov)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.bar-glass{-webkit-backdrop-filter:blur(10px) saturate(160%);backdrop-filter:blur(10px) saturate(160%)}.ov-glass{-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}}
+@media (prefers-reduced-transparency:reduce){.ov-glass,.bar-glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.surface{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.mesh{background:radial-gradient(circle 360px at 10% 20%,var(--m1),transparent 72%),radial-gradient(circle 380px at 92% 30%,var(--m2),transparent 72%),radial-gradient(circle 340px at 55% 98%,var(--m3),transparent 72%)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 15px Inter,system-ui,sans-serif;text-decoration:none;box-sizing:border-box}
+.btn-primary{background:var(--accent);color:var(--onaccent)}
+.btn-ghost{background:var(--chip);color:var(--text);border:1px solid var(--line)}
+.chip{font:600 13px Inter,system-ui,sans-serif;padding:4px 12px;border-radius:999px;background:var(--accenttint);color:var(--accent)}
+a{color:inherit}
+.nav a{text-decoration:none;color:var(--muted);font:500 15px Inter,system-ui,sans-serif;padding:10px 14px;border-radius:999px}
+.date{color:var(--muted);font:500 14px Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.row{padding:16px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;align-items:center;text-decoration:none}
+.seg{display:flex;gap:4px;padding:4px;background:var(--chip);border:1px solid var(--line);border-radius:16px}
+.seg button{flex:1;min-height:44px;border:0;border-radius:12px;font:600 15px Inter,system-ui,sans-serif;background:transparent;color:var(--text)}
+.item{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 14px;border-radius:16px;text-decoration:none;font:600 18px Inter,system-ui,sans-serif;letter-spacing:-0.01em}
+.bar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex:1 1 0;height:60px;padding:0 4px;border-radius:999px;text-decoration:none;font:600 13px Inter,system-ui,sans-serif;color:var(--text);box-sizing:border-box}
+.bar a.on{background:var(--accent);color:var(--onaccent)}
+.cap{font:500 14px Inter,system-ui,sans-serif;color:var(--muted)}
+.sw{display:flex;flex-direction:column;gap:6px;width:112px}
+.sw i{display:block;height:56px;border-radius:14px;border:1px solid var(--line)}
+.sw b{font:600 13px Inter,system-ui,sans-serif}
+.sw span{font:500 13px Inter,system-ui,sans-serif;color:var(--muted)}
+</style>
+</helmet>
+<div style="{{vars}} position:relative; overflow:hidden; width:1280px; min-height:1700px; box-sizing:border-box; background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif; padding:40px; display:flex; flex-direction:column; gap:48px">
+
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <h1 style="margin:0; font-size:40px; letter-spacing:-0.035em">Komponen</h1>
+    <p style="margin:0; font-size:17px; color:var(--muted); max-width:640px">Semua komponen utama dalam satu layar, tema gelap. Ubah tweak theme ke terang untuk membandingkan.</p>
+  </div>
+
+  <section aria-labelledby="k-kaca" style="display:flex; flex-direction:column; gap:16px">
+    <h2 id="k-kaca" style="margin:0; font-size:24px; letter-spacing:-0.03em">Kaca di atas kabut</h2>
+    <div style="position:relative; overflow:hidden; border-radius:32px; padding:32px; background:var(--bg)">
+      <div class="mesh" aria-hidden="true" style="position:absolute; inset:0"></div>
+      <div style="position:relative; display:flex; flex-direction:column; gap:28px">
+        <div style="display:flex; flex-direction:column; gap:8px">
+          <header class="glass bar-glass" style="border-radius:999px; padding:8px 12px 8px 10px; display:flex; align-items:center; justify-content:space-between; gap:12px">
+            <img src="/_blob/76f354f1e0e572759e72c25b3ac8ee54" alt="Zydhan" width="40" height="40" style="width:40px; height:40px; border-radius:50%; display:block">
+            <nav class="nav" aria-label="Contoh" style="display:flex; gap:4px"><a href="Komponen.dc.html" aria-current="page" style="color:var(--onaccent); background:var(--accent)">Home</a><a href="Komponen.dc.html">CV</a></nav>
+            <div style="display:flex; align-items:center; gap:8px">
+              <button aria-label="Ganti bahasa" style="min-height:44px; min-width:44px; padding:0 12px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--text); font:600 14px Inter,system-ui,sans-serif">EN</button>
+              <button aria-label="Ganti tema" style="min-height:44px; min-width:44px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--text); display:inline-flex; align-items:center; justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+              <a class="btn btn-primary" href="Komponen.dc.html" style="min-height:44px">Hubungi saya</a>
+            </div>
+          </header>
+          <span class="cap">Bar atas</span>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start">
+          <div style="flex:0 0 380px; display:flex; flex-direction:column; gap:8px">
+            <aside class="glass" style="padding:28px; display:flex; flex-direction:column; gap:14px">
+              <h3 style="margin:0; font-size:22px; letter-spacing:-0.02em">Menerima proyek freelance</h3>
+              <p style="margin:0; font-size:15px; line-height:1.6">Proyek apa pun boleh dibicarakan. Yang paling sering kukerjakan: backend dan API, modernisasi sistem lama, dan arsitektur untuk beban besar.</p>
+              <a class="btn btn-ghost" href="Komponen.dc.html" style="justify-content:flex-start">zydhanlinnar11@gmail.com</a>
+            </aside>
+            <span class="cap">Panel kaca</span>
+          </div>
+
+          <div style="flex:0 0 320px; display:flex; flex-direction:column; gap:8px">
+            <div class="glass ov-glass" style="padding:12px; display:flex; flex-direction:column; gap:2px; border-radius:24px">
+              <span style="padding:6px 14px 10px; font:500 14px Inter,system-ui,sans-serif; color:var(--muted)">Navigasi</span>
+              <a class="item" href="Komponen.dc.html">Ringkasan</a>
+              <a class="item" href="Komponen.dc.html" aria-current="location" style="background:var(--accenttint); color:var(--accent)">Pengalaman<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></a>
+              <a class="item" href="Komponen.dc.html">Keahlian</a>
+              <a class="item" href="Komponen.dc.html">Pendidikan</a>
+            </div>
+            <span class="cap">Panel overlay</span>
+          </div>
+
+          <div style="flex:0 0 360px; display:flex; flex-direction:column; gap:8px">
+            <nav class="glass bar-glass bar" aria-label="Contoh bar bawah" style="height:72px; padding:6px; border-radius:999px; display:flex; gap:4px; box-sizing:border-box">
+              <a href="Komponen.dc.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Navigasi</span></a>
+              <a href="Komponen.dc.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><span>Unduh PDF</span></a>
+              <a class="on" href="Komponen.dc.html"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg><span>Hubungi</span></a>
+            </nav>
+            <span class="cap">Bar bawah melayang, item utama terisi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="k-kontrol" style="display:flex; flex-direction:column; gap:16px">
+    <h2 id="k-kontrol" style="margin:0; font-size:24px; letter-spacing:-0.03em">Tombol dan kontrol</h2>
+    <div class="surface" style="padding:28px; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:28px">
+      <div style="display:flex; flex-direction:column; gap:10px"><span class="cap">Tombol utama dan sekunder</span><div style="display:flex; flex-wrap:wrap; gap:12px"><a class="btn btn-primary" href="Komponen.dc.html">Lihat CV lengkap</a><a class="btn btn-ghost" href="Komponen.dc.html">Ajak kerja sama</a></div></div>
+      <div style="display:flex; flex-direction:column; gap:10px"><span class="cap">Fokus keyboard</span><div><a class="btn btn-ghost" href="Komponen.dc.html" style="outline:3px solid var(--focus); outline-offset:3px">Tombol sedang fokus</a></div></div>
+      <div style="display:flex; flex-direction:column; gap:10px"><span class="cap">Kontrol bersegmen</span><div class="seg" role="group" aria-label="Bahasa" style="max-width:320px"><button aria-pressed="true" style="background:var(--accent); color:var(--onaccent)">Indonesia</button><button aria-pressed="false">English</button></div></div>
+      <div style="display:flex; flex-direction:column; gap:10px"><span class="cap">Navigasi: aktif dan biasa</span><nav class="nav" aria-label="Contoh pil" style="display:flex; gap:4px"><a href="Komponen.dc.html" aria-current="page" style="color:var(--onaccent); background:var(--accent)">Home</a><a href="Komponen.dc.html">CV</a></nav></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="k-data" style="display:flex; flex-direction:column; gap:16px">
+    <h2 id="k-data" style="margin:0; font-size:24px; letter-spacing:-0.03em">Data dan daftar</h2>
+    <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px">
+      <div style="display:flex; flex-direction:column; gap:16px">
+        <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px">
+          <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:6px; background:var(--accent); border-color:var(--accent); color:var(--onaccent)"><span style="font-size:34px; font-weight:700; letter-spacing:-0.03em">1 juta+</span><span style="font-size:15px; line-height:1.5">ubin statistik terisi</span></div>
+          <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:6px"><span style="font-size:34px; font-weight:700; letter-spacing:-0.03em">140+</span><span style="font-size:15px; line-height:1.5; color:var(--muted)">ubin statistik datar</span></div>
+        </div>
+        <div class="surface" style="padding:22px; display:flex; flex-direction:column; gap:12px"><span class="cap">Chip teknologi</span><div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">React</span><span class="chip">Firestore</span><span class="chip">OpenTelemetry</span></div></div>
+      </div>
+      <div class="surface" style="padding:0 24px">
+        <a class="row" href="Komponen.dc.html"><span><span style="display:block; font-weight:600; font-size:17px">Software Engineer di SEVIMA PENA</span><span style="color:var(--muted); font-size:15px">Peran yang masih berjalan</span></span><span class="date" style="color:var(--accent); font-weight:700">Jan 2026 – sekarang</span></a>
+        <a class="row" href="Komponen.dc.html" style="border-bottom:0"><span><span style="display:block; font-weight:600; font-size:17px">Full-stack Developer di DPTSI ITS</span><span style="color:var(--muted); font-size:15px">Peran yang sudah selesai</span></span><span class="date">Sep 2023 – Agu 2025</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="k-warna" style="display:flex; flex-direction:column; gap:16px">
+    <h2 id="k-warna" style="margin:0; font-size:24px; letter-spacing:-0.03em">Warna tema gelap</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:18px">
+      <div class="sw"><i style="background:#12141C"></i><b>Latar</b><span>#12141C</span></div>
+      <div class="sw"><i style="background:#F1EEEA"></i><b>Teks</b><span>#F1EEEA</span></div>
+      <div class="sw"><i style="background:#BDBAB8"></i><b>Teks sekunder</b><span>#BDBAB8</span></div>
+      <div class="sw"><i style="background:#BFDDE1"></i><b>Aksen</b><span>#BFDDE1</span></div>
+      <div class="sw"><i style="background:#2E5560"></i><b>Kabut 1</b><span>#2E5560</span></div>
+      <div class="sw"><i style="background:#7A5440"></i><b>Kabut 2</b><span>#7A5440</span></div>
+      <div class="sw"><i style="background:#46413C"></i><b>Kabut 3</b><span>#46413C</span></div>
+      <div class="sw"><i style="background:#1E212C"></i><b>Padat (cadangan)</b><span>#1E212C</span></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["terang","gelap"],"default":"gelap"},"$preview":{"width":1280,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme !== 'terang';
+    const t = dark ? {
+      bg:'#12141C', text:'#F1EEEA', muted:'#BDBAB8', glass:'rgba(24,27,38,0.62)', glassline:'rgba(255,255,255,0.20)', glasshi:'rgba(255,255,255,0.16)',
+      shadow:'0 12px 40px rgba(0,0,0,0.45)', solid:'#1E212C', accent:'#BFDDE1', accenttint:'rgba(191,221,225,0.14)', onaccent:'#12141C', chip:'rgba(255,255,255,0.08)',
+      surface:'rgba(255,255,255,0.045)', line:'rgba(255,255,255,0.13)', focus:'#DAEAED',
+      m1:'#2E5560', m2:'#7A5440', m3:'#46413C'
+    } : {
+      bg:'#EEF3F4', text:'#12141C', muted:'#46413C', glass:'rgba(255,255,255,0.58)', glassline:'rgba(255,255,255,0.85)', glasshi:'rgba(255,255,255,0.9)',
+      shadow:'0 0 0 1px rgba(18,20,28,0.08), 0 12px 40px rgba(70,65,60,0.16)', solid:'#FFFFFF', accent:'#1F6F7A', accenttint:'rgba(31,111,122,0.12)', onaccent:'#FFFFFF', chip:'rgba(18,20,28,0.07)',
+      surface:'rgba(255,255,255,0.72)', line:'rgba(18,20,28,0.12)', focus:'#1F6F7A',
+      m1:'#BFDDE1', m2:'#D7AB8E', m3:'#A19E9D'
+    };
+    const vars = Object.keys(t).map((k) => '--' + k + ':' + t[k] + ';').join(' ')
+      + ' --glassbar:' + (dark ? 'rgba(24,27,38,0.30)' : 'rgba(255,255,255,0.24)') + ';'
+      + ' --glassov:' + (dark ? 'rgba(24,27,38,0.48)' : 'rgba(255,255,255,0.44)') + ';';
+    return { vars };
+  }
+}
+</script>
+</body>
+</html>

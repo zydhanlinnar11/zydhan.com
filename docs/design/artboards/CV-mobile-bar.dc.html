@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>CV mobile dengan bar melayang</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.glass{background:var(--glass);border:1px solid var(--glassline);box-shadow:var(--shadow),inset 0 1px 0 var(--glasshi);border-radius:22px}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+.glass{-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%)}
+}
+@media (prefers-reduced-transparency:reduce){.glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.bar-glass{background:var(--glassbar)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.bar-glass{-webkit-backdrop-filter:blur(10px) saturate(160%);backdrop-filter:blur(10px) saturate(160%)}}
+@media (prefers-reduced-transparency:reduce){.bar-glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.surface{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.chip{font:600 13px Inter,system-ui,sans-serif;padding:4px 12px;border-radius:999px;background:var(--accenttint);color:var(--accent)}
+a{color:inherit}
+.date{color:var(--muted);font:500 14px Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.role ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;color:var(--text);font-size:16px;line-height:1.65}
+.bar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex:1 1 0;height:60px;padding:0 4px;border-radius:999px;text-decoration:none;font:600 13px Inter,system-ui,sans-serif;color:var(--text);box-sizing:border-box}
+.bar a.on{background:var(--accent);color:var(--onaccent)}
+</style>
+</helmet>
+<div style="{{vars}} position:relative; overflow:hidden; width:390px; height:844px; box-sizing:border-box; background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif">
+
+  <div style="padding:16px; display:flex; flex-direction:column; gap:14px">
+    <article id="peran-pena-akhir" class="surface role" style="padding:20px; display:flex; flex-direction:column; gap:12px; border-top-left-radius:0; border-top-right-radius:0; margin-top:-24px; padding-top:44px">
+      <ul>
+        <li>Integrasi dengan CBT dan SSO dalam 2 minggu, dukungan on-site saat go-live untuk ~2.000 pengguna awal.</li>
+        <li>Integrasi dengan platform Sentra Finansial Teknologi (FinanceCloud dan Edufin) untuk pengelolaan keuangan dan agregator pembayaran.</li>
+        <li>Mengoperasikan tracing, logging, dan performance monitoring dengan Sentry.</li>
+      </ul>
+      <div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">React</span><span class="chip">SSO</span><span class="chip">Sentry</span></div>
+    </article>
+
+    <article id="peran-sevima" class="surface role" style="padding:20px; display:flex; flex-direction:column; gap:12px">
+      <div><h3 style="margin:0; font-size:18px">Full-stack Developer di SEVIMA</h3><div style="color:var(--muted); font-size:14px; margin-top:2px">SEVIMA (PT Sentra Vidya Utama)</div></div>
+      <span class="date">Sep 2025 – Jan 2026</span>
+      <ul>
+        <li>Memimpin migrasi data asinkron pada siAkadCloud (monolit PHP) dengan RabbitMQ.</li>
+        <li>Mengganti UI/UX alur penilaian di Edlink (Laravel dan Nuxt 2) dengan menjaga kompatibilitas API untuk aplikasi mobile dan PWA.</li>
+        <li>Menulis dokumentasi setup Edlink untuk mempercepat onboarding.</li>
+      </ul>
+      <div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Laravel</span><span class="chip">Nuxt</span><span class="chip">RabbitMQ</span></div>
+    </article>
+
+    <article id="peran-dptsi" class="surface role" style="padding:20px; display:flex; flex-direction:column; gap:12px">
+      <div><h3 style="margin:0; font-size:18px">Full-stack Developer di DPTSI ITS</h3><div style="color:var(--muted); font-size:14px; margin-top:2px">Direktorat Pengembangan Teknologi dan Sistem Informasi</div></div>
+      <span class="date">Sep 2023 – Agu 2025</span>
+      <ul>
+        <li>Membangun Student Enrollment System (Go, PostgreSQL, Next.js, Kafka) yang menggantikan sistem PHP 5 berumur 17 tahun.</li>
+        <li>Membuat SSO proxy untuk Microsoft Entra ID OIDC dengan dukungan MFA, menjaga kompatibilitas 140+ aplikasi.</li>
+      </ul>
+    </article>
+  </div>
+
+  <nav class="glass bar-glass bar" aria-label="Aksi CV" style="position:absolute; left:16px; right:16px; bottom:16px; height:72px; padding:6px; border-radius:999px; display:flex; gap:4px; box-sizing:border-box">
+    <a href="CV-mobile-bar-menu.dc.html" aria-expanded="false" aria-label="Buka navigasi">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      <span>Navigasi</span>
+    </a>
+    <a href="cv.pdf">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
+      <span>Unduh PDF</span>
+    </a>
+    <a class="on" href="mailto:zydhanlinnar11@gmail.com?subject=Proyek%20freelance" aria-label="Hubungi lewat email">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg>
+      <span>Hubungi</span>
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["terang","gelap"],"default":"terang"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'gelap';
+    const t = dark ? {
+      bg:'#12141C', text:'#F1EEEA', muted:'#BDBAB8', glass:'rgba(24,27,38,0.62)', glassline:'rgba(255,255,255,0.20)', glasshi:'rgba(255,255,255,0.16)',
+      shadow:'0 12px 40px rgba(0,0,0,0.45)', solid:'#1E212C', accent:'#BFDDE1', accenttint:'rgba(191,221,225,0.14)', onaccent:'#12141C', chip:'rgba(255,255,255,0.08)',
+      surface:'rgba(255,255,255,0.045)', line:'rgba(255,255,255,0.13)', focus:'#DAEAED'
+    } : {
+      bg:'#EEF3F4', text:'#12141C', muted:'#46413C', glass:'rgba(255,255,255,0.58)', glassline:'rgba(255,255,255,0.85)', glasshi:'rgba(255,255,255,0.9)',
+      shadow:'0 0 0 1px rgba(18,20,28,0.08), 0 12px 40px rgba(70,65,60,0.16)', solid:'#FFFFFF', accent:'#1F6F7A', accenttint:'rgba(31,111,122,0.12)', onaccent:'#FFFFFF', chip:'rgba(18,20,28,0.07)',
+      surface:'rgba(255,255,255,0.72)', line:'rgba(18,20,28,0.12)', focus:'#1F6F7A'
+    };
+    const vars = Object.keys(t).map((k) => '--' + k + ':' + t[k] + ';').join(' ') + ' --glassbar:' + (dark ? 'rgba(24,27,38,0.30)' : 'rgba(255,255,255,0.24)') + ';';
+    return { vars };
+  }
+}
+</script>
+</body>
+</html>

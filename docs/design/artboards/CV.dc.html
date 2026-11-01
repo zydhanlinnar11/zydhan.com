@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>CV Zydhan Linnar Putra</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+body{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.glass{background:var(--glass);border:1px solid var(--glassline);box-shadow:var(--shadow),inset 0 1px 0 var(--glasshi);border-radius:22px}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+.glass{-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%)}
+}
+@media (prefers-reduced-transparency:reduce){.glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.bar-glass{background:var(--glassbar)}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.bar-glass{-webkit-backdrop-filter:blur(10px) saturate(160%);backdrop-filter:blur(10px) saturate(160%)}}
+@media (prefers-reduced-transparency:reduce){.bar-glass{background:var(--solid);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.surface{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.mesh,.mesh-c{background:radial-gradient(42% 52% at 18% 32%,var(--m1),transparent 72%),radial-gradient(46% 56% at 82% 22%,var(--m2),transparent 72%),radial-gradient(40% 50% at 58% 86%,var(--m3),transparent 72%)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font:600 15px Inter,system-ui,sans-serif;text-decoration:none;box-sizing:border-box}
+.btn-primary{background:var(--accent);color:var(--onaccent)}
+.btn-ghost{background:var(--chip);color:var(--text);border:1px solid var(--line)}
+.chip{font:600 13px Inter,system-ui,sans-serif;padding:4px 12px;border-radius:999px;background:var(--accenttint);color:var(--accent)}
+a{color:inherit}
+.nav a{text-decoration:none;color:var(--muted);font:500 15px Inter,system-ui,sans-serif;padding:10px 14px;border-radius:999px}
+.nav a:hover{color:var(--text);background:var(--chip)}
+.toc a{display:block;text-decoration:none;color:var(--muted);font:500 15px Inter,system-ui,sans-serif;padding:11px 14px;border-radius:12px}
+.toc a:hover{background:var(--chip);color:var(--text)}
+.role ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px;color:var(--text);font-size:16px;line-height:1.65}
+.date{color:var(--muted);font:500 14px Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+</style>
+</helmet>
+<div style="{{vars}} position:relative; overflow:hidden; background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif; min-height:2300px; box-sizing:border-box">
+  <div class="mesh" aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:620px; -webkit-mask-image:linear-gradient(#000 55%, transparent); mask-image:linear-gradient(#000 55%, transparent)"></div>
+
+  <div style="position:relative; max-width:1120px; margin:0 auto; padding:24px 24px 64px; display:flex; flex-direction:column; gap:56px">
+
+    <header class="glass bar-glass" style="border-radius:999px; padding:8px 12px 8px 10px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; justify-content:space-between">
+      <a href="Main.dc.html" aria-label="Zydhan, ke Home" style="display:inline-flex; border-radius:50%"><img src="/_blob/76f354f1e0e572759e72c25b3ac8ee54" alt="" width="40" height="40" style="width:40px; height:40px; border-radius:50%; display:block"></a>
+      <nav class="nav" aria-label="Utama" style="display:flex; flex-wrap:wrap; gap:4px">
+        <a href="Main.dc.html">Home</a>
+        <a href="CV.dc.html" aria-current="page" style="color:var(--onaccent); background:var(--accent)">CV</a>      </nav>
+      <div style="display:flex; align-items:center; gap:8px">
+        <button aria-label="Ganti bahasa: sekarang Bahasa Indonesia, ganti ke English" style="min-height:44px; min-width:44px; padding:0 12px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--text); font:600 14px Inter,system-ui,sans-serif; cursor:pointer">EN</button>
+        <button aria-label="Ganti tema: sekarang terang, ganti ke gelap" style="min-height:44px; min-width:44px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--text); display:inline-flex; align-items:center; justify-content:center; cursor:pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <a class="btn btn-primary" href="#kontak">Hubungi saya</a>
+      </div>
+    </header>
+
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px">
+      <div style="display:flex; flex-direction:column; gap:12px; min-width:0">
+        <h1 style="margin:0; font-size:52px; letter-spacing:-0.035em; line-height:1.05">Zydhan Linnar Putra</h1>
+        <p style="margin:0; font-size:18px; color:var(--text)">Software Engineer di SEVIMA PENA, memimpin arsitektur inti dan tim engineering. Sebelumnya memimpin 20 developer di DPTSI ITS dan membimbing 15+ mahasiswa magang.</p>
+        <p style="margin:0; font-size:15px; color:var(--muted)">Pengalaman profesional sejak Agustus 2021 (hampir 5 tahun)</p>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:12px">
+        <a class="btn btn-primary" href="cv.pdf">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
+          Unduh PDF
+        </a>
+        <a class="btn btn-ghost" href="#kontak">Ajak kerja sama</a>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start">
+
+      <aside class="surface toc" aria-label="Isi CV" style="flex:0 0 220px; padding:12px; display:flex; flex-direction:column; gap:2px; box-sizing:border-box; position:sticky; top:24px; align-self:flex-start">
+        <a href="#ringkasan" aria-current="location" style="background:var(--accent); color:var(--onaccent)">Ringkasan</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#keahlian">Keahlian</a>
+        <a href="#pendidikan">Pendidikan</a>
+        <a href="#tulisan">Tulisan</a>
+      </aside>
+
+      <div style="flex:1 1 600px; min-width:0; display:flex; flex-direction:column; gap:48px">
+
+        <section id="ringkasan" aria-labelledby="h-ring" style="display:flex; flex-direction:column; gap:16px">
+          <h2 id="h-ring" style="margin:0; font-size:28px; letter-spacing:-0.03em">Ringkasan</h2>
+          <div class="surface" style="padding:28px">
+            <p style="margin:0; font-size:17px; line-height:1.7">Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Memimpin modernisasi sistem lama ke Go dan Next.js, serta optimasi performa yang menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar pada kurs 2024). Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring: Sentry di SEVIMA PENA, OpenTelemetry di SNPMB SSO dan UTBK-SNBT.</p>
+          </div>
+        </section>
+
+        <section id="pengalaman" aria-labelledby="h-peng" style="display:flex; flex-direction:column; gap:16px">
+          <h2 id="h-peng" style="margin:0; font-size:28px; letter-spacing:-0.03em">Pengalaman</h2>
+
+          <article id="peran-pena" class="surface role" style="padding:28px; display:flex; flex-direction:column; gap:14px">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px">
+              <div><h3 style="margin:0; font-size:20px">Software Engineer di SEVIMA PENA</h3><div style="color:var(--muted); font-size:15px">SEVIMA (PT Sentra Vidya Utama), Surabaya, on-site</div></div>
+              <span class="date" style="color:var(--accent); font-weight:700">Jan 2026 – sekarang</span>
+            </div>
+            <ul>
+              <li>Memimpin arsitektur inti (Go dan React) dan tim engineering produk K-12, dari setup awal sampai launch untuk ~3.500 siswa dan guru.</li>
+              <li>Code review, kolaborasi dengan PM dan klien, serta komunikasi infrastruktur dengan OpSec (database, monitoring, server). Menerapkan alur kerja agentic coding untuk menaikkan throughput tim.</li>
+              <li>Integrasi dengan CBT dan SSO dalam 2 minggu, dukungan on-site saat go-live untuk ~2.000 pengguna awal.</li>
+              <li>Integrasi dengan platform Sentra Finansial Teknologi (FinanceCloud dan Edufin) untuk pengelolaan keuangan dan agregator pembayaran.</li>
+              <li>Mengoperasikan tracing, logging, dan performance monitoring dengan Sentry.</li>
+            </ul>
+            <div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">React</span><span class="chip">SSO</span><span class="chip">Sentry</span></div>
+          </article>
+
+          <article id="peran-sevima" class="surface role" style="padding:28px; display:flex; flex-direction:column; gap:14px">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px">
+              <div><h3 style="margin:0; font-size:20px">Full-stack Developer di SEVIMA</h3><div style="color:var(--muted); font-size:15px">SEVIMA (PT Sentra Vidya Utama)</div></div>
+              <span class="date">Sep 2025 – Jan 2026</span>
+            </div>
+            <ul>
+              <li>Memimpin migrasi data asinkron pada siAkadCloud (monolit PHP) dengan RabbitMQ.</li>
+              <li>Mengganti UI/UX alur penilaian di Edlink (Laravel dan Nuxt 2) dengan menjaga kompatibilitas API untuk aplikasi mobile dan PWA.</li>
+              <li>Menulis dokumentasi setup Edlink untuk mempercepat onboarding.</li>
+            </ul>
+            <div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Laravel</span><span class="chip">Nuxt</span><span class="chip">RabbitMQ</span></div>
+          </article>
+
+          <article id="peran-dptsi" class="surface role" style="padding:28px; display:flex; flex-direction:column; gap:14px">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px">
+              <div><h3 style="margin:0; font-size:20px">Full-stack Developer di DPTSI ITS</h3><div style="color:var(--muted); font-size:15px">Direktorat Pengembangan Teknologi dan Sistem Informasi</div></div>
+              <span class="date">Sep 2023 – Agu 2025</span>
+            </div>
+            <ul>
+              <li>Membangun Student Enrollment System (Go, PostgreSQL, Next.js, Kafka) yang menggantikan sistem PHP 5 berumur 17 tahun.</li>
+              <li>Membuat SSO proxy untuk Microsoft Entra ID OIDC dengan dukungan MFA, menjaga kompatibilitas 140+ aplikasi.</li>
+              <li>Membimbing 15+ mahasiswa magang dalam DDD dan Clean Architecture, memimpin 20 developer, dan membuat framework Go internal bergaya Laravel (18 modul).</li>
+              <li>Memulai aplikasi myITS Portal Mobile (Expo React Native) untuk 30 ribu+ pengguna.</li>
+            </ul>
+            <div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">Next.js</span><span class="chip">Kafka</span><span class="chip">OIDC</span><span class="chip">React Native</span></div>
+          </article>
+
+          <article id="peran-snpmb" class="surface role" style="padding:28px; display:flex; flex-direction:column; gap:14px">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px">
+              <div><h3 style="margin:0; font-size:20px">Full-stack Engineer di SNPMB</h3><div style="color:var(--muted); font-size:15px">BPPP Kemdiktisaintek, part-time dan berjalan paralel dengan peran lain</div></div>
+              <span class="date" style="color:var(--accent); font-weight:700">2022 – sekarang</span>
+            </div>
+            <ul>
+              <li>Mengoptimalkan SSO berbasis PHP dengan Cloud Run, menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar pada kurs 2024).</li>
+              <li>Merancang sistem registrasi UTBK-SNBT (Go, Next.js, Firestore, Google Cloud Storage) yang dipakai 1 juta+ pengguna.</li>
+              <li>Berkoordinasi dengan 10+ developer untuk integrasi data, dan membangun CI/CD dengan Cloud Build.</li>
+              <li>Mengoperasikan tracing, logging, dan performance monitoring SSO dan UTBK-SNBT dengan OpenTelemetry.</li>
+            </ul>
+            <div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">Firestore</span><span class="chip">Cloud Run</span><span class="chip">OpenTelemetry</span></div>
+          </article>
+
+          <div class="surface" style="padding:22px 28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:center">
+            <div><div style="font-weight:600; font-size:17px">Web Developer Intern di DPTSI ITS</div><div style="color:var(--muted); font-size:15px">Laravel dan PHP; riset micro-frontend sebagai skripsi</div></div>
+            <span class="date">Agu 2021 – Jun 2023</span>
+          </div>
+        </section>
+
+        <section id="keahlian" aria-labelledby="h-ahli" style="display:flex; flex-direction:column; gap:16px">
+          <h2 id="h-ahli" style="margin:0; font-size:28px; letter-spacing:-0.03em">Keahlian</h2>
+          <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px">
+            <div class="surface" style="padding:24px; display:flex; flex-direction:column; gap:12px"><div style="font-weight:600">Backend</div><div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">Go</span><span class="chip">PHP / Laravel</span><span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">OIDC / OAuth2</span></div></div>
+            <div class="surface" style="padding:24px; display:flex; flex-direction:column; gap:12px"><div style="font-weight:600">Frontend</div><div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vue / Nuxt</span><span class="chip">React Native</span></div></div>
+            <div class="surface" style="padding:24px; display:flex; flex-direction:column; gap:12px"><div style="font-weight:600">Arsitektur</div><div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">DDD</span><span class="chip">CQRS</span><span class="chip">Hexagonal</span><span class="chip">Modular monolith</span></div></div>
+            <div class="surface" style="padding:24px; display:flex; flex-direction:column; gap:12px"><div style="font-weight:600">Data, cloud, dan observability</div><div style="display:flex; flex-wrap:wrap; gap:8px"><span class="chip">PostgreSQL</span><span class="chip">Firestore</span><span class="chip">Kafka</span><span class="chip">RabbitMQ</span><span class="chip">GCP</span><span class="chip">Docker</span><span class="chip">Sentry</span><span class="chip">OpenTelemetry</span></div></div>
+          </div>
+        </section>
+
+        <section id="pendidikan" aria-labelledby="h-pend" style="display:flex; flex-direction:column; gap:16px">
+          <h2 id="h-pend" style="margin:0; font-size:28px; letter-spacing:-0.03em">Pendidikan</h2>
+          <div class="surface" style="padding:24px 28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px">
+            <div><div style="font-weight:600; font-size:17px">Institut Teknologi Sepuluh Nopember</div><div style="color:var(--muted); font-size:15px">S1 Teknik Informatika, Surabaya</div></div>
+            <span class="date">Agu 2019 – Sep 2023</span>
+          </div>
+        </section>
+
+        <section id="tulisan" aria-labelledby="h-tulis" style="display:flex; flex-direction:column; gap:16px">
+          <h2 id="h-tulis" style="margin:0; font-size:28px; letter-spacing:-0.03em">Tulisan</h2>
+          <div class="surface" style="padding:24px 28px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; align-items:center">
+            <div><div style="font-weight:600">Simple and Easy REST API Implementation with Laravel</div><div style="color:var(--muted); font-size:15px">Dev.to</div></div>
+            <a class="btn btn-ghost" href="https://dev.to/zydhanlinnar11/simple-and-easy-rest-api-implementation-with-laravel-4je7">Baca di Dev.to</a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section id="kontak" style="position:relative; overflow:hidden; border-radius:32px; padding:40px; background:var(--bg)">
+      <div class="mesh-c" aria-hidden="true" style="position:absolute; inset:0"></div>
+      <div class="glass" style="position:relative; padding:40px; display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center">
+        <div style="display:flex; flex-direction:column; gap:8px; max-width:560px">
+          <h2 style="margin:0; font-size:32px; letter-spacing:-0.03em">Ada sistem yang perlu dibangun atau dirombak?</h2>
+          <p style="margin:0; font-size:16px; line-height:1.6">Tulis apa yang ingin dibangun, kapan harus selesai, dan batasannya. Aku balas lewat email atau LinkedIn.</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:12px">
+          <a class="btn btn-primary" href="mailto:zydhanlinnar11@gmail.com?subject=Proyek%20freelance">Kirim email</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/zydhanlinnar11/">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["terang","gelap"],"default":"terang"},"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'gelap';
+    const t = dark ? {
+      bg:'#12141C', text:'#F1EEEA', muted:'#BDBAB8', glass:'rgba(24,27,38,0.62)', glassline:'rgba(255,255,255,0.20)', glasshi:'rgba(255,255,255,0.16)',
+      shadow:'0 12px 40px rgba(0,0,0,0.45)', solid:'#1E212C', accent:'#BFDDE1', accenttint:'rgba(191,221,225,0.14)', onaccent:'#12141C', chip:'rgba(255,255,255,0.08)',
+      surface:'rgba(255,255,255,0.045)', line:'rgba(255,255,255,0.13)', focus:'#DAEAED',
+      m1:'#2E5560', m2:'#7A5440', m3:'#46413C'
+    } : {
+      bg:'#EEF3F4', text:'#12141C', muted:'#46413C', glass:'rgba(255,255,255,0.58)', glassline:'rgba(255,255,255,0.85)', glasshi:'rgba(255,255,255,0.9)',
+      shadow:'0 0 0 1px rgba(18,20,28,0.08), 0 12px 40px rgba(70,65,60,0.16)', solid:'#FFFFFF', accent:'#1F6F7A', accenttint:'rgba(31,111,122,0.12)', onaccent:'#FFFFFF', chip:'rgba(18,20,28,0.07)',
+      surface:'rgba(255,255,255,0.72)', line:'rgba(18,20,28,0.12)', focus:'#1F6F7A',
+      m1:'#BFDDE1', m2:'#D7AB8E', m3:'#A19E9D'
+    };
+    const vars = Object.keys(t).map((k) => '--' + k + ':' + t[k] + ';').join(' ') + ' --glassbar:' + (dark ? 'rgba(24,27,38,0.30)' : 'rgba(255,255,255,0.24)') + ';';
+    return { vars };
+  }
+}
+</script>
+</body>
+</html>
