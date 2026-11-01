@@ -37,7 +37,7 @@ Anti-tujuan (dianggap gagal walau secara teknis jalan):
 ## Keputusan pemilik
 
 - Strategi repo: branch `rewrite` di repo ini; situs lama tetap di `main` sampai siap, lalu `rewrite` menggantikan `main` saat cutover.
-- Bahasa saat peluncuran: Indonesia saja. Tombol EN disembunyikan sampai terjemahan ada (tidak boleh ada tombol mati). Struktur data konten dikunci per bahasa supaya EN bisa ditambahkan di `/en`.
+- Bahasa saat peluncuran: Indonesia saja di `/`. Tombol EN disembunyikan sampai terjemahan ada (tidak boleh ada tombol mati). Struktur data konten dikunci per bahasa supaya terjemahan bisa ditambahkan nanti. Keputusan jangka panjang (2026-11-01): bahasa bawaan situs adalah Inggris — saat EN dibuat, EN memakai `/` dan Indonesia pindah ke `/id` (struktur situs lama); pengalihan `/id` → `/` pada peluncuran ini ditinjau ulang di saat itu.
 - Bagian "Proyek unggulan" dan "Tulisan" di Home dipertahankan seperti desain. Bar atas hanya Home dan CV (+ tombol Hubungi); Proyek dan Tulisan sengaja bukan tautan bar atas.
 - Font: Inter, hosting sendiri.
 - Arah visual: kaca selektif (bar atas, bar bawah, panel hero, panel overlay, blok kontak), latar kabut dari palet avatar pemilik; permukaan lain datar bergaris tipis. Aksen teal. Tidak ada Material Expressive.
@@ -71,9 +71,9 @@ Breakpoint acuan: 390, 768, 1440, 1920. Kolom konten maksimum 1120px (Home dan C
 
 - `/` Home: hero, kartu freelance, empat statistik, tiga peran terakhir, proyek unggulan, tulisan, blok kontak, footer.
 - `/cv` CV: header, ringkasan, pengalaman (kartu peran), keahlian, pendidikan, tulisan, blok kontak. ID anchor tetap: `ringkasan`, `pengalaman`, `keahlian`, `pendidikan`, `tulisan`, `peran-pena`, `peran-sevima`, `peran-dptsi`, `peran-snpmb`, dan `peran-intern` untuk peran Web Developer Intern (keputusan perancang spec: artboard memuat lima peran tapi hanya empat yang punya anchor).
-- `/cv.pdf` disajikan dari `static/`. Sampai #271 selesai, tombol "Unduh PDF" disembunyikan (keputusan pembangun-sementara, lihat "Terbuka").
+- PDF CV dibuat client-side: tombol "Unduh PDF" memanggil `window.print()` dengan stylesheet khusus cetak (dialog print browser, default "Simpan sebagai PDF"). Tombol aktif saat peluncuran, tidak menunggu #271, dan tidak ada berkas `/cv.pdf` statis (keputusan pemilik).
 - `404.html` untuk GitHub Pages.
-- Rute lama (`/id`, `/projects`, `/id/projects`, `/projects/<slug>`, `/id/projects/<slug>`, slug yang ada: `optika-id`, `snpmb-utbk-snbt-2023`) menjadi halaman pengalihan statis (meta refresh + canonical). Host statis tidak bisa 301. Target (keputusan perancang spec): `/id` ke `/`; semua `/projects*` dan `/id/projects*` ke `/cv`, dengan anchor `peran-snpmb` untuk `snpmb-utbk-snbt-2023`; `optika-id` ke `/cv` tanpa anchor karena proyek itu tidak ada lagi di CV.
+- Rute lama (`/id`, `/projects`, `/id/projects`, `/projects/<slug>`, `/id/projects/<slug>`, slug yang ada: `optika-id`, `snpmb-utbk-snbt-2023`) menjadi halaman pengalihan statis (meta refresh + canonical). Host statis tidak bisa 301. Target (keputusan perancang spec): `/id` ke `/` (peluncuran; ditinjau saat EN diadakan, lihat Keputusan pemilik); semua `/projects*` dan `/id/projects*` ke `/cv`, dengan anchor `peran-snpmb` untuk `snpmb-utbk-snbt-2023`; `optika-id` ke `/cv` tanpa anchor karena proyek itu tidak ada lagi di CV.
 
 ## Perilaku
 
@@ -96,7 +96,7 @@ Aturan wajib:
 - Masa kerja dihitung dari Agustus 2021 ("hampir 5 tahun").
 - Jabatan resmi di SEVIMA PENA adalah Software Engineer. Dilarang memakai "tech lead" sebagai gelar; deskripsikan tanggung jawab ("memimpin arsitektur inti dan tim engineering"). Jangan menaikkan gelar di mana pun.
 - SNPMB dihitung mulai 2022 (part-time, paralel). "Memimpin 20 developer di ITS" dikonfirmasi aman.
-- Penghematan SSO: US$60.000 per tahun, sekitar Rp1 miliar pada kurs 2024 (angka Rp berasal dari LinkedIn pemilik; kurs belum diverifikasi resmi).
+- Penghematan SSO: US$60.000 per tahun, sekitar Rp1 miliar pada kurs 2024 (dikonfirmasi pemilik; dulu dicatat belum terverifikasi).
 - Observability: Sentry di SEVIMA PENA; OpenTelemetry di SNPMB SSO dan UTBK-SNBT. "Sedang mendalami Prometheus dan Grafana" dibuang.
 - Tidak boleh mengarang angka, kutipan, atau detail studi kasus.
 - Salinan kunci (dari desain): judul hero "Aku memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."; kalimat kontak "Ada sistem yang perlu dibangun atau dirombak?" dengan badan "Tulis apa yang ingin dibangun, kapan harus selesai, dan batasannya. Aku balas lewat email atau LinkedIn."
@@ -130,12 +130,14 @@ GitHub Actions: pasang pnpm, build, unggah artifak, `deploy-pages`. Sebelum cuto
 
 ## Diserahkan ke pembangun
 
-Struktur berkas dan komponen Svelte, pembagian CSS (global dan per komponen), pustaka ikon (inline SVG sesuai desain), strategi uji (kecil: bangun, jelajahi rute, cek gulir horizontal, aksesibilitas otomatis), mekanisme ekspor gambar Open Graph, detail Ark UI per komponen, alat pembuat favicon.
+Struktur berkas dan komponen Svelte, pembagian CSS (global dan per komponen), pustaka ikon (inline SVG sesuai desain), strategi uji (kecil: bangun, jelajahi rute, cek gulir horizontal, aksesibilitas otomatis), mekanisme ekspor gambar Open Graph, detail Ark UI per komponen, desain stylesheet cetak untuk tombol "Unduh PDF" (`window.print()`), alat pembuat favicon.
 
-## Terbuka (butuh pemilik, di luar spec)
+## Terbuka — diselesaikan 2026-11-01
 
-- Kurs 2024 untuk "sekitar Rp1 miliar": belum diverifikasi.
-- #271 CV PDF 2026: pemilik menyiapkan; peluncuran boleh jalan tanpa tombol Unduh PDF.
-- #272 studi kasus: pemilik menyiapkan cerita.
-- Jadwal DNS dan cutover.
-- Terjemahan bahasa Inggris dan bahasa bawaan jangka panjang: situs lama berbahasa Inggris di `/` dan Indonesia di `/id`; peluncuran ini menjadikan Indonesia bahasa bawaan.
+Semua pertanyaan terbuka versi awal sudah dijawab pemilik pada 2026-11-01:
+
+- Kurs "sekitar Rp1 miliar": dikonfirmasi baik oleh pemilik.
+- CV PDF: dibuat client-side dari halaman CV (gaya cetak + `window.print()`); tombol "Unduh PDF" aktif saat peluncuran, tidak menunggu #271. Tidak ada berkas `/cv.pdf` statis.
+- #272 studi kasus: tiket terpisah, di luar lingkup #270; situs ini tidak menautkan studi kasus.
+- Jadwal DNS dan cutover: diurus sendiri oleh pemilik, tidak memblokir pekerjaan di sini.
+- Terjemahan bahasa Inggris: tetap menyusul (di luar lingkup). Keputusan jangka panjang: bahasa bawaan situs adalah Inggris (`/`), Indonesia pindah ke `/id`. Peluncuran tetap Indonesia di `/`.
