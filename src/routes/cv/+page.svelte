@@ -2,11 +2,13 @@
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { getContent } from '#lib/content';
+	import { links } from '#lib/links';
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import RoleCard from '#lib/components/RoleCard.svelte';
 
 	const c = getContent('id');
+	const summaryDescription = c.summary.split('. ')[0] + '.';
 
 	const sections = [
 		{ id: 'ringkasan', label: c.sectionTitles.summary },
@@ -66,6 +68,21 @@
 		};
 	});
 </script>
+
+<svelte:head>
+	<title>CV — Zydhan Linnar Putra</title>
+	<meta name="description" content={summaryDescription} />
+	<link rel="canonical" href="{links.domain}/cv" />
+	<meta property="og:title" content="CV — Zydhan Linnar Putra" />
+	<meta property="og:description" content={summaryDescription} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{links.domain}/cv" />
+	<meta property="og:image" content="{links.domain}/og.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="CV — Zydhan Linnar Putra" />
+	<meta name="twitter:description" content={summaryDescription} />
+	<meta name="twitter:image" content="{links.domain}/og.png" />
+</svelte:head>
 
 <div class="page">
 	<div

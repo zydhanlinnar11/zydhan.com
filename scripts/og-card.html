@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<title>Kartu Open Graph zydhan.com</title>
+		<style>
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 100 900;
+				font-display: block;
+				src: url('../static/fonts/inter-var.woff2') format('woff2');
+			}
+
+			:root {
+				--bg: #eef3f4;
+				--text: #12141c;
+				--muted: #46413c;
+				--accent: #1f6f7a;
+				--glass: rgba(255, 255, 255, 0.58);
+				--glassline: rgba(255, 255, 255, 0.85);
+				--glasshi: rgba(255, 255, 255, 0.9);
+				--shadow: 0 0 0 1px rgba(18, 20, 28, 0.08), 0 12px 40px rgba(70, 65, 60, 0.16);
+				--m1: #bfdde1;
+				--m2: #d7ab8e;
+				--m3: #a19e9d;
+			}
+
+			html,
+			body {
+				margin: 0;
+				width: 1200px;
+				height: 630px;
+				overflow: hidden;
+				background: var(--bg);
+				color: var(--text);
+				font-family: Inter, system-ui, sans-serif;
+			}
+
+			.card {
+				position: relative;
+				overflow: hidden;
+				width: 1200px;
+				height: 630px;
+				box-sizing: border-box;
+				background: var(--bg);
+			}
+
+			.mesh {
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(circle 420px at 12% 18%, var(--m1), transparent 72%),
+					radial-gradient(circle 460px at 90% 24%, var(--m2), transparent 72%),
+					radial-gradient(circle 380px at 62% 96%, var(--m3), transparent 72%);
+			}
+
+			.glass {
+				position: absolute;
+				left: 56px;
+				top: 56px;
+				right: 56px;
+				bottom: 56px;
+				box-sizing: border-box;
+				padding: 56px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				background: var(--glass);
+				border: 1px solid var(--glassline);
+				border-radius: 32px;
+				box-shadow:
+					var(--shadow),
+					inset 0 1px 0 var(--glasshi);
+				-webkit-backdrop-filter: blur(24px) saturate(170%);
+				backdrop-filter: blur(24px) saturate(170%);
+			}
+
+			.identity {
+				display: flex;
+				align-items: center;
+				gap: 36px;
+			}
+
+			.logo {
+				width: 168px;
+				height: 168px;
+				border-radius: 50%;
+				display: block;
+				flex: 0 0 auto;
+			}
+
+			.identity-copy {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+				min-width: 0;
+			}
+
+			h1 {
+				margin: 0;
+				font-size: 72px;
+				line-height: 1.02;
+				letter-spacing: -0.035em;
+				font-weight: 700;
+			}
+
+			.role {
+				margin: 0;
+				font-size: 30px;
+				line-height: 1.3;
+				font-weight: 500;
+				color: var(--accent);
+			}
+
+			.footer {
+				display: flex;
+				align-items: flex-end;
+				justify-content: space-between;
+				gap: 32px;
+			}
+
+			.description {
+				margin: 0;
+				max-width: 760px;
+				font-size: 32px;
+				line-height: 1.3;
+				letter-spacing: -0.01em;
+			}
+
+			.domain {
+				font-size: 30px;
+				font-weight: 600;
+				color: var(--accent);
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="card">
+			<div class="mesh" aria-hidden="true"></div>
+
+			<div class="glass">
+				<div class="identity">
+					<img class="logo" src="../static/logo.webp" alt="" width="168" height="168" />
+					<div class="identity-copy">
+						<h1>Zydhan Linnar Putra</h1>
+						<p class="role">Backend engineer di Surabaya</p>
+					</div>
+				</div>
+
+				<div class="footer">
+					<p class="description">
+						Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai.
+					</p>
+					<span class="domain">zydhan.com</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

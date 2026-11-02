@@ -13,6 +13,30 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Zydhan Linnar Putra, backend engineer di Surabaya</title>
+	<meta
+		name="description"
+		content="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
+	/>
+	<link rel="canonical" href="{links.domain}/" />
+	<meta property="og:title" content="Zydhan Linnar Putra, backend engineer di Surabaya" />
+	<meta
+		property="og:description"
+		content="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{links.domain}/" />
+	<meta property="og:image" content="{links.domain}/og.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Zydhan Linnar Putra, backend engineer di Surabaya" />
+	<meta
+		name="twitter:description"
+		content="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
+	/>
+	<meta name="twitter:image" content="{links.domain}/og.png" />
+</svelte:head>
+
 <div class="page">
 	<div
 		class="mesh hero-mesh"

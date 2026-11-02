@@ -71,6 +71,24 @@ test('floating bar re-finds the trigger after client-side navigation', async ({ 
   await expect(bar).toBeVisible();
 });
 
+test('Home has canonical, og tags, and description', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'id');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/');
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /backend engineer di Surabaya/);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Memimpin tim developer/);
+});
+
+test('CV has canonical and title', async ({ page }) => {
+  await page.goto('/cv');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/cv');
+  await expect(page).toHaveTitle(/CV — Zydhan Linnar Putra/);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    'Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal).'
+  );
+});
+
 test('CV exposes all section and role anchors', async ({ page }) => {
   await page.goto('/cv');
   for (const id of ['ringkasan','pengalaman','keahlian','pendidikan','tulisan','peran-pena','peran-sevima','peran-dptsi','peran-snpmb','peran-intern']) {
