@@ -13,7 +13,6 @@ export default defineConfig({
 			},
 			adapter: adapter({ pages: 'build', assets: 'build', fallback: undefined, strict: true }),
 			paths: { base },
-			alias: { $lib: 'src/lib' },
 			prerender: { handleHttpError: 'warn' }
 		})
 	]

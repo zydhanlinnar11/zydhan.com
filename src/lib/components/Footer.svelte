@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { content } from '$lib/content';
-	import { links } from '$lib/links';
+	import { content } from '#lib/content';
+	import { links } from '#lib/links';
 
 	const c = content.id;
 </script>

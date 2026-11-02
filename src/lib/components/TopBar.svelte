@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { asset, resolve } from '$app/paths';
-	import { links } from '$lib/links';
+	import { links } from '#lib/links';
 	import Icon from './Icon.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 	import { ui } from '../ui.svelte.js';

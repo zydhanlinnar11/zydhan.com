@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toggleTheme } from '$lib/theme';
+	import { toggleTheme } from '#lib/theme';
 	import Icon from './Icon.svelte';
 </script>
 

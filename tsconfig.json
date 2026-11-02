@@ -1,7 +1,8 @@
 {
 	"extends": "$app/tsconfig",
 	"compilerOptions": {
-		"strict": true
+		"strict": true,
+		"paths": { "#lib/*": ["./src/lib/*"] }
 	},
 	"include": [
 		"src",

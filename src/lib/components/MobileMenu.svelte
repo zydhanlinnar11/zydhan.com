@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import type { Theme } from '$lib/theme';
-	import { setTheme } from '$lib/theme';
+	import type { Theme } from '#lib/theme';
+	import { setTheme } from '#lib/theme';
 	import { ui } from '../ui.svelte.js';
 
 	let dialog = $state<HTMLDialogElement>();
