@@ -93,18 +93,18 @@ body {
 
 .surface { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
 
-.mesh { background:
+.mesh, .mesh-c { background:
   radial-gradient(circle 280px at 14% 16%, var(--m1), transparent 72%),
   radial-gradient(circle 300px at 90% 30%, var(--m2), transparent 72%),
   radial-gradient(circle 260px at 40% 62%, var(--m3), transparent 72%); }
 @media (min-width: 768px) {
-  .mesh { background:
+  .mesh, .mesh-c { background:
     radial-gradient(circle 360px at 10% 20%, var(--m1), transparent 72%),
     radial-gradient(circle 380px at 92% 30%, var(--m2), transparent 72%),
     radial-gradient(circle 340px at 55% 98%, var(--m3), transparent 72%); }
 }
 @media (min-width: 1440px) {
-  .mesh { background:
+  .mesh, .mesh-c { background:
     radial-gradient(circle 420px at 14% 22%, var(--m1), transparent 72%),
     radial-gradient(circle 440px at 88% 30%, var(--m2), transparent 72%),
     radial-gradient(circle 380px at 52% 88%, var(--m3), transparent 72%); }
