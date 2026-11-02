@@ -137,3 +137,6 @@ body {
 /* typography scale */
 h1 { letter-spacing: -0.035em; line-height: 1.05; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none; animation: none; } }
+
+dialog::backdrop { background: var(--scrim); }
+dialog.menu:not([open]) { display: none; }
