@@ -6,7 +6,7 @@ test('mobile menu is a dialog and closes with the close control', async ({ page 
   await page.goto('/');
   await page.getByRole('button', { name: /Buka menu/i }).click();
   await expect(page.getByRole('dialog', { name: /Menu/i })).toBeVisible();
-  await page.getByRole('button', { name: /Tutup/i }).click();
+  await page.getByRole('button', { name: 'Tutup', exact: true }).click();
   await expect(page.getByRole('dialog', { name: /Menu/i })).toBeHidden();
 });
 
@@ -38,10 +38,37 @@ test('CV floating bar opens the section overlay', async ({ page }) => {
   await expect(overlay).toBeVisible();
   await expect(overlay.getByRole('link')).toHaveCount(5);
   await expect(overlay.getByRole('link', { name: /Pengalaman/i })).toHaveAttribute('href', /#pengalaman/);
-  await expect(overlay.getByRole('link', { name: /Ringkasan/i })).toHaveAttribute('aria-current', 'location');
+  await expect(overlay.locator('a[aria-current="location"]')).toHaveCount(1);
   await expect(bar.getByRole('button', { name: /Tutup/i })).toBeVisible();
   await overlay.getByRole('link', { name: /Keahlian/i }).click();
   await expect(overlay).toBeHidden();
+});
+
+test('CV overlay marks the section at the current scroll position', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/cv');
+  await page.evaluate(() => document.getElementById('keahlian')?.scrollIntoView());
+  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  await expect(bar).toBeVisible();
+  await bar.getByRole('button', { name: /Navigasi/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigasi/i });
+  await expect(overlay.getByRole('link', { name: /Keahlian/i })).toHaveAttribute(
+    'aria-current',
+    'location'
+  );
+});
+
+test('CV role hash settles the overlay on Pengalaman', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/cv#peran-pena');
+  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  await expect(bar).toBeVisible();
+  await bar.getByRole('button', { name: /Navigasi/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigasi/i });
+  await expect(overlay.getByRole('link', { name: /Pengalaman/i })).toHaveAttribute(
+    'aria-current',
+    'location'
+  );
 });
 
 test('Home floating bar navigasi opens the shared mobile menu', async ({ page }) => {
@@ -54,7 +81,7 @@ test('Home floating bar navigasi opens the shared mobile menu', async ({ page })
   const menu = page.getByRole('dialog', { name: /Menu/i });
   await expect(menu).toBeVisible();
   await expect(bar.getByRole('button', { name: /Tutup/i })).toBeVisible();
-  await menu.getByRole('button', { name: /Tutup/i }).click();
+  await menu.getByRole('button', { name: 'Tutup', exact: true }).click();
   await expect(menu).toBeHidden();
 });
 
@@ -121,20 +148,50 @@ test('a11y: no serious or critical violations', async ({ page }) => {
 	}
 });
 
+test('a11y: dark theme has no serious or critical violations', async ({ page }) => {
+	for (const path of ['/', '/cv']) {
+		await page.goto(path);
+		await page.evaluate(() => localStorage.setItem('theme', 'dark'));
+		await page.reload();
+		await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+		const results = await new AxeBuilder({ page }).analyze();
+		const bad = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+		expect(bad, `${path} (dark)`).toEqual([]);
+	}
+});
+
+test('keyboard focus is visible in both themes', async ({ page }) => {
+	for (const theme of ['light', 'dark']) {
+		await page.goto('/');
+		await page.evaluate((value) => localStorage.setItem('theme', value), theme);
+		await page.reload();
+		await page.keyboard.press('Tab');
+		const outline = await page.evaluate(() => {
+			const element = document.activeElement;
+			return element ? getComputedStyle(element).outlineStyle : 'none';
+		});
+		expect(outline, theme).not.toBe('none');
+	}
+});
+
 test('legacy redirect pages point at their canonical destinations', async ({ request }) => {
-	const checks: Array<[string, string]> = [
-		['/id', 'https://zydhan.com/'],
-		['/projects', 'https://zydhan.com/cv'],
-		['/id/projects', 'https://zydhan.com/cv'],
-		['/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/cv#peran-snpmb'],
-		['/id/projects/optika-id', 'https://zydhan.com/cv']
+	const checks: Array<[string, string, string, string]> = [
+		['/id', 'https://zydhan.com/', './', '/'],
+		['/projects', 'https://zydhan.com/cv', './cv', '/cv'],
+		['/id/projects', 'https://zydhan.com/cv', '../cv', '/cv'],
+		['/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/cv#peran-snpmb', '../cv#peran-snpmb', '/cv#peran-snpmb'],
+		['/projects/optika-id', 'https://zydhan.com/cv', '../cv', '/cv'],
+		['/id/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/cv#peran-snpmb', '../../cv#peran-snpmb', '/cv#peran-snpmb'],
+		['/id/projects/optika-id', 'https://zydhan.com/cv', '../../cv', '/cv']
 	];
 
-	for (const [path, target] of checks) {
+	for (const [path, target, href, label] of checks) {
 		const response = await request.get(path);
 		expect(response.status(), path).toBe(200);
 		const body = await response.text();
 		expect(body, path).toContain('http-equiv="refresh"');
+		expect(body, path).toContain(`content="0; url=${href}"`);
+		expect(body, path).toContain(`<a href="${href}">${label}</a>`);
 		expect(body, path).toContain(target);
 	}
 });

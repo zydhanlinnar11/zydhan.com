@@ -160,6 +160,13 @@
 				}
 			}
 
+			@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+				.glass,
+				.bar-glass {
+					background: var(--solid);
+				}
+			}
+
 			.surface {
 				background: var(--surface);
 				border: 1px solid var(--line);

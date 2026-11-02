@@ -34,7 +34,6 @@
 		"vitest": "^5.0.5"
 	},
 	"imports": {
-		"#lib": "./src/lib/index.js",
 		"#lib/*": "./src/lib/*"
 	}
 }

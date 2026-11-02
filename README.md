@@ -1,56 +1,27 @@
-# sv
+# zydhan.com
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Personal site and CV for Zydhan Linnar Putra. Built with SvelteKit (Svelte 5,
+static adapter) and deployed to GitHub Pages.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
+## Development
 
 ```sh
-# recreate this project
-pnpm dlx sv@1.2.0 create --template minimal --types ts --install pnpm .
+pnpm install
+pnpm dev          # local dev server
+pnpm check        # svelte-check + type sync
+pnpm lint         # ESLint
+pnpm test         # Vitest unit tests
+pnpm test:e2e     # Playwright (builds and previews the site)
+pnpm build        # static output in build/
+pnpm preview      # serve the production build
 ```
 
-## Adding features
+Set `BASE_PATH` when building for the `github.io/zydhan.com` preview
+(`BASE_PATH=/zydhan.com pnpm build`). Production uses an empty base path.
 
-Add features to your project with `sv add`:
+## Deployment
 
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Deployment is manual (`workflow_dispatch`) until the custom-domain cutover is
+complete. Follow [`docs/CUTOVER.md`](docs/CUTOVER.md) for the email replacement,
+CNAME handling, `BASE_PATH`, Pages settings, verification, and re-enabling
+automatic deploys from `main`.

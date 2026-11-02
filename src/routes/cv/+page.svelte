@@ -6,6 +6,7 @@
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import RoleCard from '#lib/components/RoleCard.svelte';
+	import { ui } from '#lib/ui.svelte';
 
 	const c = getContent('id');
 	const summaryDescription = c.summary.split('. ')[0] + '.';
@@ -21,6 +22,10 @@
 	const cvWritings = c.writings.filter((writing) => writing.onCv);
 
 	let active = $state<string>(sections[0].id);
+
+	$effect(() => {
+		ui.cvActive = active;
+	});
 
 	function sectionHref(id: string) {
 		return resolve('/cv') + '#' + id;
@@ -285,7 +290,7 @@
 		flex: 0 0 auto;
 		display: inline-flex;
 		align-items: center;
-		min-height: 40px;
+		min-height: 44px;
 		padding: 0 16px;
 		border: 1px solid var(--line);
 		border-radius: 999px;

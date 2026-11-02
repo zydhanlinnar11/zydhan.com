@@ -22,7 +22,7 @@
 
 	const isCv = $derived(page.route.id?.startsWith('/cv') ?? false);
 	const navOpen = $derived(isCv ? overlayOpen : ui.menuOpen);
-	const activeId = $derived(page.url.hash.replace('#', '') || sections[0].id);
+	const activeId = $derived(isCv ? ui.cvActive : sections[0].id);
 
 	function sectionHref(id: string) {
 		return resolve('/cv') + '#' + id;
@@ -67,6 +67,7 @@
 			<button
 				type="button"
 				class:tint={navOpen}
+				aria-expanded={overlayOpen}
 				onclick={() => (overlayOpen = !overlayOpen)}
 			>
 				<Icon name={overlayOpen ? 'close' : 'menu'} size={20} />
@@ -82,7 +83,12 @@
 				<span>Hubungi</span>
 			</a>
 		{:else}
-			<button type="button" class:tint={navOpen} onclick={() => (ui.menuOpen = !ui.menuOpen)}>
+			<button
+				type="button"
+				class:tint={navOpen}
+				aria-expanded={ui.menuOpen}
+				onclick={() => (ui.menuOpen = !ui.menuOpen)}
+			>
 				<Icon name={ui.menuOpen ? 'close' : 'menu'} size={20} />
 				<span>{ui.menuOpen ? 'Tutup' : 'Navigasi'}</span>
 			</button>

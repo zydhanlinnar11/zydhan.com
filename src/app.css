@@ -90,6 +90,9 @@ body {
 @media (prefers-reduced-transparency: reduce) {
   .glass, .bar-glass, .ov-glass { background: var(--solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .bar-glass, .ov-glass, .panel { background: var(--solid); }
+}
 
 .surface { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
 
@@ -153,7 +156,7 @@ dialog.menu:not([open]) { display: none; }
     --surface: #fff;
     --solid: #fff;
   }
-  .top-bar, .floating-bar, .toc, .pills, footer, #kontak, .no-print { display: none !important; }
+  .top-bar, .floating-bar, .toc, .pills, footer, .footer-wrap, .mesh, .mesh-c, .menu, #kontak, .no-print { display: none !important; }
   body { background: #fff; color: #000; }
   .glass, .surface { background: #fff; border: 1px solid #ccc; box-shadow: none; }
 }

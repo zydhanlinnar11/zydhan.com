@@ -6,7 +6,11 @@
 	import Icon from '#lib/components/Icon.svelte';
 
 	const c = getContent('id');
-	const recentRoles = c.roles.slice(0, 3);
+	const recentRoles = ['peran-pena', 'peran-dptsi', 'peran-snpmb'].map((id) => {
+		const role = c.roles.find((candidate) => candidate.id === id);
+		if (!role) throw new Error(`Missing role: ${id}`);
+		return role;
+	});
 
 	function projectHref(href: string) {
 		return resolve('/cv') + '#' + href.split('#')[1];
@@ -390,13 +394,10 @@
 		}
 
 		.hero {
-			flex-direction: row;
-			align-items: center;
-			gap: 48px;
+			gap: 36px;
 		}
 
 		.hero-copy {
-			flex: 1 1 560px;
 			gap: 24px;
 		}
 
@@ -416,7 +417,6 @@
 		}
 
 		.freelance {
-			flex: 0 1 360px;
 			padding: 28px;
 			gap: 16px;
 		}
@@ -426,7 +426,6 @@
 		}
 
 		.stats {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
 			gap: 16px;
 		}
 
@@ -506,6 +505,24 @@
 	}
 
 	@media (min-width: 1440px) {
+		.hero {
+			flex-direction: row;
+			align-items: center;
+			gap: 48px;
+		}
+
+		.hero-copy {
+			flex: 1 1 560px;
+		}
+
+		.freelance {
+			flex: 0 1 360px;
+		}
+
+		.stats {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
 		h1 {
 			font-size: 60px;
 		}
@@ -514,6 +531,10 @@
 	@media (min-width: 1920px) {
 		.wrap {
 			max-width: 1280px;
+		}
+
+		.project-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
 		}
 
 		h1 {

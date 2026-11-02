@@ -28,10 +28,6 @@
 			<span class="date" class:current={role.current}>{role.period}</span>
 		</div>
 
-		{#if role.summary}
-			<p class="summary">{role.summary}</p>
-		{/if}
-
 		<ul class="bullets">
 			{#each role.bullets as bullet (bullet)}
 				<li>{bullet}</li>
@@ -81,17 +77,11 @@
 		letter-spacing: -0.015em;
 	}
 
-	.org,
-	.summary {
+	.org {
 		margin: 2px 0 0;
 		color: var(--muted);
 		font-size: 15px;
 		line-height: 1.5;
-	}
-
-	.summary {
-		margin: 0;
-		color: var(--text);
 	}
 
 	.date {

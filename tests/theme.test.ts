@@ -26,6 +26,12 @@ describe('glass transparency fallback', () => {
     expect(css).toContain('@supports');
     expect(css).toContain('backdrop-filter');
   });
+  it('falls back to solid surfaces when backdrop-filter is unsupported', () => {
+    expect(css).toContain(
+      '@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))'
+    );
+    expect(css).toContain('.glass, .bar-glass, .ov-glass, .panel { background: var(--solid); }');
+  });
 });
 
 describe('print stylesheet', () => {

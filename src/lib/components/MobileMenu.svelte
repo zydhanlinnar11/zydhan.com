@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import type { Theme } from '#lib/theme';
 	import { setTheme } from '#lib/theme';
+	import Icon from './Icon.svelte';
 	import { ui } from '../ui.svelte.js';
 
 	let dialog = $state<HTMLDialogElement>();
@@ -39,65 +40,96 @@
 </script>
 
 <dialog bind:this={dialog} class="menu" aria-label="Menu" onclose={() => (ui.menuOpen = false)}>
-	<div class="head">
-		<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home" onclick={close}>
-			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
-		</a>
-		<span class="head-title">Menu</span>
-	</div>
+	<div class="panel">
+		<div class="head">
+			<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home" onclick={close}>
+				<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
+			</a>
+			<button class="close" type="button" aria-label="Tutup menu" onclick={close}>
+				<Icon name="close" size={20} />
+			</button>
+		</div>
 
-	<nav class="nav" aria-label="Menu utama">
-		<a class="item" href={resolve('/')} aria-current={homeActive ? 'page' : undefined} onclick={close}
-			>Home</a
-		>
-		<a class="item" href={resolve('/cv')} aria-current={cvActive ? 'page' : undefined} onclick={close}>
-			CV
-		</a>
-	</nav>
+		<nav class="nav" aria-label="Menu utama">
+			<a class="item" href={resolve('/')} aria-current={homeActive ? 'page' : undefined} onclick={close}
+				>Home</a
+			>
+			<a class="item" href={resolve('/cv')} aria-current={cvActive ? 'page' : undefined} onclick={close}>
+				CV
+			</a>
+		</nav>
 
-	<div class="prefs">
-		<div class="field">
-			<span class="lbl">Tema</span>
-			<div class="seg" role="group" aria-label="Tema">
-				<button
-					type="button"
-					class:on={current === 'light'}
-					aria-pressed={current === 'light'}
-					onclick={() => choose('light')}>Terang</button
-				>
-				<button
-					type="button"
-					class:on={current === 'dark'}
-					aria-pressed={current === 'dark'}
-					onclick={() => choose('dark')}>Gelap</button
-				>
+		<div class="prefs">
+			<div class="field">
+				<span class="lbl">Tema</span>
+				<div class="seg" role="group" aria-label="Tema">
+					<button
+						type="button"
+						class:on={current === 'light'}
+						aria-pressed={current === 'light'}
+						onclick={() => choose('light')}>Terang</button
+					>
+					<button
+						type="button"
+						class:on={current === 'dark'}
+						aria-pressed={current === 'dark'}
+						onclick={() => choose('dark')}>Gelap</button
+					>
+				</div>
 			</div>
 		</div>
+
+		<button class="btn btn-ghost close-btn" type="button" aria-label="Tutup" onclick={close}>Tutup</button>
 	</div>
-
-	<div class="spacer"></div>
-
-	<button class="btn btn-ghost close-btn" type="button" aria-label="Tutup" onclick={close}>Tutup</button>
 </dialog>
 
 <style>
 	.menu {
 		position: fixed;
-		inset: 0;
-		width: 100%;
+		top: 16px;
+		left: 16px;
+		right: 16px;
+		width: auto;
 		max-width: none;
-		height: 100dvh;
-		max-height: none;
+		height: auto;
+		max-height: calc(100dvh - 32px);
 		margin: 0;
+		padding: 0;
 		border: 0;
-		padding: 24px;
-		background: var(--bg);
+		background: transparent;
 		color: var(--text);
+		overflow: visible;
 		box-sizing: border-box;
+	}
+
+	.panel {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
-		overflow-y: auto;
+		gap: 20px;
+		padding: 16px;
+		background: var(--glassov);
+		border: 1px solid var(--glassline);
+		box-shadow: var(--shadow), inset 0 1px 0 var(--glasshi);
+		border-radius: 22px;
+		max-height: calc(100dvh - 32px);
+		overflow: auto;
+		box-sizing: border-box;
+		-webkit-backdrop-filter: blur(12px) saturate(160%);
+		backdrop-filter: blur(12px) saturate(160%);
+	}
+
+	@media (prefers-reduced-transparency: reduce) {
+		.panel {
+			background: var(--solid);
+			-webkit-backdrop-filter: none;
+			backdrop-filter: none;
+		}
+	}
+
+	@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+		.panel {
+			background: var(--solid);
+		}
 	}
 
 	.head {
@@ -119,9 +151,20 @@
 		border-radius: 50%;
 	}
 
-	.head-title {
-		font: 600 18px Inter, system-ui, sans-serif;
-		color: var(--muted);
+	.close {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		min-width: 44px;
+		min-height: 44px;
+		padding: 0;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		background: var(--chip);
+		color: var(--text);
+		cursor: pointer;
 	}
 
 	.nav {
@@ -156,10 +199,6 @@
 	.seg button.on {
 		background: var(--accent);
 		color: var(--onaccent);
-	}
-
-	.spacer {
-		flex: 1;
 	}
 
 	.close-btn {

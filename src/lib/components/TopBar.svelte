@@ -31,6 +31,7 @@
 			class="menu-btn"
 			type="button"
 			aria-label="Buka menu"
+			aria-expanded={ui.menuOpen}
 			onclick={() => (ui.menuOpen = true)}
 		>
 			<Icon name="menu" size={20} />

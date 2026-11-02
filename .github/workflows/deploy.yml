@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
 
-# Automatic deploys from `rewrite` may be re-enabled only after cutover: remove
-# static/CNAME, configure DNS for the custom domain, and set the repository variable
-# BASE_PATH to an empty string. Until then, deploy manually via workflow_dispatch.
+# Automatic deploys may be re-enabled only after cutover: keep static/CNAME for
+# production (remove it only for the github.io preview), configure DNS for the custom
+# domain, and set BASE_PATH to an empty string. Then re-enable pushes from `main`,
+# not `rewrite`. Until then, deploy manually via workflow_dispatch only.
 on:
   workflow_dispatch:
 
@@ -58,6 +59,7 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
-# Note: static/CNAME points github.io at https://zydhan.com, so the preview URL will
-# redirect to the live domain until CNAME is temporarily removed or DNS is configured
-# for the custom domain. This is an owner cutover step, not part of the build.
+# Note: static/CNAME is required for production and points github.io at
+# https://zydhan.com. Remove it only for a github.io preview (or configure DNS for the
+# custom domain first), then restore it before the production deploy. This is an owner
+# cutover step, not part of the build.
