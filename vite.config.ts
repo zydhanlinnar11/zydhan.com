@@ -13,7 +13,7 @@ export default defineConfig({
 			},
 			adapter: adapter({ pages: 'build', assets: 'build', fallback: undefined, strict: true }),
 			paths: { base },
-			prerender: { handleHttpError: 'warn', handleMissingId: 'warn' }
+			prerender: { handleHttpError: 'warn' }
 		})
 	]
 });

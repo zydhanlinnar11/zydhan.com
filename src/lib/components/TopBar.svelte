@@ -119,4 +119,10 @@
 			display: none;
 		}
 	}
+
+	@media (min-width: 1920px) {
+		.bar-wrap {
+			max-width: 1280px;
+		}
+	}
 </style>

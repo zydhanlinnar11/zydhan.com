@@ -17,3 +17,11 @@ test('Home renders hero, stats, roles, projects, writings, contact', async ({ pa
   await expect(page.getByRole('heading', { name: /Ada sistem yang perlu dibangun/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Kirim email/i })).toHaveAttribute('href', /mailto:/);
 });
+
+test('CV exposes all section and role anchors', async ({ page }) => {
+  await page.goto('/cv');
+  for (const id of ['ringkasan','pengalaman','keahlian','pendidikan','tulisan','peran-pena','peran-sevima','peran-dptsi','peran-snpmb','peran-intern']) {
+    await expect(page.locator(`[id="${id}"]`)).toHaveCount(1);
+  }
+  await expect(page.getByRole('button', { name: /Unduh PDF/i })).toBeVisible();
+});

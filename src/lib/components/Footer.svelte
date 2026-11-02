@@ -51,4 +51,10 @@
 			padding: 40px 24px 64px;
 		}
 	}
+
+	@media (min-width: 1920px) {
+		.footer-wrap {
+			max-width: 1280px;
+		}
+	}
 </style>

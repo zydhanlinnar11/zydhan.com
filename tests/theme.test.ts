@@ -27,3 +27,13 @@ describe('glass transparency fallback', () => {
     expect(css).toContain('backdrop-filter');
   });
 });
+
+describe('print stylesheet', () => {
+  it('hides chrome and forces solid surfaces in print', () => {
+    expect(css).toContain('@media print');
+    for (const sel of ['.top-bar', '.floating-bar', '.toc', 'footer', '#kontak']) {
+      expect(css).toContain(sel);
+    }
+    expect(css).toContain('display: none');
+  });
+});
