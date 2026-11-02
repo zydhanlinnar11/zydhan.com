@@ -18,6 +18,59 @@ test('Home renders hero, stats, roles, projects, writings, contact', async ({ pa
   await expect(page.getByRole('link', { name: /Kirim email/i })).toHaveAttribute('href', /mailto:/);
 });
 
+test('floating bar shows after scrolling past hero CTA on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.getByRole('navigation', { name: /Aksi cepat/i })).toBeHidden();
+  await page.mouse.wheel(0, 1200);
+  await expect(page.getByRole('navigation', { name: /Aksi cepat/i })).toBeVisible();
+});
+
+test('CV floating bar opens the section overlay', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/cv');
+  await page.mouse.wheel(0, 1200);
+  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  await expect(bar).toBeVisible();
+  await bar.getByRole('button', { name: /Navigasi/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigasi/i });
+  await expect(overlay).toBeVisible();
+  await expect(overlay.getByRole('link')).toHaveCount(5);
+  await expect(overlay.getByRole('link', { name: /Pengalaman/i })).toHaveAttribute('href', /#pengalaman/);
+  await expect(overlay.getByRole('link', { name: /Ringkasan/i })).toHaveAttribute('aria-current', 'location');
+  await expect(bar.getByRole('button', { name: /Tutup/i })).toBeVisible();
+  await overlay.getByRole('link', { name: /Keahlian/i }).click();
+  await expect(overlay).toBeHidden();
+});
+
+test('Home floating bar navigasi opens the shared mobile menu', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.mouse.wheel(0, 1200);
+  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  await expect(bar).toBeVisible();
+  await bar.getByRole('button', { name: /Navigasi/i }).click();
+  const menu = page.getByRole('dialog', { name: /Menu/i });
+  await expect(menu).toBeVisible();
+  await expect(bar.getByRole('button', { name: /Tutup/i })).toBeVisible();
+  await menu.getByRole('button', { name: /Tutup/i }).click();
+  await expect(menu).toBeHidden();
+});
+
+test('floating bar re-finds the trigger after client-side navigation', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.mouse.wheel(0, 1200);
+  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  await expect(bar).toBeVisible();
+  await bar.getByRole('link', { name: /Lihat CV/i }).click();
+  await expect(page).toHaveURL(/\/cv$/);
+  // The CV pills (its trigger) are in view at the top, so the bar hides again.
+  await expect(bar).toBeHidden();
+  await page.mouse.wheel(0, 1200);
+  await expect(bar).toBeVisible();
+});
+
 test('CV exposes all section and role anchors', async ({ page }) => {
   await page.goto('/cv');
   for (const id of ['ringkasan','pengalaman','keahlian','pendidikan','tulisan','peran-pena','peran-sevima','peran-dptsi','peran-snpmb','peran-intern']) {

@@ -3,6 +3,7 @@
 	import TopBar from '#lib/components/TopBar.svelte';
 	import MobileMenu from '#lib/components/MobileMenu.svelte';
 	import Footer from '#lib/components/Footer.svelte';
+	import FloatingBar from '#lib/components/FloatingBar.svelte';
 	import type { LayoutProps } from './$types';
 
 	let { children }: LayoutProps = $props();
@@ -12,3 +13,4 @@
 <MobileMenu />
 <main>{@render children()}</main>
 <Footer />
+<FloatingBar />
