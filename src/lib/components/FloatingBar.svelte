@@ -171,7 +171,7 @@
 		top: auto;
 		left: 16px;
 		right: 16px;
-		bottom: 88px;
+		bottom: 102px;
 		width: auto;
 		height: auto;
 		max-width: none;
