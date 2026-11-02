@@ -1,0 +1,62 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [rewrite]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+
+      # Preview deploys are served from https://<owner>.github.io/zydhan.com, so the
+      # site is built with that base path. At custom-domain cutover, set the repository
+      # variable BASE_PATH to an empty string and remove the `|| '/zydhan.com'` fallback.
+      - run: pnpm build
+        env:
+          BASE_PATH: "${{ vars.BASE_PATH || '/zydhan.com' }}"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+# Note: static/CNAME points github.io at https://zydhan.com, so the preview URL will
+# redirect to the live domain until CNAME is temporarily removed or DNS is configured
+# for the custom domain. This is an owner cutover step, not part of the build.

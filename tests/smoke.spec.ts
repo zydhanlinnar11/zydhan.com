@@ -1,3 +1,4 @@
+import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '@playwright/test';
 
 test('mobile menu is a dialog and closes with the close control', async ({ page }) => {
@@ -95,4 +96,57 @@ test('CV exposes all section and role anchors', async ({ page }) => {
     await expect(page.locator(`[id="${id}"]`)).toHaveCount(1);
   }
   await expect(page.getByRole('button', { name: /Unduh PDF/i })).toBeVisible();
+});
+
+const widths = [390, 768, 1440, 1920];
+for (const w of widths) {
+	test(`no horizontal scroll at ${w}px`, async ({ page }) => {
+		await page.setViewportSize({ width: w, height: 900 });
+		for (const path of ['/', '/cv']) {
+			await page.goto(path);
+			const overflow = await page.evaluate(
+				() => document.documentElement.scrollWidth - document.documentElement.clientWidth
+			);
+			expect(overflow, `${path}@${w}`).toBeLessThanOrEqual(0);
+		}
+	});
+}
+
+test('a11y: no serious or critical violations', async ({ page }) => {
+	for (const path of ['/', '/cv']) {
+		await page.goto(path);
+		const results = await new AxeBuilder({ page }).analyze();
+		const bad = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+		expect(bad, path).toEqual([]);
+	}
+});
+
+test('legacy redirect pages point at their canonical destinations', async ({ request }) => {
+	const checks: Array<[string, string]> = [
+		['/id', 'https://zydhan.com/'],
+		['/projects', 'https://zydhan.com/cv'],
+		['/id/projects', 'https://zydhan.com/cv'],
+		['/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/cv#peran-snpmb'],
+		['/id/projects/optika-id', 'https://zydhan.com/cv']
+	];
+
+	for (const [path, target] of checks) {
+		const response = await request.get(path);
+		expect(response.status(), path).toBe(200);
+		const body = await response.text();
+		expect(body, path).toContain('http-equiv="refresh"');
+		expect(body, path).toContain(target);
+	}
+});
+
+test('404 page renders with a helpful message', async ({ request }) => {
+	const response = await request.get('/this-does-not-exist');
+	expect(response.status()).toBe(404);
+	const body = await response.text();
+	if (body.includes('Halaman ini tidak ada')) return;
+	// `vite preview` serves SvelteKit's JS error shell for unknown paths instead of the
+	// static 404.html. GitHub Pages serves the asset directly, so verify that file.
+	const asset = await request.get('/404.html');
+	expect(asset.status()).toBe(200);
+	expect(await asset.text()).toContain('Halaman ini tidak ada');
 });
