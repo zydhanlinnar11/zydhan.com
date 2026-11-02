@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="id">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<title>Halaman tidak ditemukan — Zydhan</title>
+		<meta
+			name="description"
+			content="Halaman ini tidak ada. Alamatnya mungkin salah ketik, atau halamannya sudah dipindah."
+		/>
+		<script>
+			(function () {
+				var d = document.documentElement;
+				var t = null;
+				try { t = localStorage.getItem('theme'); } catch (e) {}
+				var dark = (t === 'light' || t === 'dark') ? (t === 'dark') : window.matchMedia('(prefers-color-scheme: dark)').matches;
+				d.dataset.theme = dark ? 'dark' : 'light';
+			})();
+		</script>
+		<link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 100 900;
+				font-display: swap;
+				src: url('/fonts/inter-var.woff2') format('woff2');
+				unicode-range:
+					U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+					U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+
+			:root {
+				--bg: #eef3f4;
+				--text: #12141c;
+				--muted: #46413c;
+				--glass: rgba(255, 255, 255, 0.58);
+				--glassline: rgba(255, 255, 255, 0.85);
+				--glasshi: rgba(255, 255, 255, 0.9);
+				--shadow: 0 0 0 1px rgba(18, 20, 28, 0.08), 0 12px 40px rgba(70, 65, 60, 0.16);
+				--solid: #ffffff;
+				--accent: #1f6f7a;
+				--accenttint: rgba(31, 111, 122, 0.12);
+				--onaccent: #ffffff;
+				--chip: rgba(18, 20, 28, 0.07);
+				--surface: rgba(255, 255, 255, 0.72);
+				--line: rgba(18, 20, 28, 0.12);
+				--focus: #1f6f7a;
+				--m1: #bfdde1;
+				--m2: #d7ab8e;
+				--m3: #a19e9d;
+				--glassbar: rgba(255, 255, 255, 0.24);
+				color-scheme: light;
+			}
+
+			[data-theme='dark'] {
+				--bg: #12141c;
+				--text: #f1eeea;
+				--muted: #bdbab8;
+				--glass: rgba(24, 27, 38, 0.62);
+				--glassline: rgba(255, 255, 255, 0.2);
+				--glasshi: rgba(255, 255, 255, 0.16);
+				--shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+				--solid: #1e212c;
+				--accent: #bfdde1;
+				--accenttint: rgba(191, 221, 225, 0.14);
+				--onaccent: #12141c;
+				--chip: rgba(255, 255, 255, 0.08);
+				--surface: rgba(255, 255, 255, 0.045);
+				--line: rgba(255, 255, 255, 0.13);
+				--focus: #daeaed;
+				--m1: #2e5560;
+				--m2: #7a5440;
+				--m3: #46413c;
+				--glassbar: rgba(24, 27, 38, 0.3);
+				color-scheme: dark;
+			}
+
+			html,
+			body {
+				margin: 0;
+				min-height: 100%;
+			}
+
+			body {
+				background: var(--bg);
+				color: var(--text);
+				font-family: Inter, system-ui, sans-serif;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			a {
+				color: inherit;
+			}
+
+			:focus-visible {
+				outline: 3px solid var(--focus);
+				outline-offset: 3px;
+			}
+
+			.mesh {
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(circle 280px at 14% 16%, var(--m1), transparent 72%),
+					radial-gradient(circle 300px at 90% 30%, var(--m2), transparent 72%),
+					radial-gradient(circle 260px at 40% 62%, var(--m3), transparent 72%);
+			}
+
+			@media (min-width: 768px) {
+				.mesh {
+					background:
+						radial-gradient(circle 360px at 10% 20%, var(--m1), transparent 72%),
+						radial-gradient(circle 380px at 92% 30%, var(--m2), transparent 72%),
+						radial-gradient(circle 340px at 55% 98%, var(--m3), transparent 72%);
+				}
+			}
+
+			@media (min-width: 1440px) {
+				.mesh {
+					background:
+						radial-gradient(circle 420px at 14% 22%, var(--m1), transparent 72%),
+						radial-gradient(circle 440px at 88% 30%, var(--m2), transparent 72%),
+						radial-gradient(circle 380px at 52% 88%, var(--m3), transparent 72%);
+				}
+			}
+
+			.glass {
+				background: var(--glass);
+				border: 1px solid var(--glassline);
+				box-shadow: var(--shadow), inset 0 1px 0 var(--glasshi);
+				border-radius: 22px;
+			}
+
+			.bar-glass {
+				background: var(--glassbar);
+			}
+
+			@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+				.glass {
+					-webkit-backdrop-filter: blur(24px) saturate(170%);
+					backdrop-filter: blur(24px) saturate(170%);
+				}
+
+				.bar-glass {
+					-webkit-backdrop-filter: blur(10px) saturate(160%);
+					backdrop-filter: blur(10px) saturate(160%);
+				}
+			}
+
+			@media (prefers-reduced-transparency: reduce) {
+				.glass,
+				.bar-glass {
+					background: var(--solid);
+					-webkit-backdrop-filter: none;
+					backdrop-filter: none;
+				}
+			}
+
+			.surface {
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 18px;
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-height: 44px;
+				padding: 0 20px;
+				border-radius: 999px;
+				font: 600 15px Inter, system-ui, sans-serif;
+				text-decoration: none;
+				box-sizing: border-box;
+			}
+
+			.btn-primary {
+				background: var(--accent);
+				color: var(--onaccent);
+			}
+
+			.btn-ghost {
+				background: var(--chip);
+				color: var(--text);
+				border: 1px solid var(--line);
+			}
+
+			.chip {
+				font: 600 13px Inter, system-ui, sans-serif;
+				padding: 4px 12px;
+				border-radius: 999px;
+				background: var(--accenttint);
+				color: var(--accent);
+			}
+
+			.item {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				min-height: 48px;
+				padding: 0 14px;
+				border-radius: 16px;
+				text-decoration: none;
+				font: 600 18px Inter, system-ui, sans-serif;
+				letter-spacing: -0.01em;
+			}
+
+			.item:hover {
+				background: var(--chip);
+			}
+
+			.page {
+				position: relative;
+				overflow: hidden;
+				background: var(--bg);
+				color: var(--text);
+				min-height: 100vh;
+				box-sizing: border-box;
+			}
+
+			.wrap {
+				position: relative;
+				max-width: 1120px;
+				margin: 0 auto;
+				padding: 16px;
+				display: flex;
+				flex-direction: column;
+				gap: 48px;
+				box-sizing: border-box;
+			}
+
+			.top-bar {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px;
+				padding: 6px 6px 6px 8px;
+				border-radius: 999px;
+			}
+
+			.logo {
+				display: inline-flex;
+				border-radius: 50%;
+			}
+
+			.logo img {
+				display: block;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+			}
+
+			.card {
+				padding: 32px 24px;
+				max-width: 720px;
+				display: flex;
+				flex-direction: column;
+				gap: 24px;
+				box-sizing: border-box;
+			}
+
+			.card h1 {
+				margin: 0;
+				font-size: clamp(32px, 6vw, 48px);
+				line-height: 1.08;
+				letter-spacing: -0.03em;
+			}
+
+			.card p {
+				margin: 0;
+				font-size: 18px;
+				line-height: 1.6;
+				max-width: 540px;
+				color: var(--muted);
+			}
+
+			.links {
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+			}
+
+			.links .item:first-child {
+				border-bottom: 1px solid var(--line);
+			}
+
+			.actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				align-items: center;
+			}
+
+			@media (min-width: 768px) {
+				.wrap {
+					padding: 24px;
+					gap: 64px;
+				}
+
+				.card {
+					padding: 56px;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				*,
+				*::before,
+				*::after {
+					transition: none;
+					animation: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div class="mesh" aria-hidden="true"></div>
+			<div class="wrap">
+				<header class="glass bar-glass top-bar">
+					<a class="logo" href="/" aria-label="Zydhan, ke Home">
+						<img src="/logo.webp" alt="Zydhan" width="40" height="40" />
+					</a>
+					<a class="btn btn-primary" href="mailto:hello@zydhan.com?subject=Proyek%20freelance"
+						>Hubungi saya</a
+					>
+				</header>
+
+				<main class="glass card">
+					<h1>Halaman ini tidak ada</h1>
+					<p>
+						Alamatnya mungkin salah ketik, atau halamannya sudah dipindah. Dari sini kamu bisa lanjut ke
+						bagian lain.
+					</p>
+					<nav class="surface links" aria-label="Halaman yang tersedia">
+						<a class="item" href="/">
+							<span>Home</span>
+							<svg
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M9 6l6 6-6 6" />
+							</svg>
+						</a>
+						<a class="item" href="/cv">
+							<span>CV</span>
+							<svg
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M9 6l6 6-6 6" />
+							</svg>
+						</a>
+					</nav>
+					<div class="actions">
+						<a class="btn btn-primary" href="/">Kembali ke Home</a>
+						<a class="btn btn-ghost" href="mailto:hello@zydhan.com?subject=Tautan%20rusak%20di%20zydhan.com"
+							>Laporkan tautan rusak</a
+						>
+					</div>
+				</main>
+			</div>
+		</div>
+	</body>
+</html>
