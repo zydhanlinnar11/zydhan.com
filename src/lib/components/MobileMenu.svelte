@@ -30,6 +30,13 @@
 		}
 	});
 
+	$effect(() => {
+		document.body.style.overflow = ui.menuOpen ? 'hidden' : '';
+		return () => {
+			document.body.style.overflow = '';
+		};
+	});
+
 	function close() {
 		ui.menuOpen = false;
 	}
