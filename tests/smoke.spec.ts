@@ -222,6 +222,25 @@ test('404 page renders with a helpful message', async ({ request }) => {
 	expect(await asset.text()).toContain('Halaman ini tidak ada');
 });
 
+test('404 page list rows stay flush so the divider is a flat line', async ({ page }) => {
+	await page.goto('/404.html');
+	const shape = await page.evaluate(() => {
+		const nav = document.querySelector('.links')!;
+		const item = document.querySelector('.links .item')!;
+		const style = getComputedStyle(item);
+		return {
+			navWidth: nav.getBoundingClientRect().width,
+			itemWidth: item.getBoundingClientRect().width,
+			bottomLeft: style.borderBottomLeftRadius,
+			bottomRight: style.borderBottomRightRadius
+		};
+	});
+	// 1px border on each side of the .surface container
+	expect(shape.itemWidth).toBe(shape.navWidth - 2);
+	expect(shape.bottomLeft).toBe('0px');
+	expect(shape.bottomRight).toBe('0px');
+});
+
 test('print layout is one A4 page, one column, light', async ({ page }) => {
 	await page.goto('/cv');
 	await page.emulateMedia({ media: 'print', colorScheme: 'dark' });
