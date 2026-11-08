@@ -26,6 +26,8 @@
 }
 
 :root {
+	--ease-out: cubic-bezier(.22, 1, .36, 1);
+	--ease-in: cubic-bezier(.4, 0, 1, 1);
 	--bg: #eef3f4;
 	--text: #12141c;
 	--muted: #46413c;
@@ -165,9 +167,12 @@ body {
 
 /* typography scale */
 h1 { letter-spacing: -0.035em; line-height: 1.05; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none; animation: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0s !important; animation: none !important; } }
 
-dialog::backdrop { background: var(--scrim); }
+dialog::backdrop { background: var(--scrim); opacity: 0; transition: opacity 160ms var(--ease-in); }
+dialog[open]::backdrop { opacity: 1; transition: opacity 240ms var(--ease-out); }
+@starting-style { dialog[open]::backdrop { opacity: 0; } }
+dialog.closing::backdrop { opacity: 0; transition: opacity 160ms var(--ease-in); }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   dialog::backdrop {
     -webkit-backdrop-filter: blur(20px) saturate(160%);

@@ -95,6 +95,9 @@ test('floating bar re-finds the trigger after client-side navigation', async ({ 
   await expect(page).toHaveURL(/\/cv$/);
   // The CV pills (its trigger) are in view at the top, so the bar hides again.
   await expect(bar).toBeHidden();
+  // Smooth scrolling: let the post-navigation scroll reset settle before scrolling again.
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await page.waitForTimeout(500);
   await page.mouse.wheel(0, 1200);
   await expect(bar).toBeVisible();
 });

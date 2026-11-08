@@ -22,11 +22,13 @@
 	$effect(() => {
 		if (!dialog) return;
 		if (ui.menuOpen) {
+			clearTimeout(timer);
+			closing = false;
 			const theme = document.documentElement.dataset.theme;
 			if (theme === 'light' || theme === 'dark') current = theme;
 			if (!dialog.open) dialog.showModal();
 		} else if (dialog.open) {
-			dialog.close();
+			requestClose();
 		}
 	});
 
@@ -37,6 +39,23 @@
 		};
 	});
 
+	let closing = $state(false);
+	let timer: ReturnType<typeof setTimeout> | undefined;
+
+	function finishClose() {
+		if (!dialog?.open) return;
+		dialog.close();
+		closing = false;
+	}
+
+	function requestClose() {
+		if (!dialog?.open || closing) return;
+		closing = true;
+		const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		clearTimeout(timer);
+		timer = setTimeout(finishClose, reduce ? 0 : 170);
+	}
+
 	function close() {
 		ui.menuOpen = false;
 	}
@@ -46,7 +65,17 @@
 	}
 </script>
 
-<dialog bind:this={dialog} class="menu" aria-label="Menu" onclose={() => (ui.menuOpen = false)}>
+<dialog
+	bind:this={dialog}
+	class="menu"
+	class:closing
+	aria-label="Menu"
+	oncancel={(e) => {
+		e.preventDefault();
+		close();
+	}}
+	onclose={() => (ui.menuOpen = false)}
+>
 	<div class="menu-bar glass bar-glass">
 		<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home" onclick={close}>
 			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
@@ -110,6 +139,37 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+	}
+
+	.menu-bar,
+	.panel {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 240ms var(--ease-out),
+			transform 320ms var(--ease-out);
+	}
+
+	.panel {
+		transition-delay: 50ms;
+	}
+
+	@starting-style {
+		.menu[open] .menu-bar,
+		.menu[open] .panel {
+			opacity: 0;
+			transform: translateY(-12px);
+		}
+	}
+
+	.menu.closing .menu-bar,
+	.menu.closing .panel {
+		opacity: 0;
+		transform: translateY(-12px);
+		transition:
+			opacity 160ms var(--ease-in),
+			transform 160ms var(--ease-in);
+		transition-delay: 0s;
 	}
 
 	.menu-bar {
