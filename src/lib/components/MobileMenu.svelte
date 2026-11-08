@@ -216,6 +216,19 @@
 		background: var(--chip);
 		color: var(--text);
 		cursor: pointer;
+		transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+	}
+
+	@media (hover: hover) {
+		.close:hover {
+			background: var(--chiphover);
+			border-color: var(--accent);
+		}
+	}
+
+	.close:active {
+		transform: scale(0.96);
+		transition-duration: 80ms;
 	}
 
 	.menu-nav {

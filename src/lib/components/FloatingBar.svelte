@@ -216,7 +216,8 @@
 	.floating-bar button.nav {
 		transition:
 			background-color 200ms var(--ease-out),
-			color 200ms var(--ease-out);
+			color 200ms var(--ease-out),
+			transform 180ms var(--ease-out);
 	}
 
 	.ico {
@@ -298,8 +299,10 @@
 		transform: none;
 		transition:
 			opacity 240ms var(--ease-out),
-			transform 300ms var(--ease-out);
-		transition-delay: calc(var(--i) * 30ms + 40ms);
+			transform 300ms var(--ease-out),
+			background-color 180ms var(--ease-out),
+			color 180ms var(--ease-out);
+		transition-delay: calc(var(--i) * 30ms + 40ms), calc(var(--i) * 30ms + 40ms), 0s, 0s;
 	}
 
 	@starting-style {

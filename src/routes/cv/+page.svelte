@@ -277,6 +277,24 @@
 		color: var(--muted);
 		text-decoration: none;
 		font: 600 14px Inter, system-ui, sans-serif;
+		transition:
+			background-color 180ms var(--ease-out),
+			border-color 180ms var(--ease-out),
+			color 180ms var(--ease-out),
+			transform 180ms var(--ease-out);
+	}
+
+	@media (hover: hover) {
+		.pills a:not(.active):hover {
+			background: var(--chiphover);
+			border-color: var(--accent);
+			color: var(--text);
+		}
+	}
+
+	.pills a:active {
+		transform: scale(0.96);
+		transition-duration: 80ms;
 	}
 
 	.pills a.active {
@@ -366,10 +384,25 @@
 	.writing {
 		color: var(--text);
 		text-decoration: none;
+		transition:
+			background-color 180ms var(--ease-out),
+			border-color 180ms var(--ease-out),
+			transform 180ms var(--ease-out),
+			box-shadow 220ms var(--ease-out);
 	}
 
-	.writing:hover {
-		border-color: var(--accent);
+	@media (hover: hover) {
+		.writing:hover {
+			background: var(--surfacehover);
+			border-color: var(--accent);
+			transform: translateY(-2px);
+			box-shadow: var(--hovershadow);
+		}
+	}
+
+	.writing:active {
+		transform: scale(0.99);
+		transition-duration: 80ms;
 	}
 
 	.writings {
@@ -498,6 +531,12 @@
 		.toc :global(a.active) {
 			background: var(--accent);
 			color: var(--onaccent);
+		}
+
+		@media (hover: hover) {
+			.toc :global(a.active:hover) {
+				background: var(--accenthover);
+			}
 		}
 	}
 

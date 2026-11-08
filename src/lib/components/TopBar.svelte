@@ -82,10 +82,15 @@
 		gap: 4px;
 	}
 
-	.nav a.active,
-	.nav a.active:hover {
+	.nav a.active {
 		color: var(--onaccent);
 		background: var(--accent);
+	}
+
+	@media (hover: hover) {
+		.nav a.active:hover {
+			background: var(--accenthover);
+		}
 	}
 
 	.actions {
@@ -108,6 +113,19 @@
 		background: var(--chip);
 		color: var(--text);
 		cursor: pointer;
+		transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+	}
+
+	@media (hover: hover) {
+		.menu-btn:hover {
+			background: var(--chiphover);
+			border-color: var(--accent);
+		}
+	}
+
+	.menu-btn:active {
+		transform: scale(0.96);
+		transition-duration: 80ms;
 	}
 
 	@media (min-width: 768px) {

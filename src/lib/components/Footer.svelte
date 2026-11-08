@@ -40,6 +40,7 @@
 	.links a {
 		color: var(--muted);
 		text-decoration: none;
+		transition: color 180ms var(--ease-out);
 	}
 
 	.links a:hover {
