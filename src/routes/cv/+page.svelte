@@ -90,12 +90,6 @@
 </svelte:head>
 
 <div class="page">
-	<div
-		class="mesh cv-mesh"
-		aria-hidden="true"
-		style="mask-image: linear-gradient(#000 58%, transparent); -webkit-mask-image: linear-gradient(#000 58%, transparent)"
-	></div>
-
 	<div class="wrap">
 		<header class="cv-head">
 			<div class="intro">
@@ -208,15 +202,6 @@
 	.page {
 		position: relative;
 		overflow: hidden;
-	}
-
-	.cv-mesh {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 620px;
-		pointer-events: none;
 	}
 
 	.wrap {
@@ -428,10 +413,6 @@
 	}
 
 	@media (min-width: 768px) {
-		.cv-mesh {
-			height: 760px;
-		}
-
 		.wrap {
 			padding: 24px 24px 64px;
 			gap: 40px;
@@ -537,10 +518,6 @@
 			max-width: none;
 			padding: 0;
 			gap: 20px;
-		}
-
-		.cv-mesh {
-			display: none;
 		}
 
 		.body {

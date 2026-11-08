@@ -9,8 +9,36 @@
 	let { children }: LayoutProps = $props();
 </script>
 
-<TopBar />
-<MobileMenu />
-<main>{@render children()}</main>
-<Footer />
+<div class="shell">
+	<div class="mesh global-mesh" aria-hidden="true"></div>
+	<TopBar />
+	<MobileMenu />
+	<main>{@render children()}</main>
+	<Footer />
+</div>
 <FloatingBar />
+
+<style>
+	.shell {
+		position: relative;
+		isolation: isolate;
+	}
+
+	.global-mesh {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 760px;
+		z-index: -1;
+		pointer-events: none;
+		-webkit-mask-image: linear-gradient(#000 62%, transparent);
+		mask-image: linear-gradient(#000 62%, transparent);
+	}
+
+	@media (min-width: 768px) {
+		.global-mesh {
+			height: 900px;
+		}
+	}
+</style>
