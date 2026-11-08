@@ -43,8 +43,16 @@
 	.bar-wrap {
 		max-width: 1120px;
 		margin: 0 auto;
-		padding: 16px 16px 0;
+		padding: calc(16px + env(safe-area-inset-top)) 16px 0;
 		box-sizing: border-box;
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		pointer-events: none;
+	}
+
+	.top-bar {
+		pointer-events: auto;
 	}
 
 	.top-bar {
@@ -104,7 +112,7 @@
 
 	@media (min-width: 768px) {
 		.bar-wrap {
-			padding: 24px 24px 0;
+			padding: calc(24px + env(safe-area-inset-top)) 24px 0;
 		}
 
 		.nav {

@@ -306,7 +306,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
-		scroll-margin-top: 96px;
+		scroll-margin-top: 112px;
 	}
 
 	h2 {
@@ -491,7 +491,7 @@
 			width: 220px;
 			padding: 12px;
 			position: sticky;
-			top: 24px;
+			top: 112px;
 			box-sizing: border-box;
 		}
 

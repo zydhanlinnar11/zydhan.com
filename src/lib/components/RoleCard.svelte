@@ -51,7 +51,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
-		scroll-margin-top: 96px;
+		scroll-margin-top: 112px;
 	}
 
 	.intern {
