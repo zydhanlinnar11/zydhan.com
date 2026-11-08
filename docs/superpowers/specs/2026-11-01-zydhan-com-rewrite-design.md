@@ -93,7 +93,7 @@ Breakpoint acuan: 390, 768, 1440, 1920. Kolom konten maksimum 1120px (Home dan C
 
 ## Konten
 
-Sumber kebenaran konten: LinkedIn pemilik (lebih baru) dan CV Oktober 2025; koreksi pemilik tanggal 2026-11-01 menang atas keduanya. Simpan sebagai data terstruktur satu tempat (peran, statistik, keahlian, pendidikan, tulisan, salinan hero), dipakai Home, CV, dan PDF. Tiap butir pengalaman boleh punya `short` opsional: PDF memakai `short` bila ada dan teks penuh bila tidak; halaman web selalu memakai teks penuh. Artboard `CV-PDF` sudah memakai versi ringkas itu (misalnya tiga butir SEVIMA PENA digabung menjadi tiga yang lebih padat), jadi teks ringkasnya diambil dari sana. Peran juga menyimpan daftar stack yang dipakai chip di web dan baris stack di PDF.
+Sumber kebenaran konten: LinkedIn pemilik (lebih baru) dan CV Oktober 2025; koreksi pemilik tanggal 2026-11-01 menang atas keduanya. Simpan sebagai data terstruktur satu tempat (peran, statistik, keahlian, pendidikan, tulisan, salinan hero), dipakai Home, CV, dan PDF. Tiap peran boleh punya `pdfBullets` opsional (tingkat peran, bukan per butir, karena versi ringkas menggabungkan butir): PDF memakai `pdfBullets` bila ada dan `bullets` bila tidak; halaman web selalu memakai `bullets`. Artboard `CV-PDF` memuat versi ringkas itu (misalnya lima butir SEVIMA PENA menjadi tiga), jadi teks ringkasnya diambil dari sana; angka harus identik dengan `bullets`. Data juga menyimpan `pdf` (headline, ringkasan, proyek) untuk bagian yang hanya ada di PDF.
 
 Aturan wajib:
 - Masa kerja dihitung dari Agustus 2021 ("hampir 5 tahun").
