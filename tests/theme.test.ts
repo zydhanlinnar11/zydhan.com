@@ -37,9 +37,10 @@ describe('glass transparency fallback', () => {
 describe('print stylesheet', () => {
   it('hides chrome and forces solid surfaces in print', () => {
     expect(css).toContain('@media print');
-    for (const sel of ['.top-bar', '.floating-bar', '.toc', 'footer', '#kontak']) {
+    for (const sel of ['.top-bar', '.floating-bar', '.toc', 'footer', '#kontak', '.print-only']) {
       expect(css).toContain(sel);
     }
     expect(css).toContain('display: none');
+    expect(css).toContain('size: A4');
   });
 });

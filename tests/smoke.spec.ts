@@ -207,3 +207,19 @@ test('404 page renders with a helpful message', async ({ request }) => {
 	expect(asset.status()).toBe(200);
 	expect(await asset.text()).toContain('Halaman ini tidak ada');
 });
+
+test('print layout is one A4 page, one column, light', async ({ page }) => {
+	await page.goto('/cv');
+	await page.emulateMedia({ media: 'print', colorScheme: 'dark' });
+	const sheet = page.locator('.print-only');
+	await expect(sheet).toBeVisible();
+	for (const sel of ['.top-bar', '.toc', 'footer', '#kontak']) {
+		await expect(page.locator(sel)).toBeHidden();
+	}
+	const box = await sheet.boundingBox();
+	expect(Math.round(box!.width)).toBe(794);
+	expect(box!.height).toBeLessThanOrEqual(1123);
+	expect(await sheet.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
+	const pdf = await page.pdf({ preferCSSPageSize: true });
+	expect((pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) ?? []).length).toBe(1);
+});

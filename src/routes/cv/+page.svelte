@@ -5,6 +5,7 @@
 	import { links } from '#lib/links';
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
+	import PrintCV from '#lib/components/PrintCV.svelte';
 	import RoleCard from '#lib/components/RoleCard.svelte';
 	import { ui } from '#lib/ui.svelte';
 
@@ -197,6 +198,8 @@
 		<ContactBlock compact />
 	</div>
 </div>
+
+<PrintCV />
 
 <style>
 	.page {
