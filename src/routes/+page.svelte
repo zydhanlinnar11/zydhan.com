@@ -42,12 +42,6 @@
 </svelte:head>
 
 <div class="page">
-	<div
-		class="mesh hero-mesh"
-		aria-hidden="true"
-		style="mask-image: linear-gradient(#000 62%, transparent); -webkit-mask-image: linear-gradient(#000 62%, transparent)"
-	></div>
-
 	<div class="wrap">
 		<section class="hero" aria-labelledby="h-hero">
 			<div class="hero-copy">
@@ -159,15 +153,6 @@
 	.page {
 		position: relative;
 		overflow: hidden;
-	}
-
-	.hero-mesh {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 760px;
-		pointer-events: none;
 	}
 
 	.wrap {
@@ -384,10 +369,6 @@
 	}
 
 	@media (min-width: 768px) {
-		.hero-mesh {
-			height: 900px;
-		}
-
 		.wrap {
 			padding: 24px 24px 64px;
 			gap: 88px;
