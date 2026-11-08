@@ -30,6 +30,7 @@
 	--m3: #a19e9d;
 	--glassbar: rgba(255, 255, 255, 0.24);
 	--glassov: rgba(255, 255, 255, 0.44);
+	--glassov-strong: rgba(255, 255, 255, 0.30);
 	--scrim: rgba(18, 20, 28, 0.16);
 	color-scheme: light;
 }
@@ -55,6 +56,7 @@
 	--m3: #46413c;
 	--glassbar: rgba(24, 27, 38, 0.3);
 	--glassov: rgba(24, 27, 38, 0.48);
+	--glassov-strong: rgba(24, 27, 38, 0.38);
 	--scrim: rgba(8, 9, 14, 0.3);
 	color-scheme: dark;
 }
@@ -82,16 +84,18 @@ body {
 }
 .bar-glass { background: var(--glassbar); }
 .ov-glass { background: var(--glassov); }
+.ov-glass-strong { background: var(--glassov-strong); }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .glass { -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%); }
   .bar-glass { -webkit-backdrop-filter: blur(10px) saturate(160%); backdrop-filter: blur(10px) saturate(160%); }
   .ov-glass { -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); }
+  .ov-glass-strong { -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .glass, .bar-glass, .ov-glass { background: var(--solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .glass, .bar-glass, .ov-glass, .ov-glass-strong { background: var(--solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass, .bar-glass, .ov-glass, .panel { background: var(--solid); }
+  .glass, .bar-glass, .ov-glass, .ov-glass-strong, .panel { background: var(--solid); }
 }
 
 .surface { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }

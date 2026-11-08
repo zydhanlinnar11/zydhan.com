@@ -107,7 +107,7 @@
 
 <dialog
 	bind:this={overlayDialog}
-	class="glass ov-glass overlay no-print"
+	class="glass ov-glass ov-glass-strong overlay no-print"
 	aria-label="Navigasi"
 	onclose={() => (overlayOpen = false)}
 	onclick={(event) => {
@@ -178,14 +178,14 @@
 		top: auto;
 		left: 16px;
 		right: 16px;
-		bottom: 102px;
+		bottom: 100px;
 		width: auto;
 		height: auto;
 		max-width: none;
-		max-height: min(60vh, 480px);
-		overflow: auto;
+		max-height: none;
+		overflow: visible;
 		margin: 0;
-		padding: 8px;
+		padding: 12px;
 		border-radius: 22px;
 		color: var(--text);
 		box-sizing: border-box;
