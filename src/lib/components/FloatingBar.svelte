@@ -123,6 +123,7 @@
 		if (!onPanel) overlayOpen = false;
 	}}
 >
+	<span class="overlay-title">Navigasi</span>
 	<nav class="sections" aria-label="Isi CV">
 		{#each sections as section (section.id)}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware; the rule cannot see through string concatenation -->
@@ -192,6 +193,12 @@
 
 	.overlay:not([open]) {
 		display: none;
+	}
+
+	.overlay-title {
+		padding: 6px 14px 10px;
+		font: 500 14px Inter, system-ui, sans-serif;
+		color: var(--muted);
 	}
 
 	.sections {
