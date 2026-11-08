@@ -146,6 +146,18 @@ h1 { letter-spacing: -0.035em; line-height: 1.05; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none; animation: none; } }
 
 dialog::backdrop { background: var(--scrim); }
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  dialog::backdrop {
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  dialog::backdrop {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
 dialog.menu:not([open]) { display: none; }
 
 @media print {
