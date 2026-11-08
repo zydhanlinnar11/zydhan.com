@@ -54,10 +54,25 @@
 	$effect(() => {
 		if (!overlayDialog) return;
 		if (overlayOpen && !overlayDialog.open) {
-			overlayDialog.showModal();
+			overlayDialog.show();
 		} else if (!overlayOpen && overlayDialog.open) {
 			overlayDialog.close();
 		}
+	});
+
+	$effect(() => {
+		const shell = document.querySelector('.shell');
+		if (overlayOpen) {
+			document.body.style.overflow = 'hidden';
+			shell?.setAttribute('inert', '');
+		} else {
+			document.body.style.overflow = '';
+			shell?.removeAttribute('inert');
+		}
+		return () => {
+			document.body.style.overflow = '';
+			shell?.removeAttribute('inert');
+		};
 	});
 </script>
 
@@ -105,23 +120,15 @@
 	</nav>
 {/if}
 
+{#if overlayOpen}
+	<div class="overlay-scrim" aria-hidden="true" onclick={() => (overlayOpen = false)}></div>
+{/if}
+
 <dialog
 	bind:this={overlayDialog}
 	class="glass ov-glass ov-glass-strong overlay no-print"
 	aria-label="Navigasi"
 	onclose={() => (overlayOpen = false)}
-	onclick={(event) => {
-		// Modal dialogs put the rest of the page (including the bar) behind the
-		// backdrop, so a tap on the bar's "Tutup" lands here; dismiss on it.
-		if (event.target !== overlayDialog) return;
-		const rect = overlayDialog.getBoundingClientRect();
-		const onPanel =
-			event.clientX >= rect.left &&
-			event.clientX <= rect.right &&
-			event.clientY >= rect.top &&
-			event.clientY <= rect.bottom;
-		if (!onPanel) overlayOpen = false;
-	}}
 >
 	<span class="overlay-title">Navigasi</span>
 	<nav class="sections" aria-label="Isi CV">
@@ -179,6 +186,7 @@
 		left: 16px;
 		right: 16px;
 		bottom: 100px;
+		z-index: 26;
 		width: auto;
 		height: auto;
 		max-width: none;
@@ -189,6 +197,29 @@
 		border-radius: 22px;
 		color: var(--text);
 		box-sizing: border-box;
+	}
+
+	.overlay-scrim {
+		position: fixed;
+		inset: 0;
+		z-index: 25;
+		background: var(--scrim);
+		-webkit-backdrop-filter: blur(20px) saturate(160%);
+		backdrop-filter: blur(20px) saturate(160%);
+	}
+
+	@media (prefers-reduced-transparency: reduce) {
+		.overlay-scrim {
+			-webkit-backdrop-filter: none;
+			backdrop-filter: none;
+		}
+	}
+
+	@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+		.overlay-scrim {
+			-webkit-backdrop-filter: none;
+			backdrop-filter: none;
+		}
 	}
 
 	.overlay:not([open]) {
