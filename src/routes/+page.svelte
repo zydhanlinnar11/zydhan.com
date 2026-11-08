@@ -273,6 +273,12 @@
 		color: var(--text);
 	}
 
+	.row-main,
+	.row-title,
+	.date {
+		transition: transform 220ms var(--ease-out), color 180ms var(--ease-out);
+	}
+
 	.row-main {
 		display: flex;
 		flex-direction: column;
@@ -315,11 +321,13 @@
 		gap: 8px;
 		text-decoration: none;
 		color: var(--text);
+		transition: transform 220ms var(--ease-out), background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 220ms var(--ease-out);
 	}
 
 	.project-title {
 		font-weight: 600;
 		font-size: 18px;
+		transition: color 180ms var(--ease-out);
 	}
 
 	.project-desc {
@@ -341,6 +349,8 @@
 
 	.writing-cta {
 		font-size: 13px;
+		/* Mengganti transition .btn (app.css) tanpa menyertakan transform dan box-shadow-nya akan menghilangkan efek tekan dan lift. */
+		transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 180ms var(--ease-out), box-shadow 220ms var(--ease-out);
 	}
 
 	.mobile-only {
@@ -349,6 +359,48 @@
 
 	.desktop-only {
 		display: none;
+	}
+
+	@media (hover: hover) {
+		.roles-surface .row:hover .row-main,
+		.writings-surface .row:hover .row-main {
+			transform: translateX(4px);
+		}
+
+		.roles-surface .row:hover .row-title,
+		.writings-surface .row:hover .row-title {
+			color: var(--accent);
+		}
+
+		.roles-surface .row:hover .date:not(.current) {
+			color: var(--text);
+		}
+
+		.writings-surface .row:hover .writing-cta {
+			background: var(--chiphover);
+			border-color: var(--accent);
+		}
+
+		.project:hover {
+			background: var(--surfacehover);
+			border-color: var(--accent);
+			transform: translateY(-2px);
+			box-shadow: var(--hovershadow);
+		}
+
+		.project:hover .project-title {
+			color: var(--accent);
+		}
+	}
+
+	.roles-surface .row:active .row-main,
+	.writings-surface .row:active .row-main {
+		transform: translateX(2px);
+	}
+
+	.project:active {
+		transform: scale(.99);
+		transition-duration: 80ms;
 	}
 
 	@media (min-width: 768px) {
