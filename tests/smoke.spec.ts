@@ -218,7 +218,9 @@ test('print layout is one A4 page, one column, light', async ({ page }) => {
 	}
 	const box = await sheet.boundingBox();
 	expect(Math.round(box!.width)).toBe(794);
-	expect(box!.height).toBeLessThanOrEqual(1123);
+	// text must fit inside the fixed-height sheet (overflow is clipped)
+	expect(await sheet.evaluate((el) => el.scrollHeight <= el.clientHeight)).toBe(true);
+	expect(box!.height).toBeLessThanOrEqual(1120);
 	expect(await sheet.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
 	const pdf = await page.pdf({ preferCSSPageSize: true });
 	expect((pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) ?? []).length).toBe(1);
