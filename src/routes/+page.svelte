@@ -4,6 +4,7 @@
 	import { links } from '#lib/links';
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 
 	const c = getContent('id');
 	const recentRoles = ['peran-pena', 'peran-dptsi', 'peran-snpmb'].map((id) => {
@@ -17,29 +18,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Zydhan Linnar Putra, backend engineer di Surabaya</title>
-	<meta
-		name="description"
-		content="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
-	/>
-	<link rel="canonical" href="{links.domain}/" />
-	<meta property="og:title" content="Zydhan Linnar Putra, backend engineer di Surabaya" />
-	<meta
-		property="og:description"
-		content="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
-	/>
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="{links.domain}/" />
-	<meta property="og:image" content="{links.domain}/og.png" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Zydhan Linnar Putra, backend engineer di Surabaya" />
-	<meta
-		name="twitter:description"
-		content="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
-	/>
-	<meta name="twitter:image" content="{links.domain}/og.png" />
-</svelte:head>
+<Seo
+	title="Zydhan Linnar Putra, backend engineer di Surabaya"
+	description="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
+	path="/"
+/>
 
 <div class="page">
 	<div class="wrap">

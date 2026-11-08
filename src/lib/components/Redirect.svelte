@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import type { RedirectTarget } from '#lib/redirects';
+	import Seo from '#lib/components/Seo.svelte';
 
 	let { to }: { to: RedirectTarget } = $props();
 
@@ -15,7 +16,7 @@
 
 <svelte:head>
 	<meta http-equiv="refresh" content={`0; url=${href}`} />
-	<link rel="canonical" href={`https://zydhan.com${to}`} />
 </svelte:head>
+<Seo title="Zydhan Linnar Putra" description="Backend engineer di Surabaya." path={to} />
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- href is already passed through resolve() in hrefFor -->
 <p>Memindahkan ke <a href={href}>{to}</a>…</p>
