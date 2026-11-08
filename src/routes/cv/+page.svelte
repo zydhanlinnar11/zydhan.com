@@ -195,7 +195,7 @@
 <style>
 	.page {
 		position: relative;
-		overflow: hidden;
+		overflow: clip;
 	}
 
 	.wrap {
