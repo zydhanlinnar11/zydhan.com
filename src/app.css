@@ -113,14 +113,14 @@ body {
     radial-gradient(circle 380px at 52% 88%, var(--m3), transparent 72%); }
 }
 
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 999px; font: 600 15px Inter, system-ui, sans-serif; text-decoration: none; box-sizing: border-box; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; font: 600 15px Inter, system-ui, sans-serif; text-decoration: none; box-sizing: border-box; cursor: pointer; }
 .btn-primary { background: var(--accent); color: var(--onaccent); }
 .btn-ghost { background: var(--chip); color: var(--text); border: 1px solid var(--line); }
 
 .chip { font: 600 13px Inter, system-ui, sans-serif; padding: 4px 12px; border-radius: 999px; background: var(--accenttint); color: var(--accent); }
 
-.nav a { text-decoration: none; color: var(--muted); font: 500 15px Inter, system-ui, sans-serif; padding: 10px 14px; border-radius: 999px; }
-.nav a:hover { color: var(--text); background: var(--chip); }
+.top-bar .nav a { text-decoration: none; color: var(--muted); font: 500 15px Inter, system-ui, sans-serif; padding: 10px 14px; border-radius: 999px; }
+.top-bar .nav a:hover { color: var(--text); background: var(--chip); }
 
 .row { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; text-decoration: none; }
 .date { color: var(--muted); font: 500 14px Inter, system-ui, sans-serif; font-variant-numeric: tabular-nums; }
@@ -128,7 +128,7 @@ body {
 .toc a { display: block; text-decoration: none; color: var(--muted); font: 500 15px Inter, system-ui, sans-serif; padding: 11px 14px; border-radius: 12px; }
 .toc a:hover { background: var(--chip); color: var(--text); }
 
-.item { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0 14px; border-radius: 16px; text-decoration: none; font: 600 18px Inter, system-ui, sans-serif; letter-spacing: -0.01em; }
+.item { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0 14px; border-radius: 16px; text-decoration: none; color: var(--text); font: 600 18px Inter, system-ui, sans-serif; letter-spacing: -0.01em; }
 
 .seg { display: flex; gap: 4px; padding: 4px; background: var(--chip); border: 1px solid var(--line); border-radius: 16px; }
 .seg button { flex: 1; min-height: 44px; border: 0; border-radius: 12px; font: 600 15px Inter, system-ui, sans-serif; cursor: pointer; background: transparent; color: var(--text); }
