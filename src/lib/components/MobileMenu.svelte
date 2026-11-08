@@ -40,17 +40,17 @@
 </script>
 
 <dialog bind:this={dialog} class="menu" aria-label="Menu" onclose={() => (ui.menuOpen = false)}>
-	<div class="panel">
-		<div class="head">
-			<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home" onclick={close}>
-				<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
-			</a>
-			<button class="close" type="button" aria-label="Tutup menu" onclick={close}>
-				<Icon name="close" size={20} />
-			</button>
-		</div>
+	<div class="menu-bar glass bar-glass">
+		<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home" onclick={close}>
+			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
+		</a>
+		<button class="close" type="button" aria-label="Tutup menu" onclick={close}>
+			<Icon name="close" size={20} />
+		</button>
+	</div>
 
-		<nav class="nav" aria-label="Menu utama">
+	<div class="panel glass ov-glass">
+		<nav class="menu-nav" aria-label="Menu utama">
 			<a class="item" href={resolve('/')} aria-current={homeActive ? 'page' : undefined} onclick={close}
 				>Home</a
 			>
@@ -86,57 +86,41 @@
 <style>
 	.menu {
 		position: fixed;
-		top: 16px;
-		left: 16px;
-		right: 16px;
+		top: 0;
+		left: 0;
+		right: 0;
 		width: auto;
 		max-width: none;
 		height: auto;
-		max-height: calc(100dvh - 32px);
+		max-height: 100dvh;
 		margin: 0;
-		padding: 0;
+		padding: 16px;
 		border: 0;
 		background: transparent;
 		color: var(--text);
-		overflow: visible;
+		overflow: auto;
 		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.menu-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 6px 6px 6px 8px;
+		border-radius: 999px;
 	}
 
 	.panel {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		padding: 16px;
-		background: var(--glassov);
-		border: 1px solid var(--glassline);
-		box-shadow: var(--shadow), inset 0 1px 0 var(--glasshi);
+		padding: 12px 12px 20px;
 		border-radius: 22px;
-		max-height: calc(100dvh - 32px);
-		overflow: auto;
 		box-sizing: border-box;
-		-webkit-backdrop-filter: blur(12px) saturate(160%);
-		backdrop-filter: blur(12px) saturate(160%);
-	}
-
-	@media (prefers-reduced-transparency: reduce) {
-		.panel {
-			background: var(--solid);
-			-webkit-backdrop-filter: none;
-			backdrop-filter: none;
-		}
-	}
-
-	@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-		.panel {
-			background: var(--solid);
-		}
-	}
-
-	.head {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 12px;
 	}
 
 	.logo {
@@ -167,13 +151,13 @@
 		cursor: pointer;
 	}
 
-	.nav {
+	.menu-nav {
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
 	}
 
-	.nav .item[aria-current='page'] {
+	.menu-nav .item[aria-current='page'] {
 		background: var(--accenttint);
 		color: var(--accent);
 	}

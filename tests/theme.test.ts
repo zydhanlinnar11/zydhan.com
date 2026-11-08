@@ -30,7 +30,7 @@ describe('glass transparency fallback', () => {
     expect(css).toContain(
       '@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)))'
     );
-    expect(css).toContain('.glass, .bar-glass, .ov-glass, .panel { background: var(--solid); }');
+    expect(css).toContain('.glass, .bar-glass, .ov-glass, .ov-glass-strong, .panel { background: var(--solid); }');
   });
 });
 
