@@ -1,0 +1,28 @@
+name: Configure Cloudflare DNS
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Apply the DNS changes. Leave off for a dry run.
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  dns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Plan or apply Cloudflare DNS
+        run: node scripts/configure-cloudflare-dns.mjs
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          APPLY: ${{ inputs.apply }}

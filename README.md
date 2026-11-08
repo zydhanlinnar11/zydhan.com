@@ -21,7 +21,10 @@ Set `BASE_PATH` when building for the `github.io/zydhan.com` preview
 
 ## Deployment
 
-Deployment is manual (`workflow_dispatch`) until the custom-domain cutover is
-complete. Follow [`docs/CUTOVER.md`](docs/CUTOVER.md) for the email replacement,
-CNAME handling, `BASE_PATH`, Pages settings, verification, and re-enabling
-automatic deploys from `main`.
+Production deploys automatically from `main` to GitHub Pages at
+`https://zydhan.com`. Manual dispatches from other branches build the
+`https://zydhanlinnar11.github.io/zydhan.com/` preview with `BASE_PATH=/zydhan.com`.
+
+Cloudflare DNS is managed by the manual **Configure Cloudflare DNS** workflow,
+which uses the `CLOUDFLARE_API_TOKEN` repository secret. See
+[`docs/CUTOVER.md`](docs/CUTOVER.md) for the cutover and rollback steps.

@@ -1,93 +1,95 @@
 # Cutover runbook — zydhan.com
 
-The site is a static SvelteKit build served by GitHub Pages. Until cutover it
-deploys manually (`workflow_dispatch`) from the `rewrite` branch and is built
-with `BASE_PATH=/zydhan.com` for the `github.io/zydhan.com` preview.
+The site is a static SvelteKit build served by GitHub Pages at
+`https://zydhan.com`. Production deploys from `main`; the `preview` branch can
+still be deployed manually to `https://zydhanlinnar11.github.io/zydhan.com/`.
 
-Work through these steps in order.
+## Prerequisites
 
-## 1. Email (done 2026-11-08)
+1. **Pages source** is **GitHub Actions** (already configured).
+2. **Cloudflare API token** — create a token with `Zone:Read` and `DNS:Edit`
+   for the `zydhan.com` zone, then store it as the repository secret
+   `CLOUDFLARE_API_TOKEN`:
 
-`hello@zydhan.com` is live and routes to the owner's real inbox. No replacement
-is needed: the site already uses it in `src/lib/links.ts` (`email`,
-`mailtoFreelance`, `mailtoBroken`) and `static/404.html` (header CTA, footer
-CTA, "Laporkan tautan rusak"). Verify the built output still uses it:
-
-```sh
-grep -R "hello@zydhan.com" build src static
-```
-
-## 2. Decide how to handle CNAME for the preview
-
-`static/CNAME` contains `zydhan.com`, so a `github.io` preview deployment will
-redirect to the live custom domain (or fail while DNS still points elsewhere).
-
-Choose one:
-
-- **Preferred for a final preview:** temporarily remove `static/CNAME`, deploy
-  the preview, then restore it before the production deploy.
-- **Or** point DNS for `zydhan.com` at GitHub Pages first and accept that the
-  preview URL redirects to the custom domain.
-
-Keep `static/CNAME` in the repository for the production build — it is how
-GitHub Pages binds the site to `zydhan.com`.
-
-## 3. Configure the production base path
-
-For the custom domain the site must be served from `/`, not from
-`/zydhan.com`:
-
-1. Set the repository variable `BASE_PATH` to an empty string.
-2. Remove the `|| '/zydhan.com'` fallback from the build step in
-   `.github/workflows/deploy.yml` so an empty value stays empty:
-
-   ```yaml
-   - run: pnpm build
-     env:
-       BASE_PATH: ${{ vars.BASE_PATH }}
+   ```sh
+   gh secret set CLOUDFLARE_API_TOKEN --repo zydhanlinnar11/zydhan.com
    ```
 
-Without this, every asset and internal link is emitted under `/zydhan.com/`.
+3. `static/CNAME` contains `zydhan.com` on `main`. The `preview` branch
+   intentionally omits it so the preview URL does not redirect to production.
 
-## 4. Enable Pages and the deployment workflow
+## 1. Verify the preview
 
-1. In the repository settings, set **Pages → Build and deployment → Source**
-   to **GitHub Actions**.
-2. Run the **Deploy to GitHub Pages** workflow once via
-   `workflow_dispatch` and confirm it succeeds.
-3. In **Pages → Custom domain**, enter `zydhan.com` (the `CNAME` file also
-   records this).
-4. Wait for the DNS check, then enable **Enforce HTTPS**.
+Open `https://zydhanlinnar11.github.io/zydhan.com/` and check Home, CV,
+redirects, 404, fonts, and the OG image. Deploy a fresh preview with:
 
-## 5. Verify the live site
+```sh
+gh workflow run deploy.yml --ref preview
+```
 
-Check each item in a private window and with `curl`:
+## 2. Deploy production
 
-- `/` renders the Home page with working fonts and images.
-- `/cv` renders the CV, anchors (`#ringkasan`, `#pengalaman`, `#keahlian`,
-  `#pendidikan`, `#tulisan`, `#peran-*`) and the floating bar on mobile.
-- Legacy redirects return the page and a correct meta refresh:
+Merge the reviewed preview commits into `main`, then push. The `Deploy to
+GitHub Pages` workflow runs automatically with an empty `BASE_PATH` and
+publishes the `build/` directory.
+
+## 3. Bind the custom domain
+
+```sh
+gh api --method PUT repos/zydhanlinnar11/zydhan.com/pages \
+  -f cname=zydhan.com
+```
+
+GitHub will start the DNS check. The domain does not need to resolve to Pages
+yet.
+
+## 4. Point Cloudflare at GitHub Pages
+
+Run the manual workflow first as a dry run, then apply:
+
+```sh
+gh workflow run configure-cloudflare-dns.yml -f apply=false
+gh run watch
+
+gh workflow run configure-cloudflare-dns.yml -f apply=true
+gh run watch
+```
+
+It replaces the apex `A`/`AAAA` records and the `www` CNAME with the GitHub
+Pages targets, leaves every other DNS record alone, and sets the records to
+**DNS only** (not proxied).
+
+Old Vercel records for rollback: `A @ 76.76.21.21` and
+`CNAME www cname.vercel-dns.com`.
+
+## 5. Wait for propagation and HTTPS
+
+```sh
+dig +short zydhan.com A
+dig +short www.zydhan.com CNAME
+```
+
+Expect the four `185.199.108-111.153` addresses and
+`zydhanlinnar11.github.io`. Then enable **Enforce HTTPS** in
+**Settings → Pages** (or via the API) once GitHub finishes issuing the
+certificate.
+
+## 6. Verify the live site
+
+- `/` renders Home with fonts, images, and the OG card.
+- `/cv` renders the CV, anchors, and the mobile floating bar.
+- Legacy redirects return a meta refresh:
   `/id`, `/projects`, `/id/projects`,
   `/projects/snpmb-utbk-snbt-2023`, `/projects/optika-id`,
   `/id/projects/snpmb-utbk-snbt-2023`, `/id/projects/optika-id`.
 - An unknown path serves `404.html` with status 404.
 - `https://zydhan.com/sitemap.xml` and `https://zydhan.com/robots.txt` resolve.
-- Open Graph and Twitter metadata on `/` and `/cv` point at
-  `https://zydhan.com/...` and the `og.png` image loads.
-- No request 404s in the browser network panel, and no `/zydhan.com/` prefix
-  appears in asset URLs.
+- OG/Twitter metadata on `/` and `/cv` points at `https://zydhan.com/...` and
+  the `og.png` image loads.
+- No `/zydhan.com/` prefix appears in asset URLs.
+- `https://www.zydhan.com` reaches the site.
 
-## 6. Re-enable automatic deploys
+## Rollback
 
-Only after steps 1–5 are verified, re-enable the workflow trigger in
-`.github/workflows/deploy.yml` for **`main`** (not `rewrite`):
-
-```yaml
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-```
-
-Keep `workflow_dispatch` so hotfix deploys remain possible. Do not re-enable
-pushes from `rewrite`.
+Restore the Vercel DNS records from step 4. The old Vercel deployment remains
+available, so reverting DNS is enough to bring the previous site back.

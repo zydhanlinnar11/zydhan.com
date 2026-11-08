@@ -1,10 +1,11 @@
 name: Deploy to GitHub Pages
 
-# Automatic deploys may be re-enabled only after cutover: keep static/CNAME for
-# production (remove it only for the github.io preview), configure DNS for the custom
-# domain, and set BASE_PATH to an empty string. Then re-enable pushes from `main`,
-# not `rewrite`. Until then, deploy manually via workflow_dispatch only.
+# Production deploys run on every push to main and use an empty BASE_PATH.
+# A manual dispatch from another branch (for example preview) still builds the
+# github.io/zydhan.com preview with BASE_PATH=/zydhan.com.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -38,12 +39,17 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
 
-      # Preview deploys are served from https://<owner>.github.io/zydhan.com, so the
-      # site is built with that base path. At custom-domain cutover, set the repository
-      # variable BASE_PATH to an empty string and remove the `|| '/zydhan.com'` fallback.
+      # main is served from the custom domain at /, while a manual preview deploy
+      # from another branch is served from https://<owner>.github.io/zydhan.com.
+      - name: Choose base path
+        run: |
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            echo "BASE_PATH=" >> "$GITHUB_ENV"
+          else
+            echo "BASE_PATH=/zydhan.com" >> "$GITHUB_ENV"
+          fi
+
       - run: pnpm build
-        env:
-          BASE_PATH: "${{ vars.BASE_PATH || '/zydhan.com' }}"
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -59,7 +65,6 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
-# Note: static/CNAME is required for production and points github.io at
-# https://zydhan.com. Remove it only for a github.io preview (or configure DNS for the
-# custom domain first), then restore it before the production deploy. This is an owner
-# cutover step, not part of the build.
+# Note: main includes static/CNAME (zydhan.com), so the production artifact is bound
+# to the custom domain. The preview branch intentionally omits the file so the
+# github.io/zydhan.com preview does not redirect to the live domain.
