@@ -6,18 +6,15 @@ with `BASE_PATH=/zydhan.com` for the `github.io/zydhan.com` preview.
 
 Work through these steps in order.
 
-## 1. Replace the placeholder email
+## 1. Email (done 2026-11-08)
 
-`hello@zydhan.com` is a placeholder. Replace it everywhere before the site goes
-live:
-
-- `src/lib/links.ts` (`email`, `mailtoFreelance`, `mailtoBroken`)
-- `static/404.html` (header CTA, footer CTA, "Laporkan tautan rusak")
-
-Check the built output afterwards:
+`hello@zydhan.com` is live and routes to the owner's real inbox. No replacement
+is needed: the site already uses it in `src/lib/links.ts` (`email`,
+`mailtoFreelance`, `mailtoBroken`) and `static/404.html` (header CTA, footer
+CTA, "Laporkan tautan rusak"). Verify the built output still uses it:
 
 ```sh
-grep -R "hello@zydhan.com" build src static || true
+grep -R "hello@zydhan.com" build src static
 ```
 
 ## 2. Decide how to handle CNAME for the preview

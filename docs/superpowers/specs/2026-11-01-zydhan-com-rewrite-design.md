@@ -77,7 +77,7 @@ Breakpoint acuan: 390, 768, 1440, 1920. Kolom konten maksimum 1120px (Home dan C
 
 ## Perilaku
 
-- Bar atas: logo avatar bulat (`/_blob` di artifact = `public/logo.webp` diperkecil), tautan Home dan CV (desktop dan tablet), tombol "Hubungi saya" (`mailto:zydhanlinnar11@gmail.com?subject=Proyek%20freelance`), pengganti tema, tombol EN (disembunyikan saat peluncuran). Item aktif berupa pil aksen penuh dengan `aria-current="page"`.
+- Bar atas: logo avatar bulat (`/_blob` di artifact = `public/logo.webp` diperkecil), tautan Home dan CV (desktop dan tablet), tombol "Hubungi saya" (`mailto:hello@zydhan.com?subject=Proyek%20freelance`), pengganti tema, tombol EN (disembunyikan saat peluncuran). Item aktif berupa pil aksen penuh dengan `aria-current="page"`.
 - Mobile: bar atas hanya logo dan tombol menu, yang membuka layar menu (Home, CV, bahasa (disembunyikan), tema, bar bawah dengan Tutup).
 - Bar bawah melayang (hanya di bawah 768px): tiga item ikon di atas label, pil kaca, 16px dari tepi.
   - Home: Navigasi, Hubungi, Lihat CV (aksi utama, terisi aksen). Muncul setelah tombol utama hero ("Lihat CV lengkap") keluar dari viewport, hilang saat kembali ke atas.
