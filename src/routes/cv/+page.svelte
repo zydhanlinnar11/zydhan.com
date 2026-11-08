@@ -2,10 +2,11 @@
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { getContent } from '#lib/content';
-	import { links } from '#lib/links';
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
+	import PrintCV from '#lib/components/PrintCV.svelte';
 	import RoleCard from '#lib/components/RoleCard.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 	import { ui } from '#lib/ui.svelte';
 
 	const c = getContent('id');
@@ -74,20 +75,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>CV — Zydhan Linnar Putra</title>
-	<meta name="description" content={summaryDescription} />
-	<link rel="canonical" href="{links.domain}/cv" />
-	<meta property="og:title" content="CV — Zydhan Linnar Putra" />
-	<meta property="og:description" content={summaryDescription} />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="{links.domain}/cv" />
-	<meta property="og:image" content="{links.domain}/og.png" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="CV — Zydhan Linnar Putra" />
-	<meta name="twitter:description" content={summaryDescription} />
-	<meta name="twitter:image" content="{links.domain}/og.png" />
-</svelte:head>
+<Seo
+	title="CV — Zydhan Linnar Putra"
+	description={summaryDescription}
+	path="/cv"
+/>
 
 <div class="page">
 	<div class="wrap">
@@ -197,6 +189,8 @@
 		<ContactBlock compact />
 	</div>
 </div>
+
+<PrintCV />
 
 <style>
 	.page {

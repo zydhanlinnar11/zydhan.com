@@ -104,6 +104,13 @@ test('Home has canonical, og tags, and description', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('lang', 'id');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/');
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /backend engineer di Surabaya/);
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Zydhan Linnar Putra');
+  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute('content', 'id_ID');
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://zydhan.com/og.png');
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content', '1200');
+  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content', '630');
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', /Kartu profil/);
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Memimpin tim developer/);
 });
 
@@ -111,6 +118,8 @@ test('CV has canonical and title', async ({ page }) => {
   await page.goto('/cv');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/cv');
   await expect(page).toHaveTitle(/CV — Zydhan Linnar Putra/);
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'CV — Zydhan Linnar Putra');
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Zydhan Linnar Putra');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
     'Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal).'
@@ -193,6 +202,8 @@ test('legacy redirect pages point at their canonical destinations', async ({ req
 		expect(body, path).toContain(`content="0; url=${href}"`);
 		expect(body, path).toContain(`<a href="${href}">${label}</a>`);
 		expect(body, path).toContain(target);
+		expect(body, path).toContain('property="og:site_name"');
+		expect(body, path).toContain('https://zydhan.com/og.png');
 	}
 });
 
@@ -206,4 +217,22 @@ test('404 page renders with a helpful message', async ({ request }) => {
 	const asset = await request.get('/404.html');
 	expect(asset.status()).toBe(200);
 	expect(await asset.text()).toContain('Halaman ini tidak ada');
+});
+
+test('print layout is one A4 page, one column, light', async ({ page }) => {
+	await page.goto('/cv');
+	await page.emulateMedia({ media: 'print', colorScheme: 'dark' });
+	const sheet = page.locator('.print-only');
+	await expect(sheet).toBeVisible();
+	for (const sel of ['.top-bar', '.toc', 'footer', '#kontak']) {
+		await expect(page.locator(sel)).toBeHidden();
+	}
+	const box = await sheet.boundingBox();
+	expect(Math.round(box!.width)).toBe(794);
+	// text must fit inside the fixed-height sheet (overflow is clipped)
+	expect(await sheet.evaluate((el) => el.scrollHeight <= el.clientHeight)).toBe(true);
+	expect(box!.height).toBeLessThanOrEqual(1120);
+	expect(await sheet.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
+	const pdf = await page.pdf({ preferCSSPageSize: true });
+	expect((pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) ?? []).length).toBe(1);
 });

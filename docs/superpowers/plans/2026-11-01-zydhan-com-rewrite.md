@@ -24,7 +24,7 @@
 - Home JS (gzip) < 60 KB; no horizontal scroll at 390 / 768 / 1440 / 1920.
 - No AI-flavored text/visuals; no inflated titles.
 - **Email is `hello@zydhan.com` — LIVE since 2026-11-08; it routes to the owner's real inbox.** No replacement step is needed. It appears in `links.email`, `links.mailtoFreelance`, `links.mailtoBroken`, and the freelance-card email label.
-- Content rules (verbatim): work counted from **Agustus 2021** ("hampir 5 tahun"); official SEVIMA PENA title is **Software Engineer** — the string "tech lead" must never appear as a title, only the phrase "memimpin arsitektur inti dan tim engineering"; SNPMB counted from **2022** (part-time, parallel); "Memimpin 20 developer di ITS" is safe; SSO savings **US$60.000 per tahun ≈ Rp1 miliar (kurs 2024)**; observability is **Sentry** (SEVIMA PENA) and **OpenTelemetry** (SNPMB SSO, UTBK-SNBT); never fabricate numbers/quotes/case-study detail.
+- Content rules (verbatim): work counted from **Agustus 2021** ("5+ tahun"); official SEVIMA PENA title is **Software Engineer** — the string "tech lead" must never appear as a title, only the phrase "memimpin arsitektur inti dan tim engineering"; SNPMB counted from **2022** (part-time, parallel); "Memimpin 20 developer di ITS" is safe; SSO savings **US$60.000 per tahun ≈ Rp1 miliar (kurs 2024)**; observability is **Sentry** (SEVIMA PENA) and **OpenTelemetry** (SNPMB SSO, UTBK-SNBT); never fabricate numbers/quotes/case-study detail.
 
 ## File Structure
 
@@ -41,6 +41,7 @@
 │   ├── 404.html                          # hand-authored, self-contained (GitHub Pages fallback)
 │   ├── logo.webp                         # moved from public/ (1079×1079 source)
 │   ├── fonts/inter-var.woff2             # Inter variable, latin subset
+│   ├── fonts/source-serif-4.woff2        # Source Serif 4 variable (roman + italic), latin subset; print/PDF only
 │   ├── icon-32.png  icon-192.png  icon-512.png  apple-touch-icon.png
 │   ├── og.png                            # 1200×630 Open Graph card
 │   ├── robots.txt                        # allow all
@@ -60,6 +61,7 @@
 │   │   ├── icons.ts                      # inline SVG path registry
 │   │   └── components/
 │   │       ├── Icon.svelte
+│   │       ├── PrintCV.svelte            # A4 one-page print layout (hidden on screen), reads content.ts
 │   │       ├── TopBar.svelte
 │   │       ├── MobileMenu.svelte
 │   │       ├── ThemeToggle.svelte
@@ -89,7 +91,7 @@ The old Next.js files (`src/app`, `src/components`, `src/config`, `src/hooks`, `
 The spec says what the site must do, not everything it will meet. These are the inputs/failure modes most likely to bite a real visitor, each pinned to a test in its owning task:
 
 1. **Legacy bookmarked URLs** (`/id`, `/projects`, `/projects/<slug>`, `/id/projects/<slug>`) must land somewhere useful, not the 404. → Task 9 test asserts `snpmb-utbk-snbt-2023 → /cv#peran-snpmb`, `optika-id → /cv`, and the fixed routes.
-2. **"Unduh PDF"** must produce a clean single-column resume — no glass/toc/floating bar/footer in print. → Task 6 test asserts the print stylesheet hides `.toc`, `.top-bar`, `.floating-bar`, `footer`, `#kontak`, and the header action buttons.
+2. **"Unduh PDF"** must produce a clean one-page A4 resume (single column, serif, light even under the dark theme) — no glass/toc/floating bar/footer in print, and no second page. → Task 6 tests assert the print stylesheet hides chrome and shows `.print-only`, and an emulated-print PDF has exactly one page at 794px width.
 3. **Keyboard/AT users** opening the mobile menu must not tab into background content and must be able to close it (Esc / "Tutup"). → Task 4 test asserts the menu is a `<dialog>` (native focus containment) and the close control is a button labeled "Tutup".
 4. **`prefers-reduced-transparency` / `prefers-reduced-motion` / no `backdrop-filter`** must still show every surface — glass falls back to solid, nothing hidden behind blur. → Task 2 test asserts the fallback rule sets solid backgrounds for `.glass`, `.bar-glass`, `.ov-glass`.
 5. **Anti-fabrication rules** (no "tech lead" title, exact dates/savings/observability strings) must hold in the deployed data. → Task 3 tests assert the invariants over `content.id`.
@@ -379,7 +381,8 @@ git add src/app.css src/lib/theme.ts src/app.html static/fonts tests/theme.test.
 ```ts
 export type Lang = 'id';
 export interface Stat { value: string; label: string; labelShort: string; accent?: boolean; }
-export interface Role { id: string; title: string; org: string; location: string; period: string; current?: boolean; summary?: string; bullets: string[]; chips: string[]; }
+export interface Role { id: string; title: string; org: string; location: string; period: string; current?: boolean; summary?: string; bullets: string[]; pdfBullets?: string[]; chips: string[]; }
+export interface PdfContent { headline: string; summary: string; projects: { text: string; href?: string }[]; }
 export interface SkillGroup { name: string; items: string[]; }
 export interface Education { school: string; detail: string; period: string; }
 export interface Writing { title: string; meta: string; href: string; cta: string; onCv?: boolean; }
@@ -394,6 +397,7 @@ export interface Content {
   education: Education;
   writings: Writing[];
   summary: string;
+  pdf: PdfContent;
   tagline: string;
   experienceNote: string;
   name: string;
@@ -420,6 +424,13 @@ export function getContent(lang: Lang = 'id'): Content { return content[lang]; }
 - `skills` (4): `{name:"Backend", items:["Go","PHP / Laravel","Node.js","Python","OIDC / OAuth2"]}`, `{name:"Frontend", items:["React","Next.js","Vue / Nuxt","React Native"]}`, `{name:"Arsitektur", items:["DDD","CQRS","Hexagonal","Modular monolith"]}`, `{name:"Data, cloud, dan observability", items:["PostgreSQL","Firestore","Kafka","RabbitMQ","GCP","Docker","Sentry","OpenTelemetry"]}`.
 - `education = { school:"Institut Teknologi Sepuluh Nopember", detail:"S1 Teknik Informatika, Surabaya", period:"Agu 2019 – Sep 2023" }`.
 - `writings` (2): `{title:"Simple and Easy REST API Implementation with Laravel", meta:"Dev.to", cta:"Baca di Dev.to", href: links.devto, onCv:true}`, `{title:"Better way to debug Go code in Visual Studio Code", meta:"LinkedIn · 4.432 tayangan", cta:"Baca di LinkedIn", href: links.linkedinDebug, onCv:false}`. (Home renders both; CV renders only `onCv`.)
+- **PDF copy (one source, condensed for A4).** `roles[].pdfBullets` is optional: the print layout uses it when present and falls back to `bullets`; the web CV always uses `bullets`. It is role-level (not per bullet) because the condensed copy merges bullets. Set it for the four roles with bullets, taken from `docs/design/artboards/CV-PDF.dc.html` (the artboard is the reference for wording, keep every figure identical to `bullets`):
+  - `peran-pena` (3): "Memimpin arsitektur inti (Go, React) dan tim engineering produk K-12, dari setup awal sampai launch untuk ~3.500 siswa dan guru." / "Mengintegrasikan CBT dan SSO dalam 2 minggu dan mendampingi go-live on-site untuk ~2.000 pengguna awal; berkoordinasi dengan PM, klien, dan OpSec soal infrastruktur." / "Mengintegrasikan platform FinanceCloud dan Edufin untuk pengelolaan keuangan dan agregator pembayaran; mengoperasikan tracing, logging, dan monitoring dengan Sentry."
+  - `peran-sevima` (2): "Memimpin migrasi data asinkron pada siAkadCloud (monolit PHP) dengan RabbitMQ." / "Mengganti UI/UX alur penilaian Edlink (Laravel, Nuxt 2) dengan menjaga kompatibilitas API untuk aplikasi mobile dan PWA; menulis dokumentasi setup untuk mempercepat onboarding."
+  - `peran-dptsi` (4): the artboard's four lines (enrollment system, SSO proxy, "Memimpin 20 developer, membimbing 15+ mahasiswa magang …", myITS Portal Mobile).
+  - `peran-snpmb` (3): the artboard's three lines (SSO US$60.000, UTBK-SNBT 1 juta+, 10+ developer + OpenTelemetry).
+  - `pdf = { headline: "Backend-Focused Full-Stack Developer | 5+ Tahun Pengalaman | Arsitek, Modernisasi Sistem, & Mentor", summary: <the artboard's Ringkasan Profesional paragraph, which keeps "US$60.000">, projects: [{text:"Situs portofolio pribadi: https://zydhan.com", href: links.site}, {text:'Artikel di Dev.to: "Simple and Easy REST API Implementation with Laravel"', href: links.devto}] }`.
+  - The PDF shows `chips` as a "stack" line only if there is room; it is optional in the artboard (not shown there). PDF periods use `Role.period` as written in the data, so the artboard's `01/2026` style is not required.
 - `featuredProjects` (4) with `date / dateShort / title / description / descriptionShort / chips / href`:
   1. "2026, memimpin arsitektur" / "2026" / "SEVIMA PENA" / "Platform K-12 dari nol sampai launch, terintegrasi dengan CBT, SSO, FinanceCloud, dan Edufin." / "Platform K-12 dari nol sampai launch." / ["Go","React"] / "/cv#peran-pena"
   2. "2022 – sekarang, full-stack" / "2022 – sekarang" / "UTBK-SNBT dan SSO SNPMB" / "Registrasi seleksi nasional untuk 1 juta+ pengguna, ditambah SSO yang menghemat sekitar Rp1 miliar per tahun." / "Registrasi nasional untuk 1 juta+ pengguna." / ["Go","Firestore","Cloud Run"] / "/cv#peran-snpmb"
@@ -427,7 +438,7 @@ export function getContent(lang: Lang = 'id'): Content { return content[lang]; }
   4. "2023 – 2025, inisiator" / "2023 – 2025" / "myITS Portal Mobile" / "Aplikasi lintas platform untuk mahasiswa, staf, dan dosen, target 30 ribu+ pengguna." / "Aplikasi lintas platform, target 30 ribu+ pengguna." / ["Expo","React Native"] / "/cv#peran-dptsi"
 - `summary = "Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Memimpin modernisasi sistem lama ke Go dan Next.js, serta optimasi performa yang menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar pada kurs 2024). Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring: Sentry di SEVIMA PENA, OpenTelemetry di SNPMB SSO dan UTBK-SNBT."`
 - `tagline = "Software Engineer di SEVIMA PENA, memimpin arsitektur inti dan tim engineering. Sebelumnya memimpin 20 developer di DPTSI ITS dan membimbing 15+ mahasiswa magang."`
-- `experienceNote = "Pengalaman profesional sejak Agustus 2021 (hampir 5 tahun)"`
+- `experienceNote = "Pengalaman profesional sejak Agustus 2021 (5+ tahun)"`
 - `name = "Zydhan Linnar Putra"`
 - `contact = { title:"Ada sistem yang perlu dibangun atau dirombak?", body:"Tulis apa yang ingin dibangun, kapan harus selesai, dan batasannya. Aku balas lewat email atau LinkedIn.", bodyShort:"Tulis apa yang ingin dibangun dan kapan harus selesai, lewat email atau LinkedIn.", ctaEmail:"Kirim email", ctaLinkedIn:"Hubungi di LinkedIn" }`
 - `footer = { copyright:"© 2026 Zydhan Linnar Putra", github:"GitHub", linkedin:"LinkedIn" }`
@@ -453,6 +464,15 @@ describe('content invariants', () => {
   it('states SSO savings as US$60.000/year ≈ Rp1 miliar (2024)', () => {
     expect(id.roles.find(r => r.id === 'peran-snpmb')!.bullets[0]).toContain('US$60.000');
     expect(id.summary).toContain('Rp1 miliar');
+  });
+  it('keeps PDF copy consistent with the web copy', () => {
+    for (const r of id.roles.filter(r => r.pdfBullets)) {
+      expect(r.pdfBullets!.length).toBeLessThanOrEqual(r.bullets.length);
+    }
+    expect(id.pdf.summary).toContain('US$60.000');
+    expect(id.roles.find(r => r.id === 'peran-snpmb')!.pdfBullets!.join()).toContain('US$60.000');
+    expect(id.roles.find(r => r.id === 'peran-pena')!.pdfBullets!.join()).toContain('Sentry');
+    expect(JSON.stringify(id.pdf)).not.toContain('tech lead');
   });
   it('lists Sentry for PENA and OpenTelemetry for SNPMB', () => {
     expect(id.roles.find(r => r.id === 'peran-pena')!.bullets.join()).toContain('Sentry');
@@ -671,7 +691,7 @@ git add src/routes/+page.svelte src/lib/components/ContactBlock.svelte && git co
 ### Task 6: CV page + print ("Unduh PDF")
 
 **Files:**
-- Create: `src/lib/components/RoleCard.svelte`
+- Create: `src/lib/components/RoleCard.svelte`, `src/lib/components/PrintCV.svelte`, `static/fonts/source-serif-4.woff2`
 - Modify: `src/routes/cv/+page.svelte`, `src/app.css` (print stylesheet)
 
 **Interfaces:**
@@ -686,10 +706,11 @@ Add to `tests/theme.test.ts` (it already reads `app.css` into `css`):
 describe('print stylesheet', () => {
   it('hides chrome and forces solid surfaces in print', () => {
     expect(css).toContain('@media print');
-    for (const sel of ['.top-bar', '.floating-bar', '.toc', 'footer', '#kontak']) {
+    for (const sel of ['.top-bar', '.floating-bar', '.toc', 'footer', '#kontak', '.print-only']) {
       expect(css).toContain(sel);
     }
     expect(css).toContain('display: none');
+    expect(css).toContain('size: A4');
   });
 });
 ```
@@ -703,6 +724,20 @@ test('CV exposes all section and role anchors', async ({ page }) => {
     await expect(page.locator(`[id="${id}"]`)).toHaveCount(1);
   }
   await expect(page.getByRole('button', { name: /Unduh PDF/i })).toBeVisible();
+});
+
+test('print layout is one A4 page, one column, light', async ({ page }) => {
+  await page.goto('/cv');
+  await page.emulateMedia({ media: 'print', colorScheme: 'dark' });
+  const sheet = page.locator('.print-only');
+  await expect(sheet).toBeVisible();
+  await expect(page.locator('.top-bar, .toc, footer, #kontak')).toBeHidden();
+  const box = await sheet.boundingBox();
+  expect(Math.round(box!.width)).toBe(794);
+  expect(box!.height).toBeLessThanOrEqual(1123); // content must not spill to a second page
+  expect(await sheet.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
+  const pdf = await page.pdf({ preferCSSPageSize: true });
+  expect((pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) ?? []).length).toBe(1);
 });
 ```
 
@@ -722,15 +757,23 @@ CV `+page.svelte` structure (driven by `const c = getContent('id')`):
 3. Two-column body: left `<aside class="surface toc">` (220px, `position: sticky; top: 24px`) with the 5 section links; active section via an IntersectionObserver toggling `background: var(--accent); color: var(--onaccent)` + `aria-current="location"`. Right column: `#ringkasan` (summary paragraph in a `.surface`), `#pengalaman` (the four `RoleCard`s + the intern row), `#keahlian` (2-col grid of `.surface` cards, each a group name + `.chip` items), `#pendidikan` (one `.surface` row), `#tulisan` (only `writings` with `onCv` — one `.surface` row). On mobile, replace the sticky TOC with a horizontally-scrollable pill row of the 5 anchors.
 4. `<ContactBlock id="kontak"/>` (compact variant with "LinkedIn" as the secondary label).
 
+`PrintCV.svelte` renders `<div class="print-only">` (a sibling of the page content, rendered from `getContent('id')`) and matches artboard `docs/design/artboards/CV-PDF.dc.html`: 794px wide, single column, padding 40px 44px 36px, Source Serif 4 (`@font-face` in `app.css`, `/fonts/source-serif-4.woff2`, `font-display: swap`) with Georgia/Times fallback, text `#000` on `#fff`, accent links `#0B4F8A`. Header: name (uppercase, centered), `pdf.headline`, one contact line (location, email, LinkedIn, site). Sections with an uppercase heading and 1.5px rule: Ringkasan Profesional (`pdf.summary`), Keahlian (the four `skills` groups as `Nama: item, item`), Pengalaman Kerja (per role: bold `org`, italic `title`, `period` right-aligned, then `pdfBullets ?? bullets`; the intern role is one row), Proyek & Tulisan (`pdf.projects`), Pendidikan. Body text 11.5px, row text 12px. Use `<a>` for links so the PDF keeps them clickable.
+
 Add to `app.css`:
 
 ```css
+.print-only { display: none; }
+@page { size: A4; margin: 0; }
 @media print {
+  body > * { display: none !important; }
+  body > .print-only, .print-only { display: block !important; }
   .top-bar, .floating-bar, .toc, footer, #kontak, .no-print { display: none !important; }
-  body { background: #fff; color: #000; }
-  .glass, .surface { background: #fff; border: 1px solid #ccc; box-shadow: none; }
+  html, body { background: #fff !important; color: #000; }
+  .print-only { width: 794px; min-height: 1123px; box-sizing: border-box; background: #fff; }
 }
 ```
+
+If `body > * { display: none }` also hides the SvelteKit wrapper that contains `.print-only`, instead hide siblings with `:not(:has(.print-only))` or render `PrintCV` in `+layout.svelte` as a direct child of `body`'s wrapper; the Task 6 print test is the check. Print must stay one page: if the test fails after a copy change, shorten `pdfBullets`, not the font size below 11px.
 
 - [ ] **Step 4: Run smoke test, verify it passes**
 
@@ -740,7 +783,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/lib/components/RoleCard.svelte src/routes/cv/+page.svelte src/app.css && git commit -m "feat: CV page with print stylesheet"
+git add src/lib/components/RoleCard.svelte src/lib/components/PrintCV.svelte src/routes/cv/+page.svelte src/app.css static/fonts/source-serif-4.woff2 && git commit -m "feat: CV page with one-page A4 print layout"
 ```
 
 ---

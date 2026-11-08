@@ -2,7 +2,8 @@ import { links } from './links';
 
 export type Lang = 'id';
 export interface Stat { value: string; label: string; labelShort: string; accent?: boolean; }
-export interface Role { id: string; title: string; org: string; location: string; period: string; current?: boolean; summary?: string; bullets: string[]; chips: string[]; }
+export interface Role { id: string; title: string; org: string; location: string; period: string; current?: boolean; summary?: string; bullets: string[]; pdfBullets?: string[]; pdfOrg?: string; chips: string[]; }
+export interface PdfContent { headline: string; summary: string; projects: { text: string; href?: string }[]; }
 export interface SkillGroup { name: string; items: string[]; }
 export interface Education { school: string; detail: string; period: string; }
 export interface Writing { title: string; meta: string; href: string; cta: string; onCv?: boolean; }
@@ -17,6 +18,7 @@ export interface Content {
 	education: Education;
 	writings: Writing[];
 	summary: string;
+	pdf: PdfContent;
 	tagline: string;
 	experienceNote: string;
 	name: string;
@@ -121,6 +123,11 @@ export const content: Record<Lang, Content> = {
 					'Integrasi dengan platform Sentra Finansial Teknologi (FinanceCloud dan Edufin) untuk pengelolaan keuangan dan agregator pembayaran.',
 					'Mengoperasikan tracing, logging, dan performance monitoring dengan Sentry.'
 				],
+				pdfBullets: [
+					'Memimpin arsitektur inti (Go, React) dan tim engineering produk K-12, dari setup awal sampai launch untuk ~3.500 siswa dan guru.',
+					'Mengintegrasikan CBT dan SSO dalam 2 minggu dan mendampingi go-live on-site untuk ~2.000 pengguna awal; berkoordinasi dengan PM, klien, dan OpSec soal infrastruktur.',
+					'Mengintegrasikan platform FinanceCloud dan Edufin untuk pengelolaan keuangan dan agregator pembayaran; mengoperasikan tracing, logging, dan monitoring dengan Sentry.'
+				],
 				chips: ['Go', 'React', 'SSO', 'Sentry']
 			},
 			{
@@ -134,12 +141,17 @@ export const content: Record<Lang, Content> = {
 					'Mengganti UI/UX alur penilaian di Edlink (Laravel dan Nuxt 2) dengan menjaga kompatibilitas API untuk aplikasi mobile dan PWA.',
 					'Menulis dokumentasi setup Edlink untuk mempercepat onboarding.'
 				],
+				pdfBullets: [
+					'Memimpin migrasi data asinkron pada siAkadCloud (monolit PHP) dengan RabbitMQ.',
+					'Mengganti UI/UX alur penilaian Edlink (Laravel, Nuxt 2) dengan menjaga kompatibilitas API untuk aplikasi mobile dan PWA; menulis dokumentasi setup untuk mempercepat onboarding.'
+				],
 				chips: ['Laravel', 'Nuxt', 'RabbitMQ']
 			},
 			{
 				id: 'peran-dptsi',
 				title: 'Full-stack Developer di DPTSI ITS',
 				org: 'Direktorat Pengembangan Teknologi dan Sistem Informasi',
+				pdfOrg: 'DPTSI ITS',
 				location: '',
 				period: 'Sep 2023 – Agu 2025',
 				summary: 'Sistem enrollment mahasiswa, SSO proxy, myITS Portal Mobile',
@@ -149,12 +161,19 @@ export const content: Record<Lang, Content> = {
 					'Membimbing 15+ mahasiswa magang dalam DDD dan Clean Architecture, memimpin 20 developer, dan membuat framework Go internal bergaya Laravel (18 modul).',
 					'Memulai aplikasi myITS Portal Mobile (Expo React Native) untuk 30 ribu+ pengguna.'
 				],
+				pdfBullets: [
+					'Membangun Student Enrollment System (Go, PostgreSQL, Next.js, Kafka) yang menggantikan sistem PHP 5 berumur 17 tahun.',
+					'Membuat SSO proxy untuk Microsoft Entra ID OIDC dengan dukungan MFA, menjaga kompatibilitas 140+ aplikasi.',
+					'Memimpin 20 developer, membimbing 15+ mahasiswa magang dalam DDD dan Clean Architecture, dan membuat framework Go internal bergaya Laravel (18 modul).',
+					'Memulai aplikasi myITS Portal Mobile (Expo React Native) untuk 30 ribu+ pengguna.'
+				],
 				chips: ['Go', 'Next.js', 'Kafka', 'OIDC', 'React Native']
 			},
 			{
 				id: 'peran-snpmb',
 				title: 'Full-stack Engineer di SNPMB',
 				org: 'BPPP Kemdiktisaintek, part-time dan berjalan paralel dengan peran lain',
+				pdfOrg: 'SNPMB BPPP Kemdiktisaintek',
 				location: '',
 				period: '2022 – sekarang',
 				current: true,
@@ -164,6 +183,11 @@ export const content: Record<Lang, Content> = {
 					'Merancang sistem registrasi UTBK-SNBT (Go, Next.js, Firestore, Google Cloud Storage) yang dipakai 1 juta+ pengguna.',
 					'Berkoordinasi dengan 10+ developer untuk integrasi data, dan membangun CI/CD dengan Cloud Build.',
 					'Mengoperasikan tracing, logging, dan performance monitoring SSO dan UTBK-SNBT dengan OpenTelemetry.'
+				],
+				pdfBullets: [
+					'Mengoptimalkan SSO berbasis PHP dengan Cloud Run (serverless), menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar, kurs 2024).',
+					'Merancang sistem registrasi UTBK-SNBT (Go, Next.js, Firestore, Cloud Storage) untuk 1 juta+ pengguna; membangun CI/CD dengan Cloud Build.',
+					'Berkoordinasi dengan 10+ developer untuk integrasi data; mengoperasikan tracing dan monitoring dengan OpenTelemetry.'
 				],
 				chips: ['Go', 'Firestore', 'Cloud Run', 'OpenTelemetry']
 			},
@@ -219,9 +243,22 @@ export const content: Record<Lang, Content> = {
 		],
 		summary:
 			'Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Memimpin modernisasi sistem lama ke Go dan Next.js, serta optimasi performa yang menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar pada kurs 2024). Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring: Sentry di SEVIMA PENA, OpenTelemetry di SNPMB SSO dan UTBK-SNBT.',
+		pdf: {
+			headline:
+				'Backend-Focused Full-Stack Developer | 5+ Tahun Pengalaman | Arsitek, Modernisasi Sistem, & Mentor',
+			summary:
+				'Software engineer dengan fokus Back-End Development (Go/PHP/Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Berpengalaman memimpin modernisasi sistem lama ke Go dan Next.js serta optimasi performa yang menghemat sekitar US$60.000 per tahun. Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring (Sentry, OpenTelemetry).',
+			projects: [
+				{ text: 'Situs portofolio pribadi: https://zydhan.com', href: links.domain },
+				{
+					text: 'Artikel di Dev.to: "Simple and Easy REST API Implementation with Laravel"',
+					href: links.devto
+				}
+			]
+		},
 		tagline:
 			'Software Engineer di SEVIMA PENA, memimpin arsitektur inti dan tim engineering. Sebelumnya memimpin 20 developer di DPTSI ITS dan membimbing 15+ mahasiswa magang.',
-		experienceNote: 'Pengalaman profesional sejak Agustus 2021 (hampir 5 tahun)',
+		experienceNote: 'Pengalaman profesional sejak Agustus 2021 (5+ tahun)',
 		name: 'Zydhan Linnar Putra',
 		contact: {
 			title: 'Ada sistem yang perlu dibangun atau dirombak?',

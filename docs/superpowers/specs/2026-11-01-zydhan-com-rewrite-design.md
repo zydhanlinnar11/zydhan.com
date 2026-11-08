@@ -46,7 +46,7 @@ Anti-tujuan (dianggap gagal walau secara teknis jalan):
 
 Artboard tersimpan di repo: `docs/design/artboards/*.dc.html` (+ `canvas.json`). Itu HTML dengan gaya inline dan variabel CSS; nilai di dalamnya adalah acuan token. Tidak bisa dirender tanpa runtime artifact, tapi bisa dibaca. Versi terkelola: https://claude.ai/artifact/2j2b7Aqe94Kt4GsbSWmazD (pribadi, milik pemilik).
 
-Layar: Home desktop 1440 (`Main`), Home lebar 1920 (`Home-wide`), Home tablet 768 (`Home-tablet`), Home mobile 390 (`Mobile`), menu mobile (`Mobile-menu`), bar melayang Home mobile (`Mobile-bar`), CV desktop (`CV`), CV mobile (`CV-mobile`), bar melayang CV (`CV-mobile-bar`, `CV-mobile-bar-menu`), 404 (`Halaman-404`), kartu Open Graph (`Open-graph`), lembar komponen tema gelap (`Komponen`).
+Layar: Home desktop 1440 (`Main`), Home lebar 1920 (`Home-wide`), Home tablet 768 (`Home-tablet`), Home mobile 390 (`Mobile`), menu mobile (`Mobile-menu`), bar melayang Home mobile (`Mobile-bar`), CV desktop (`CV`), CV mobile (`CV-mobile`), bar melayang CV (`CV-mobile-bar`, `CV-mobile-bar-menu`), 404 (`Halaman-404`), kartu Open Graph (`Open-graph`), lembar komponen tema gelap (`Komponen`), dan tata letak cetak CV (`CV-PDF`, A4 satu halaman, lihat Rute dan halaman).
 
 ## Token
 
@@ -72,6 +72,9 @@ Breakpoint acuan: 390, 768, 1440, 1920. Kolom konten maksimum 1120px (Home dan C
 - `/` Home: hero, kartu freelance, empat statistik, tiga peran terakhir, proyek unggulan, tulisan, blok kontak, footer.
 - `/cv` CV: header, ringkasan, pengalaman (kartu peran), keahlian, pendidikan, tulisan, blok kontak. ID anchor tetap: `ringkasan`, `pengalaman`, `keahlian`, `pendidikan`, `tulisan`, `peran-pena`, `peran-sevima`, `peran-dptsi`, `peran-snpmb`, dan `peran-intern` untuk peran Web Developer Intern (keputusan perancang spec: artboard memuat lima peran tapi hanya empat yang punya anchor).
 - PDF CV dibuat client-side: tombol "Unduh PDF" memanggil `window.print()` dengan stylesheet khusus cetak (dialog print browser, default "Simpan sebagai PDF"). Tombol aktif saat peluncuran, tidak menunggu #271, dan tidak ada berkas `/cv.pdf` statis (keputusan pemilik).
+  - Tata letak cetak mengikuti artboard `CV-PDF`: A4 (794×1123px) satu halaman, satu kolom bergaya ATS, hitam di atas putih, Source Serif 4 (11,5px isi; sengaja berbeda dari Inter di situs, keputusan pemilik), selalu terang apa pun tema layar. Urutan: ringkasan, keahlian, pengalaman, proyek dan tulisan, pendidikan. Bahasa mengikuti bahasa halaman.
+  - Di `@media print`, kerangka situs (bar, kabut, kaca, daftar isi) disembunyikan dan blok cetak khusus ditampilkan; blok itu disembunyikan di layar. Blok cetak dan halaman CV membaca data konten yang sama, hanya tampilannya yang berbeda.
+  - Keluaran print harus tetap satu halaman A4; periksa saat membangun, termasuk saat salinan bertambah.
 - `404.html` untuk GitHub Pages.
 - Rute lama (`/id`, `/projects`, `/id/projects`, `/projects/<slug>`, `/id/projects/<slug>`, slug yang ada: `optika-id`, `snpmb-utbk-snbt-2023`) menjadi halaman pengalihan statis (meta refresh + canonical). Host statis tidak bisa 301. Target (keputusan perancang spec): `/id` ke `/` (peluncuran; ditinjau saat EN diadakan, lihat Keputusan pemilik); semua `/projects*` dan `/id/projects*` ke `/cv`, dengan anchor `peran-snpmb` untuk `snpmb-utbk-snbt-2023`; `optika-id` ke `/cv` tanpa anchor karena proyek itu tidak ada lagi di CV.
 
@@ -90,10 +93,10 @@ Breakpoint acuan: 390, 768, 1440, 1920. Kolom konten maksimum 1120px (Home dan C
 
 ## Konten
 
-Sumber kebenaran konten: LinkedIn pemilik (lebih baru) dan CV Oktober 2025; koreksi pemilik tanggal 2026-11-01 menang atas keduanya. Simpan sebagai data terstruktur satu tempat (peran, statistik, keahlian, pendidikan, tulisan, salinan hero), dipakai Home, CV, dan PDF.
+Sumber kebenaran konten: LinkedIn pemilik (lebih baru) dan CV Oktober 2025; koreksi pemilik tanggal 2026-11-01 menang atas keduanya. Simpan sebagai data terstruktur satu tempat (peran, statistik, keahlian, pendidikan, tulisan, salinan hero), dipakai Home, CV, dan PDF. Tiap peran boleh punya `pdfBullets` opsional (tingkat peran, bukan per butir, karena versi ringkas menggabungkan butir): PDF memakai `pdfBullets` bila ada dan `bullets` bila tidak; halaman web selalu memakai `bullets`. Artboard `CV-PDF` memuat versi ringkas itu (misalnya lima butir SEVIMA PENA menjadi tiga), jadi teks ringkasnya diambil dari sana; angka harus identik dengan `bullets`. Data juga menyimpan `pdf` (headline, ringkasan, proyek) untuk bagian yang hanya ada di PDF.
 
 Aturan wajib:
-- Masa kerja dihitung dari Agustus 2021 ("hampir 5 tahun").
+- Masa kerja dihitung dari Agustus 2021 ("5+ tahun").
 - Jabatan resmi di SEVIMA PENA adalah Software Engineer. Dilarang memakai "tech lead" sebagai gelar; deskripsikan tanggung jawab ("memimpin arsitektur inti dan tim engineering"). Jangan menaikkan gelar di mana pun.
 - SNPMB dihitung mulai 2022 (part-time, paralel). "Memimpin 20 developer di ITS" dikonfirmasi aman.
 - Penghematan SSO: US$60.000 per tahun, sekitar Rp1 miliar pada kurs 2024 (dikonfirmasi pemilik; dulu dicatat belum terverifikasi).
