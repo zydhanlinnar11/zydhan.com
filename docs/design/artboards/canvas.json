@@ -14,6 +14,7 @@
     "Halaman-404.dc.html": { "expand": "fill", "h": 900, "title": "Halaman 404", "w": 1440, "x": 2848, "y": 2740 },
     "Open-graph.dc.html": { "h": 630, "title": "Kartu Open Graph (1200x630)", "w": 1200, "x": 4368, "y": 2740 },
     "Mobile-bar.dc.html": { "h": 844, "title": "Home mobile, bar melayang (setelah menggulir)", "w": 390, "x": 5390, "y": 0 },
+    "CV-PDF.dc.html": { "h": 1123, "paper": "a4", "title": "CV PDF (A4, satu halaman)", "w": 794, "x": 5860, "y": 0 },
     "Komponen.dc.html": { "h": 1700, "title": "Komponen (tema gelap)", "w": 1280, "x": 5688, "y": 2740 }
   },
   "createdOnFiles": { "at": "2026-11-01T12:00:00Z", "v": 1 },
@@ -40,6 +41,12 @@
       "x": 4368,
       "y": 2480
     },
+    "t5": {
+      "text": "PDF unduhan CV (tombol 'Unduh PDF'): A4 satu halaman, satu kolom bergaya ATS: ringkasan, keahlian, pengalaman, proyek, pendidikan. Serif hitam di atas putih, mudah dibaca mesin dan di cetakan hitam putih. Ekspor lewat Export PDF.",
+      "w": 320,
+      "x": 5860,
+      "y": -220
+    },
     "t2": {
       "text": "Bar melayang muncul setelah pengguna menggulir melewati baris pil isi CV, dan hilang saat kembali ke atas. Margin 16px dari tepi dan jarak 12px ke panel, sama dengan header di menu atas.",
       "w": 320,
@@ -47,7 +54,7 @@
       "y": -220
     }
   },
-  "order": ["Main.dc.html", "CV.dc.html", "Mobile.dc.html", "Mobile-menu.dc.html", "CV-mobile.dc.html", "CV-mobile-bar.dc.html", "CV-mobile-bar-menu.dc.html", "Home-wide.dc.html", "Home-tablet.dc.html", "Halaman-404.dc.html", "Open-graph.dc.html", "Mobile-bar.dc.html", "Komponen.dc.html"],
+  "order": ["Main.dc.html", "CV.dc.html", "Mobile.dc.html", "Mobile-menu.dc.html", "CV-mobile.dc.html", "CV-mobile-bar.dc.html", "CV-mobile-bar-menu.dc.html", "Home-wide.dc.html", "Home-tablet.dc.html", "Halaman-404.dc.html", "Open-graph.dc.html", "Mobile-bar.dc.html", "CV-PDF.dc.html", "Komponen.dc.html"],
   "pages": [],
   "title": "zydhan.com Rewrite Design"
 }
