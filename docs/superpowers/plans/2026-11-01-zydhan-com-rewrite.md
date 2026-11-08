@@ -24,7 +24,7 @@
 - Home JS (gzip) < 60 KB; no horizontal scroll at 390 / 768 / 1440 / 1920.
 - No AI-flavored text/visuals; no inflated titles.
 - **Email is `hello@zydhan.com` — LIVE since 2026-11-08; it routes to the owner's real inbox.** No replacement step is needed. It appears in `links.email`, `links.mailtoFreelance`, `links.mailtoBroken`, and the freelance-card email label.
-- Content rules (verbatim): work counted from **Agustus 2021** ("hampir 5 tahun"); official SEVIMA PENA title is **Software Engineer** — the string "tech lead" must never appear as a title, only the phrase "memimpin arsitektur inti dan tim engineering"; SNPMB counted from **2022** (part-time, parallel); "Memimpin 20 developer di ITS" is safe; SSO savings **US$60.000 per tahun ≈ Rp1 miliar (kurs 2024)**; observability is **Sentry** (SEVIMA PENA) and **OpenTelemetry** (SNPMB SSO, UTBK-SNBT); never fabricate numbers/quotes/case-study detail.
+- Content rules (verbatim): work counted from **Agustus 2021** ("5+ tahun"); official SEVIMA PENA title is **Software Engineer** — the string "tech lead" must never appear as a title, only the phrase "memimpin arsitektur inti dan tim engineering"; SNPMB counted from **2022** (part-time, parallel); "Memimpin 20 developer di ITS" is safe; SSO savings **US$60.000 per tahun ≈ Rp1 miliar (kurs 2024)**; observability is **Sentry** (SEVIMA PENA) and **OpenTelemetry** (SNPMB SSO, UTBK-SNBT); never fabricate numbers/quotes/case-study detail.
 
 ## File Structure
 
@@ -429,7 +429,7 @@ export function getContent(lang: Lang = 'id'): Content { return content[lang]; }
   - `peran-sevima` (2): "Memimpin migrasi data asinkron pada siAkadCloud (monolit PHP) dengan RabbitMQ." / "Mengganti UI/UX alur penilaian Edlink (Laravel, Nuxt 2) dengan menjaga kompatibilitas API untuk aplikasi mobile dan PWA; menulis dokumentasi setup untuk mempercepat onboarding."
   - `peran-dptsi` (4): the artboard's four lines (enrollment system, SSO proxy, "Memimpin 20 developer, membimbing 15+ mahasiswa magang …", myITS Portal Mobile).
   - `peran-snpmb` (3): the artboard's three lines (SSO US$60.000, UTBK-SNBT 1 juta+, 10+ developer + OpenTelemetry).
-  - `pdf = { headline: "Backend-Focused Full-Stack Developer | Hampir 5 Tahun Pengalaman | Arsitek, Modernisasi Sistem, & Mentor", summary: <the artboard's Ringkasan Profesional paragraph, which keeps "US$60.000">, projects: [{text:"Situs portofolio pribadi: https://zydhan.com", href: links.site}, {text:'Artikel di Dev.to: "Simple and Easy REST API Implementation with Laravel"', href: links.devto}] }`.
+  - `pdf = { headline: "Backend-Focused Full-Stack Developer | 5+ Tahun Pengalaman | Arsitek, Modernisasi Sistem, & Mentor", summary: <the artboard's Ringkasan Profesional paragraph, which keeps "US$60.000">, projects: [{text:"Situs portofolio pribadi: https://zydhan.com", href: links.site}, {text:'Artikel di Dev.to: "Simple and Easy REST API Implementation with Laravel"', href: links.devto}] }`.
   - The PDF shows `chips` as a "stack" line only if there is room; it is optional in the artboard (not shown there). PDF periods use `Role.period` as written in the data, so the artboard's `01/2026` style is not required.
 - `featuredProjects` (4) with `date / dateShort / title / description / descriptionShort / chips / href`:
   1. "2026, memimpin arsitektur" / "2026" / "SEVIMA PENA" / "Platform K-12 dari nol sampai launch, terintegrasi dengan CBT, SSO, FinanceCloud, dan Edufin." / "Platform K-12 dari nol sampai launch." / ["Go","React"] / "/cv#peran-pena"
@@ -438,7 +438,7 @@ export function getContent(lang: Lang = 'id'): Content { return content[lang]; }
   4. "2023 – 2025, inisiator" / "2023 – 2025" / "myITS Portal Mobile" / "Aplikasi lintas platform untuk mahasiswa, staf, dan dosen, target 30 ribu+ pengguna." / "Aplikasi lintas platform, target 30 ribu+ pengguna." / ["Expo","React Native"] / "/cv#peran-dptsi"
 - `summary = "Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Memimpin modernisasi sistem lama ke Go dan Next.js, serta optimasi performa yang menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar pada kurs 2024). Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring: Sentry di SEVIMA PENA, OpenTelemetry di SNPMB SSO dan UTBK-SNBT."`
 - `tagline = "Software Engineer di SEVIMA PENA, memimpin arsitektur inti dan tim engineering. Sebelumnya memimpin 20 developer di DPTSI ITS dan membimbing 15+ mahasiswa magang."`
-- `experienceNote = "Pengalaman profesional sejak Agustus 2021 (hampir 5 tahun)"`
+- `experienceNote = "Pengalaman profesional sejak Agustus 2021 (5+ tahun)"`
 - `name = "Zydhan Linnar Putra"`
 - `contact = { title:"Ada sistem yang perlu dibangun atau dirombak?", body:"Tulis apa yang ingin dibangun, kapan harus selesai, dan batasannya. Aku balas lewat email atau LinkedIn.", bodyShort:"Tulis apa yang ingin dibangun dan kapan harus selesai, lewat email atau LinkedIn.", ctaEmail:"Kirim email", ctaLinkedIn:"Hubungi di LinkedIn" }`
 - `footer = { copyright:"© 2026 Zydhan Linnar Putra", github:"GitHub", linkedin:"LinkedIn" }`

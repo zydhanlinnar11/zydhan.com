@@ -96,7 +96,7 @@ Breakpoint acuan: 390, 768, 1440, 1920. Kolom konten maksimum 1120px (Home dan C
 Sumber kebenaran konten: LinkedIn pemilik (lebih baru) dan CV Oktober 2025; koreksi pemilik tanggal 2026-11-01 menang atas keduanya. Simpan sebagai data terstruktur satu tempat (peran, statistik, keahlian, pendidikan, tulisan, salinan hero), dipakai Home, CV, dan PDF. Tiap peran boleh punya `pdfBullets` opsional (tingkat peran, bukan per butir, karena versi ringkas menggabungkan butir): PDF memakai `pdfBullets` bila ada dan `bullets` bila tidak; halaman web selalu memakai `bullets`. Artboard `CV-PDF` memuat versi ringkas itu (misalnya lima butir SEVIMA PENA menjadi tiga), jadi teks ringkasnya diambil dari sana; angka harus identik dengan `bullets`. Data juga menyimpan `pdf` (headline, ringkasan, proyek) untuk bagian yang hanya ada di PDF.
 
 Aturan wajib:
-- Masa kerja dihitung dari Agustus 2021 ("hampir 5 tahun").
+- Masa kerja dihitung dari Agustus 2021 ("5+ tahun").
 - Jabatan resmi di SEVIMA PENA adalah Software Engineer. Dilarang memakai "tech lead" sebagai gelar; deskripsikan tanggung jawab ("memimpin arsitektur inti dan tim engineering"). Jangan menaikkan gelar di mana pun.
 - SNPMB dihitung mulai 2022 (part-time, paralel). "Memimpin 20 developer di ITS" dikonfirmasi aman.
 - Penghematan SSO: US$60.000 per tahun, sekitar Rp1 miliar pada kurs 2024 (dikonfirmasi pemilik; dulu dicatat belum terverifikasi).

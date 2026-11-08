@@ -245,7 +245,7 @@ export const content: Record<Lang, Content> = {
 			'Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Memimpin modernisasi sistem lama ke Go dan Next.js, serta optimasi performa yang menghemat sekitar US$60.000 per tahun (sekitar Rp1 miliar pada kurs 2024). Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring: Sentry di SEVIMA PENA, OpenTelemetry di SNPMB SSO dan UTBK-SNBT.',
 		pdf: {
 			headline:
-				'Backend-Focused Full-Stack Developer | Hampir 5 Tahun Pengalaman | Arsitek, Modernisasi Sistem, & Mentor',
+				'Backend-Focused Full-Stack Developer | 5+ Tahun Pengalaman | Arsitek, Modernisasi Sistem, & Mentor',
 			summary:
 				'Software engineer dengan fokus Back-End Development (Go/PHP/Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal). Berpengalaman memimpin modernisasi sistem lama ke Go dan Next.js serta optimasi performa yang menghemat sekitar US$60.000 per tahun. Terbiasa membimbing developer junior, berkolaborasi lintas tim, dan mengoperasikan tracing, logging, serta performance monitoring (Sentry, OpenTelemetry).',
 			projects: [
@@ -258,7 +258,7 @@ export const content: Record<Lang, Content> = {
 		},
 		tagline:
 			'Software Engineer di SEVIMA PENA, memimpin arsitektur inti dan tim engineering. Sebelumnya memimpin 20 developer di DPTSI ITS dan membimbing 15+ mahasiswa magang.',
-		experienceNote: 'Pengalaman profesional sejak Agustus 2021 (hampir 5 tahun)',
+		experienceNote: 'Pengalaman profesional sejak Agustus 2021 (5+ tahun)',
 		name: 'Zydhan Linnar Putra',
 		contact: {
 			title: 'Ada sistem yang perlu dibangun atau dirombak?',
