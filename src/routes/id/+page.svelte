@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Redirect from '#lib/components/Redirect.svelte';
+	import HomePage from '#lib/pages/HomePage.svelte';
 </script>
 
-<Redirect to="/" />
+<HomePage lang="id" />

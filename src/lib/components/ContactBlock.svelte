@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { getContent } from '#lib/content';
+	import { getContent, type Lang } from '#lib/content';
 	import { links } from '#lib/links';
+	import { mailtoFreelanceHref } from '#lib/ui-copy';
 
-	let { compact = false }: { compact?: boolean } = $props();
+	let { compact = false, lang }: { compact?: boolean; lang: Lang } = $props();
 
-	const c = getContent('id');
+	const c = $derived(getContent(lang));
 </script>
 
 <section id="kontak" class="contact">
@@ -14,7 +15,7 @@
 		<p>{compact ? c.contact.bodyShort : c.contact.body}</p>
 		<div class="actions">
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a class="btn btn-primary" href={links.mailtoFreelance}>{c.contact.ctaEmail}</a>
+			<a class="btn btn-primary" href={mailtoFreelanceHref(lang)}>{c.contact.ctaEmail}</a>
 			<a class="btn btn-ghost" href={links.linkedin} target="_blank" rel="external noopener">
 				{c.contact.ctaLinkedIn}
 			</a>

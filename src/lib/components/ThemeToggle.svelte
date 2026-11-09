@@ -1,9 +1,18 @@
 <script lang="ts">
+	import type { Lang } from '#lib/content';
 	import { toggleTheme } from '#lib/theme';
+	import { uiCopy } from '#lib/ui-copy';
 	import Icon from './Icon.svelte';
+
+	let { lang }: { lang: Lang } = $props();
 </script>
 
-<button type="button" class="theme-toggle" aria-label="Ganti tema" onclick={() => toggleTheme()}>
+<button
+	type="button"
+	class="theme-toggle"
+	aria-label={uiCopy[lang].themeToggle.aria}
+	onclick={() => toggleTheme()}
+>
 	<Icon name="moon" />
 </button>
 

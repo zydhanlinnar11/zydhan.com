@@ -1,46 +1,46 @@
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from '@playwright/test';
+import { test, expect } from './test-fixture';
 
 test('mobile menu is a dialog and closes with the close control', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await page.getByRole('button', { name: /Buka menu/i }).click();
+  await page.getByRole('button', { name: /Open menu/i }).click();
   await expect(page.getByRole('dialog', { name: /Menu/i })).toBeVisible();
-  await page.getByRole('button', { name: 'Tutup', exact: true }).click();
+  await page.getByRole('button', { name: 'Close', exact: true }).click();
   await expect(page.getByRole('dialog', { name: /Menu/i })).toBeHidden();
 });
 
 test('Home renders hero, stats, roles, projects, writings, contact', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /memimpin tim developer/i, level: 1 })).toBeVisible();
-  await expect(page.getByText('1 juta+', { exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Software Engineer di SEVIMA PENA/i })).toHaveAttribute('href', /#peran-pena/);
-  await expect(page.getByRole('heading', { name: /Ada sistem yang perlu dibangun/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Kirim email/i })).toHaveAttribute('href', /mailto:/);
+  await expect(page.getByRole('heading', { name: /lead engineering teams/i, level: 1 })).toBeVisible();
+  await expect(page.getByText('1 million+', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Software Engineer at SEVIMA PENA/i })).toHaveAttribute('href', /#peran-pena/);
+  await expect(page.getByRole('heading', { name: /Have a system to build/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Send email/i })).toHaveAttribute('href', /mailto:/);
 });
 
 test('floating bar shows after scrolling past hero CTA on mobile', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await expect(page.getByRole('navigation', { name: /Aksi cepat/i })).toBeHidden();
+  await expect(page.getByRole('navigation', { name: /Quick actions/i })).toBeHidden();
   await page.mouse.wheel(0, 1200);
-  await expect(page.getByRole('navigation', { name: /Aksi cepat/i })).toBeVisible();
+  await expect(page.getByRole('navigation', { name: /Quick actions/i })).toBeVisible();
 });
 
 test('CV floating bar opens the section overlay', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/cv');
   await page.mouse.wheel(0, 1200);
-  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  const bar = page.getByRole('navigation', { name: /Quick actions/i });
   await expect(bar).toBeVisible();
-  await bar.getByRole('button', { name: /Navigasi/i }).click();
-  const overlay = page.getByRole('dialog', { name: /Navigasi/i });
+  await bar.getByRole('button', { name: /Navigation/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigation/i });
   await expect(overlay).toBeVisible();
   await expect(overlay.getByRole('link')).toHaveCount(5);
-  await expect(overlay.getByRole('link', { name: /Pengalaman/i })).toHaveAttribute('href', /#pengalaman/);
+  await expect(overlay.getByRole('link', { name: /Experience/i })).toHaveAttribute('href', /#pengalaman/);
   await expect(overlay.locator('a[aria-current="location"]')).toHaveCount(1);
-  await expect(bar.getByRole('button', { name: /Tutup/i })).toBeVisible();
-  await overlay.getByRole('link', { name: /Keahlian/i }).click();
+  await expect(bar.getByRole('button', { name: /Close/i })).toBeVisible();
+  await overlay.getByRole('link', { name: /Skills/i }).click();
   await expect(overlay).toBeHidden();
 });
 
@@ -48,24 +48,24 @@ test('CV overlay marks the section at the current scroll position', async ({ pag
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/cv');
   await page.evaluate(() => document.getElementById('keahlian')?.scrollIntoView());
-  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  const bar = page.getByRole('navigation', { name: /Quick actions/i });
   await expect(bar).toBeVisible();
-  await bar.getByRole('button', { name: /Navigasi/i }).click();
-  const overlay = page.getByRole('dialog', { name: /Navigasi/i });
-  await expect(overlay.getByRole('link', { name: /Keahlian/i })).toHaveAttribute(
+  await bar.getByRole('button', { name: /Navigation/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigation/i });
+  await expect(overlay.getByRole('link', { name: /Skills/i })).toHaveAttribute(
     'aria-current',
     'location'
   );
 });
 
-test('CV role hash settles the overlay on Pengalaman', async ({ page }) => {
+test('CV role hash settles the overlay on Experience', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/cv#peran-pena');
-  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  const bar = page.getByRole('navigation', { name: /Quick actions/i });
   await expect(bar).toBeVisible();
-  await bar.getByRole('button', { name: /Navigasi/i }).click();
-  const overlay = page.getByRole('dialog', { name: /Navigasi/i });
-  await expect(overlay.getByRole('link', { name: /Pengalaman/i })).toHaveAttribute(
+  await bar.getByRole('button', { name: /Navigation/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigation/i });
+  await expect(overlay.getByRole('link', { name: /Experience/i })).toHaveAttribute(
     'aria-current',
     'location'
   );
@@ -75,13 +75,13 @@ test('Home floating bar navigasi opens the shared mobile menu', async ({ page })
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.mouse.wheel(0, 1200);
-  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  const bar = page.getByRole('navigation', { name: /Quick actions/i });
   await expect(bar).toBeVisible();
-  await bar.getByRole('button', { name: /Navigasi/i }).click();
+  await bar.getByRole('button', { name: /Navigation/i }).click();
   const menu = page.getByRole('dialog', { name: /Menu/i });
   await expect(menu).toBeVisible();
-  await expect(bar.getByRole('button', { name: /Tutup/i })).toBeVisible();
-  await menu.getByRole('button', { name: 'Tutup', exact: true }).click();
+  await expect(bar.getByRole('button', { name: /Close/i })).toBeVisible();
+  await menu.getByRole('button', { name: 'Close', exact: true }).click();
   await expect(menu).toBeHidden();
 });
 
@@ -89,9 +89,9 @@ test('floating bar re-finds the trigger after client-side navigation', async ({ 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.mouse.wheel(0, 1200);
-  const bar = page.getByRole('navigation', { name: /Aksi cepat/i });
+  const bar = page.getByRole('navigation', { name: /Quick actions/i });
   await expect(bar).toBeVisible();
-  await bar.getByRole('link', { name: /Lihat CV/i }).click();
+  await bar.getByRole('link', { name: /View CV/i }).click();
   await expect(page).toHaveURL(/\/cv$/);
   // The CV pills (its trigger) are in view at the top, so the bar hides again.
   await expect(bar).toBeHidden();
@@ -104,16 +104,24 @@ test('floating bar re-finds the trigger after client-side navigation', async ({ 
 
 test('Home has canonical, og tags, and description', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('html')).toHaveAttribute('lang', 'id');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/');
-  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /backend engineer di Surabaya/);
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /backend engineer in Surabaya/);
   await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Zydhan Linnar Putra');
-  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute('content', 'id_ID');
+  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute('content', 'en_US');
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://zydhan.com/og.png');
   await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content', '1200');
   await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content', '630');
-  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', /Kartu profil/);
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', /Profile card/);
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Leading engineering teams/);
+});
+
+test('Home (id) has canonical, og tags, and description', async ({ page }) => {
+  await page.goto('/id');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'id');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/id');
+  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute('content', 'id_ID');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Memimpin tim developer/);
 });
 
@@ -125,7 +133,7 @@ test('CV has canonical and title', async ({ page }) => {
   await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Zydhan Linnar Putra');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    'Software engineer dengan fokus back-end (Go, PHP, Node.js) dan arsitektur modern (DDD, CQRS, Hexagonal).'
+    'Software engineer focused on back-end development (Go, PHP, Node.js) and modern architecture (DDD, CQRS, Hexagonal).'
   );
 });
 
@@ -134,14 +142,14 @@ test('CV exposes all section and role anchors', async ({ page }) => {
   for (const id of ['ringkasan','pengalaman','keahlian','pendidikan','tulisan','peran-pena','peran-sevima','peran-dptsi','peran-snpmb','peran-intern']) {
     await expect(page.locator(`[id="${id}"]`)).toHaveCount(1);
   }
-  await expect(page.getByRole('button', { name: /Unduh PDF/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Download PDF/i })).toBeVisible();
 });
 
 const widths = [390, 768, 1440, 1920];
 for (const w of widths) {
 	test(`no horizontal scroll at ${w}px`, async ({ page }) => {
 		await page.setViewportSize({ width: w, height: 900 });
-		for (const path of ['/', '/cv']) {
+		for (const path of ['/', '/cv', '/id', '/id/cv']) {
 			await page.goto(path);
 			const overflow = await page.evaluate(
 				() => document.documentElement.scrollWidth - document.documentElement.clientWidth
@@ -152,7 +160,7 @@ for (const w of widths) {
 }
 
 test('a11y: no serious or critical violations', async ({ page }) => {
-	for (const path of ['/', '/cv']) {
+	for (const path of ['/', '/cv', '/id', '/id/cv']) {
 		await page.goto(path);
 		const results = await new AxeBuilder({ page }).analyze();
 		const bad = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
@@ -187,18 +195,19 @@ test('keyboard focus is visible in both themes', async ({ page }) => {
 });
 
 test('legacy redirect pages point at their canonical destinations', async ({ request }) => {
+	// BASE_PATH-aware fetches: request.get() resolves relative to the origin
+	// and would drop the base otherwise.
 	const checks: Array<[string, string, string, string]> = [
-		['/id', 'https://zydhan.com/', './', '/'],
 		['/projects', 'https://zydhan.com/cv', './cv', '/cv'],
-		['/id/projects', 'https://zydhan.com/cv', '../cv', '/cv'],
+		['/id/projects', 'https://zydhan.com/id/cv', '../id/cv', '/id/cv'],
 		['/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/cv#peran-snpmb', '../cv#peran-snpmb', '/cv#peran-snpmb'],
 		['/projects/optika-id', 'https://zydhan.com/cv', '../cv', '/cv'],
-		['/id/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/cv#peran-snpmb', '../../cv#peran-snpmb', '/cv#peran-snpmb'],
-		['/id/projects/optika-id', 'https://zydhan.com/cv', '../../cv', '/cv']
+		['/id/projects/snpmb-utbk-snbt-2023', 'https://zydhan.com/id/cv#peran-snpmb', '../../id/cv#peran-snpmb', '/id/cv#peran-snpmb'],
+		['/id/projects/optika-id', 'https://zydhan.com/id/cv', '../../id/cv', '/id/cv']
 	];
 
 	for (const [path, target, href, label] of checks) {
-		const response = await request.get(path);
+		const response = await request.get(`${process.env.BASE_PATH || ''}${path}`);
 		expect(response.status(), path).toBe(200);
 		const body = await response.text();
 		expect(body, path).toContain('http-equiv="refresh"');
@@ -211,15 +220,15 @@ test('legacy redirect pages point at their canonical destinations', async ({ req
 });
 
 test('404 page renders with a helpful message', async ({ request }) => {
-	const response = await request.get('/this-does-not-exist');
+	const response = await request.get(`${process.env.BASE_PATH || ''}/this-does-not-exist`);
 	expect(response.status()).toBe(404);
 	const body = await response.text();
-	if (body.includes('Halaman ini tidak ada')) return;
+	if (body.includes("This page doesn't exist")) return;
 	// `vite preview` serves SvelteKit's JS error shell for unknown paths instead of the
 	// static 404.html. GitHub Pages serves the asset directly, so verify that file.
-	const asset = await request.get('/404.html');
+	const asset = await request.get(`${process.env.BASE_PATH || ''}/404.html`);
 	expect(asset.status()).toBe(200);
-	expect(await asset.text()).toContain('Halaman ini tidak ada');
+	await expect(asset.text()).resolves.toContain('Page not found');
 });
 
 test('404 page list rows stay flush so the divider is a flat line', async ({ page }) => {

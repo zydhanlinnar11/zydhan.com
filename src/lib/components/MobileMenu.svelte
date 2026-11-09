@@ -1,16 +1,30 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { asset, resolve } from '$app/paths';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import type { Lang } from '#lib/content';
+	import { langFromRouteId, langHref } from '#lib/i18n';
+	import { counterpartHref } from '#lib/lang-nav';
 	import type { Theme } from '#lib/theme';
 	import { setTheme } from '#lib/theme';
+	import { uiCopy } from '#lib/ui-copy';
 	import Icon from './Icon.svelte';
-	import { ui } from '../ui.svelte.js';
+	import { ui } from '#lib/ui.svelte';
 
 	let dialog = $state<HTMLDialogElement>();
 
-	const homeActive = $derived(page.route.id === '/');
-	const cvActive = $derived(page.route.id?.startsWith('/cv') ?? false);
+	const lang = $derived(langFromRouteId(page.route.id ?? '/'));
+	const copy = $derived(uiCopy[lang].mobileMenu);
+
+	type HostRoute = '/' | '/id' | '/cv' | '/id/cv';
+	// Nav is language-aware: langHref keeps visitors on their language,
+	// resolve() is base-aware (correct hrefs when paths.base is non-empty).
+	const homeHref = $derived(resolve(langHref('/', lang) as HostRoute));
+	const cvHref = $derived(resolve(langHref('/cv', lang) as HostRoute));
+
+	const homeActive = $derived(page.route.id === '/' || page.route.id === '/id');
+	const cvActive = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
 
 	let current = $state<Theme>('light');
 
@@ -63,13 +77,20 @@
 	function choose(theme: Theme) {
 		current = setTheme(theme);
 	}
+
+	function goLang(target: Lang) {
+		if (target === lang) return;
+		close();
+		// eslint-disable-next-line svelte/no-navigation-without-resolve -- counterpartHref() already runs resolve()
+		void goto(counterpartHref(page.route.id ?? '/', page.params));
+	}
 </script>
 
 <dialog
 	bind:this={dialog}
 	class="menu"
 	class:closing
-	aria-label="Menu"
+	aria-label={copy.dialogAria}
 	oncancel={(e) => {
 		e.preventDefault();
 		close();
@@ -77,45 +98,68 @@
 	onclose={() => (ui.menuOpen = false)}
 >
 	<div class="menu-bar glass bar-glass">
-		<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home" onclick={close}>
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
+		<a class="logo" href={homeHref} aria-label={copy.logoAria} onclick={close}>
 			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
 		</a>
-		<button class="close" type="button" aria-label="Tutup menu" onclick={close}>
+		<button class="close" type="button" aria-label={copy.closeAria} onclick={close}>
 			<Icon name="close" size={20} />
 		</button>
 	</div>
 
 	<div class="panel glass ov-glass">
-		<nav class="menu-nav" aria-label="Menu utama">
-			<a class="item" href={resolve('/')} aria-current={homeActive ? 'page' : undefined} onclick={close}
+		<nav class="menu-nav" aria-label={copy.navAria}>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
+			<a class="item" href={homeHref} aria-current={homeActive ? 'page' : undefined} onclick={close}
 				>Home</a
 			>
-			<a class="item" href={resolve('/cv')} aria-current={cvActive ? 'page' : undefined} onclick={close}>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- homeHref/cvHref run resolve() inside -->
+			<a class="item" href={cvHref} aria-current={cvActive ? 'page' : undefined} onclick={close}>
 				CV
 			</a>
 		</nav>
 
 		<div class="prefs">
 			<div class="field">
-				<span class="lbl">Tema</span>
-				<div class="seg" role="group" aria-label="Tema">
+				<span class="lbl">{copy.langHeading}</span>
+				<div class="seg" role="group" aria-label={copy.langHeading}>
+					<button
+						type="button"
+						class:on={lang === 'id'}
+						aria-pressed={lang === 'id'}
+						onclick={() => goLang('id')}>{copy.indonesia}</button
+					>
+					<button
+						type="button"
+						class:on={lang === 'en'}
+						aria-pressed={lang === 'en'}
+						onclick={() => goLang('en')}>{copy.english}</button
+					>
+				</div>
+			</div>
+
+			<div class="field">
+				<span class="lbl">{copy.themeHeading}</span>
+				<div class="seg" role="group" aria-label={copy.themeAria}>
 					<button
 						type="button"
 						class:on={current === 'light'}
 						aria-pressed={current === 'light'}
-						onclick={() => choose('light')}>Terang</button
+						onclick={() => choose('light')}>{copy.light}</button
 					>
 					<button
 						type="button"
 						class:on={current === 'dark'}
 						aria-pressed={current === 'dark'}
-						onclick={() => choose('dark')}>Gelap</button
+						onclick={() => choose('dark')}>{copy.dark}</button
 					>
 				</div>
 			</div>
 		</div>
 
-		<button class="btn btn-ghost close-btn" type="button" aria-label="Tutup" onclick={close}>Tutup</button>
+		<button class="btn btn-ghost close-btn" type="button" aria-label={copy.closeLabel} onclick={close}
+			>{copy.closeLabel}</button
+		>
 	</div>
 </dialog>
 
