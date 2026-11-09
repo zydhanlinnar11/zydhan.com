@@ -1,4 +1,5 @@
 import { test, expect } from './test-fixture';
+import type { Page } from '@playwright/test';
 import { uiCopy } from '../src/lib/ui-copy';
 
 const DESKTOP = { width: 1280, height: 800 };
@@ -140,23 +141,59 @@ test.describe('language metadata', () => {
 		);
 		expect(hreflangs).toEqual(['en', 'id', 'x-default']);
 	});
+
+	// Soft navigation must sync <html lang> via the layout effect (final review,
+	// Important 1) — not leave the first-rendered document language behind.
+	test('/ → soft-nav ID pill → <html lang="id">', async ({ page }) => {
+		await page.goto('/');
+		await page.locator('.lang-toggle').click();
+		await page.waitForURL(/\/id$/);
+		await expect(page.locator('html')).toHaveAttribute('lang', 'id');
+	});
+
+	test('/id → soft-nav EN pill → <html lang="en">', async ({ page }) => {
+		await page.goto('/id');
+		await page.locator('.lang-toggle').click();
+		await page.waitForURL(/\/$/);
+		await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+	});
 });
 
 test.describe('no leftover untranslated strings', () => {
-	const idStrings = /Hubungi saya|Unduh|Keahlian|Aksi cepat|Buka menu|Ganti tema|Ringkasan|Proyek/;
-	const enStrings = /Contact me|Download PDF|Quick actions|Open menu|Toggle theme|Professional Summary/;
+	// 'Beralih ke Bahasa' / 'Switch to English' are the lang pill's aria-labels,
+	// which deliberately name the target language in that language — the clone
+	// below has the pill removed, so these patterns still count as violations.
+	// (Without the pill removal these checks passed "by coincidence" against the
+	// toggle control, final review Minor 1.)
+	const idStrings = /Hubungi saya|Unduh|Keahlian|Aksi cepat|Buka menu|Ganti tema|Ringkasan|Proyek|Beralih ke Bahasa/;
+	const enStrings = /Contact me|Download PDF|Quick actions|Open menu|Toggle theme|Professional Summary|Switch to English/;
+
+	// One atomic evaluate: drop the lang pill from a CLONE of the document and
+	// serialize that. Mutating the live DOM is racy here (hydration can land
+	// after the removal and re-create the pill); hydration renders the same
+	// copy as the SSR markup, so either snapshot is representative.
+	function cleanHtml(page: Page) {
+		return page.evaluate(
+			(selector) => {
+				const clone = document.documentElement.cloneNode(true) as HTMLElement;
+				clone.querySelector(selector)?.remove();
+				return clone.outerHTML;
+			},
+			'.lang-toggle'
+		);
+	}
 
 	test('EN pages have no Indonesian chrome strings', async ({ page }) => {
 		for (const path of ['/', '/cv']) {
 			await page.goto(path);
-			expect(await page.content(), path).not.toMatch(idStrings);
+			expect(await cleanHtml(page), path).not.toMatch(idStrings);
 		}
 	});
 
 	test('ID pages have no English chrome strings', async ({ page }) => {
 		for (const path of ['/id', '/id/cv']) {
 			await page.goto(path);
-			expect(await page.content(), path).not.toMatch(enStrings);
+			expect(await cleanHtml(page), path).not.toMatch(enStrings);
 		}
 	});
 });

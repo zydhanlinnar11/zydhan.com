@@ -31,10 +31,12 @@ for (const [pagePath, targetLang] of PAGES) {
 
 		// Clicking must actually land on the counterpart page (not the
 		// /id/<base>/... dead 404 href the pathname-based bug minted), with the
-		// target language's chrome rendered. (Soft navigation keeps <html
-		// lang> unchanged, so chrome copy is the reliable probe.)
+		// target language's chrome rendered. The layout effect must also sync
+		// <html lang> on the soft navigation (final review, Important 1) —
+		// chrome copy is the extra probe.
 		await toggle.click();
 		await page.waitForURL(new RegExp(`${expected.replace(/\//g, '\\/')}\\/?$`));
+		await expect(page.locator('html')).toHaveAttribute('lang', targetLang);
 		await expect(
 			page.getByRole('link', { name: uiCopy[targetLang].topBar.contact })
 		).toBeVisible();
