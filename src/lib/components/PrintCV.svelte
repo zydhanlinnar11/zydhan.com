@@ -42,7 +42,7 @@
 			<div class="p-blk">
 				<div class="p-row">
 					<span>
-						{#if role.org}<b>{role.pdfOrg ?? role.org}</b>: {/if}<i>{role.org ? role.title.split(' di ')[0] : role.title}</i>{#if role.id === 'peran-intern'}
+						{#if role.org}<b>{role.pdfOrg ?? role.org}</b>: {/if}<i>{role.org ? role.title.split(/( di | at )/)[0].trim() : role.title}</i>{#if role.id === 'peran-intern'}
 							, {role.summary}{/if}
 					</span>
 					<span class="p-date">{role.period}</span>
