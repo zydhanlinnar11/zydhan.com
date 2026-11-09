@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { content } from '#lib/content';
+	import { page } from '$app/state';
+	import { content, type Lang } from '#lib/content';
+	import { langFromRouteId } from '#lib/i18n';
 	import { links } from '#lib/links';
 
-	const c = content.id;
+	const lang = $derived<Lang>(langFromRouteId(page.route.id ?? '/'));
+	const c = $derived(content[lang]);
 </script>
 
 <div class="footer-wrap">

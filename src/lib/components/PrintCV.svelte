@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { getContent } from '#lib/content';
+	import { getContent, type Lang } from '#lib/content';
+	import { uiCopy } from '#lib/ui-copy';
 	import { links } from '#lib/links';
 
-	const c = getContent('id');
-	const experience = c.roles;
+	let { lang }: { lang: Lang } = $props();
+
+	const c = $derived(getContent(lang));
+	const copy = $derived(uiCopy[lang].print);
+	const experience = $derived(c.roles);
 </script>
 
 <div class="print-only">
@@ -12,14 +16,14 @@
 		<div class="p-line">{c.pdf.headline}</div>
 		<!-- eslint-disable svelte/no-navigation-without-resolve -- external links -->
 		<div class="p-line">
-			Surabaya, Indonesia | <a href={`mailto:${links.email}`}>{links.email}</a> |
+			{copy.locationLine} | <a href={`mailto:${links.email}`}>{links.email}</a> |
 			<a href={links.linkedin}>{links.linkedinHandle}</a> | <a href={links.domain}>zydhan.com</a>
 		</div>
 		<!-- eslint-enable svelte/no-navigation-without-resolve -->
 	</header>
 
 	<section class="p-blk">
-		<h2>Ringkasan Profesional</h2>
+		<h2>{copy.summaryHeading}</h2>
 		<p class="p-sum">{c.pdf.summary}</p>
 	</section>
 
@@ -33,7 +37,7 @@
 	</section>
 
 	<section class="p-blk p-exp">
-		<h2>Pengalaman Kerja</h2>
+		<h2>{copy.experienceHeading}</h2>
 		{#each experience as role (role.id)}
 			<div class="p-blk">
 				<div class="p-row">
@@ -55,7 +59,7 @@
 	</section>
 
 	<section class="p-blk">
-		<h2>Proyek &amp; Tulisan</h2>
+		<h2>{copy.projectsHeading}</h2>
 		<ul>
 			{#each c.pdf.projects as project (project.text)}
 				<li>
@@ -71,7 +75,7 @@
 	<section class="p-blk">
 		<h2>{c.sectionTitles.education}</h2>
 		<div class="p-row">
-			<span><b>{c.education.school}</b> || Surabaya, Indonesia</span>
+			<span><b>{c.education.school}</b> || {copy.locationLine}</span>
 			<span class="p-date">{c.education.period}</span>
 		</div>
 		<div class="p-edu"><i>{c.education.detail.replace(', Surabaya', '')}</i></div>

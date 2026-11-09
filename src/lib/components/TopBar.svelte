@@ -1,36 +1,45 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { asset, resolve } from '$app/paths';
-	import { mailtoFreelanceHref } from '#lib/ui-copy';
-	import Icon from './Icon.svelte';
-	import ThemeToggle from './ThemeToggle.svelte';
-	import { ui } from '../ui.svelte.js';
+	import Icon from '#lib/components/Icon.svelte';
+	import LangToggle from '#lib/components/LangToggle.svelte';
+	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
+	import { langFromRouteId } from '#lib/i18n';
+	import { mailtoFreelanceHref, uiCopy } from '#lib/ui-copy';
+	import { ui } from '#lib/ui.svelte';
 
-	const homeActive = $derived(page.route.id === '/');
-	const cvActive = $derived(page.route.id?.startsWith('/cv') ?? false);
+	const lang = $derived(langFromRouteId(page.route.id ?? '/'));
+	const copy = $derived(uiCopy[lang]);
+
+	const homeActive = $derived(page.route.id === '/' || page.route.id === '/id');
+	const cvActive = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
 </script>
 
 <div class="bar-wrap">
 	<header class="top-bar glass bar-glass">
-		<a class="logo" href={resolve('/')} aria-label="Zydhan, ke Home">
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
+		<a class="logo" href={resolve('/')} aria-label={copy.topBar.logoAria}>
 			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
 		</a>
 
-		<nav class="nav" aria-label="Utama">
+		<nav class="nav" aria-label={copy.topBar.navAria}>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
 			<a class:active={homeActive} href={resolve('/')} aria-current={homeActive ? 'page' : undefined}>Home</a>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
 			<a class:active={cvActive} href={resolve('/cv')} aria-current={cvActive ? 'page' : undefined}>CV</a>
 		</nav>
 
 		<div class="actions">
-			<ThemeToggle />
+			<LangToggle />
+			<ThemeToggle {lang} />
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a class="btn btn-primary" href={mailtoFreelanceHref('id')}>Hubungi saya</a>
+			<a class="btn btn-primary" href={mailtoFreelanceHref(lang)}>{copy.topBar.contact}</a>
 		</div>
 
 		<button
 			class="menu-btn"
 			type="button"
-			aria-label="Buka menu"
+			aria-label={copy.topBar.openMenuAria}
 			aria-expanded={ui.menuOpen}
 			onclick={() => (ui.menuOpen = true)}
 		>

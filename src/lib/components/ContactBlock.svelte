@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { getContent } from '#lib/content';
+	import { getContent, type Lang } from '#lib/content';
 	import { links } from '#lib/links';
 	import { mailtoFreelanceHref } from '#lib/ui-copy';
 
-	let { compact = false }: { compact?: boolean } = $props();
+	let { compact = false, lang }: { compact?: boolean; lang: Lang } = $props();
 
-	const c = getContent('id');
+	const c = $derived(getContent(lang));
 </script>
 
 <section id="kontak" class="contact">

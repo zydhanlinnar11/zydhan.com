@@ -24,9 +24,6 @@
 			case '/id':
 				return resolve('/id') + suffix;
 			case '/id/cv':
-				// The '/id/cv' route arrives with Task 4 (page wrapper refactor);
-				// drop this directive once `svelte-kit sync` has seen it.
-				// @ts-expect-error '/id/cv' is not in RouteId yet
 				return resolve('/id/cv') + suffix;
 		}
 	}

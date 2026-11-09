@@ -1,20 +1,25 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import type { RouteId } from '$app/types';
 	import { page } from '$app/state';
-	import { getContent } from '#lib/content';
-	import { mailtoFreelanceHref } from '#lib/ui-copy';
+	import { getContent, type Lang } from '#lib/content';
+	import { langFromRouteId, langHref } from '#lib/i18n';
+	import { mailtoFreelanceHref, uiCopy } from '#lib/ui-copy';
 	import { ui } from '#lib/ui.svelte';
 	import Icon from './Icon.svelte';
 
-	const c = getContent('id');
+	const lang = $derived<Lang>(langFromRouteId(page.route.id ?? '/'));
+	const copy = $derived(uiCopy[lang].floatingBar);
 
-	const sections = [
+	const c = $derived(getContent(lang));
+
+	const sections = $derived([
 		{ id: 'ringkasan', label: c.sectionTitles.summary },
 		{ id: 'pengalaman', label: c.sectionTitles.experience },
 		{ id: 'keahlian', label: c.sectionTitles.skills },
 		{ id: 'pendidikan', label: c.sectionTitles.education },
 		{ id: 'tulisan', label: c.sectionTitles.writings }
-	] as const;
+	] as const);
 
 	let visible = $state(false);
 	let overlayOpen = $state(false);
@@ -22,12 +27,21 @@
 	let closing = $state(false);
 	let closeTimer: ReturnType<typeof setTimeout> | undefined;
 
-	const isCv = $derived(page.route.id?.startsWith('/cv') ?? false);
+	const isCv = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
 	const navOpen = $derived(isCv ? overlayOpen : ui.menuOpen);
 	const activeId = $derived(isCv ? ui.cvActive : sections[0].id);
 
+	function link(href: string) {
+		// Only page paths this site controls flow through here ('/', '/cv'), so a
+		// narrow route type is safe and keeps resolve()'s overloads happy.
+		type HostRoute = '/' | '/id' | '/cv' | '/id/cv';
+		const pure = (href.indexOf('#') === -1 ? href : href.slice(0, href.indexOf('#'))) as HostRoute;
+		const resolved = resolve(pure);
+		return href.indexOf('#') === -1 ? resolved : resolved + href.slice(href.indexOf('#'));
+	}
+
 	function sectionHref(id: string) {
-		return resolve('/cv') + '#' + id;
+		return link(langHref(`/cv#${id}`, lang));
 	}
 
 	// Re-find the page's trigger after client-side navigation: the layout persists,
@@ -89,7 +103,7 @@
 <nav
 	class="floating-bar glass bar-glass bar"
 	class:show={visible}
-	aria-label="Aksi cepat"
+	aria-label={copy.quickAria}
 	aria-hidden={visible ? undefined : 'true'}
 	inert={!visible}
 >
@@ -105,16 +119,16 @@
 					<span class="m"><Icon name="menu" size={20} /></span>
 					<span class="x"><Icon name="close" size={20} /></span>
 				</span>
-				<span>{overlayOpen ? 'Tutup' : 'Navigasi'}</span>
+				<span>{overlayOpen ? copy.closeLabel : copy.navigation}</span>
 			</button>
 			<button type="button" onclick={() => window.print()}>
 				<Icon name="download" size={20} />
-				<span>Unduh PDF</span>
+				<span>{copy.downloadPdf}</span>
 			</button>
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a class="on" href={mailtoFreelanceHref('id')}>
+			<a class="on" href={mailtoFreelanceHref(lang)}>
 				<Icon name="mail" size={20} />
-				<span>Hubungi</span>
+				<span>{copy.contact}</span>
 			</a>
 		{:else}
 			<button
@@ -128,16 +142,16 @@
 					<span class="m"><Icon name="menu" size={20} /></span>
 					<span class="x"><Icon name="close" size={20} /></span>
 				</span>
-				<span>{ui.menuOpen ? 'Tutup' : 'Navigasi'}</span>
+				<span>{ui.menuOpen ? copy.closeLabel : copy.navigation}</span>
 			</button>
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a href={mailtoFreelanceHref('id')}>
+			<a href={mailtoFreelanceHref(lang)}>
 				<Icon name="mail" size={20} />
-				<span>Hubungi</span>
+				<span>{copy.contact}</span>
 			</a>
-			<a class="on" href={resolve('/cv')}>
+			<a class="on" href={link(langHref('/cv', lang))}>
 				<Icon name="file" size={20} />
-				<span>Lihat CV</span>
+				<span>{copy.viewCv}</span>
 			</a>
 		{/if}
 </nav>
@@ -148,11 +162,11 @@
 	bind:this={overlayDialog}
 	class="glass ov-glass ov-glass-strong overlay no-print"
 	class:closing
-	aria-label="Navigasi"
+	aria-label={copy.overlayAria}
 	onclose={() => (overlayOpen = false)}
 >
-	<span class="overlay-title">Navigasi</span>
-	<nav class="sections" aria-label="Isi CV">
+	<span class="overlay-title">{copy.navigation}</span>
+	<nav class="sections" aria-label={copy.fillCv}>
 		{#each sections as section, i (section.id)}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware; the rule cannot see through string concatenation -->
 			<a class="item" style:--i={i} href={sectionHref(section.id)} aria-current={activeId === section.id ? 'location' : undefined} onclick={() => (overlayOpen = false)}>
