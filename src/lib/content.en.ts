@@ -5,20 +5,20 @@ import type { Content } from './content';
 
 export const enContent: Content = {
 	hero: {
-		title: 'I lead developer teams and stay with clients until the system is in use.',
-		body: 'Zydhan Linnar Putra, backend engineer in Surabaya. I lead 20 developers at ITS and supported the SEVIMA PENA go-live on-site at the client.',
+		title: 'I lead engineering teams and stay with clients until the system is actually in use.',
+		body: 'Zydhan Linnar Putra, backend engineer in Surabaya. I lead 20 developers at ITS and supported the SEVIMA PENA go-live on-site with the client.',
 		ctaPrimary: 'View full CV',
 		ctaSecondary: 'Work with me'
 	},
 	freelance: {
 		title: 'Open to freelance projects',
-		body: 'Any project is worth talking about. What I take on most often: backends and APIs, modernizing legacy systems, and architecture for heavy load.',
+		body: 'Any project is worth talking about. What I take on most often: backends and APIs, modernizing legacy systems, and architecture for high load.',
 		bodyShort: 'Any project is worth talking about. Most often: backends and APIs, legacy modernization, high-load architecture.'
 	},
 	stats: [
 		{
 			value: '1 million+',
-			label: 'users of UTBK-SNBT registration',
+			label: 'users of the UTBK-SNBT registration system',
 			labelShort: 'UTBK-SNBT users',
 			accent: true
 		},
@@ -44,8 +44,8 @@ export const enContent: Content = {
 			dateShort: '2026',
 			title: 'SEVIMA PENA',
 			description:
-				'K-12 platform built from zero through launch, integrated with CBT, SSO, FinanceCloud, and Edufin.',
-			descriptionShort: 'K-12 platform built from zero through launch.',
+				'K-12 platform taken from zero to launch, integrated with CBT, SSO, FinanceCloud, and Edufin.',
+			descriptionShort: 'K-12 platform taken from zero to launch.',
 			chips: ['Go', 'React'],
 			href: '/cv#peran-pena'
 		},
@@ -91,7 +91,7 @@ export const enContent: Content = {
 			summary: 'Leading the architecture and engineering team for a K-12 product',
 			bullets: [
 				'Lead the core architecture (Go and React) and engineering team for the K-12 product, from initial setup through launch for ~3,500 students and teachers.',
-				'Code review, collaboration with the PM and client, and infrastructure communication with OpSec (databases, monitoring, servers). Introduced an agentic-coding workflow to raise team throughput.',
+				'Code review, collaboration with the PM and client, and infrastructure communication with OpSec (databases, monitoring, servers). Introduced an agentic coding workflow to raise team throughput.',
 				'Integrated with CBT and SSO in 2 weeks; provided on-site support during go-live for ~2,000 initial users.',
 				'Integrated the Sentra Finansial Teknologi platforms (FinanceCloud and Edufin) for financial management and payment aggregation.',
 				'Operate tracing, logging, and performance monitoring with Sentry.'
@@ -150,7 +150,7 @@ export const enContent: Content = {
 			location: '',
 			period: '2022 – present',
 			current: true,
-			summary: 'National UTBK-SNBT and SSO, concurrent part-time',
+			summary: 'National UTBK-SNBT and SSO, part-time in parallel',
 			bullets: [
 				'Optimized the PHP-based SSO with Cloud Run, saving about US$60,000 per year (about Rp1 billion at 2024 rates).',
 				'Designed the UTBK-SNBT registration system (Go, Next.js, Firestore, Google Cloud Storage) used by 1 million+ users.',
@@ -215,10 +215,10 @@ export const enContent: Content = {
 		}
 	],
 	summary:
-		'Software engineer focused on back-end development (Go, PHP, Node.js) and modern architecture (DDD, CQRS, Hexagonal). Leads modernization of legacy systems to Go and Next.js, plus performance optimization that saves about US$60,000 per year (about Rp1 billion at 2024 rates). Used to mentoring junior developers, collaborating across teams, and operating tracing, logging, and performance monitoring: Sentry at SEVIMA PENA, OpenTelemetry at SNPMB SSO and UTBK-SNBT.',
+		'Software engineer focused on back-end development (Go, PHP, Node.js) and modern architecture (DDD, CQRS, Hexagonal). Leads modernization of legacy systems to Go and Next.js, plus performance optimization that saves about US$60,000 per year (about Rp1 billion at 2024 rates). Used to mentoring junior developers, collaborating across teams, and operating tracing, logging, and performance monitoring — Sentry at SEVIMA PENA, OpenTelemetry at SNPMB SSO and UTBK-SNBT.',
 	pdf: {
 		headline:
-			'Backend-Focused Full-Stack Developer | 5+ Years of Experience | Architect, System Modernization, & Mentor',
+			'Backend-Focused Full-Stack Developer | 5+ Years of Experience | Architect, Systems Modernization & Mentor',
 		summary:
 			'Software engineer focused on back-end development (Go/PHP/Node.js) and modern architecture (DDD, CQRS, Hexagonal). Experienced in leading modernization of legacy systems to Go and Next.js, and in performance optimization that saves about US$60,000 per year. Used to mentoring junior developers, collaborating across teams, and operating tracing, logging, and performance monitoring (Sentry, OpenTelemetry).',
 		projects: [
@@ -236,8 +236,8 @@ export const enContent: Content = {
 	contact: {
 		title: 'Have a system to build or overhaul?',
 		body:
-			'Tell me what you want to build, when it must be done, and the constraints. I reply by email or LinkedIn.',
-		bodyShort: 'Tell me what you want to build and when it must be done, by email or LinkedIn.',
+			'Tell me what you want to build, when it needs to be done, and the constraints. I reply by email or LinkedIn.',
+		bodyShort: 'Tell me what you want to build and when it needs to be done, by email or LinkedIn.',
 		ctaEmail: 'Send email',
 		ctaLinkedIn: 'Reach me on LinkedIn'
 	},
@@ -264,9 +264,9 @@ export const enChrome = {
 	topBar: {
 		contact: 'Contact me',
 		logoAria: 'Zydhan, go to Home',
-		navAria: 'Main',
+		navAria: 'Main navigation',
 		openMenuAria: 'Open menu',
-		switchLangAria: 'Switch language'
+		switchLangAria: 'Switch to English'
 	},
 	themeToggle: {
 		aria: 'Toggle theme'
@@ -277,13 +277,13 @@ export const enChrome = {
 		closeAria: 'Close menu',
 		logoAria: 'Zydhan, go to Home',
 		langHeading: 'Language',
-		indonesia: 'Indonesian',
+		indonesia: 'Indonesia',
 		english: 'English',
 		themeHeading: 'Theme',
 		themeAria: 'Theme',
 		light: 'Light',
 		dark: 'Dark',
-		navAria: 'Main'
+		navAria: 'Main menu'
 	},
 	floatingBar: {
 		quickAria: 'Quick actions',
@@ -312,7 +312,7 @@ export const enChrome = {
 	},
 	seo: {
 		homeTitle: 'Zydhan Linnar Putra, backend engineer in Surabaya',
-		homeDescription: 'Leading developer teams and staying with clients until the system is in use.',
+		homeDescription: 'Leading engineering teams and staying with clients until the system is actually in use.',
 		cvTitle: 'CV — Zydhan Linnar Putra',
 		cvDescription: 'Software engineer focused on back-end development (Go, PHP, Node.js) and modern architecture (DDD, CQRS, Hexagonal).',
 		imageAlt: 'Profile card of Zydhan Linnar Putra on a gradient background with the text "backend engineer in Surabaya".'
