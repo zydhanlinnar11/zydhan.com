@@ -4,7 +4,6 @@
 	import { langFromRouteId } from '#lib/i18n';
 	import { counterpartHref } from '#lib/lang-nav';
 	import { uiCopy } from '#lib/ui-copy';
-
 	// Label = the language you switch TO.
 	const other = $derived<Lang>(langFromRouteId(page.route.id ?? '/') === 'id' ? 'en' : 'id');
 	const target = $derived(other === 'en' ? 'EN' : 'ID');
@@ -12,6 +11,7 @@
 	const href = $derived(counterpartHref(page.url.pathname));
 </script>
 
+<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- href comes from counterpartHref(), which already runs resolve() -->
 <a class="lang-toggle" {href} aria-label={aria}>{target}</a>
 
 <style>

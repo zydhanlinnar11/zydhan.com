@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
-	import type { RouteId } from '$app/types';
 	import { getContent, type Lang } from '#lib/content';
 	import { langHref } from '#lib/i18n';
 	import { uiCopy } from '#lib/ui-copy';
@@ -16,7 +15,6 @@
 
 	const c = $derived(getContent(lang));
 	const seo = $derived(uiCopy[lang].seo);
-	const summaryDescription = $derived(c.summary.split('. ')[0] + '.');
 
 	const sections = $derived([
 		{ id: 'ringkasan', label: c.sectionTitles.summary },

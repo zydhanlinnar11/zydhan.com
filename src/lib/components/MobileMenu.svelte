@@ -75,6 +75,7 @@
 	function goLang(target: Lang) {
 		if (target === lang) return;
 		close();
+		// eslint-disable-next-line svelte/no-navigation-without-resolve -- counterpartHref() already runs resolve()
 		void goto(counterpartHref(page.url.pathname));
 	}
 </script>

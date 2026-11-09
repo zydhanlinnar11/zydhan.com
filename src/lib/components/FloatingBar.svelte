@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import type { RouteId } from '$app/types';
 	import { page } from '$app/state';
 	import { getContent, type Lang } from '#lib/content';
 	import { langFromRouteId, langHref } from '#lib/i18n';
@@ -149,6 +148,7 @@
 				<Icon name="mail" size={20} />
 				<span>{copy.contact}</span>
 			</a>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- link() passes the path through resolve() -->
 			<a class="on" href={link(langHref('/cv', lang))}>
 				<Icon name="file" size={20} />
 				<span>{copy.viewCv}</span>

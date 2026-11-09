@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import type { RouteId } from '$app/types';
 	import { getContent, type Lang } from '#lib/content';
 	import { links } from '#lib/links';
 	import { uiCopy, mailtoFreelanceHref } from '#lib/ui-copy';
