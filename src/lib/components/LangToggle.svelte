@@ -8,7 +8,9 @@
 	const other = $derived<Lang>(langFromRouteId(page.route.id ?? '/') === 'id' ? 'en' : 'id');
 	const target = $derived(other === 'en' ? 'EN' : 'ID');
 	const aria = $derived(uiCopy[other].topBar.switchLangAria);
-	const href = $derived(counterpartHref(page.url.pathname));
+	// Route id, not page.url.pathname: pathname is base-prefixed when paths.base
+	// is set (GH Pages previews), which would mint dead '/id/base/…' hrefs.
+	const href = $derived(counterpartHref(page.route.id ?? '/', page.params));
 </script>
 
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- href comes from counterpartHref(), which already runs resolve() -->

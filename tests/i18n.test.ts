@@ -1,7 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { langFromRouteId, swapLangPath, langHref } from '../src/lib/i18n';
 import { enChrome } from '../src/lib/content.en';
+
+// counterpartHref() calls resolve() from $app/paths; stand it in so the unit
+// test can pin that counterpart hrefs are derived from ROUTE IDs (base-free)
+// and always flow through resolve() (base-aware).
+vi.mock('$app/paths', () => ({
+	resolve: (routeId: string) => `/RESOLVED${routeId}`
+}));
+
+const { counterpartHref } = (await import('../src/lib/lang-nav')) as typeof import('../src/lib/lang-nav');
 
 describe('static 404 page matches enChrome.notFound', () => {
   const html = readFileSync(new URL('../static/404.html', import.meta.url), 'utf8').replace(/\s+/g, ' ');
@@ -17,6 +26,26 @@ describe('static 404 page matches enChrome.notFound', () => {
   });
 });
 
+
+describe('counterpartHref (route-id based, base-path safe)', () => {
+	it('resolves the counterpart of the four page routes', () => {
+		expect(counterpartHref('/')).toBe('/RESOLVED/id');
+		expect(counterpartHref('/id')).toBe('/RESOLVED/');
+		expect(counterpartHref('/cv')).toBe('/RESOLVED/id/cv');
+		expect(counterpartHref('/id/cv')).toBe('/RESOLVED/cv');
+	});
+
+	it('resolves redirect-stub routes with params, never from a pathname', () => {
+		expect(counterpartHref('/projects/[slug]', { slug: 'optika-id' })).toBe('/RESOLVED/id/projects/[slug]');
+		expect(counterpartHref('/id/projects/[slug]', { slug: 'optika-id' })).toBe('/RESOLVED/projects/[slug]');
+		expect(counterpartHref('/projects')).toBe('/RESOLVED/id/projects');
+	});
+
+	it('passes unknown routes through unresolved', () => {
+		expect(counterpartHref('/ideas')).toBe('/id/ideas');
+		expect(counterpartHref('/id/ideas')).toBe('/ideas');
+	});
+});
 
 describe('langFromRouteId', () => {
   it('defaults EN pages to en', () => {

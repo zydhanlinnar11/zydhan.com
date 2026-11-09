@@ -1,8 +1,56 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './test-fixture';
 import { uiCopy } from '../src/lib/ui-copy';
 
 const DESKTOP = { width: 1280, height: 800 };
 const MOBILE = { width: 390, height: 844 };
+
+test.describe('top-bar nav is language-aware', () => {
+	for (const [from, target, expected] of [
+		['/', 'Home', /\/$/],
+		['/', 'CV', /\/cv$/],
+		['/id', 'Home', /\/id$/],
+		['/id', 'CV', /\/id\/cv$/]
+	] as Array<[string, string, RegExp]>) {
+		test(`${from} → nav "${target}" → ${expected}`, async ({ page }) => {
+			await page.setViewportSize(DESKTOP);
+			await page.goto(from);
+			await page.getByRole('navigation').getByRole('link', { name: target, exact: true }).click();
+			await page.waitForURL(expected);
+		});
+	}
+});
+
+test.describe('mobile menu nav is language-aware', () => {
+	test('/id → menu "Home" stays on /id, "CV" goes to /id/cv', async ({ page }) => {
+		await page.setViewportSize(MOBILE);
+		await page.goto('/id');
+		await page.getByRole('button', { name: uiCopy.id.topBar.openMenuAria }).click();
+		const menu = page.getByRole('dialog', { name: uiCopy.id.mobileMenu.dialogAria });
+		await expect(menu).toBeVisible();
+		await menu.getByRole('navigation').getByRole('link', { name: 'Home' }).click();
+		await expect(page).toHaveURL(/\/id$/);
+		await page.getByRole('button', { name: uiCopy.id.topBar.openMenuAria }).click();
+		const menu2 = page.getByRole('dialog', { name: uiCopy.id.mobileMenu.dialogAria });
+		await expect(menu2).toBeVisible();
+		await menu2.getByRole('navigation').getByRole('link', { name: 'CV' }).click();
+		await expect(page).toHaveURL(/\/id\/cv$/);
+	});
+
+	test('/ → menu "Home" stays on /, "CV" goes to /cv', async ({ page }) => {
+		await page.setViewportSize(MOBILE);
+		await page.goto('/');
+		await page.getByRole('button', { name: uiCopy.en.topBar.openMenuAria }).click();
+		const menu = page.getByRole('dialog', { name: uiCopy.en.mobileMenu.dialogAria });
+		await expect(menu).toBeVisible();
+		await menu.getByRole('navigation').getByRole('link', { name: 'Home' }).click();
+		await expect(page).toHaveURL(/\/$/);
+		await page.getByRole('button', { name: uiCopy.en.topBar.openMenuAria }).click();
+		const menu2 = page.getByRole('dialog', { name: uiCopy.en.mobileMenu.dialogAria });
+		await expect(menu2).toBeVisible();
+		await menu2.getByRole('navigation').getByRole('link', { name: 'CV' }).click();
+		await expect(page).toHaveURL(/\/cv$/);
+	});
+});
 
 test.describe('top-bar language toggle', () => {
 	test('/id → EN → /', async ({ page }) => {
@@ -95,7 +143,7 @@ test.describe('language metadata', () => {
 });
 
 test.describe('no leftover untranslated strings', () => {
-	const idStrings = /Hubungi saya|Unduh|Keahlian|Aksi cepat|Buka menu|Ganti tema|Ringkasan/;
+	const idStrings = /Hubungi saya|Unduh|Keahlian|Aksi cepat|Buka menu|Ganti tema|Ringkasan|Proyek/;
 	const enStrings = /Contact me|Download PDF|Quick actions|Open menu|Toggle theme|Professional Summary/;
 
 	test('EN pages have no Indonesian chrome strings', async ({ page }) => {

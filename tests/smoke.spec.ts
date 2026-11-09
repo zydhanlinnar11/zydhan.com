@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from '@playwright/test';
+import { test, expect } from './test-fixture';
 
 test('mobile menu is a dialog and closes with the close control', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -195,6 +195,8 @@ test('keyboard focus is visible in both themes', async ({ page }) => {
 });
 
 test('legacy redirect pages point at their canonical destinations', async ({ request }) => {
+	// BASE_PATH-aware fetches: request.get() resolves relative to the origin
+	// and would drop the base otherwise.
 	const checks: Array<[string, string, string, string]> = [
 		['/projects', 'https://zydhan.com/cv', './cv', '/cv'],
 		['/id/projects', 'https://zydhan.com/id/cv', '../id/cv', '/id/cv'],
@@ -205,7 +207,7 @@ test('legacy redirect pages point at their canonical destinations', async ({ req
 	];
 
 	for (const [path, target, href, label] of checks) {
-		const response = await request.get(path);
+		const response = await request.get(`${process.env.BASE_PATH || ''}${path}`);
 		expect(response.status(), path).toBe(200);
 		const body = await response.text();
 		expect(body, path).toContain('http-equiv="refresh"');
@@ -218,13 +220,13 @@ test('legacy redirect pages point at their canonical destinations', async ({ req
 });
 
 test('404 page renders with a helpful message', async ({ request }) => {
-	const response = await request.get('/this-does-not-exist');
+	const response = await request.get(`${process.env.BASE_PATH || ''}/this-does-not-exist`);
 	expect(response.status()).toBe(404);
 	const body = await response.text();
 	if (body.includes("This page doesn't exist")) return;
 	// `vite preview` serves SvelteKit's JS error shell for unknown paths instead of the
 	// static 404.html. GitHub Pages serves the asset directly, so verify that file.
-	const asset = await request.get('/404.html');
+	const asset = await request.get(`${process.env.BASE_PATH || ''}/404.html`);
 	expect(asset.status()).toBe(200);
 	await expect(asset.text()).resolves.toContain('Page not found');
 });

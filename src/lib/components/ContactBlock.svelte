@@ -15,7 +15,7 @@
 		<p>{compact ? c.contact.bodyShort : c.contact.body}</p>
 		<div class="actions">
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a class="btn btn-primary" href={mailtoFreelanceHref('id')}>{c.contact.ctaEmail}</a>
+			<a class="btn btn-primary" href={mailtoFreelanceHref(lang)}>{c.contact.ctaEmail}</a>
 			<a class="btn btn-ghost" href={links.linkedin} target="_blank" rel="external noopener">
 				{c.contact.ctaLinkedIn}
 			</a>

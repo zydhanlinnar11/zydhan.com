@@ -4,7 +4,7 @@
 	import Icon from '#lib/components/Icon.svelte';
 	import LangToggle from '#lib/components/LangToggle.svelte';
 	import ThemeToggle from '#lib/components/ThemeToggle.svelte';
-	import { langFromRouteId } from '#lib/i18n';
+	import { langFromRouteId, langHref } from '#lib/i18n';
 	import { mailtoFreelanceHref, uiCopy } from '#lib/ui-copy';
 	import { ui } from '#lib/ui.svelte';
 
@@ -13,20 +13,26 @@
 
 	const homeActive = $derived(page.route.id === '/' || page.route.id === '/id');
 	const cvActive = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
+
+	type HostRoute = '/' | '/id' | '/cv' | '/id/cv';
+	// Nav is language-aware: langHref keeps visitors on their language,
+	// resolve() is base-aware (correct hrefs when paths.base is non-empty).
+	const homeHref = $derived(resolve(langHref('/', lang) as HostRoute));
+	const cvHref = $derived(resolve(langHref('/cv', lang) as HostRoute));
 </script>
 
 <div class="bar-wrap">
 	<header class="top-bar glass bar-glass">
-		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
-		<a class="logo" href={resolve('/')} aria-label={copy.topBar.logoAria}>
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- homeHref runs resolve() inside -->
+		<a class="logo" href={homeHref} aria-label={copy.topBar.logoAria}>
 			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
 		</a>
 
 		<nav class="nav" aria-label={copy.topBar.navAria}>
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
-			<a class:active={homeActive} href={resolve('/')} aria-current={homeActive ? 'page' : undefined}>Home</a>
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
-			<a class:active={cvActive} href={resolve('/cv')} aria-current={cvActive ? 'page' : undefined}>CV</a>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- homeHref runs resolve() inside -->
+			<a class:active={homeActive} href={homeHref} aria-current={homeActive ? 'page' : undefined}>Home</a>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- cvHref runs resolve() inside -->
+			<a class:active={cvActive} href={cvHref} aria-current={cvActive ? 'page' : undefined}>CV</a>
 		</nav>
 
 		<div class="actions">

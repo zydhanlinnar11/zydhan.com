@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import type { Lang } from '#lib/content';
-	import { langFromRouteId } from '#lib/i18n';
+	import { langFromRouteId, langHref } from '#lib/i18n';
 	import { counterpartHref } from '#lib/lang-nav';
 	import type { Theme } from '#lib/theme';
 	import { setTheme } from '#lib/theme';
@@ -16,6 +16,12 @@
 
 	const lang = $derived(langFromRouteId(page.route.id ?? '/'));
 	const copy = $derived(uiCopy[lang].mobileMenu);
+
+	type HostRoute = '/' | '/id' | '/cv' | '/id/cv';
+	// Nav is language-aware: langHref keeps visitors on their language,
+	// resolve() is base-aware (correct hrefs when paths.base is non-empty).
+	const homeHref = $derived(resolve(langHref('/', lang) as HostRoute));
+	const cvHref = $derived(resolve(langHref('/cv', lang) as HostRoute));
 
 	const homeActive = $derived(page.route.id === '/' || page.route.id === '/id');
 	const cvActive = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
@@ -76,7 +82,7 @@
 		if (target === lang) return;
 		close();
 		// eslint-disable-next-line svelte/no-navigation-without-resolve -- counterpartHref() already runs resolve()
-		void goto(counterpartHref(page.url.pathname));
+		void goto(counterpartHref(page.route.id ?? '/', page.params));
 	}
 </script>
 
@@ -93,7 +99,7 @@
 >
 	<div class="menu-bar glass bar-glass">
 		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
-		<a class="logo" href={resolve('/')} aria-label={copy.logoAria} onclick={close}>
+		<a class="logo" href={homeHref} aria-label={copy.logoAria} onclick={close}>
 			<img src={asset('logo.webp')} alt="Zydhan" width="40" height="40" />
 		</a>
 		<button class="close" type="button" aria-label={copy.closeAria} onclick={close}>
@@ -104,11 +110,11 @@
 	<div class="panel glass ov-glass">
 		<nav class="menu-nav" aria-label={copy.navAria}>
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
-			<a class="item" href={resolve('/')} aria-current={homeActive ? 'page' : undefined} onclick={close}
+			<a class="item" href={homeHref} aria-current={homeActive ? 'page' : undefined} onclick={close}
 				>Home</a
 			>
-			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware -->
-			<a class="item" href={resolve('/cv')} aria-current={cvActive ? 'page' : undefined} onclick={close}>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- homeHref/cvHref run resolve() inside -->
+			<a class="item" href={cvHref} aria-current={cvActive ? 'page' : undefined} onclick={close}>
 				CV
 			</a>
 		</nav>
