@@ -237,7 +237,7 @@ export const enContent: Content = {
 		title: 'Have a system to build or overhaul?',
 		body:
 			'Tell me what you want to build, when it needs to be done, and the constraints. I reply by email or LinkedIn.',
-		bodyShort: 'Tell me what you want to build and when it needs to be done, by email or LinkedIn.',
+		bodyShort: 'Tell me what you want to build and when it needs to be done. Replies by email or LinkedIn.',
 		ctaEmail: 'Send email',
 		ctaLinkedIn: 'Reach me on LinkedIn'
 	},
