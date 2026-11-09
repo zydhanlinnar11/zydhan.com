@@ -2,7 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { getContent } from '#lib/content';
-	import { links } from '#lib/links';
+	import { mailtoFreelanceHref } from '#lib/ui-copy';
 	import { ui } from '#lib/ui.svelte';
 	import Icon from './Icon.svelte';
 
@@ -112,7 +112,7 @@
 				<span>Unduh PDF</span>
 			</button>
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a class="on" href={links.mailtoFreelance}>
+			<a class="on" href={mailtoFreelanceHref('id')}>
 				<Icon name="mail" size={20} />
 				<span>Hubungi</span>
 			</a>
@@ -131,7 +131,7 @@
 				<span>{ui.menuOpen ? 'Tutup' : 'Navigasi'}</span>
 			</button>
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a href={links.mailtoFreelance}>
+			<a href={mailtoFreelanceHref('id')}>
 				<Icon name="mail" size={20} />
 				<span>Hubungi</span>
 			</a>

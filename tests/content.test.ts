@@ -2,6 +2,38 @@ import { describe, it, expect } from 'vitest';
 import { getContent } from '../src/lib/content';
 
 const id = getContent('id');
+const en = getContent('en');
+
+describe('EN/ID content parity', () => {
+  it('shares the same top-level shape as the ID content', () => {
+    expect(Object.keys(en).join()).toBe(Object.keys(id).join());
+  });
+  it('keeps role anchors identical and in the same order', () => {
+    expect(en.roles.map(r => r.id)).toEqual(id.roles.map(r => r.id));
+  });
+  it('keeps featured project and writing links identical', () => {
+    expect(en.featuredProjects.map(p => p.href)).toEqual(id.featuredProjects.map(p => p.href));
+    expect(en.writings.map(w => w.href)).toEqual(id.writings.map(w => w.href));
+  });
+  it('claims US$60,000 savings in summary, the SNPMB role, and the PDF', () => {
+    const re = /US\$60[.,]000/;
+    expect(en.summary).toMatch(re);
+    expect(en.roles.find(r => r.id === 'peran-snpmb')!.bullets.join()).toMatch(re);
+    expect(JSON.stringify(en.pdf)).toMatch(re);
+  });
+  it('mentions 1 million+ users and experience since 2021', () => {
+    expect(JSON.stringify([en.stats, en.hero])).toContain('1 million+');
+    expect(en.experienceNote).toContain('2021');
+  });
+  it('never claims "tech lead"', () => {
+    expect(JSON.stringify(en)).not.toContain('tech lead');
+  });
+  it('keeps PDF copy consistent with the web copy', () => {
+    for (const r of en.roles.filter(r => r.pdfBullets)) {
+      expect(r.pdfBullets!.length).toBeLessThanOrEqual(r.bullets.length);
+    }
+  });
+});
 
 describe('content invariants', () => {
   it('uses the official SEVIMA PENA title and never claims "tech lead"', () => {

@@ -1,6 +1,7 @@
 import { links } from './links';
+import { enContent } from './content.en';
 
-export type Lang = 'id';
+export type Lang = 'id' | 'en';
 export interface Stat { value: string; label: string; labelShort: string; accent?: boolean; }
 export interface Role { id: string; title: string; org: string; location: string; period: string; current?: boolean; summary?: string; bullets: string[]; pdfBullets?: string[]; pdfOrg?: string; chips: string[]; }
 export interface PdfContent { headline: string; summary: string; projects: { text: string; href?: string }[]; }
@@ -284,7 +285,8 @@ export const content: Record<Lang, Content> = {
 			skills: 'Keahlian',
 			education: 'Pendidikan'
 		}
-	}
+	},
+	en: enContent
 };
 
 export function getContent(lang: Lang = 'id'): Content {

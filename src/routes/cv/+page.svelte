@@ -79,6 +79,7 @@
 	title="CV — Zydhan Linnar Putra"
 	description={summaryDescription}
 	path="/cv"
+	lang="id"
 />
 
 <div class="page">

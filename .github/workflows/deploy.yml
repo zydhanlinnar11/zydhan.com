@@ -36,7 +36,7 @@ jobs:
       - run: pnpm check
       - run: pnpm lint
       - run: pnpm test
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps --only-shell chromium
       - run: pnpm test:e2e
 
       # main is served from the custom domain at /, while a manual preview deploy

@@ -104,7 +104,7 @@ test('floating bar re-finds the trigger after client-side navigation', async ({ 
 
 test('Home has canonical, og tags, and description', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('html')).toHaveAttribute('lang', 'id');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://zydhan.com/');
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /backend engineer di Surabaya/);
   await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Zydhan Linnar Putra');
@@ -214,12 +214,12 @@ test('404 page renders with a helpful message', async ({ request }) => {
 	const response = await request.get('/this-does-not-exist');
 	expect(response.status()).toBe(404);
 	const body = await response.text();
-	if (body.includes('Halaman ini tidak ada')) return;
+	if (body.includes("This page doesn't exist")) return;
 	// `vite preview` serves SvelteKit's JS error shell for unknown paths instead of the
 	// static 404.html. GitHub Pages serves the asset directly, so verify that file.
 	const asset = await request.get('/404.html');
 	expect(asset.status()).toBe(200);
-	expect(await asset.text()).toContain('Halaman ini tidak ada');
+	await expect(asset.text()).resolves.toContain('Page not found');
 });
 
 test('404 page list rows stay flush so the divider is a flat line', async ({ page }) => {

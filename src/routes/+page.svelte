@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import { getContent } from '#lib/content';
 	import { links } from '#lib/links';
+	import { mailtoFreelanceHref } from '#lib/ui-copy';
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
@@ -22,6 +23,7 @@
 	title="Zydhan Linnar Putra, backend engineer di Surabaya"
 	description="Memimpin tim developer dan mendampingi klien sampai sistemnya dipakai."
 	path="/"
+	lang="id"
 />
 
 <div class="page">
@@ -46,7 +48,7 @@
 				<p class="mobile-only">{c.freelance.bodyShort}</p>
 				<div class="freelance-links">
 					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-					<a class="btn btn-ghost" href={links.mailtoFreelance}>{links.email}</a>
+					<a class="btn btn-ghost" href={mailtoFreelanceHref('id')}>{links.email}</a>
 					<a
 						class="btn btn-ghost"
 						href={links.linkedin}

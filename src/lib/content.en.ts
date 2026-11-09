@@ -1,4 +1,5 @@
-// English copy draft. Standalone: nothing imports this yet (later tasks wire it up).
+// English copy draft. Approved draft consumed by ./content.ts (exported as
+// `content.en`); keep this file as the single source of the English copy.
 // Field order mirrors `content.id` in ./content.ts to keep the two easy to diff.
 import { links } from './links';
 import type { Content } from './content';

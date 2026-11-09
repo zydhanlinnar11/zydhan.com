@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { asset, resolve } from '$app/paths';
-	import { links } from '#lib/links';
+	import { mailtoFreelanceHref } from '#lib/ui-copy';
 	import Icon from './Icon.svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 	import { ui } from '../ui.svelte.js';
@@ -24,7 +24,7 @@
 		<div class="actions">
 			<ThemeToggle />
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
-			<a class="btn btn-primary" href={links.mailtoFreelance}>Hubungi saya</a>
+			<a class="btn btn-primary" href={mailtoFreelanceHref('id')}>Hubungi saya</a>
 		</div>
 
 		<button
