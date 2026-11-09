@@ -84,5 +84,5 @@ Anti-tujuan (gagal walaupun jalan):
 - Cara teknis meng-override `html lang` per rute dalam SvelteKit + adapter-static (harus lolos pada prerender, diverifikasi di `build/`).
 - Implementasi hreflang (di component `Seo` atau layout per grup rute).
 - Detail mikro terjemahan (gaya kalimat): hasil subagent penerjemah, disetujui reviewer terjemahan; reviewer berwenang mengembalikan revisi sampai mutunya nyaman. Klaim harus paritas dengan versi ID (unit test asersinya).
-- **Keputusan tambahan (dari builder check):** halaman 404 ikut diterjemahkan per bahasa (anti-tujuan bahasa campur berlaku); `static/sitemap.xml` diperluas ke 4 URL dengan `xhtml:link` alternates.
+- **Keputusan tambahan (dari builder check):** `static/404.html` jadi EN penuh (satu file statis di GitHub Pages tidak bisa bervariasi per bahasa); `static/sitemap.xml` diperluas ke 4 URL dengan `xhtml:link` alternates.
 - Feedback loop UI: Playwright (browser `chromium-headless-shell`, ringan) — jalankan e2e + screenshot halaman kunci di kedua bahasa/kedua tema, bandingkan dengan mockup, perbaiki sampai layak. Skenario minimal: toggle top bar desktop memindah `/` ↔ `/id` dan `/cv` ↔ `/id/cv`; segmented Bahasa di MobileMenu berperilaku sama; tidak ada teks lupa-terjemah; test hijau sebelum push ke `main`.
