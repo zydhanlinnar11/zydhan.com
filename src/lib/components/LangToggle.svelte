@@ -12,7 +12,7 @@
 </script>
 
 <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- href comes from counterpartHref(), which already runs resolve() -->
-<a class="lang-toggle" {href} aria-label={aria}>{target}</a>
+<a class="lang-toggle" {href} data-lang={target} aria-label={aria}></a>
 
 <style>
 	.lang-toggle {
@@ -29,10 +29,17 @@
 		background: var(--chip);
 		color: var(--text);
 		text-decoration: none;
+		/* The code is decorative pseudo-content: the accessible name alone
+		   carries the meaning, and visible text can't mismatch it (axe
+		   label-content-name-mismatch). */
 		font: 600 13px Inter, system-ui, sans-serif;
 		letter-spacing: 0.02em;
 		cursor: pointer;
 		transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+	}
+
+	.lang-toggle::before {
+		content: attr(data-lang);
 	}
 
 	@media (hover: hover) {
