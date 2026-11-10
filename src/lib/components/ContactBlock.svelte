@@ -30,6 +30,7 @@
 		border-radius: 28px;
 		padding: 16px;
 		background: var(--bg);
+		scroll-margin-top: 112px;
 	}
 
 	.mesh-c {

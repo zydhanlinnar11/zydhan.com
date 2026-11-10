@@ -293,6 +293,8 @@ export const enChrome = {
 		viewCv: 'View CV',
 		navigation: 'Navigation',
 		fillCv: 'CV contents',
+		pageSections: 'Page sections',
+		contactSection: 'Contact',
 		closeAria: 'Close',
 		closeLabel: 'Close',
 		overlayAria: 'Navigation'

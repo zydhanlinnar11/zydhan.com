@@ -71,18 +71,40 @@ test('CV role hash settles the overlay on Experience', async ({ page }) => {
   );
 });
 
-test('Home floating bar navigasi opens the shared mobile menu', async ({ page }) => {
+test('Home floating bar opens the page section overlay', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.mouse.wheel(0, 1200);
   const bar = page.getByRole('navigation', { name: /Quick actions/i });
   await expect(bar).toBeVisible();
   await bar.getByRole('button', { name: /Navigation/i }).click();
-  const menu = page.getByRole('dialog', { name: /Menu/i });
-  await expect(menu).toBeVisible();
+  const overlay = page.getByRole('dialog', { name: /Navigation/i });
+  await expect(overlay).toBeVisible();
+  await expect(overlay.getByRole('link')).toHaveCount(4);
+  await expect(overlay.getByRole('link', { name: /Featured projects/i })).toHaveAttribute(
+    'href',
+    /#proyek/
+  );
+  await expect(overlay.getByRole('link', { name: /Contact/i })).toHaveAttribute('href', /#kontak/);
+  await expect(overlay.locator('a[aria-current="location"]')).toHaveCount(1);
   await expect(bar.getByRole('button', { name: /Close/i })).toBeVisible();
-  await menu.getByRole('button', { name: 'Close', exact: true }).click();
-  await expect(menu).toBeHidden();
+  await overlay.getByRole('link', { name: /Writing/i }).click();
+  await expect(overlay).toBeHidden();
+  await expect(page).toHaveURL(/#tulisan$/);
+});
+
+test('Home overlay marks the section at the current scroll position', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.evaluate(() => document.getElementById('proyek')?.scrollIntoView());
+  const bar = page.getByRole('navigation', { name: /Quick actions/i });
+  await expect(bar).toBeVisible();
+  await bar.getByRole('button', { name: /Navigation/i }).click();
+  const overlay = page.getByRole('dialog', { name: /Navigation/i });
+  await expect(overlay.getByRole('link', { name: /Featured projects/i })).toHaveAttribute(
+    'aria-current',
+    'location'
+  );
 });
 
 test('floating bar re-finds the trigger after client-side navigation', async ({ page }) => {

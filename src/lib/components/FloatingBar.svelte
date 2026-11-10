@@ -12,7 +12,9 @@
 
 	const c = $derived(getContent(lang));
 
-	const sections = $derived([
+	const isCv = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
+
+	const cvSections = $derived([
 		{ id: 'ringkasan', label: c.sectionTitles.summary },
 		{ id: 'pengalaman', label: c.sectionTitles.experience },
 		{ id: 'keahlian', label: c.sectionTitles.skills },
@@ -20,15 +22,22 @@
 		{ id: 'tulisan', label: c.sectionTitles.writings }
 	] as const);
 
+	const homeSections = $derived([
+		{ id: 'peran', label: c.sectionTitles.recentRoles },
+		{ id: 'proyek', label: c.sectionTitles.featured },
+		{ id: 'tulisan', label: c.sectionTitles.writings },
+		{ id: 'kontak', label: copy.contactSection }
+	] as const);
+
+	const sections = $derived(isCv ? cvSections : homeSections);
+
 	let visible = $state(false);
 	let overlayOpen = $state(false);
 	let overlayDialog = $state<HTMLDialogElement>();
 	let closing = $state(false);
 	let closeTimer: ReturnType<typeof setTimeout> | undefined;
 
-	const isCv = $derived(page.route.id === '/cv' || page.route.id === '/id/cv');
-	const navOpen = $derived(isCv ? overlayOpen : ui.menuOpen);
-	const activeId = $derived(isCv ? ui.cvActive : sections[0].id);
+	const activeId = $derived(isCv ? ui.cvActive : ui.homeActive);
 
 	function link(href: string) {
 		// Only page paths this site controls flow through here ('/', '/cv'), so a
@@ -40,7 +49,7 @@
 	}
 
 	function sectionHref(id: string) {
-		return link(langHref(`/cv#${id}`, lang));
+		return link(langHref(`${isCv ? '/cv' : '/'}#${id}`, lang));
 	}
 
 	// Re-find the page's trigger after client-side navigation: the layout persists,
@@ -106,20 +115,20 @@
 	aria-hidden={visible ? undefined : 'true'}
 	inert={!visible}
 >
+		<button
+			type="button"
+			class="nav"
+			class:tint={overlayOpen}
+			aria-expanded={overlayOpen}
+			onclick={() => (overlayOpen = !overlayOpen)}
+		>
+			<span class="ico">
+				<span class="m"><Icon name="menu" size={20} /></span>
+				<span class="x"><Icon name="close" size={20} /></span>
+			</span>
+			<span>{overlayOpen ? copy.closeLabel : copy.navigation}</span>
+		</button>
 		{#if isCv}
-			<button
-				type="button"
-				class="nav"
-				class:tint={navOpen}
-				aria-expanded={overlayOpen}
-				onclick={() => (overlayOpen = !overlayOpen)}
-			>
-				<span class="ico">
-					<span class="m"><Icon name="menu" size={20} /></span>
-					<span class="x"><Icon name="close" size={20} /></span>
-				</span>
-				<span>{overlayOpen ? copy.closeLabel : copy.navigation}</span>
-			</button>
 			<button type="button" onclick={() => window.print()}>
 				<Icon name="download" size={20} />
 				<span>{copy.downloadPdf}</span>
@@ -130,19 +139,6 @@
 				<span>{copy.contact}</span>
 			</a>
 		{:else}
-			<button
-				type="button"
-				class="nav"
-				class:tint={navOpen}
-				aria-expanded={ui.menuOpen}
-				onclick={() => (ui.menuOpen = !ui.menuOpen)}
-			>
-				<span class="ico">
-					<span class="m"><Icon name="menu" size={20} /></span>
-					<span class="x"><Icon name="close" size={20} /></span>
-				</span>
-				<span>{ui.menuOpen ? copy.closeLabel : copy.navigation}</span>
-			</button>
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- mailto links are external -->
 			<a href={mailtoFreelanceHref(lang)}>
 				<Icon name="mail" size={20} />
@@ -166,7 +162,7 @@
 	onclose={() => (overlayOpen = false)}
 >
 	<span class="overlay-title">{copy.navigation}</span>
-	<nav class="sections" aria-label={copy.fillCv}>
+	<nav class="sections" aria-label={isCv ? copy.fillCv : copy.pageSections}>
 		{#each sections as section, i (section.id)}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() is base-aware; the rule cannot see through string concatenation -->
 			<a class="item" style:--i={i} href={sectionHref(section.id)} aria-current={activeId === section.id ? 'location' : undefined} onclick={() => (overlayOpen = false)}>

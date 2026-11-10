@@ -1,1 +1,1 @@
-export const ui = $state({ menuOpen: false, cvActive: 'ringkasan' });
+export const ui = $state({ menuOpen: false, cvActive: 'ringkasan', homeActive: 'peran' });

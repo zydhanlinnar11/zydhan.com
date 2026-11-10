@@ -37,6 +37,8 @@ export interface UICopy {
 		viewCv: string;
 		navigation: string;
 		fillCv: string;
+		pageSections: string;
+		contactSection: string;
 		closeAria: string;
 		closeLabel: string;
 		overlayAria: string;
@@ -101,6 +103,8 @@ export const uiCopy: Record<Lang, UICopy> = {
 			viewCv: 'Lihat CV',
 			navigation: 'Navigasi',
 			fillCv: 'Isi CV',
+			pageSections: 'Bagian halaman',
+			contactSection: 'Kontak',
 			closeAria: 'Tutup',
 			closeLabel: 'Tutup',
 			overlayAria: 'Navigasi'

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { getContent, type Lang } from '#lib/content';
 	import { links } from '#lib/links';
@@ -7,11 +8,67 @@
 	import ContactBlock from '#lib/components/ContactBlock.svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import Seo from '#lib/components/Seo.svelte';
+	import { ui } from '#lib/ui.svelte';
 
 	let { lang }: { lang: Lang } = $props();
 
 	const c = $derived(getContent(lang));
 	const seo = $derived(uiCopy[lang].seo);
+
+	const sections = [
+		{ id: 'peran' },
+		{ id: 'proyek' },
+		{ id: 'tulisan' },
+		{ id: 'kontak' }
+	] as const;
+
+	let active = $state<string>(sections[0].id);
+
+	$effect(() => {
+		ui.homeActive = active;
+	});
+
+	onMount(() => {
+		const elements = sections
+			.map((section) => document.getElementById(section.id))
+			.filter((element): element is HTMLElement => element !== null);
+		const lastId = sections[sections.length - 1].id;
+
+		function updateActive() {
+			const atBottom =
+				window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+			if (atBottom) {
+				active = lastId;
+				return;
+			}
+
+			const current = elements
+				.filter((element) => element.getBoundingClientRect().top <= 120)
+				.at(-1);
+
+			active = current?.id ?? sections[0].id;
+		}
+
+		const observer = new IntersectionObserver(updateActive, {
+			rootMargin: '-120px 0px -100% 0px',
+			threshold: 0
+		});
+
+		for (const element of elements) {
+			observer.observe(element);
+		}
+
+		window.addEventListener('scroll', updateActive, { passive: true });
+		window.addEventListener('hashchange', updateActive);
+		updateActive();
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener('scroll', updateActive);
+			window.removeEventListener('hashchange', updateActive);
+		};
+	});
 	const recentRoles = $derived(
 		['peran-pena', 'peran-dptsi', 'peran-snpmb'].map((id) => {
 			const role = c.roles.find((candidate) => candidate.id === id);
@@ -87,7 +144,7 @@
 			{/each}
 		</section>
 
-		<section class="roles" aria-labelledby="h-roles">
+		<section id="peran" class="roles" aria-labelledby="h-roles">
 			<h2 id="h-roles">{c.sectionTitles.recentRoles}</h2>
 			<div class="surface roles-surface">
 				{#each recentRoles as role (role.id)}
@@ -107,7 +164,7 @@
 			<a class="btn btn-ghost all-roles" href={link(langHref('/cv', lang))}>{c.sectionTitles.allRoles}</a>
 		</section>
 
-		<section class="projects" aria-labelledby="h-projects">
+		<section id="proyek" class="projects" aria-labelledby="h-projects">
 			<h2 id="h-projects">{c.sectionTitles.featured}</h2>
 			<div class="project-grid">
 				{#each c.featuredProjects as project (project.title)}
@@ -128,7 +185,7 @@
 			</div>
 		</section>
 
-		<section class="writings" aria-labelledby="h-writings">
+		<section id="tulisan" class="writings" aria-labelledby="h-writings">
 			<h2 id="h-writings">{c.sectionTitles.writings}</h2>
 			<div class="surface writings-surface">
 				{#each c.writings as writing (writing.href)}
@@ -265,6 +322,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
+		scroll-margin-top: 112px;
 	}
 
 	h2 {
