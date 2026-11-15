@@ -17,7 +17,10 @@ node_modules
 /.cursor/
 /.gemini/
 /.impeccable/
-/.opencode/
+# Keep the project's committed PM agent and config; ignore downloaded skills.
+/.opencode/*
+!/.opencode/agents/
+!/.opencode/opencode.json
 
 # OS
 .DS_Store
